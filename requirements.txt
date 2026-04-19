@@ -2,4 +2,4 @@ anthropic>=0.92.0
 flask>=3.0.0
 python-dotenv>=1.0.0
 gunicorn>=21.2.0
-gevent>=24.2.1
+gevent>=24.10.1
