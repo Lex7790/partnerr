@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Partnerr — Trouvez vos partenaires B2B</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=DM+Sans:opsz,wght@9..40,400;9..40,500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink:       #0B0718;
+      --ink-soft:  #4B4565;
+      --ink-muted: #8B87A3;
+      --accent:    #5E35E0;
+      --accent-hi: #7B56F5;
+      --accent-lo: #EDE9FF;
+      --surface:   #F8F7FF;
+      --white:     #FFFFFF;
+      --border:    rgba(94,53,224,0.14);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'DM Sans', system-ui, sans-serif;
+      background: var(--surface);
+      color: var(--ink);
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Header ── */
+    .site-header {
+      background: var(--ink);
+      padding: 0 32px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+    }
+    .site-logo {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 800;
+      font-size: 18px;
+      color: var(--white);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .logo-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--accent-hi);
+      display: inline-block;
+    }
+
+    /* ── Contenu ── */
+    .page-body { padding: 48px 20px 80px; }
+    .container { max-width: 820px; margin: 0 auto; }
+
+    .page-title {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 26px;
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: var(--ink);
+      letter-spacing: -0.01em;
+    }
+    .subtitle {
+      color: var(--ink-soft);
+      margin-bottom: 32px;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    /* ── Carte formulaire ── */
+    .card {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 32px;
+      border: 1px solid var(--border);
+      box-shadow: 0 2px 12px rgba(11,7,24,0.06);
+    }
+
+    label {
+      display: block;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 600;
+      font-size: 14px;
+      margin-bottom: 8px;
+      margin-top: 24px;
+      color: var(--ink);
+    }
+    label:first-of-type { margin-top: 0; }
+
+    .label-hint {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 400;
+      color: var(--ink-muted);
+      font-size: 13px;
+    }
+
+    textarea, select, input[type="text"], input[type="email"] {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1.5px solid rgba(94,53,224,0.18);
+      border-radius: 10px;
+      font-size: 14px;
+      font-family: 'DM Sans', sans-serif;
+      color: var(--ink);
+      transition: border-color 0.15s, background 0.15s;
+      background: var(--surface);
+    }
+    textarea:focus, select:focus, input[type="text"]:focus, input[type="email"]:focus {
+      outline: none;
+      border-color: var(--accent);
+      background: var(--white);
+    }
+    textarea { height: 80px; resize: vertical; line-height: 1.6; }
+    select { height: 46px; cursor: pointer; }
+
+    .checkbox-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+      margin-top: 6px;
+    }
+    .checkbox-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 400;
+      font-size: 14px;
+      margin-top: 0;
+      color: var(--ink-soft);
+      cursor: pointer;
+    }
+    .checkbox-item input[type="checkbox"] {
+      width: 15px;
+      height: 15px;
+      accent-color: var(--accent);
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    .other-input { display: none; margin-top: 8px; }
+
+    button {
+      margin-top: 28px;
+      width: 100%;
+      padding: 14px;
+      background: var(--accent);
+      color: var(--white);
+      border: none;
+      border-radius: 10px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.15s, transform 0.1s, box-shadow 0.15s;
+      box-shadow: 0 4px 16px rgba(94,53,224,0.25);
+    }
+    button:hover:not(:disabled) { background: var(--accent-hi); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(94,53,224,0.35); }
+    button:active:not(:disabled) { transform: translateY(0); }
+    button:disabled { background: #C4B5FD; cursor: not-allowed; transform: none; box-shadow: none; }
+
+    /* ── Barre de statut ── */
+    #loading {
+      display: none;
+      margin-top: 24px;
+      padding: 16px 20px;
+      background: var(--accent-lo);
+      border-radius: 10px;
+      border: 1px solid rgba(94,53,224,0.2);
+      align-items: center;
+      gap: 12px;
+    }
+    #loading.visible { display: flex; }
+
+    .spinner {
+      flex-shrink: 0;
+      width: 18px; height: 18px;
+      border: 2.5px solid rgba(94,53,224,0.25);
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    #status { color: var(--accent); font-size: 14px; font-weight: 500; }
+
+    /* ── Zone de résultat ── */
+    #result { margin-top: 24px; }
+
+    #result-content {
+      white-space: pre-wrap;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      line-height: 1.75;
+      background: var(--white);
+      border-radius: 16px;
+      padding: 32px;
+      border: 1px solid var(--border);
+      box-shadow: 0 2px 12px rgba(11,7,24,0.06);
+      border-left: 4px solid var(--accent);
+    }
+
+    .error-box {
+      background: #FEF2F2;
+      color: #DC2626;
+      padding: 16px 20px;
+      border-radius: 10px;
+      border: 1px solid #FECACA;
+      font-size: 14px;
+      margin-top: 8px;
+    }
+
+    /* ── Tip ── */
+    .tip {
+      margin-top: 16px;
+      font-size: 12px;
+      color: var(--ink-muted);
+      text-align: center;
+    }
+
+    /* ── Boutons export ── */
+    #export-buttons { display: flex; gap: 12px; margin-top: 16px; }
+    #export-buttons button { margin-top: 0; flex: 1; padding: 12px; font-size: 14px; }
+    .btn-csv { background: #059669; box-shadow: none; }
+    .btn-csv:hover:not(:disabled) { background: #047857; }
+    .btn-pdf { background: var(--ink-soft); box-shadow: none; }
+    .btn-pdf:hover:not(:disabled) { background: var(--ink); }
+
+    @media print {
+      body { background: white; padding: 0; }
+      .site-header, .page-title, .subtitle, .card, #loading, #export-buttons, .tip { display: none !important; }
+      #result { margin-top: 0; }
+      #result-content { box-shadow: none; border: none; padding: 0; font-size: 12px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header" style="justify-content:space-between;">
+    <a href="/" class="site-logo">Partnerr<span class="logo-dot"></span></a>
+    <a href="/legal" style="font-size:13px; color:rgba(255,255,255,0.65); text-decoration:none;">Mentions légales & confidentialité</a>
+  </header>
+
+  <div class="page-body">
+  <div class="container">
+    <h1 class="page-title">Trouve tes partenaires B2B</h1>
+    <p class="subtitle">Remplis le formulaire, Partnerr analyse le marché et te propose 5 partenaires qualifiés avec le bon contact et une stratégie concrète.</p>
+
+    <div class="card">
+      <form id="matchForm">
+
+        <label for="user_email">Ton email <span class="label-hint">· pour mémoriser tes résultats et éviter les doublons</span></label>
+        <input type="email" id="user_email" name="user_email" placeholder="Ex : alexis@monentreprise.com" required>
+        <p style="margin-top:6px; font-size:12px; color:var(--ink-muted); line-height:1.5;">Utilisé uniquement pour sauvegarder vos résultats et éviter les doublons. Aucun envoi commercial.</p>
+
+        <label for="company_name">Nom de ta boîte</label>
+        <input type="text" id="company_name" name="company_name" placeholder="Ex : Upela" required>
+
+        <label>Secteur de ta boîte</label>
+        <div class="checkbox-grid">
+          <label class="checkbox-item"><input type="checkbox" name="sector" value="E-commerce"> E-commerce</label>
+          <label class="checkbox-item"><input type="checkbox" name="sector" value="Logistique/Transport"> Logistique/Transport</label>
+          <label class="checkbox-item"><input type="checkbox" name="sector" value="Marketing/Communication"> Marketing/Communication</label>
+          <label class="checkbox-item"><input type="checkbox" name="sector" value="Finance/Financement"> Finance/Financement</label>
+          <label class="checkbox-item"><input type="checkbox" name="sector" value="Comptabilité"> Comptabilité</label>
+          <label class="checkbox-item"><input type="checkbox" name="sector" value="Juridique"> Juridique</label>
+          <label class="checkbox-item"><input type="checkbox" name="sector" value="RH/Recrutement"> RH/Recrutement</label>
+          <label class="checkbox-item"><input type="checkbox" name="sector" value="Tech/SaaS"> Tech/SaaS</label>
+          <label class="checkbox-item"><input type="checkbox" name="sector" value="Formation"> Formation</label>
+          <label class="checkbox-item"><input type="checkbox" name="sector" value="Retail"> Retail</label>
+          <label class="checkbox-item"><input type="checkbox" name="sector" value="Santé"> Santé</label>
+          <label class="checkbox-item"><input type="checkbox" name="sector" value="Immobilier"> Immobilier</label>
+          <label class="checkbox-item"><input type="checkbox" name="sector" value="Restauration/Food & Beverage"> Restauration/Food & Beverage</label>
+          <label class="checkbox-item"><input type="checkbox" name="sector" value="BTP/Construction"> BTP/Construction</label>
+          <label class="checkbox-item"><input type="checkbox" name="sector" value="Industrie/Manufacturing"> Industrie/Manufacturing</label>
+          <label class="checkbox-item"><input type="checkbox" name="sector" value="Tourisme/Hospitality"> Tourisme/Hospitality</label>
+          <label class="checkbox-item"><input type="checkbox" name="sector" value="Médias/Presse/Contenu"> Médias/Presse/Contenu</label>
+          <label class="checkbox-item"><input type="checkbox" name="sector" value="Sport/Bien-être"> Sport/Bien-être</label>
+          <label class="checkbox-item"><input type="checkbox" name="sector" value="Assurance/Insurtech"> Assurance/Insurtech</label>
+          <label class="checkbox-item"><input type="checkbox" name="sector" value="Automobile/Mobilité"> Automobile/Mobilité</label>
+          <label class="checkbox-item"><input type="checkbox" name="sector" value="Mode/Beauté/Cosmétique"> Mode/Beauté/Cosmétique</label>
+          <label class="checkbox-item"><input type="checkbox" name="sector" value="Autre" id="sector-autre-cb"> Autre</label>
+        </div>
+        <input type="text" name="sector_other" id="sector-other-input" class="other-input" placeholder="Précise ton secteur...">
+
+        <label>Ton client type</label>
+        <div class="checkbox-grid">
+          <label class="checkbox-item"><input type="checkbox" name="clients" value="PME"> PME</label>
+          <label class="checkbox-item"><input type="checkbox" name="clients" value="E-commerçants"> E-commerçants</label>
+          <label class="checkbox-item"><input type="checkbox" name="clients" value="Grands comptes"> Grands comptes</label>
+          <label class="checkbox-item"><input type="checkbox" name="clients" value="ETI"> ETI</label>
+          <label class="checkbox-item"><input type="checkbox" name="clients" value="Startups"> Startups</label>
+          <label class="checkbox-item"><input type="checkbox" name="clients" value="Indépendants/Freelances"> Indépendants/Freelances</label>
+          <label class="checkbox-item"><input type="checkbox" name="clients" value="Artisans/TPE"> Artisans/TPE</label>
+          <label class="checkbox-item"><input type="checkbox" name="clients" value="Particuliers"> Particuliers</label>
+          <label class="checkbox-item"><input type="checkbox" name="clients" value="Associations/ONG"> Associations/ONG</label>
+        </div>
+
+        <label for="size">Taille de ta boîte</label>
+        <select id="size" name="size" required>
+          <option value="">— Choisir —</option>
+          <option value="Moins de 5M€ de CA">Moins de 5M€ de CA</option>
+          <option value="5M€ à 20M€">5M€ à 20M€</option>
+          <option value="20M€ à 50M€">20M€ à 50M€</option>
+          <option value="Plus de 50M€">Plus de 50M€</option>
+        </select>
+
+        <label>Secteurs où tu cherches des partenaires</label>
+        <div class="checkbox-grid">
+          <label class="checkbox-item"><input type="checkbox" name="partner_sectors" value="E-commerce"> E-commerce</label>
+          <label class="checkbox-item"><input type="checkbox" name="partner_sectors" value="Logistique/Transport"> Logistique/Transport</label>
+          <label class="checkbox-item"><input type="checkbox" name="partner_sectors" value="Marketing/Communication"> Marketing/Communication</label>
+          <label class="checkbox-item"><input type="checkbox" name="partner_sectors" value="Finance/Financement"> Finance/Financement</label>
+          <label class="checkbox-item"><input type="checkbox" name="partner_sectors" value="Comptabilité"> Comptabilité</label>
+          <label class="checkbox-item"><input type="checkbox" name="partner_sectors" value="Juridique"> Juridique</label>
+          <label class="checkbox-item"><input type="checkbox" name="partner_sectors" value="RH/Recrutement"> RH/Recrutement</label>
+          <label class="checkbox-item"><input type="checkbox" name="partner_sectors" value="Tech/SaaS"> Tech/SaaS</label>
+          <label class="checkbox-item"><input type="checkbox" name="partner_sectors" value="Formation"> Formation</label>
+          <label class="checkbox-item"><input type="checkbox" name="partner_sectors" value="Retail"> Retail</label>
+          <label class="checkbox-item"><input type="checkbox" name="partner_sectors" value="Santé"> Santé</label>
+          <label class="checkbox-item"><input type="checkbox" name="partner_sectors" value="Immobilier"> Immobilier</label>
+          <label class="checkbox-item"><input type="checkbox" name="partner_sectors" value="Restauration/Food & Beverage"> Restauration/Food & Beverage</label>
+          <label class="checkbox-item"><input type="checkbox" name="partner_sectors" value="BTP/Construction"> BTP/Construction</label>
+          <label class="checkbox-item"><input type="checkbox" name="partner_sectors" value="Industrie/Manufacturing"> Industrie/Manufacturing</label>
+          <label class="checkbox-item"><input type="checkbox" name="partner_sectors" value="Tourisme/Hospitality"> Tourisme/Hospitality</label>
+          <label class="checkbox-item"><input type="checkbox" name="partner_sectors" value="Médias/Presse/Contenu"> Médias/Presse/Contenu</label>
+          <label class="checkbox-item"><input type="checkbox" name="partner_sectors" value="Sport/Bien-être"> Sport/Bien-être</label>
+          <label class="checkbox-item"><input type="checkbox" name="partner_sectors" value="Assurance/Insurtech"> Assurance/Insurtech</label>
+          <label class="checkbox-item"><input type="checkbox" name="partner_sectors" value="Automobile/Mobilité"> Automobile/Mobilité</label>
+          <label class="checkbox-item"><input type="checkbox" name="partner_sectors" value="Mode/Beauté/Cosmétique"> Mode/Beauté/Cosmétique</label>
+          <label class="checkbox-item"><input type="checkbox" name="partner_sectors" value="Autre" id="partner-autre-cb"> Autre</label>
+        </div>
+        <input type="text" name="partner_sectors_other" id="partner-other-input" class="other-input" placeholder="Précise le secteur...">
+
+        <label for="context">
+          Contexte / précision
+          <span class="label-hint">· optionnel</span>
+        </label>
+        <textarea id="context" name="context" placeholder="Ex : On sort d'une levée de fonds, on cherche des partenaires tech pour une intégration API"></textarea>
+
+        <label for="theme">Type de partenariat recherché</label>
+        <select id="theme" name="theme" required>
+          <option value="">— Choisir un type —</option>
+          <option value="co-marketing">🤝 Co-marketing (webinaires, articles croisés, guides communs)</option>
+          <option value="technologie">⚙️ Technologie (intégration API, connecteurs, bundle technique)</option>
+          <option value="affiliation">💰 Affiliation (programme de commission, apport d'affaires)</option>
+          <option value="distribution">📦 Distribution (revente, reseller, accès nouveaux marchés)</option>
+          <option value="commercial">🤝 Commercial (bundle, offre combinée, co-vente)</option>
+          <option value="événementiel">🎪 Événementiel (salons, conférences, meetups communs)</option>
+        </select>
+
+        <button type="submit" id="submitBtn">
+          Trouver mes 5 partenaires qualifiés →
+        </button>
+      </form>
+
+      <p class="tip">Les résultats arrivent dans quelques minutes · Résultats complets et actionnables</p>
+    </div>
+
+    <!-- Barre de statut -->
+    <div id="loading">
+      <div class="spinner"></div>
+      <span id="status">Analyse de ta boîte en cours...</span>
+    </div>
+
+    <!-- Zone de résultat -->
+    <div id="result"></div>
+  </div>
+  </div>
+
+  <script>
+    // Toggle "Autre" champs texte
+    document.getElementById('sector-autre-cb').addEventListener('change', function() {
+      document.getElementById('sector-other-input').style.display = this.checked ? 'block' : 'none';
+    });
+    document.getElementById('partner-autre-cb').addEventListener('change', function() {
+      document.getElementById('partner-other-input').style.display = this.checked ? 'block' : 'none';
+    });
+
+    // Pré-remplir l'email depuis localStorage
+    const emailInput = document.getElementById('user_email');
+    const savedEmail = localStorage.getItem('b2b_user_email');
+    if (savedEmail) emailInput.value = savedEmail;
+
+    const form       = document.getElementById('matchForm');
+    const loading    = document.getElementById('loading');
+    const statusEl   = document.getElementById('status');
+    const result     = document.getElementById('result');
+    const submitBtn  = document.getElementById('submitBtn');
+
+    function showExportButtons(text) {
+      const existing = document.getElementById('export-buttons');
+      if (existing) existing.remove();
+      const theme = document.getElementById('theme') ? document.getElementById('theme').value : '';
+      const div = document.createElement('div');
+      div.id = 'export-buttons';
+      const csvBtn = document.createElement('button');
+      csvBtn.type = 'button';
+      csvBtn.className = 'btn-csv';
+      csvBtn.textContent = '⬇️ Exporter CSV';
+      csvBtn.onclick = () => exportCSV(text, theme);
+      div.appendChild(csvBtn);
+      result.appendChild(div);
+    }
+
+    function exportCSV(text, theme) {
+      const sections = text.split(/(?=## Partenaire \d+\s*:)/);
+      const header = ['Partenaire', 'URL', 'Secteur partenaire', 'Thématique', 'Stratégie recommandée', 'Format', 'Pourquoi ça matche', 'Contact', 'Statut'];
+      const dataRows = [];
+      for (const section of sections) {
+        const nameMatch     = section.match(/## Partenaire \d+\s*:\s*(.+)/);
+        if (!nameMatch) continue;
+        const urlRaw        = (section.match(/🔗\s*(.+)/) || [])[1] || '';
+        const urlClean      = (urlRaw.match(/\(([^)]+)\)/) || [])[1] || urlRaw.replace(/\[.*?\]/g, '').trim();
+        const sectorMatch   = section.match(/\*\*Secteur\s*:\*\*\s*(.+)/);
+        const strategieMatch = section.match(/\*\*Stratégie recommandée\s*:\*\*\s*(.+)/);
+        const formatMatch   = section.match(/\*\*Format\s*:\*\*\s*(.+)/);
+        const whyMatch      = section.match(/\*\*Pourquoi ça matche\s*:\*\*\n([\s\S]+?)(?=\n\n\*\*|\n\n---|$)/);
+        const contactMatch  = section.match(/👤\s*(.+)/);
+        const row = [
+          nameMatch[1].trim(),
+          urlClean,
+          sectorMatch     ? sectorMatch[1].trim()                     : '',
+          theme           ? theme.trim()                              : '',
+          strategieMatch  ? strategieMatch[1].trim()                  : '',
+          formatMatch     ? formatMatch[1].trim()                     : '',
+          whyMatch        ? whyMatch[1].trim().replace(/\n/g, ' ')   : '',
+          contactMatch    ? contactMatch[1].trim()                    : '',
+          'À contacter'
+        ].map(v => '"' + v.replace(/"/g, '""') + '"').join(';');
+        dataRows.push(row);
+      }
+      const csv  = [header.join(';'), ...dataRows].join('\n');
+      const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8;' });
+      const a    = document.createElement('a');
+      a.href     = URL.createObjectURL(blob);
+      a.download = 'partenaires_b2b.csv';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(a.href);
+    }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      // Sauvegarder l'email pour les prochaines visites
+      localStorage.setItem('b2b_user_email', emailInput.value.trim());
+
+      // Réinitialiser l'interface
+      loading.classList.add('visible');
+      result.innerHTML = '';
+      submitBtn.disabled = true;
+      submitBtn.textContent = '⏳ Recherche en cours...';
+      statusEl.textContent = 'Analyse de ta boîte en cours...';
+
+      try {
+        const response = await fetch('/match', {
+          method: 'POST',
+          body: new FormData(form),
+        });
+
+        if (!response.ok) {
+          const errorText = await response.text();
+          throw new Error(errorText);
+        }
+
+        // Lire le stream SSE ligne par ligne
+        const reader  = response.body.getReader();
+        const decoder = new TextDecoder();
+        let resultContent = '';
+        let resultPre     = null;
+        let buffer        = ''; // tampon pour gérer les lignes trop longues splitées en morceaux
+
+        while (true) {
+          const { done, value } = await reader.read();
+          if (done) break;
+
+          // Accumuler dans le buffer avant de splitter
+          buffer += decoder.decode(value, { stream: true });
+          const lines = buffer.split('\n');
+          buffer = lines.pop(); // la dernière ligne est peut-être incomplète, on la garde
+
+          for (const line of lines) {
+            if (!line.startsWith('data: ')) continue;
+
+            let data;
+            try { data = JSON.parse(line.slice(6)); }
+            catch { continue; }
+
+            // Mise à jour du statut (pendant les recherches)
+            if (data.status) {
+              statusEl.textContent = data.status;
+            }
+
+            // Texte de l'agent → affichage progressif
+            if (data.text) {
+              if (!resultPre) {
+                resultPre = document.createElement('pre');
+                resultPre.id = 'result-content';
+                result.appendChild(resultPre);
+              }
+              resultContent += data.text;
+              resultPre.textContent = resultContent;
+              // Scroll automatique vers le bas
+              resultPre.scrollIntoView({ behavior: 'smooth', block: 'end' });
+            }
+
+            // Recherche terminée
+            if (data.done) {
+              loading.classList.remove('visible');
+              submitBtn.disabled = false;
+              submitBtn.textContent = '🔍 Nouvelle recherche';
+              if (resultContent) showExportButtons(resultContent);
+            }
+
+            // Erreur côté serveur
+            if (data.error) {
+              throw new Error(data.error);
+            }
+          }
+        }
+
+      } catch (error) {
+        loading.classList.remove('visible');
+        submitBtn.disabled = false;
+        submitBtn.textContent = '🔍 Trouver 5 partenaires qualifiés';
+        result.innerHTML = `<div class="error-box">❌ ${error.message}</div>`;
+      }
+    });
+  </script>
+</body>
+</html>
