@@ -187,6 +187,9 @@
     }
     @keyframes spin { to { transform: rotate(360deg); } }
 
+    @keyframes flip { 0%,100% { transform: rotate(0deg); } 50% { transform: rotate(180deg); } }
+    .hourglass-spin { display: inline-block; animation: flip 1.4s ease-in-out infinite; }
+
     #status { color: var(--accent); font-size: 14px; font-weight: 500; }
 
     /* ── Zone de résultat ── */
@@ -508,7 +511,7 @@
       document.getElementById('search-tips').style.display = 'block';
       result.innerHTML = '';
       submitBtn.disabled = true;
-      submitBtn.textContent = '⏳ Recherche en cours...';
+      submitBtn.innerHTML = '<span class="hourglass-spin">⏳</span> Recherche en cours...';
       statusEl.textContent = 'Analyse de votre entreprise en cours...';
 
       try {
@@ -568,7 +571,7 @@
               loading.classList.remove('visible');
               document.getElementById('search-tips').style.display = 'none';
               submitBtn.disabled = false;
-              submitBtn.textContent = '🔍 Lancer une nouvelle recherche';
+              submitBtn.innerHTML = '🔍 Lancer une nouvelle recherche';
               if (resultContent) showExportButtons(resultContent);
             }
 
