@@ -67,6 +67,10 @@ def match():
     partner_sectors = request.form.getlist("partner_sectors")
     ps_other        = request.form.get("partner_sectors_other", "").strip()
     context         = request.form.get("context", "").strip()
+    plan            = request.form.get("plan", "free").strip().lower()
+
+    # Nombre de partenaires selon le plan
+    n_partners = 3 if plan in ("free", "starter") else 5
 
     if not company_name or not theme or not user_email:
         return "Veuillez remplir tous les champs obligatoires.", 400
@@ -110,7 +114,7 @@ Thématique : {theme}{context_line}{excluded_line}
 
 {f"⛔ INTERDIT : Ne propose JAMAIS les boîtes suivantes, même si elles semblent pertinentes : {', '.join(excluded)}. Propose UNIQUEMENT des boîtes que tu n'as jamais proposées à cet utilisateur." if excluded else ""}
 
-Lance une recherche web sur "{company_name}" pour enrichir ton analyse, puis trouve 5 partenaires B2B qualifiés selon les règles. Oriente tes recherches vers les secteurs partenaires indiqués."""
+Lance une recherche web sur "{company_name}" pour enrichir ton analyse, puis trouve {n_partners} partenaires B2B qualifiés selon les règles. Oriente tes recherches vers les secteurs partenaires indiqués."""
 
             def save_results():
                 names = re.findall(r'## Partenaire \d+\s*:\s*(.+)', accumulated_text)
@@ -198,8 +202,8 @@ Lance une recherche web sur "{company_name}" pour enrichir ton analyse, puis tro
                             break
 
                         result_complet = (
-                            "Partenaire 5" in accumulated_text
-                            or "partenaire 5" in accumulated_text.lower()
+                            f"Partenaire {n_partners}" in accumulated_text
+                            or f"partenaire {n_partners}" in accumulated_text.lower()
                         )
 
                         if result_complet or continuations >= 4:
@@ -208,7 +212,7 @@ Lance une recherche web sur "{company_name}" pour enrichir ton analyse, puis tro
                                 dedup_attempts += 1
                                 dup_list = ', '.join(dups)
                                 yield f"data: {json.dumps({'status': f'🔄 Remplacement de {len(dups)} doublon(s)...'})}\n\n"
-                                continue_msg = f"⛔ Tu as proposé des partenaires déjà connus de cet utilisateur : {dup_list}. Ces boîtes sont INTERDITES. Remplace-les par {len(dups)} nouveau(x) partenaire(s) différent(s) que tu n'as jamais mentionné(s). Garde les autres partenaires tels quels et présente le tout au complet."
+                                continue_msg = f"⛔ Tu as proposé des partenaires déjà connus de cet utilisateur : {dup_list}. Ces boîtes sont INTERDITES. Remplace-les par {len(dups)} nouveau(x) partenaire(s) différent(s) que tu n'as jamais mentionné(s). Garde les autres partenaires tels quels et présente les {n_partners} au complet."
                                 client.beta.sessions.events.send(
                                     session_id=session.id,
                                     events=[{"type": "user.message", "content": [{"type": "text", "text": continue_msg}]}]
@@ -220,7 +224,7 @@ Lance une recherche web sur "{company_name}" pour enrichir ton analyse, puis tro
                         else:
                             continuations += 1
                             yield f"data: {json.dumps({'status': f'💬 Relance ({continuations}/4)...'})}\n\n"
-                            continue_msg = "Continue et présente les 5 partenaires complets en suivant exactement le format demandé."
+                            continue_msg = f"Continue et présente les {n_partners} partenaires complets en suivant exactement le format demandé."
                             client.beta.sessions.events.send(
                                 session_id=session.id,
                                 events=[{

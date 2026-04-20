@@ -421,6 +421,18 @@
       document.getElementById('partner-other-input').style.display = this.checked ? 'block' : 'none';
     });
 
+    // Lire le plan depuis l'URL (?plan=free|starter|growth|scale)
+    const urlParams = new URLSearchParams(window.location.search);
+    const currentPlan = urlParams.get('plan') || 'free';
+    const isLimited = currentPlan === 'free' || currentPlan === 'starter';
+
+    // Injecter le plan dans le formulaire
+    const planInput = document.createElement('input');
+    planInput.type = 'hidden';
+    planInput.name = 'plan';
+    planInput.value = currentPlan;
+    document.getElementById('matchForm').appendChild(planInput);
+
     // Pré-remplir l'email depuis localStorage
     const emailInput = document.getElementById('user_email');
     const savedEmail = localStorage.getItem('b2b_user_email');
@@ -572,7 +584,15 @@
               document.getElementById('search-tips').style.display = 'none';
               submitBtn.disabled = false;
               submitBtn.innerHTML = '🔍 Lancer une nouvelle recherche';
-              if (resultContent) showExportButtons(resultContent);
+              if (resultContent) {
+                showExportButtons(resultContent);
+                if (isLimited) {
+                  const upsell = document.createElement('div');
+                  upsell.style.cssText = 'margin-top:16px; padding:16px 20px; background:#F5F3FF; border:1px solid rgba(94,53,224,0.25); border-radius:10px; font-size:14px; color:var(--ink-soft); text-align:center; line-height:1.6;';
+                  upsell.innerHTML = '✨ <strong style="color:var(--accent)">D\'autres partenaires pertinents ont été identifiés.</strong><br>Passez à la version complète pour accéder aux 5 recommandations.';
+                  result.appendChild(upsell);
+                }
+              }
             }
 
             // Erreur côté serveur
