@@ -389,8 +389,10 @@
         </button>
       </form>
 
-      <p class="tip">☕ Prends une pause, les résultats arrivent dans quelques minutes</p>
-      <p class="tip" style="margin-top:6px;">Chaque recherche propose de nouveaux partenaires (aucun doublon).</p>
+      <div id="search-tips" style="display:none;">
+        <p class="tip">☕ Prends une pause, les résultats arrivent dans quelques minutes</p>
+        <p class="tip" style="margin-top:6px;">Chaque recherche propose de nouveaux partenaires (aucun doublon).</p>
+      </div>
     </div>
 
     <!-- Barre de statut -->
@@ -503,6 +505,7 @@
 
       // Réinitialiser l'interface
       loading.classList.add('visible');
+      document.getElementById('search-tips').style.display = 'block';
       result.innerHTML = '';
       submitBtn.disabled = true;
       submitBtn.textContent = '⏳ Recherche en cours...';
@@ -563,6 +566,7 @@
             // Recherche terminée
             if (data.done) {
               loading.classList.remove('visible');
+              document.getElementById('search-tips').style.display = 'none';
               submitBtn.disabled = false;
               submitBtn.textContent = '🔍 Lancer une nouvelle recherche';
               if (resultContent) showExportButtons(resultContent);
