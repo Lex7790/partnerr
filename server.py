@@ -8,7 +8,7 @@ import anthropic
 import os
 import re
 import json
-from flask import Flask, request, Response, stream_with_context
+from flask import Flask, request, Response, stream_with_context, redirect
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -18,8 +18,10 @@ app = Flask(__name__)
 client = anthropic.Anthropic(api_key=os.environ.get("ANTHROPIC_API_KEY"))
 AGENT_ID = os.environ.get("AGENT_ID")
 ENV_ID = os.environ.get("ENVIRONMENT_ID")
-HISTORY_FILE = os.environ.get("HISTORY_FILE", "/data/history.json")
-LOG_FILE     = os.environ.get("LOG_FILE",     "/data/logs.json")
+HISTORY_FILE  = os.environ.get("HISTORY_FILE",  "/data/history.json")
+LOG_FILE      = os.environ.get("LOG_FILE",      "/data/logs.json")
+USERS_FILE    = os.environ.get("USERS_FILE",    "/data/users.json")
+RESEND_API_KEY = os.environ.get("RESEND_API_KEY", "")
 
 
 def load_history():
@@ -46,6 +48,66 @@ def save_history(email, new_companies):
     history[email] = merged
     with open(HISTORY_FILE, "w", encoding="utf-8") as f:
         json.dump(history, f, ensure_ascii=False, indent=2)
+
+
+def load_users():
+    if not os.path.exists(USERS_FILE):
+        return {}
+    with open(USERS_FILE, "r", encoding="utf-8") as f:
+        return json.load(f)
+
+
+def save_users(users):
+    with open(USERS_FILE, "w", encoding="utf-8") as f:
+        json.dump(users, f, ensure_ascii=False, indent=2)
+
+
+def send_welcome_email(email):
+    if not RESEND_API_KEY:
+        return
+    try:
+        import urllib.request
+        payload = json.dumps({
+            "from": "Partnerr <onboarding@resend.dev>",
+            "to": [email],
+            "subject": "Bienvenue sur Partnerr 👋",
+            "html": f"""
+            <div style="font-family:sans-serif; max-width:480px; margin:0 auto; padding:32px; color:#0B0718;">
+              <h2 style="font-size:22px; margin-bottom:16px;">Bienvenue sur Partnerr !</h2>
+              <p style="color:#4B4565; line-height:1.6; margin-bottom:24px;">
+                Votre compte est créé. Vous disposez d'<strong>1 recherche gratuite</strong> pour trouver vos premiers partenaires B2B qualifiés.
+              </p>
+              <a href="https://partnerr.onrender.com/app" style="display:inline-block; padding:12px 24px; background:#5E35E0; color:white; border-radius:8px; text-decoration:none; font-weight:600;">
+                Lancer ma première recherche →
+              </a>
+              <p style="margin-top:32px; font-size:13px; color:#8B87A3;">
+                Des questions ? Répondez à cet email ou écrivez-nous à contact@partnerr.fr
+              </p>
+            </div>
+            """
+        }).encode("utf-8")
+        req = urllib.request.Request(
+            "https://api.resend.com/emails",
+            data=payload,
+            headers={"Authorization": f"Bearer {RESEND_API_KEY}", "Content-Type": "application/json"}
+        )
+        urllib.request.urlopen(req)
+    except Exception as e:
+        print(f"[EMAIL] Erreur envoi : {e}", flush=True)
+
+
+@app.route("/register", methods=["POST"])
+def register():
+    email = request.form.get("email", "").strip().lower()
+    if not email or "@" not in email:
+        return redirect("/")
+    users = load_users()
+    is_new = email not in users
+    if is_new:
+        users[email] = {"plan": "free", "credits": 1}
+        save_users(users)
+        send_welcome_email(email)
+    return redirect(f"/app?email={email}")
 
 
 @app.route("/")

@@ -96,6 +96,19 @@ def credit_user(email, amount):
     print(f"\n  ✅ {email} : {before} → {user['credits']} crédits\n")
 
 
+def delete_user(email):
+    email = email.strip().lower()
+    for path, is_dict in [(HISTORY_FILE, True), (USERS_FILE, True)]:
+        data = load_json(path)
+        if email in data:
+            del data[email]
+            save_json(path, data)
+    logs = load_json(LOG_FILE)
+    logs = [l for l in logs if l.get("email") != email]
+    save_json(LOG_FILE, logs)
+    print(f"\n  ✅ Données supprimées pour : {email}\n")
+
+
 def set_plan(email, plan):
     email = email.strip().lower()
     if plan not in PLAN_CREDITS:
@@ -116,6 +129,7 @@ if __name__ == "__main__":
     parser.add_argument("--logs",     action="store_true", help="20 dernières recherches")
     parser.add_argument("--credit",   nargs=2, metavar=("EMAIL", "N"), help="Ajouter N crédits")
     parser.add_argument("--set-plan", nargs=2, metavar=("EMAIL", "PLAN"), help="Changer le plan")
+    parser.add_argument("--delete",   metavar="EMAIL", help="Supprimer toutes les données d'un utilisateur")
     args = parser.parse_args()
 
     if args.email:
@@ -126,5 +140,7 @@ if __name__ == "__main__":
         credit_user(args.credit[0], int(args.credit[1]))
     elif args.set_plan:
         set_plan(args.set_plan[0], args.set_plan[1])
+    elif args.delete:
+        delete_user(args.delete)
     else:
         parser.print_help()

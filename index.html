@@ -289,7 +289,7 @@
 
         <label for="user_email">Ton email <span class="label-hint">· pour mémoriser tes résultats et éviter les doublons</span></label>
         <input type="email" id="user_email" name="user_email" placeholder="Ex : alexis@monentreprise.com" required>
-        <p style="margin-top:6px; font-size:12px; color:var(--ink-muted); line-height:1.5;">Utilisé uniquement pour sauvegarder vos résultats et éviter les doublons. Aucun envoi commercial.</p>
+        <p style="margin-top:6px; font-size:12px; color:var(--ink-muted); line-height:1.5;">Utilisé uniquement pour sauvegarder vos résultats, éviter les doublons et gérer vos crédits. Aucune utilisation commerciale.</p>
 
         <label for="company_name">Nom de ta boîte</label>
         <input type="text" id="company_name" name="company_name" placeholder="Ex : Mon Entreprise" required>
@@ -415,6 +415,7 @@
 
     <!-- Zone de résultat -->
     <div id="result"></div>
+    <p id="sources-mention" style="display:none; margin-top:12px; font-size:12px; color:var(--ink-muted); text-align:center;">Les informations de contact affichées proviennent de sources publiques professionnelles.</p>
   </div>
   </div>
 
@@ -444,10 +445,12 @@
     planInput.value = currentPlan;
     document.getElementById('matchForm').appendChild(planInput);
 
-    // Pré-remplir l'email depuis localStorage
+    // Pré-remplir l'email depuis URL (?email=...) ou localStorage
     const emailInput = document.getElementById('user_email');
+    const emailFromUrl = urlParams.get('email');
     const savedEmail = localStorage.getItem('b2b_user_email');
-    if (savedEmail) emailInput.value = savedEmail;
+    if (emailFromUrl) emailInput.value = emailFromUrl;
+    else if (savedEmail) emailInput.value = savedEmail;
 
     const form       = document.getElementById('matchForm');
     const loading    = document.getElementById('loading');
@@ -593,6 +596,7 @@
             if (data.done) {
               loading.classList.remove('visible');
               document.getElementById('search-tips').style.display = 'none';
+              document.getElementById('sources-mention').style.display = 'block';
               submitBtn.disabled = false;
               submitBtn.innerHTML = '🔍 Lancer une nouvelle recherche';
               if (resultContent) {
