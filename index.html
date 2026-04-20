@@ -257,6 +257,15 @@
     }
   </style>
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script>
+    // Ouvrir tous les liens en nouvel onglet
+    const renderer = new marked.Renderer();
+    renderer.link = (href, title, text) => {
+      const t = title ? ` title="${title}"` : '';
+      return `<a href="${href}"${t} target="_blank" rel="noopener noreferrer">${text}</a>`;
+    };
+    marked.setOptions({ renderer });
+  </script>
 </head>
 <body>
   <header class="site-header" style="justify-content:space-between;">
@@ -383,7 +392,10 @@
     <!-- Barre de statut -->
     <div id="loading">
       <div class="spinner"></div>
-      <span id="status">Analyse de ta boîte en cours...</span>
+      <div>
+        <span id="status">Analyse de ta boîte en cours...</span>
+        <div style="font-size:12px; color:var(--accent); margin-top:3px; opacity:0.75;">⚠️ Ne quitte pas cette page pendant la recherche</div>
+      </div>
     </div>
 
     <!-- Zone de résultat -->
