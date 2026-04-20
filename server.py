@@ -118,10 +118,19 @@ Lance une recherche web sur "{company_name}" pour enrichir ton analyse, puis tro
                 if names and user_email:
                     save_history(user_email, names)
 
+            def find_duplicates():
+                found = []
+                for name in excluded:
+                    if re.search(r'## Partenaire \d+\s*:\s*' + re.escape(name), accumulated_text, re.IGNORECASE):
+                        found.append(name)
+                return found
+
             # Texte accumulé pour savoir si le résultat est complet
             accumulated_text = ""
             # Compteur de relances pour éviter une boucle infinie
             continuations = 0
+            # Compteur de corrections de doublons (max 1)
+            dedup_attempts = 0
 
             # Pattern stream-first : ouvrir AVANT d'envoyer
             with client.beta.sessions.events.stream(session_id=session.id) as stream:
@@ -189,13 +198,24 @@ Lance une recherche web sur "{company_name}" pour enrichir ton analyse, puis tro
                         )
 
                         if result_complet or continuations >= 4:
-                            save_results()
-                            yield f"data: {json.dumps({'done': True})}\n\n"
-                            break
+                            dups = find_duplicates() if dedup_attempts < 1 else []
+                            if dups:
+                                dedup_attempts += 1
+                                dup_list = ', '.join(dups)
+                                yield f"data: {json.dumps({'status': f'🔄 Remplacement de {len(dups)} doublon(s)...'})}\n\n"
+                                continue_msg = f"⛔ Tu as proposé des partenaires déjà connus de cet utilisateur : {dup_list}. Ces boîtes sont INTERDITES. Remplace-les par {len(dups)} nouveau(x) partenaire(s) différent(s) que tu n'as jamais mentionné(s). Garde les autres partenaires tels quels et présente le tout au complet."
+                                client.beta.sessions.events.send(
+                                    session_id=session.id,
+                                    events=[{"type": "user.message", "content": [{"type": "text", "text": continue_msg}]}]
+                                )
+                            else:
+                                save_results()
+                                yield f"data: {json.dumps({'done': True})}\n\n"
+                                break
                         else:
                             continuations += 1
                             yield f"data: {json.dumps({'status': f'💬 Relance ({continuations}/4)...'})}\n\n"
-                            continue_msg = "Continue et présente les 5 partenaires complets avec leurs messages LinkedIn, en suivant exactement le format demandé."
+                            continue_msg = "Continue et présente les 5 partenaires complets en suivant exactement le format demandé."
                             client.beta.sessions.events.send(
                                 session_id=session.id,
                                 events=[{
