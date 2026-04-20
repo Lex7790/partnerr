@@ -423,18 +423,39 @@
     const result     = document.getElementById('result');
     const submitBtn  = document.getElementById('submitBtn');
 
+    const FEEDBACK_URL = 'https://docs.google.com/forms/d/17fU3JbiJU15vprC88tNrq9sUc-S8ARBzBHHyLgjxeYg/viewform';
+
     function showExportButtons(text) {
       const existing = document.getElementById('export-buttons');
       if (existing) existing.remove();
       const theme = document.getElementById('theme') ? document.getElementById('theme').value : '';
+
+      // Message de fin
+      const successMsg = document.createElement('div');
+      successMsg.style.cssText = 'margin-bottom:16px; padding:14px 20px; background:rgba(94,53,224,0.08); border:1px solid rgba(94,53,224,0.2); border-radius:10px; font-family:\'Plus Jakarta Sans\',sans-serif; font-size:14px; font-weight:600; color:var(--accent); text-align:center;';
+      successMsg.textContent = '✅ 5 partenaires identifiés — prêts à être contactés.';
+      result.insertBefore(successMsg, result.firstChild);
+
       const div = document.createElement('div');
       div.id = 'export-buttons';
+
       const csvBtn = document.createElement('button');
       csvBtn.type = 'button';
       csvBtn.className = 'btn-csv';
       csvBtn.textContent = '⬇️ Exporter CSV';
       csvBtn.onclick = () => exportCSV(text, theme);
+
+      const feedbackBtn = document.createElement('a');
+      feedbackBtn.href = FEEDBACK_URL;
+      feedbackBtn.target = '_blank';
+      feedbackBtn.rel = 'noopener noreferrer';
+      feedbackBtn.style.cssText = 'flex:1; display:flex; align-items:center; justify-content:center; padding:12px; background:var(--ink-soft); color:white; border-radius:10px; font-family:\'Plus Jakarta Sans\',sans-serif; font-size:14px; font-weight:600; text-decoration:none; transition:background 0.15s;';
+      feedbackBtn.textContent = '💬 Donner mon avis';
+      feedbackBtn.onmouseover = () => feedbackBtn.style.background = 'var(--ink)';
+      feedbackBtn.onmouseout = () => feedbackBtn.style.background = 'var(--ink-soft)';
+
       div.appendChild(csvBtn);
+      div.appendChild(feedbackBtn);
       result.appendChild(div);
     }
 
@@ -481,7 +502,7 @@
       result.innerHTML = '';
       submitBtn.disabled = true;
       submitBtn.textContent = '⏳ Recherche en cours...';
-      statusEl.textContent = 'Analyse de ta boîte en cours...';
+      statusEl.textContent = 'Analyse de votre entreprise en cours...';
 
       try {
         const response = await fetch('/match', {
@@ -539,7 +560,7 @@
             if (data.done) {
               loading.classList.remove('visible');
               submitBtn.disabled = false;
-              submitBtn.textContent = '🔍 Nouvelle recherche';
+              submitBtn.textContent = '🔍 Lancer une nouvelle recherche';
               if (resultContent) showExportButtons(resultContent);
             }
 
