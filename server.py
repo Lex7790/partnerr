@@ -140,6 +140,7 @@ def match():
     partner_sectors = request.form.getlist("partner_sectors")
     ps_other        = request.form.get("partner_sectors_other", "").strip()
     context         = request.form.get("context", "").strip()
+    geo             = request.form.get("geo", "France").strip()
     plan            = request.form.get("plan", "free").strip().lower()
     exclude_manual  = request.form.get("exclude_manual", "").strip()
 
@@ -186,11 +187,12 @@ Secteur : {sectors_str}
 Clients cibles : {clients_str}
 Taille : {size}
 Secteurs partenaires recherchés : {partners_str}
+Zone géographique cible : {geo}
 Thématique : {theme}{context_line}{excluded_line}
 
 {f"⛔ INTERDIT : Ne propose JAMAIS les boîtes suivantes, même si elles semblent pertinentes : {', '.join(excluded)}. Propose UNIQUEMENT des boîtes que tu n'as jamais proposées à cet utilisateur." if excluded else ""}
 
-Lance une recherche web sur "{company_name}" pour enrichir ton analyse, puis trouve {n_partners} partenaires B2B qualifiés selon les règles. Oriente tes recherches vers les secteurs partenaires indiqués.
+Lance une recherche web sur "{company_name}" pour enrichir ton analyse, puis trouve {n_partners} partenaires B2B qualifiés selon les règles. Oriente tes recherches vers les secteurs partenaires indiqués. Les partenaires proposés doivent être basés ou actifs en priorité dans la zone géographique suivante : {geo}.
 
 ⚠️ QUALITÉ OBLIGATOIRE : Pour chaque partenaire proposé, vérifie qu'il existe une présence en ligne cohérente et récente (site web fonctionnel, activité visible, actualités récentes). Si l'activité d'une entreprise est incertaine, douteuse ou introuvable en ligne, ne la propose pas et choisis une alternative active et vérifiable."""
 
