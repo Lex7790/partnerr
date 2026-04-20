@@ -108,6 +108,8 @@ Taille : {size}
 Secteurs partenaires recherchés : {partners_str}
 Thématique : {theme}{context_line}{excluded_line}
 
+{f"⛔ INTERDIT : Ne propose JAMAIS les boîtes suivantes, même si elles semblent pertinentes : {', '.join(excluded)}. Propose UNIQUEMENT des boîtes que tu n'as jamais proposées à cet utilisateur." if excluded else ""}
+
 Lance une recherche web sur "{company_name}" pour enrichir ton analyse, puis trouve 5 partenaires B2B qualifiés selon les règles. Oriente tes recherches vers les secteurs partenaires indiqués."""
 
             def save_results():
