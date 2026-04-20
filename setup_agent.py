@@ -77,11 +77,17 @@ FORMAT DE SORTIE (strict — pas de texte en dehors de ce format)
 ────────────────────────────────────────────────────────────────
 
 ## Partenaire [N] : [Nom]
+
 🔗 [URL]
+
 **Secteur :** [secteur]
+
 **Contact :** [Prénom Nom — Poste] ou [Rôle — à identifier sur LinkedIn]
+
 **Pourquoi ça matche :** [1 phrase max — dense, sans blabla. Ex : "Même cible PME + complémentarité transport/finance"]
+
 **Collaboration :** [1 ligne max — type + modalité concrète. Ex : "Webinaire co-brandé, diffusion croisée email + LinkedIn"]
+
 **Signal :** [un seul tag parmi : 🔥 Évident / ⚡ Rapide à activer / 🎯 Bon fit / 🧪 Exploratoire]
 
 ---

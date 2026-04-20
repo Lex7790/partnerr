@@ -428,28 +428,22 @@
 
     function exportCSV(text, theme) {
       const sections = text.split(/(?=## Partenaire \d+\s*:)/);
-      const header = ['Partenaire', 'URL', 'Secteur partenaire', 'Thématique', 'Stratégie recommandée', 'Format', 'Pourquoi ça matche', 'Contact', 'Statut'];
+      const header = ['Entreprise', 'URL', 'Contact', 'Statut', 'Date de contact', 'Relance prévue', 'Notes'];
       const dataRows = [];
       for (const section of sections) {
-        const nameMatch     = section.match(/## Partenaire \d+\s*:\s*(.+)/);
+        const nameMatch    = section.match(/## Partenaire \d+\s*:\s*(.+)/);
         if (!nameMatch) continue;
-        const urlRaw        = (section.match(/🔗\s*(.+)/) || [])[1] || '';
-        const urlClean      = (urlRaw.match(/\(([^)]+)\)/) || [])[1] || urlRaw.replace(/\[.*?\]/g, '').trim();
-        const sectorMatch   = section.match(/\*\*Secteur\s*:\*\*\s*(.+)/);
-        const strategieMatch = section.match(/\*\*Stratégie recommandée\s*:\*\*\s*(.+)/);
-        const formatMatch   = section.match(/\*\*Format\s*:\*\*\s*(.+)/);
-        const whyMatch      = section.match(/\*\*Pourquoi ça matche\s*:\*\*\n([\s\S]+?)(?=\n\n\*\*|\n\n---|$)/);
-        const contactMatch  = section.match(/👤\s*(.+)/);
+        const urlRaw       = (section.match(/🔗\s*(.+)/) || [])[1] || '';
+        const urlClean     = (urlRaw.match(/\(([^)]+)\)/) || [])[1] || urlRaw.replace(/\[.*?\]/g, '').trim();
+        const contactMatch = section.match(/\*\*Contact\s*:\*\*\s*(.+)/);
         const row = [
           nameMatch[1].trim(),
           urlClean,
-          sectorMatch     ? sectorMatch[1].trim()                     : '',
-          theme           ? theme.trim()                              : '',
-          strategieMatch  ? strategieMatch[1].trim()                  : '',
-          formatMatch     ? formatMatch[1].trim()                     : '',
-          whyMatch        ? whyMatch[1].trim().replace(/\n/g, ' ')   : '',
-          contactMatch    ? contactMatch[1].trim()                    : '',
-          'À contacter'
+          contactMatch ? contactMatch[1].trim() : '',
+          'À contacter',
+          '',
+          '',
+          ''
         ].map(v => '"' + v.replace(/"/g, '""') + '"').join(';');
         dataRows.push(row);
       }
