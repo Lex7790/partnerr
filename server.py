@@ -18,7 +18,7 @@ app = Flask(__name__)
 client = anthropic.Anthropic(api_key=os.environ.get("ANTHROPIC_API_KEY"))
 AGENT_ID = os.environ.get("AGENT_ID")
 ENV_ID = os.environ.get("ENVIRONMENT_ID")
-HISTORY_FILE = "history.json"
+HISTORY_FILE = os.environ.get("HISTORY_FILE", "/data/history.json")
 
 
 def load_history():
