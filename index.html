@@ -282,7 +282,7 @@
   <div class="page-body">
   <div class="container">
     <h1 class="page-title">Trouve tes partenaires B2B</h1>
-    <p class="subtitle">Remplis le formulaire, Partnerr analyse le marché et te propose 5 partenaires qualifiés avec le bon contact et une stratégie concrète.</p>
+    <p class="subtitle" id="page-subtitle">Remplis le formulaire, Partnerr analyse le marché et te propose 5 partenaires qualifiés avec le bon contact et une stratégie concrète.</p>
 
     <div class="card">
       <form id="matchForm">
@@ -425,6 +425,11 @@
     const urlParams = new URLSearchParams(window.location.search);
     const currentPlan = urlParams.get('plan') || 'free';
     const isLimited = currentPlan === 'free' || currentPlan === 'starter';
+
+    // Adapter le wording selon le plan
+    if (isLimited) {
+      document.getElementById('page-subtitle').textContent = 'Remplis le formulaire, Partnerr analyse le marché et te propose des partenaires B2B qualifiés avec le bon contact et une stratégie concrète.';
+    }
 
     // Injecter le plan dans le formulaire
     const planInput = document.createElement('input');
@@ -589,7 +594,7 @@
                 if (isLimited) {
                   const upsell = document.createElement('div');
                   upsell.style.cssText = 'margin-top:16px; padding:16px 20px; background:#F5F3FF; border:1px solid rgba(94,53,224,0.25); border-radius:10px; font-size:14px; color:var(--ink-soft); text-align:center; line-height:1.6;';
-                  upsell.innerHTML = '✨ <strong style="color:var(--accent)">D\'autres partenaires pertinents ont été identifiés.</strong><br>Passez à la version complète pour accéder aux 5 recommandations.';
+                  upsell.innerHTML = '<div style="font-size:12px;font-weight:600;color:var(--ink-muted);letter-spacing:0.04em;text-transform:uppercase;margin-bottom:8px;">3 partenaires affichés</div>✨ <strong style="color:var(--accent)">D\'autres partenaires pertinents ont été identifiés pour ce cas.</strong><br>Passe à la version complète pour accéder aux 5 recommandations.';
                   result.appendChild(upsell);
                 }
               }
