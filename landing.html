@@ -295,17 +295,20 @@
     .steps-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 2px;
-      background: var(--border);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      overflow: hidden;
+      gap: 20px;
     }
 
     .step {
       background: var(--white);
       padding: 40px 36px;
       position: relative;
+      border: 1.5px solid var(--border);
+      border-radius: 16px;
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+    .step:hover {
+      border-color: rgba(94,53,224,0.5);
+      box-shadow: 0 0 0 3px rgba(94,53,224,0.08), 0 0 24px rgba(94,53,224,0.12);
     }
 
     .step-num {
@@ -372,12 +375,13 @@
       border: 1px solid rgba(255,255,255,0.08);
       border-radius: 16px;
       padding: 36px 32px;
-      transition: background 0.2s, border-color 0.2s;
+      transition: background 0.3s, border-color 0.3s, box-shadow 0.3s;
     }
 
     .feature:hover {
-      background: rgba(94, 53, 224, 0.12);
-      border-color: rgba(94, 53, 224, 0.3);
+      background: rgba(94,53,224,0.1);
+      border-color: rgba(94,53,224,0.45);
+      box-shadow: 0 0 0 3px rgba(94,53,224,0.08), 0 0 28px rgba(94,53,224,0.15);
     }
 
     .feature-icon {
@@ -501,6 +505,51 @@
       color: var(--ink-muted);
     }
 
+    /* ── PRICING & SOCIAL CARDS ── */
+    .pricing-card {
+      border-radius: 16px;
+      padding: 28px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      transition: border-color 0.3s, box-shadow 0.3s, transform 0.25s;
+    }
+    .pricing-card:hover {
+      border-color: rgba(94,53,224,0.5) !important;
+      box-shadow: 0 0 0 3px rgba(94,53,224,0.08), 0 0 28px rgba(94,53,224,0.13);
+      transform: translateY(-2px);
+    }
+    .pricing-card-dark:hover {
+      border-color: rgba(123,86,245,0.85) !important;
+      box-shadow: 0 0 0 4px rgba(94,53,224,0.15), 0 0 36px rgba(94,53,224,0.25);
+      transform: translateY(-2px);
+    }
+    .social-card {
+      background: var(--white);
+      border: 1.5px solid var(--border);
+      border-radius: 16px;
+      padding: 28px 24px;
+      transition: border-color 0.3s, box-shadow 0.3s, transform 0.25s;
+    }
+    .social-card:hover {
+      border-color: rgba(94,53,224,0.5);
+      box-shadow: 0 0 0 3px rgba(94,53,224,0.08), 0 0 24px rgba(94,53,224,0.12);
+      transform: translateY(-2px);
+    }
+
+    /* ── SCROLL ANIMATIONS ── */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    [data-anim] { opacity: 0; }
+    [data-anim].in-view {
+      animation: fadeInUp 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+    [data-anim].in-view[data-delay="1"] { animation-delay: 0.08s; }
+    [data-anim].in-view[data-delay="2"] { animation-delay: 0.16s; }
+    [data-anim].in-view[data-delay="3"] { animation-delay: 0.24s; }
+
     /* ── RESPONSIVE ── */
     @media (max-width: 900px) {
       .steps-grid { grid-template-columns: 1fr; }
@@ -579,7 +628,7 @@
     <p class="section-sub">Pas de configuration, pas d'abonnement. Juste un formulaire et des résultats concrets.</p>
 
     <div class="steps-grid">
-      <div class="step">
+      <div class="step" data-anim data-delay="0">
         <div class="step-num">01</div>
         <div class="step-icon">
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -591,7 +640,7 @@
         <p>Nom, secteur, type de partenariat recherché, secteur cible. 30 secondes, pas plus.</p>
       </div>
 
-      <div class="step">
+      <div class="step" data-anim data-delay="1">
         <div class="step-num">02</div>
         <div class="step-icon">
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -603,7 +652,7 @@
         <p>Partnerr parcourt le marché en temps réel et sélectionne les partenaires les plus pertinents pour votre profil.</p>
       </div>
 
-      <div class="step">
+      <div class="step" data-anim data-delay="2">
         <div class="step-num">03</div>
         <div class="step-icon">
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -624,13 +673,13 @@
     <p class="section-label">Ils ont testé</p>
     <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:20px; margin-top:40px;">
 
-      <div style="background:var(--white); border:1.5px solid var(--border); border-radius:16px; padding:28px 24px;">
+      <div class="social-card" data-anim data-delay="0">
         <p style="font-size:15px; color:var(--ink-soft); line-height:1.7; margin-bottom:20px;">"En 5 minutes j'avais 5 contacts qualifiés avec une vraie stratégie d'approche. J'aurais mis une semaine à faire ça manuellement."</p>
         <p style="font-family:'Plus Jakarta Sans',sans-serif; font-size:14px; font-weight:600; color:var(--ink);">Sophie M.</p>
         <p style="font-size:13px; color:var(--ink-muted);">Responsable Partenariats</p>
       </div>
 
-      <div style="background:var(--white); border:1.5px solid var(--border); border-radius:16px; padding:28px 24px;">
+      <div class="social-card" data-anim data-delay="1">
         <p style="font-size:15px; color:var(--ink-soft); line-height:1.7; margin-bottom:20px;">"Les résultats sont vraiment pertinents et la prise en main est immédiate."</p>
         <p style="font-family:'Plus Jakarta Sans',sans-serif; font-size:14px; font-weight:600; color:var(--ink);">Thomas R.</p>
         <p style="font-size:13px; color:var(--ink-muted);">Co-fondateur</p>
@@ -648,7 +697,7 @@
     <p class="section-sub">La différence entre un annuaire et un vrai outil de business development.</p>
 
     <div class="features-grid">
-      <div class="feature">
+      <div class="feature" data-anim data-delay="0">
         <div class="feature-icon">
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
             <path d="M10 2l2.4 4.9 5.4.8-3.9 3.8.9 5.4L10 14.4l-4.8 2.5.9-5.4L2.2 7.7l5.4-.8L10 2z" fill="currentColor" opacity=".4" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/>
@@ -658,7 +707,7 @@
         <p>Partnerr ne fait pas une recherche Google. Il évalue la complémentarité réelle entre votre offre et celle du partenaire potentiel : secteur, positionnement, taille, timing.</p>
       </div>
 
-      <div class="feature">
+      <div class="feature" data-anim data-delay="1">
         <div class="feature-icon">
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
             <circle cx="10" cy="7" r="3" fill="currentColor" opacity=".4"/>
@@ -669,7 +718,7 @@
         <p>Chaque résultat inclut un rôle ou un nom de contact à approcher, pas juste un site web. Vous savez à qui parler avant même d'ouvrir LinkedIn.</p>
       </div>
 
-      <div class="feature">
+      <div class="feature" data-anim data-delay="2">
         <div class="feature-icon">
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
             <path d="M3 6h14M3 10h10M3 14h7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
@@ -692,7 +741,7 @@
     <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:20px; margin-top:48px;">
 
       <!-- Gratuit -->
-      <div style="background:var(--white); border:1.5px solid var(--border); border-radius:16px; padding:28px 24px; display:flex; flex-direction:column; gap:16px;">
+      <div class="pricing-card" data-anim data-delay="0" style="background:var(--white); border:1.5px solid var(--border);">
         <div>
           <p style="font-family:'Plus Jakarta Sans',sans-serif; font-size:11px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--ink-muted); margin-bottom:8px;">Découvrir le produit</p>
           <p style="font-family:'Plus Jakarta Sans',sans-serif; font-size:24px; font-weight:800; color:var(--ink);">Gratuit</p>
@@ -706,7 +755,7 @@
       </div>
 
       <!-- Starter -->
-      <div style="background:var(--white); border:1.5px solid var(--border); border-radius:16px; padding:28px 24px; display:flex; flex-direction:column; gap:16px;">
+      <div class="pricing-card" data-anim data-delay="1" style="background:var(--white); border:1.5px solid var(--border);">
         <div>
           <p style="font-family:'Plus Jakarta Sans',sans-serif; font-size:11px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--ink-muted); margin-bottom:8px;">Tester sur un premier cas réel</p>
           <p style="font-family:'Plus Jakarta Sans',sans-serif; font-size:24px; font-weight:800; color:var(--ink);">29€</p>
@@ -720,7 +769,7 @@
       </div>
 
       <!-- Growth — mis en avant -->
-      <div style="background:var(--ink); border:1.5px solid var(--accent); border-radius:16px; padding:28px 24px; display:flex; flex-direction:column; gap:16px; position:relative;">
+      <div class="pricing-card pricing-card-dark" data-anim data-delay="2" style="background:var(--ink); border:1.5px solid var(--accent); position:relative;">
         <div style="position:absolute; top:-13px; left:50%; transform:translateX(-50%); background:var(--accent); color:white; font-family:'Plus Jakarta Sans',sans-serif; font-size:11px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; padding:4px 14px; border-radius:100px; white-space:nowrap;">Le plus choisi</div>
         <div>
           <p style="font-family:'Plus Jakarta Sans',sans-serif; font-size:11px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:rgba(255,255,255,0.45); margin-bottom:8px;">Accéder à la version complète</p>
@@ -735,7 +784,7 @@
       </div>
 
       <!-- Scale -->
-      <div style="background:var(--white); border:1.5px solid var(--border); border-radius:16px; padding:28px 24px; display:flex; flex-direction:column; gap:16px;">
+      <div class="pricing-card" data-anim data-delay="3" style="background:var(--white); border:1.5px solid var(--border);">
         <div>
           <p style="font-family:'Plus Jakarta Sans',sans-serif; font-size:11px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--ink-muted); margin-bottom:8px;">Accélérer votre stratégie de partenariats</p>
           <p style="font-family:'Plus Jakarta Sans',sans-serif; font-size:24px; font-weight:800; color:var(--ink);">99€</p>
@@ -789,6 +838,18 @@
   document.querySelectorAll('#nav-cta, #hero-cta, #final-cta').forEach(el => {
     el.href = TOOL_URL;
   });
+
+  // Scroll animations
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in-view');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.05 });
+
+  document.querySelectorAll('[data-anim]').forEach(el => io.observe(el));
 </script>
 
 </body>
