@@ -175,6 +175,11 @@ Lance une recherche web sur "{company_name}" pour enrichir ton analyse, puis tro
 
                     # Session terminée définitivement
                     elif event.type == "session.status_terminated":
+                        dups = find_duplicates() if dedup_attempts < 1 else []
+                        if dups:
+                            dup_list = ', '.join(dups)
+                            warning = f"\n\n---\n\n⚠️ **{dup_list} {'ont' if len(dups) > 1 else 'a'} déjà été proposé{'s' if len(dups) > 1 else ''} lors d'une recherche précédente.** Relance la recherche pour obtenir des remplaçants."
+                            yield f"data: {json.dumps({'text': warning})}\n\n"
                         save_results()
                         yield f"data: {json.dumps({'done': True})}\n\n"
                         break
