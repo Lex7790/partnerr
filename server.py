@@ -19,6 +19,7 @@ client = anthropic.Anthropic(api_key=os.environ.get("ANTHROPIC_API_KEY"))
 AGENT_ID = os.environ.get("AGENT_ID")
 ENV_ID = os.environ.get("ENVIRONMENT_ID")
 HISTORY_FILE = os.environ.get("HISTORY_FILE", "/data/history.json")
+LOG_FILE     = os.environ.get("LOG_FILE",     "/data/logs.json")
 
 
 def load_history():
@@ -26,6 +27,16 @@ def load_history():
         return {}
     with open(HISTORY_FILE, "r", encoding="utf-8") as f:
         return json.load(f)
+
+
+def append_log(entry):
+    logs = []
+    if os.path.exists(LOG_FILE):
+        with open(LOG_FILE, "r", encoding="utf-8") as f:
+            logs = json.load(f)
+    logs.append(entry)
+    with open(LOG_FILE, "w", encoding="utf-8") as f:
+        json.dump(logs, f, ensure_ascii=False, indent=2)
 
 
 def save_history(email, new_companies):
@@ -68,6 +79,7 @@ def match():
     ps_other        = request.form.get("partner_sectors_other", "").strip()
     context         = request.form.get("context", "").strip()
     plan            = request.form.get("plan", "free").strip().lower()
+    exclude_manual  = request.form.get("exclude_manual", "").strip()
 
     # Nombre de partenaires selon le plan
     n_partners = 3 if plan in ("free", "starter") else 5
@@ -99,7 +111,9 @@ def match():
             context_line = f"\nContexte : {context}" if context else ""
 
             history = load_history()
-            excluded = history.get(user_email, [])
+            excluded_history = history.get(user_email, [])
+            excluded_manual  = [e.strip() for e in exclude_manual.split(",") if e.strip()]
+            excluded = list(set(excluded_history + excluded_manual))
             excluded_line = (
                 f"\nBoîtes déjà proposées à EXCLURE IMPÉRATIVEMENT (propose uniquement des nouvelles boîtes) : {', '.join(excluded)}"
                 if excluded else ""
@@ -117,10 +131,20 @@ Thématique : {theme}{context_line}{excluded_line}
 Lance une recherche web sur "{company_name}" pour enrichir ton analyse, puis trouve {n_partners} partenaires B2B qualifiés selon les règles. Oriente tes recherches vers les secteurs partenaires indiqués."""
 
             def save_results():
+                from datetime import datetime, timezone
                 names = re.findall(r'## Partenaire \d+\s*:\s*(.+)', accumulated_text)
                 names = [n.strip() for n in names if n.strip()]
                 if names and user_email:
                     save_history(user_email, names)
+                append_log({
+                    "date":      datetime.now(timezone.utc).isoformat(),
+                    "email":     user_email,
+                    "company":   company_name,
+                    "plan":      plan,
+                    "n_partners": len(names),
+                    "partners":  names,
+                    "status":    "success"
+                })
 
             def find_duplicates():
                 found = []
@@ -235,12 +259,15 @@ Lance une recherche web sur "{company_name}" pour enrichir ton analyse, puis tro
 
         except anthropic.APIConnectionError:
             msg = "Connexion impossible à l'API Anthropic."
+            append_log({"date": __import__('datetime').datetime.utcnow().isoformat(), "email": user_email, "company": company_name, "plan": plan, "status": "error", "error": msg})
             yield f"data: {json.dumps({'error': msg})}\n\n"
         except anthropic.AuthenticationError:
             msg = "Clé API invalide. Vérifie ANTHROPIC_API_KEY dans .env"
+            append_log({"date": __import__('datetime').datetime.utcnow().isoformat(), "email": user_email, "company": company_name, "plan": plan, "status": "error", "error": msg})
             yield f"data: {json.dumps({'error': msg})}\n\n"
         except Exception as e:
             msg = f"Erreur : {str(e)}"
+            append_log({"date": __import__('datetime').datetime.utcnow().isoformat(), "email": user_email, "company": company_name, "plan": plan, "status": "error", "error": msg})
             yield f"data: {json.dumps({'error': msg})}\n\n"
 
     return Response(
