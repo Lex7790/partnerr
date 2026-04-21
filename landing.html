@@ -73,6 +73,11 @@
       display: inline-block;
     }
 
+    @keyframes btnGlow {
+      0%, 100% { box-shadow: 0 0 0 1px rgba(94,53,224,0.4), 0 0 16px rgba(94,53,224,0.35); }
+      50%       { box-shadow: 0 0 0 1px rgba(123,86,245,0.6), 0 0 28px rgba(123,86,245,0.55); }
+    }
+
     .btn-nav {
       font-family: 'DM Sans', sans-serif;
       font-size: 14px;
@@ -82,14 +87,14 @@
       padding: 9px 20px;
       border-radius: 8px;
       text-decoration: none;
-      transition: background 0.15s, transform 0.1s;
+      transition: background 0.2s, box-shadow 0.2s;
       border: none;
       cursor: pointer;
     }
 
     .btn-nav:hover {
       background: var(--accent-hi);
-      transform: translateY(-1px);
+      animation: btnGlow 1.2s ease-in-out infinite;
     }
 
     /* ── HERO ── */
@@ -199,7 +204,7 @@
       padding: 14px 28px;
       border-radius: 10px;
       text-decoration: none;
-      transition: background 0.15s, transform 0.1s, box-shadow 0.15s;
+      transition: background 0.2s, box-shadow 0.2s;
       display: inline-flex;
       align-items: center;
       gap: 8px;
@@ -208,8 +213,7 @@
 
     .btn-hero:hover {
       background: var(--accent-hi);
-      transform: translateY(-2px);
-      box-shadow: 0 0 0 1px rgba(123,86,245,0.5), 0 12px 40px rgba(94, 53, 224, 0.45);
+      animation: btnGlow 1.2s ease-in-out infinite;
     }
 
     .btn-hero svg { flex-shrink: 0; }
@@ -462,8 +466,7 @@
 
     .btn-cta-final:hover {
       background: var(--accent-hi);
-      transform: translateY(-2px);
-      box-shadow: 0 12px 40px rgba(94, 53, 224, 0.45);
+      animation: btnGlow 1.2s ease-in-out infinite;
     }
 
     .cta-note {
