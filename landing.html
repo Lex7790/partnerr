@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Partnerr — Trouvez vos partenaires B2B en minutes</title>
-  <meta name="description" content="L'IA qui identifie vos meilleurs partenaires B2B. Matching intelligent, contacts qualifiés, stratégie incluse." />
+  <title>Partnerr - Trouvez vos partenaires B2B en quelques minutes</title>
+  <meta name="description" content="Trouvez des partenaires B2B qualifiés en quelques minutes. Contact identifié, stratégie concrète, résultats exploitables immédiatement." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;1,9..40,400&display=swap" rel="stylesheet" />
@@ -73,6 +73,11 @@
       display: inline-block;
     }
 
+    @keyframes btnGlow {
+      0%, 100% { box-shadow: 0 0 0 1px rgba(94,53,224,0.4), 0 0 16px rgba(94,53,224,0.35); }
+      50%       { box-shadow: 0 0 0 1px rgba(123,86,245,0.6), 0 0 28px rgba(123,86,245,0.55); }
+    }
+
     .btn-nav {
       font-family: 'DM Sans', sans-serif;
       font-size: 14px;
@@ -82,20 +87,20 @@
       padding: 9px 20px;
       border-radius: 8px;
       text-decoration: none;
-      transition: background 0.15s, transform 0.1s;
+      transition: background 0.2s, box-shadow 0.2s;
       border: none;
       cursor: pointer;
     }
 
     .btn-nav:hover {
       background: var(--accent-hi);
-      transform: translateY(-1px);
+      animation: btnGlow 1.2s ease-in-out infinite;
     }
 
     /* ── HERO ── */
     .hero {
       background: var(--ink);
-      padding: 120px 32px 100px;
+      padding: 120px 32px 80px;
       position: relative;
       overflow: hidden;
     }
@@ -199,7 +204,7 @@
       padding: 14px 28px;
       border-radius: 10px;
       text-decoration: none;
-      transition: background 0.15s, transform 0.1s, box-shadow 0.15s;
+      transition: background 0.2s, box-shadow 0.2s;
       display: inline-flex;
       align-items: center;
       gap: 8px;
@@ -208,8 +213,7 @@
 
     .btn-hero:hover {
       background: var(--accent-hi);
-      transform: translateY(-2px);
-      box-shadow: 0 0 0 1px rgba(123,86,245,0.5), 0 12px 40px rgba(94, 53, 224, 0.45);
+      animation: btnGlow 1.2s ease-in-out infinite;
     }
 
     .btn-hero svg { flex-shrink: 0; }
@@ -251,15 +255,6 @@
       font-size: 13px;
       color: var(--ink-muted);
       margin-top: 4px;
-    }
-
-    .stats-geo {
-      width: 100%;
-      text-align: center;
-      font-size: 12px;
-      color: var(--ink-muted);
-      letter-spacing: 0.06em;
-      margin-top: 24px;
     }
 
     /* ── SECTION BASE ── */
@@ -304,22 +299,20 @@
     .steps-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 2px;
-      background: var(--border);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      overflow: hidden;
+      gap: 20px;
     }
 
     .step {
       background: var(--white);
       padding: 40px 36px;
       position: relative;
-      transition: transform 0.22s ease, box-shadow 0.22s ease;
+      border: 1.5px solid var(--border);
+      border-radius: 16px;
+      transition: border-color 0.3s, box-shadow 0.3s;
     }
     .step:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 12px 36px rgba(94, 53, 224, 0.1);
+      border-color: rgba(94,53,224,0.5);
+      box-shadow: 0 0 0 3px rgba(94,53,224,0.08), 0 0 24px rgba(94,53,224,0.12);
     }
 
     .step-num {
@@ -386,14 +379,13 @@
       border: 1px solid rgba(255,255,255,0.08);
       border-radius: 16px;
       padding: 36px 32px;
-      transition: background 0.22s, border-color 0.22s, transform 0.22s, box-shadow 0.22s;
+      transition: background 0.3s, border-color 0.3s, box-shadow 0.3s;
     }
 
     .feature:hover {
-      background: rgba(94, 53, 224, 0.12);
-      border-color: rgba(94, 53, 224, 0.3);
-      transform: translateY(-5px);
-      box-shadow: 0 12px 36px rgba(94, 53, 224, 0.18);
+      background: rgba(94,53,224,0.1);
+      border-color: rgba(94,53,224,0.45);
+      box-shadow: 0 0 0 3px rgba(94,53,224,0.08), 0 0 28px rgba(94,53,224,0.15);
     }
 
     .feature-icon {
@@ -474,8 +466,7 @@
 
     .btn-cta-final:hover {
       background: var(--accent-hi);
-      transform: translateY(-2px);
-      box-shadow: 0 12px 40px rgba(94, 53, 224, 0.45);
+      animation: btnGlow 1.2s ease-in-out infinite;
     }
 
     .cta-note {
@@ -517,18 +508,59 @@
       color: var(--ink-muted);
     }
 
-    /* ── SCROLL REVEAL ── */
-    .reveal {
-      opacity: 0;
-      transform: translateY(28px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
+    /* ── PRICING & SOCIAL CARDS ── */
+    .pricing-card {
+      border-radius: 16px;
+      padding: 28px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      transition: border-color 0.3s, box-shadow 0.3s, transform 0.25s;
     }
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
+    .pricing-card:hover {
+      border-color: rgba(94,53,224,0.5) !important;
+      box-shadow: 0 0 0 3px rgba(94,53,224,0.08), 0 0 28px rgba(94,53,224,0.13);
+      transform: translateY(-2px);
     }
-    .reveal-d1 { transition-delay: 0.1s; }
-    .reveal-d2 { transition-delay: 0.2s; }
+    .pricing-card-dark:hover {
+      border-color: rgba(123,86,245,0.85) !important;
+      box-shadow: 0 0 0 4px rgba(94,53,224,0.15), 0 0 36px rgba(94,53,224,0.25);
+      transform: translateY(-2px);
+    }
+    .social-card {
+      background: var(--white);
+      border: 1.5px solid var(--border);
+      border-radius: 16px;
+      padding: 28px 24px;
+      transition: border-color 0.3s, box-shadow 0.3s, transform 0.25s;
+    }
+    .social-card:hover {
+      border-color: rgba(94,53,224,0.5);
+      box-shadow: 0 0 0 3px rgba(94,53,224,0.08), 0 0 24px rgba(94,53,224,0.12);
+      transform: translateY(-2px);
+    }
+
+    .stats-geo {
+      width: 100%;
+      text-align: center;
+      font-size: 12px;
+      color: var(--ink-muted);
+      letter-spacing: 0.06em;
+      margin-top: 24px;
+    }
+
+    /* ── SCROLL ANIMATIONS ── */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    [data-anim] { opacity: 0; }
+    [data-anim].in-view {
+      animation: fadeInUp 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+    [data-anim].in-view[data-delay="1"] { animation-delay: 0.08s; }
+    [data-anim].in-view[data-delay="2"] { animation-delay: 0.16s; }
+    [data-anim].in-view[data-delay="3"] { animation-delay: 0.24s; }
 
     /* ── RESPONSIVE ── */
     @media (max-width: 900px) {
@@ -560,24 +592,40 @@
 <!-- HERO -->
 <section class="hero">
   <div class="hero-inner">
-    <div class="hero-tag">
-      <span class="hero-tag-dot"></span>
-      Matching B2B intelligent
-    </div>
-    <h1>Trouvez vos <em>partenaires B2B idéaux</em> en quelques minutes</h1>
+    <h1>Trouvez des <em>partenaires B2B qualifiés</em> en quelques minutes</h1>
     <p class="hero-sub">
-      Décrivez votre entreprise. Partnerr analyse le marché et identifie 5 partenaires qualifiés, avec le bon contact et une stratégie concrète pour approcher.
+      Partnerr analyse votre marché et identifie des entreprises pertinentes, avec le bon contact et une stratégie concrète pour les activer.
     </p>
-    <p style="font-size:clamp(17px,2vw,20px); color:rgba(255,255,255,0.82); max-width:540px; line-height:1.55; margin-bottom:40px; font-weight:500;">
-      Générez de nouvelles opportunités de chiffre d'affaires, sans passer des heures en prospection.
+    <p style="font-size:clamp(16px,1.8vw,18px); color:rgba(255,255,255,0.82); max-width:540px; line-height:1.6; margin-bottom:8px;">
+      Chaque partenaire identifié est une opportunité directe de collaboration et de chiffre d'affaires.
     </p>
-    <div class="hero-cta-row">
-      <a href="#" class="btn-hero" id="hero-cta">
+    <p style="margin-bottom:40px;"></p>
+    <form action="/register" method="POST" class="hero-cta-row" style="gap:10px;">
+      <input type="email" name="email" required placeholder="votre@email.pro"
+        style="padding:14px 18px; border-radius:10px; border:1.5px solid rgba(255,255,255,0.2); background:rgba(255,255,255,0.08); color:white; font-family:'DM Sans',sans-serif; font-size:15px; width:280px; outline:none; height:52px; box-sizing:border-box;"
+        onfocus="this.style.borderColor='rgba(123,86,245,0.6)'" onblur="this.style.borderColor='rgba(255,255,255,0.2)'">
+      <button type="submit" class="btn-hero" style="border:none; cursor:pointer; height:52px; box-sizing:border-box;">
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
           <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
-        Tester maintenant, c'est gratuit
-      </a>
+        Tester gratuitement
+      </button>
+    </form>
+    <p style="margin-top:12px; font-size:12px; color:rgba(255,255,255,0.4);">1 recherche gratuite · Aucune carte bancaire requise</p>
+
+    <!-- DEMO VIDEO -->
+    <div style="margin-top:64px; position:relative; z-index:1;">
+      <div style="max-width:860px; margin:0 auto; border-radius:14px; overflow:hidden; border:1px solid rgba(255,255,255,0.1); box-shadow:0 32px 80px rgba(0,0,0,0.5);">
+        <div style="background:#1E1A2E; padding:12px 16px; display:flex; align-items:center; gap:8px; border-bottom:1px solid rgba(255,255,255,0.06);">
+          <span style="width:10px;height:10px;border-radius:50%;background:#FF5F57;display:inline-block;"></span>
+          <span style="width:10px;height:10px;border-radius:50%;background:#FEBC2E;display:inline-block;"></span>
+          <span style="width:10px;height:10px;border-radius:50%;background:#28C840;display:inline-block;"></span>
+          <div style="flex:1; margin:0 12px; background:rgba(255,255,255,0.06); border-radius:6px; padding:4px 12px; font-size:12px; color:rgba(255,255,255,0.3); font-family:'DM Sans',sans-serif;">partnerr.onrender.com/app</div>
+        </div>
+        <video autoplay muted loop playsinline style="width:100%; display:block;">
+          <source src="/static/demo.mp4" type="video/mp4">
+        </video>
+      </div>
     </div>
   </div>
 </section>
@@ -585,31 +633,27 @@
 <!-- STATS -->
 <div class="stats">
   <div class="stats-inner">
-    <div class="stat-item reveal">
-      <div class="stat-value">5</div>
-      <div class="stat-label">partenaires qualifiés par recherche</div>
+    <div class="stat-item">
+      <div class="stat-value">~5 min</div>
+      <div class="stat-label">en moyenne pour obtenir vos résultats</div>
     </div>
-    <div class="stat-item reveal reveal-d1">
-      <div class="stat-value">6</div>
-      <div class="stat-label">types de partenariat couverts</div>
-    </div>
-    <div class="stat-item reveal reveal-d2">
+    <div class="stat-item">
       <div class="stat-value">22</div>
       <div class="stat-label">secteurs disponibles</div>
     </div>
-    <p class="stats-geo reveal">France · Suisse · Europe · International</p>
+    <p class="stats-geo">France · Suisse · Europe · International</p>
   </div>
 </div>
 
 <!-- COMMENT ÇA MARCHE -->
 <section class="section">
   <div class="section-inner">
-    <p class="section-label reveal">Comment ça marche</p>
-    <h2 class="section-title reveal">Simple comme une conversation</h2>
-    <p class="section-sub reveal">Pas de configuration, pas d'abonnement. Juste un formulaire et des résultats concrets.</p>
+    <p class="section-label">Comment ça marche</p>
+    <h2 class="section-title">Simple comme une conversation</h2>
+    <p class="section-sub">Pas de configuration, pas d'abonnement. Juste un formulaire et des résultats concrets.</p>
 
     <div class="steps-grid">
-      <div class="step reveal">
+      <div class="step" data-anim data-delay="0">
         <div class="step-num">01</div>
         <div class="step-icon">
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -621,7 +665,7 @@
         <p>Nom, secteur, type de partenariat recherché, secteur cible. 30 secondes, pas plus.</p>
       </div>
 
-      <div class="step reveal reveal-d1">
+      <div class="step" data-anim data-delay="1">
         <div class="step-num">02</div>
         <div class="step-icon">
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -629,11 +673,11 @@
             <path d="M10 7v3l2 2M15.5 4.5l1-1M4.5 4.5l-1-1M4.5 15.5l-1 1M15.5 15.5l1 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
           </svg>
         </div>
-        <h3>Partnerr analyse et matche</h3>
+        <h3>Partnerr analyse et sélectionne</h3>
         <p>Partnerr parcourt le marché en temps réel et sélectionne les partenaires les plus pertinents pour votre profil.</p>
       </div>
 
-      <div class="step reveal reveal-d2">
+      <div class="step" data-anim data-delay="2">
         <div class="step-num">03</div>
         <div class="step-icon">
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -641,9 +685,31 @@
             <path d="M7 9h6M7 12h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
           </svg>
         </div>
-        <h3>Recevez 5 partenaires qualifiés</h3>
+        <h3>Recevez vos partenaires qualifiés</h3>
         <p>Pour chacun : profil complet, stratégie recommandée, format de collaboration et contact identifié. Exportable en CSV.</p>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOCIAL PROOF -->
+<section class="section">
+  <div class="section-inner">
+    <p class="section-label">Ils ont testé</p>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:20px; margin-top:40px;">
+
+      <div class="social-card" data-anim data-delay="0">
+        <p style="font-size:15px; color:var(--ink-soft); line-height:1.7; margin-bottom:20px;">"En 5 minutes j'avais 5 contacts qualifiés avec une vraie stratégie d'approche. J'aurais mis une semaine à faire ça manuellement."</p>
+        <p style="font-family:'Plus Jakarta Sans',sans-serif; font-size:14px; font-weight:600; color:var(--ink);">Sophie M.</p>
+        <p style="font-size:13px; color:var(--ink-muted);">Responsable Partenariats</p>
+      </div>
+
+      <div class="social-card" data-anim data-delay="1">
+        <p style="font-size:15px; color:var(--ink-soft); line-height:1.7; margin-bottom:20px;">"Les résultats sont vraiment pertinents et la prise en main est immédiate."</p>
+        <p style="font-family:'Plus Jakarta Sans',sans-serif; font-size:14px; font-weight:600; color:var(--ink);">Thomas R.</p>
+        <p style="font-size:13px; color:var(--ink-muted);">Co-fondateur</p>
+      </div>
+
     </div>
   </div>
 </section>
@@ -651,22 +717,22 @@
 <!-- POURQUOI PARTNERR -->
 <section class="section why">
   <div class="section-inner">
-    <p class="section-label reveal">Pourquoi Partnerr</p>
-    <h2 class="section-title reveal">Pas juste des contacts, de vraies opportunités business.</h2>
-    <p class="section-sub reveal">La différence entre un annuaire et un vrai outil de business development.</p>
+    <p class="section-label">Pourquoi Partnerr</p>
+    <h2 class="section-title">Pas juste des contacts, de vraies opportunités business.</h2>
+    <p class="section-sub">La différence entre un annuaire et un vrai outil de business development.</p>
 
     <div class="features-grid">
-      <div class="feature reveal">
+      <div class="feature" data-anim data-delay="0">
         <div class="feature-icon">
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
             <path d="M10 2l2.4 4.9 5.4.8-3.9 3.8.9 5.4L10 14.4l-4.8 2.5.9-5.4L2.2 7.7l5.4-.8L10 2z" fill="currentColor" opacity=".4" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/>
           </svg>
         </div>
-        <h3>Matching intelligent</h3>
-        <p>Partnerr ne fait pas une recherche Google. Il évalue la complémentarité réelle entre votre offre et celle du partenaire potentiel : secteur, positionnement, taille, timing.</p>
+        <h3>Complémentarité réelle</h3>
+        <p>Partnerr ne fait pas une recherche Google. Il évalue l'adéquation entre votre offre et celle du partenaire potentiel : secteur, positionnement, taille, timing.</p>
       </div>
 
-      <div class="feature reveal reveal-d1">
+      <div class="feature" data-anim data-delay="1">
         <div class="feature-icon">
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
             <circle cx="10" cy="7" r="3" fill="currentColor" opacity=".4"/>
@@ -677,7 +743,7 @@
         <p>Chaque résultat inclut un rôle ou un nom de contact à approcher, pas juste un site web. Vous savez à qui parler avant même d'ouvrir LinkedIn.</p>
       </div>
 
-      <div class="feature reveal reveal-d2">
+      <div class="feature" data-anim data-delay="2">
         <div class="feature-icon">
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
             <path d="M3 6h14M3 10h10M3 14h7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
@@ -690,18 +756,101 @@
   </div>
 </section>
 
+<!-- PRICING -->
+<section class="section" id="pricing">
+  <div class="section-inner">
+    <p class="section-label">Tarifs</p>
+    <h2 class="section-title">Choisissez votre formule</h2>
+    <p class="section-sub">Chaque recherche génère des opportunités de partenariat activables immédiatement.<br>Un seul bon partenariat peut largement rentabiliser l'investissement.</p>
+
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:20px; margin-top:48px;">
+
+      <!-- Gratuit -->
+      <div class="pricing-card" data-anim data-delay="0" style="background:var(--white); border:1.5px solid var(--border);">
+        <div>
+          <p style="font-family:'Plus Jakarta Sans',sans-serif; font-size:11px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--ink-muted); margin-bottom:8px;">Découvrir le produit</p>
+          <p style="font-family:'Plus Jakarta Sans',sans-serif; font-size:24px; font-weight:800; color:var(--ink);">Gratuit</p>
+        </div>
+        <ul style="list-style:none; display:flex; flex-direction:column; gap:8px;">
+          <li style="font-size:14px; color:var(--ink-soft); display:flex; gap:8px; align-items:center;"><span style="color:var(--accent); font-size:16px;">✓</span> 1 recherche</li>
+          <li style="font-size:14px; color:var(--ink-soft); display:flex; gap:8px; align-items:center;"><span style="color:var(--accent); font-size:16px;">✓</span> 3 partenaires qualifiés</li>
+        </ul>
+        <p style="font-size:13px; color:var(--ink-muted); line-height:1.5; flex:1;">Voir comment Partnerr identifie des opportunités concrètes</p>
+        <a href="/app" style="display:block; text-align:center; padding:11px; border:1.5px solid var(--border); border-radius:8px; font-family:'Plus Jakarta Sans',sans-serif; font-size:14px; font-weight:600; color:var(--ink-soft); text-decoration:none;">Tester gratuitement</a>
+      </div>
+
+      <!-- Starter -->
+      <div class="pricing-card" data-anim data-delay="1" style="background:var(--white); border:1.5px solid var(--border);">
+        <div>
+          <p style="font-family:'Plus Jakarta Sans',sans-serif; font-size:11px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--ink-muted); margin-bottom:8px;">Valider un premier partenariat</p>
+          <p style="font-family:'Plus Jakarta Sans',sans-serif; font-size:24px; font-weight:800; color:var(--ink);">29,99€</p>
+        </div>
+        <ul style="list-style:none; display:flex; flex-direction:column; gap:8px;">
+          <li style="font-size:14px; color:var(--ink-soft); display:flex; gap:8px; align-items:center;"><span style="color:var(--accent); font-size:16px;">✓</span> 2 recherches</li>
+          <li style="font-size:14px; color:var(--ink-soft); display:flex; gap:8px; align-items:center;"><span style="color:var(--accent); font-size:16px;">✓</span> 3 partenaires par recherche</li>
+        </ul>
+        <p style="font-size:13px; color:var(--ink-muted); line-height:1.5; flex:1;">Jusqu'à 6 opportunités à activer immédiatement</p>
+        <button disabled style="padding:11px; border:none; border-radius:8px; font-family:'Plus Jakarta Sans',sans-serif; font-size:14px; font-weight:600; color:var(--ink-muted); background:var(--surface); cursor:not-allowed;">Bientôt disponible</button>
+      </div>
+
+      <!-- Growth — mis en avant -->
+      <div class="pricing-card pricing-card-dark" data-anim data-delay="2" style="background:var(--ink); border:1.5px solid var(--accent); position:relative;">
+        <div style="position:absolute; top:-13px; left:50%; transform:translateX(-50%); background:var(--accent); color:white; font-family:'Plus Jakarta Sans',sans-serif; font-size:11px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; padding:4px 14px; border-radius:100px; white-space:nowrap;">Le plus choisi</div>
+        <div>
+          <p style="font-family:'Plus Jakarta Sans',sans-serif; font-size:11px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:rgba(255,255,255,0.45); margin-bottom:8px;">Accéder à la version complète</p>
+          <p style="font-family:'Plus Jakarta Sans',sans-serif; font-size:24px; font-weight:800; color:white;">59,99€</p>
+        </div>
+        <ul style="list-style:none; display:flex; flex-direction:column; gap:8px;">
+          <li style="font-size:14px; color:rgba(255,255,255,0.75); display:flex; gap:8px; align-items:center;"><span style="color:var(--accent-hi); font-size:16px;">✓</span> 3 recherches</li>
+          <li style="font-size:14px; color:rgba(255,255,255,0.75); display:flex; gap:8px; align-items:center;"><span style="color:var(--accent-hi); font-size:16px;">✓</span> 5 partenaires par recherche</li>
+        </ul>
+        <p style="font-size:13px; color:rgba(255,255,255,0.5); line-height:1.5; flex:1;">Jusqu'à 15 opportunités qualifiées<br>Recommandations directement exploitables</p>
+        <button disabled style="padding:11px; border:none; border-radius:8px; font-family:'Plus Jakarta Sans',sans-serif; font-size:14px; font-weight:600; color:rgba(255,255,255,0.4); background:rgba(255,255,255,0.08); cursor:not-allowed;">Bientôt disponible</button>
+      </div>
+
+      <!-- Scale -->
+      <div class="pricing-card" data-anim data-delay="3" style="background:var(--white); border:1.5px solid var(--border);">
+        <div>
+          <p style="font-family:'Plus Jakarta Sans',sans-serif; font-size:11px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--ink-muted); margin-bottom:8px;">Accélérer votre stratégie de partenariats</p>
+          <p style="font-family:'Plus Jakarta Sans',sans-serif; font-size:24px; font-weight:800; color:var(--ink);">99,99€</p>
+        </div>
+        <ul style="list-style:none; display:flex; flex-direction:column; gap:8px;">
+          <li style="font-size:14px; color:var(--ink-soft); display:flex; gap:8px; align-items:center;"><span style="color:var(--accent); font-size:16px;">✓</span> 6 recherches</li>
+          <li style="font-size:14px; color:var(--ink-soft); display:flex; gap:8px; align-items:center;"><span style="color:var(--accent); font-size:16px;">✓</span> 5 partenaires par recherche</li>
+        </ul>
+        <p style="font-size:13px; color:var(--ink-muted); line-height:1.5; flex:1;">Jusqu'à 30 opportunités activables<br>Idéal pour structurer un pipeline de partenariats<br><span style="color:var(--accent); font-weight:500;">+ Aide à la mise en relation sur demande</span></p>
+        <button disabled style="padding:11px; border:none; border-radius:8px; font-family:'Plus Jakarta Sans',sans-serif; font-size:14px; font-weight:600; color:var(--ink-muted); background:var(--surface); cursor:not-allowed;">Bientôt disponible</button>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SERVICE -->
+<section class="section" style="padding-top:0; padding-bottom:0;">
+  <div class="section-inner">
+    <div style="background:var(--surface); border:1.5px solid var(--border); border-radius:16px; padding:32px 40px; max-width:680px; margin:0 auto;" data-anim>
+      <p style="font-size:16px; color:var(--ink-soft); line-height:1.7;">
+        Partnerr identifie des partenaires pertinents pour vous en quelques minutes.
+        Si un partenaire pertinent est identifié, Partnerr peut vous proposer une mise en relation qualifiée.
+      </p>
+      <p style="margin-top:14px; font-size:13px; color:var(--ink-muted);">→ Contactez-nous à <a href="mailto:contact@partnerr.fr" style="color:var(--accent);">contact@partnerr.fr</a></p>
+    </div>
+  </div>
+</section>
+
 <!-- CTA FINAL -->
 <section class="cta-final">
   <div class="cta-final-inner">
-    <h2 class="reveal">Votre prochain partenaire<br/><span>vous attend déjà.</span></h2>
-    <p class="reveal reveal-d1">Lancez une première recherche maintenant. Gratuit, sans compte, résultats en quelques minutes.</p>
-    <a href="#" class="btn-cta-final reveal reveal-d2" id="final-cta">
+    <h2>Votre prochain partenaire<br/><span>vous attend déjà.</span></h2>
+    <p>Lancez une première recherche maintenant. Gratuit, sans compte, résultats en quelques minutes.</p>
+    <a href="#" class="btn-cta-final" id="final-cta">
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
         <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
       Lancer ma première recherche
     </a>
-    <p class="cta-note">Crédits gratuits inclus · Fonctionne pour toutes les PME françaises</p>
+    <p class="cta-note">Crédits gratuits inclus · Fonctionne pour toutes les entreprises B2B</p>
   </div>
 </section>
 
@@ -728,17 +877,17 @@
     el.href = TOOL_URL;
   });
 
-  // Scroll reveal
-  const revealObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        revealObserver.unobserve(entry.target);
+  // Scroll animations
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in-view');
+        io.unobserve(e.target);
       }
     });
-  }, { threshold: 0.12 });
+  }, { threshold: 0.05 });
 
-  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+  document.querySelectorAll('[data-anim]').forEach(el => io.observe(el));
 </script>
 
 </body>
