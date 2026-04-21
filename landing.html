@@ -554,16 +554,16 @@
 
     /* ── SCROLL ANIMATIONS ── */
     @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(44px); }
-      to   { opacity: 1; transform: translateY(0); }
+      from { opacity: 0; transform: translateY(56px) scale(0.97); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
     }
     [data-anim] { opacity: 0; }
     [data-anim].in-view {
-      animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+      animation: fadeInUp 0.95s cubic-bezier(0.22, 1.15, 0.36, 1) both;
     }
-    [data-anim].in-view[data-delay="1"] { animation-delay: 0.14s; }
-    [data-anim].in-view[data-delay="2"] { animation-delay: 0.28s; }
-    [data-anim].in-view[data-delay="3"] { animation-delay: 0.42s; }
+    [data-anim].in-view[data-delay="1"] { animation-delay: 0.15s; }
+    [data-anim].in-view[data-delay="2"] { animation-delay: 0.30s; }
+    [data-anim].in-view[data-delay="3"] { animation-delay: 0.45s; }
 
     /* ── RESPONSIVE ── */
     @media (max-width: 900px) {
