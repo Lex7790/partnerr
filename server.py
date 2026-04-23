@@ -145,7 +145,7 @@ def match():
     exclude_manual  = request.form.get("exclude_manual", "").strip()
 
     # Nombre de partenaires selon le plan
-    n_partners = 3 if plan in ("free", "starter") else 5
+    n_partners = 2 if plan in ("free", "starter") else 5
 
     if not company_name or not theme or not user_email:
         return "Veuillez remplir tous les champs obligatoires.", 400
