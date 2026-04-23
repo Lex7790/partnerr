@@ -593,6 +593,77 @@
       line-height: 1.7;
     }
 
+    /* ── FAQ ── */
+    .faq-list {
+      max-width: 720px;
+      margin: 48px auto 0;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid rgba(0,0,0,0.07);
+      overflow: hidden;
+    }
+
+    .faq-item:first-child {
+      border-top: 1px solid rgba(0,0,0,0.07);
+    }
+
+    .faq-question {
+      width: 100%;
+      background: none;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 22px 0;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--ink);
+      text-align: left;
+    }
+
+    .faq-icon {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--accent-lo);
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: background 0.2s, transform 0.3s;
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .faq-item.open .faq-icon {
+      background: var(--accent);
+      color: white;
+      transform: rotate(45deg);
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s cubic-bezier(0.22, 1.15, 0.36, 1);
+    }
+
+    .faq-item.open .faq-answer {
+      max-height: 200px;
+    }
+
+    .faq-answer p {
+      font-size: 15px;
+      color: var(--ink-soft);
+      line-height: 1.7;
+      padding-bottom: 22px;
+    }
+
     /* ── CTA FINAL ── */
     .cta-final {
       padding: 120px 32px;
@@ -769,6 +840,7 @@
     </a>
     <a href="#comment-ca-marche" style="font-family:'DM Sans',sans-serif; font-size:14px; font-weight:500; color:var(--ink-muted); text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='var(--ink)'" onmouseout="this.style.color='var(--ink-muted)'">Comment ça marche</a>
     <a href="#pricing" style="font-family:'DM Sans',sans-serif; font-size:14px; font-weight:500; color:var(--ink-muted); text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='var(--ink)'" onmouseout="this.style.color='var(--ink-muted)'">Tarifs</a>
+    <a href="#faq" style="font-family:'DM Sans',sans-serif; font-size:14px; font-weight:500; color:var(--ink-muted); text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='var(--ink)'" onmouseout="this.style.color='var(--ink-muted)'">FAQ</a>
     <a href="#" class="btn-nav" id="nav-cta">Tester gratuitement →</a>
   </div>
 </nav>
@@ -1098,6 +1170,68 @@
   </div>
 </section>
 
+<!-- FAQ -->
+<section class="section" id="faq" style="background:var(--surface); border-top:1px solid rgba(0,0,0,0.06);">
+  <div class="section-inner" style="text-align:center;">
+    <p class="section-label" data-anim>FAQ</p>
+    <h2 class="section-title" data-anim style="margin:0 auto;">Questions fréquentes</h2>
+
+    <div class="faq-list">
+
+      <div class="faq-item" data-anim>
+        <button class="faq-question" onclick="toggleFaq(this)">
+          C'est vraiment gratuit ?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>Oui, la première recherche est entièrement gratuite et sans carte bancaire requise.</p>
+        </div>
+      </div>
+
+      <div class="faq-item" data-anim data-delay="1">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Combien de temps ça prend ?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>Entre 3 et 8 minutes selon la complexité de la recherche.</p>
+        </div>
+      </div>
+
+      <div class="faq-item" data-anim data-delay="1">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Les contacts sont-ils vérifiés ?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>Partnerr identifie les contacts les plus probables, mais les coordonnées exactes peuvent nécessiter une vérification manuelle.</p>
+        </div>
+      </div>
+
+      <div class="faq-item" data-anim data-delay="2">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Dans quels pays ça marche ?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>France et Suisse sont pleinement testés. Europe et international sont disponibles.</p>
+        </div>
+      </div>
+
+      <div class="faq-item" data-anim data-delay="2">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Que contient exactement le rapport ?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>Pour chaque partenaire : profil complet, type de collaboration recommandé, stratégie d'approche et contact identifié. Exportable en CSV.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 <!-- CTA FINAL -->
 <section class="cta-final">
   <div class="cta-final-inner">
@@ -1147,6 +1281,15 @@
   }, { threshold: 0.15 });
 
   document.querySelectorAll('[data-anim]').forEach(el => io.observe(el));
+
+  // FAQ accordion
+  function toggleFaq(btn) {
+    const item = btn.closest('.faq-item');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
+  window.toggleFaq = toggleFaq;
 </script>
 
 </body>
