@@ -368,10 +368,15 @@
       text-align: center;
     }
 
-    #export-buttons { display: flex; gap: 12px; margin-top: 16px; }
+    #export-buttons { display: flex; flex-direction: column; gap: 10px; margin-top: 16px; }
+    .export-row-main { display: flex; gap: 12px; }
     #export-buttons button { margin-top: 0; flex: 1; padding: 12px; font-size: 14px; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 600; border: none; border-radius: 10px; cursor: pointer; transition: background 0.15s; }
     .btn-csv { background: #059669; color: white; }
     .btn-csv:hover { background: #047857; }
+    .btn-copy { background: rgba(94,53,224,0.18); color: #C4B5FF; border: 1px solid rgba(94,53,224,0.35) !important; }
+    .btn-copy:hover { background: rgba(94,53,224,0.28); }
+    .btn-feedback-link { display: block; text-align: center; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 13px; color: rgba(255,255,255,0.4); text-decoration: none; padding: 4px 0; transition: color 0.15s; }
+    .btn-feedback-link:hover { color: rgba(255,255,255,0.65); }
 
     /* ── Progress card ── */
     .progress-card {
@@ -830,22 +835,36 @@
     const div = document.createElement('div');
     div.id = 'export-buttons';
 
+    const rowMain = document.createElement('div');
+    rowMain.className = 'export-row-main';
+
     const csvBtn = document.createElement('button');
     csvBtn.type = 'button';
     csvBtn.className = 'btn-csv';
-    csvBtn.textContent = '⬇️ Exporter CSV';
+    csvBtn.textContent = '⬇️ Exporter le suivi CSV';
     csvBtn.onclick = () => exportCSV(text, theme);
+
+    const copyBtn = document.createElement('button');
+    copyBtn.type = 'button';
+    copyBtn.className = 'btn-copy';
+    copyBtn.textContent = '📋 Copier le rapport';
+    copyBtn.onclick = () => {
+      navigator.clipboard.writeText(text).then(() => {
+        copyBtn.textContent = '✓ Copié';
+        setTimeout(() => { copyBtn.textContent = '📋 Copier le rapport'; }, 2000);
+      });
+    };
+
+    rowMain.appendChild(csvBtn);
+    rowMain.appendChild(copyBtn);
+    div.appendChild(rowMain);
 
     const feedbackBtn = document.createElement('a');
     feedbackBtn.href = FEEDBACK_URL;
     feedbackBtn.target = '_blank';
     feedbackBtn.rel = 'noopener noreferrer';
-    feedbackBtn.style.cssText = 'flex:1; display:flex; align-items:center; justify-content:center; padding:12px; background:rgba(255,255,255,0.08); color:rgba(255,255,255,0.7); border-radius:10px; font-family:\'Plus Jakarta Sans\',sans-serif; font-size:14px; font-weight:600; text-decoration:none; transition:background 0.15s;';
-    feedbackBtn.textContent = '💬 Donner mon avis';
-    feedbackBtn.onmouseover = () => feedbackBtn.style.background = 'rgba(255,255,255,0.12)';
-    feedbackBtn.onmouseout  = () => feedbackBtn.style.background = 'rgba(255,255,255,0.08)';
-
-    div.appendChild(csvBtn);
+    feedbackBtn.className = 'btn-feedback-link';
+    feedbackBtn.textContent = '💬 Une remarque sur ces résultats ?';
     div.appendChild(feedbackBtn);
     result.appendChild(div);
 
