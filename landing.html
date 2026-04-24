@@ -648,13 +648,14 @@
     }
 
     .faq-answer {
-      max-height: 0;
       overflow: hidden;
-      transition: max-height 0.35s cubic-bezier(0.22, 1.15, 0.36, 1);
+      max-height: 0;
+      opacity: 0;
+      transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.35s ease;
     }
 
     .faq-item.open .faq-answer {
-      max-height: 200px;
+      opacity: 1;
     }
 
     .faq-answer p {
@@ -1350,9 +1351,25 @@
   // FAQ accordion
   function toggleFaq(btn) {
     const item = btn.closest('.faq-item');
+    const answer = item.querySelector('.faq-answer');
     const isOpen = item.classList.contains('open');
-    document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
-    if (!isOpen) item.classList.add('open');
+
+    // Ferme tous les autres
+    document.querySelectorAll('.faq-item.open').forEach(el => {
+      const a = el.querySelector('.faq-answer');
+      a.style.maxHeight = a.scrollHeight + 'px';
+      requestAnimationFrame(() => { a.style.maxHeight = '0'; });
+      el.classList.remove('open');
+    });
+
+    if (!isOpen) {
+      item.classList.add('open');
+      answer.style.maxHeight = answer.scrollHeight + 'px';
+      answer.addEventListener('transitionend', function handler() {
+        if (item.classList.contains('open')) answer.style.maxHeight = 'none';
+        answer.removeEventListener('transitionend', handler);
+      });
+    }
   }
   window.toggleFaq = toggleFaq;
 </script>
