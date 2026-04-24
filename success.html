@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Paiement validé — Partnerr</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: #0B0718;
+      color: white;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 32px 24px;
+    }
+    .card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 20px;
+      padding: 52px 48px;
+      max-width: 480px;
+      width: 100%;
+      text-align: center;
+    }
+    .icon {
+      width: 64px;
+      height: 64px;
+      background: rgba(94,53,224,0.18);
+      border: 1px solid rgba(94,53,224,0.4);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 28px;
+      font-size: 28px;
+    }
+    h1 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 26px;
+      font-weight: 800;
+      color: white;
+      margin-bottom: 16px;
+      letter-spacing: -0.02em;
+    }
+    p {
+      font-size: 16px;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.6;
+      margin-bottom: 36px;
+    }
+    .btn {
+      display: inline-block;
+      background: #5E35E0;
+      color: white;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      padding: 14px 32px;
+      border-radius: 10px;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .btn:hover { background: #7B56F5; }
+    .logo {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 800;
+      font-size: 18px;
+      color: white;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      justify-content: center;
+      margin-bottom: 40px;
+    }
+    .logo-dot { color: #5E35E0; }
+  </style>
+</head>
+<body>
+
+  <a href="/" class="logo">
+    <svg width="22" height="21" viewBox="0 0 24 23" fill="none">
+      <defs>
+        <linearGradient id="vg-success" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#EDE9FF"/>
+          <stop offset="100%" stop-color="#5E35E0"/>
+        </linearGradient>
+      </defs>
+      <polygon points="15,7 21.1,10.5 21.1,17.5 15,21 8.9,17.5 8.9,10.5" fill="white" stroke="rgba(94,53,224,0.55)" stroke-width="1.5"/>
+      <polygon points="9,2 15.1,5.5 15.1,12.5 9,16 2.9,12.5 2.9,5.5" fill="url(#vg-success)"/>
+    </svg>
+    Partnerr<span class="logo-dot">.</span>
+  </a>
+
+  <div class="card">
+    <div class="icon">✓</div>
+    <h1>Paiement validé</h1>
+    <p>Vous pouvez maintenant accéder à l'ensemble des opportunités.</p>
+    <a href="/app" class="btn">Accéder à mes résultats →</a>
+  </div>
+
+</body>
+</html>

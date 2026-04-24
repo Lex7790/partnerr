@@ -1144,7 +1144,11 @@
           <li style="font-size:14px; color:var(--ink-soft); display:flex; gap:8px; align-items:center;"><span style="color:var(--accent); font-size:16px;">✓</span> 3 partenaires par recherche</li>
         </ul>
         <p style="font-size:13px; color:var(--ink-muted); line-height:1.5; flex:1;">Jusqu'à 6 opportunités à activer immédiatement</p>
-        <button disabled style="padding:11px; border:none; border-radius:8px; font-family:'Plus Jakarta Sans',sans-serif; font-size:14px; font-weight:600; color:var(--ink-muted); background:var(--surface); cursor:not-allowed;">Bientôt disponible</button>
+        <form action="/create-checkout-session" method="POST">
+          <input type="hidden" name="plan" value="starter">
+          <input type="hidden" name="email" id="starter-email" value="">
+          <button type="submit" style="width:100%; padding:11px; border:none; border-radius:8px; font-family:'Plus Jakarta Sans',sans-serif; font-size:14px; font-weight:600; color:white; background:var(--accent); cursor:pointer; transition:background 0.2s;" onmouseover="this.style.background='#7B56F5'" onmouseout="this.style.background='var(--accent)'">Choisir Starter →</button>
+        </form>
       </div>
 
       <!-- Growth — mis en avant -->
@@ -1159,7 +1163,11 @@
           <li style="font-size:14px; color:rgba(255,255,255,0.75); display:flex; gap:8px; align-items:center;"><span style="color:var(--accent-hi); font-size:16px;">✓</span> 5 partenaires par recherche</li>
         </ul>
         <p style="font-size:13px; color:rgba(255,255,255,0.5); line-height:1.5; flex:1;">Jusqu'à 15 opportunités qualifiées<br>Recommandations directement exploitables</p>
-        <button disabled style="padding:11px; border:none; border-radius:8px; font-family:'Plus Jakarta Sans',sans-serif; font-size:14px; font-weight:600; color:rgba(255,255,255,0.4); background:rgba(255,255,255,0.08); cursor:not-allowed;">Bientôt disponible</button>
+        <form action="/create-checkout-session" method="POST">
+          <input type="hidden" name="plan" value="growth">
+          <input type="hidden" name="email" id="growth-email" value="">
+          <button type="submit" style="width:100%; padding:11px; border:none; border-radius:8px; font-family:'Plus Jakarta Sans',sans-serif; font-size:14px; font-weight:600; color:white; background:var(--accent); cursor:pointer; transition:background 0.2s;" onmouseover="this.style.background='#7B56F5'" onmouseout="this.style.background='var(--accent)'">Choisir Growth →</button>
+        </form>
       </div>
 
       <!-- Scale -->
@@ -1173,7 +1181,11 @@
           <li style="font-size:14px; color:var(--ink-soft); display:flex; gap:8px; align-items:center;"><span style="color:var(--accent); font-size:16px;">✓</span> 5 partenaires par recherche</li>
         </ul>
         <p style="font-size:13px; color:var(--ink-muted); line-height:1.5; flex:1;">Jusqu'à 30 opportunités activables<br>Idéal pour structurer un pipeline de partenariats</p>
-        <button disabled style="padding:11px; border:none; border-radius:8px; font-family:'Plus Jakarta Sans',sans-serif; font-size:14px; font-weight:600; color:var(--ink-muted); background:var(--surface); cursor:not-allowed;">Bientôt disponible</button>
+        <form action="/create-checkout-session" method="POST">
+          <input type="hidden" name="plan" value="scale">
+          <input type="hidden" name="email" id="scale-email" value="">
+          <button type="submit" style="width:100%; padding:11px; border:none; border-radius:8px; font-family:'Plus Jakarta Sans',sans-serif; font-size:14px; font-weight:600; color:white; background:var(--accent); cursor:pointer; transition:background 0.2s;" onmouseover="this.style.background='#7B56F5'" onmouseout="this.style.background='var(--accent)'">Choisir Scale →</button>
+        </form>
       </div>
 
     </div>

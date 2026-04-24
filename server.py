@@ -8,7 +8,8 @@ import anthropic
 import os
 import re
 import json
-from flask import Flask, request, Response, stream_with_context, redirect
+import stripe
+from flask import Flask, request, Response, stream_with_context, redirect, jsonify
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -22,6 +23,19 @@ HISTORY_FILE  = os.environ.get("HISTORY_FILE",  "/data/history.json")
 LOG_FILE      = os.environ.get("LOG_FILE",      "/data/logs.json")
 USERS_FILE    = os.environ.get("USERS_FILE",    "/data/users.json")
 RESEND_API_KEY = os.environ.get("RESEND_API_KEY", "")
+
+stripe.api_key = os.environ.get("STRIPE_SECRET_KEY", "")
+STRIPE_WEBHOOK_SECRET = os.environ.get("STRIPE_WEBHOOK_SECRET", "")
+STRIPE_PRICES = {
+    "starter": os.environ.get("STRIPE_PRICE_STARTER", ""),
+    "growth":  os.environ.get("STRIPE_PRICE_GROWTH",  ""),
+    "scale":   os.environ.get("STRIPE_PRICE_SCALE",   ""),
+}
+PLAN_CREDITS = {
+    "starter": {"plan": "starter", "credits": 2},
+    "growth":  {"plan": "growth",  "credits": 3},
+    "scale":   {"plan": "scale",   "credits": 6},
+}
 
 
 def load_history():
@@ -344,6 +358,60 @@ Lance une recherche web sur "{company_name}" pour enrichir ton analyse, puis tro
             "X-Accel-Buffering": "no",
         },
     )
+
+
+@app.route("/create-checkout-session", methods=["POST"])
+def create_checkout_session():
+    plan = request.form.get("plan", "").strip().lower()
+    email = request.form.get("email", "").strip().lower()
+    price_id = STRIPE_PRICES.get(plan)
+    if not price_id:
+        return "Plan invalide.", 400
+    base_url = request.host_url.rstrip("/")
+    session = stripe.checkout.Session.create(
+        payment_method_types=["card"],
+        line_items=[{"price": price_id, "quantity": 1}],
+        mode="payment",
+        customer_email=email if email else None,
+        metadata={"plan": plan, "email": email},
+        success_url=f"{base_url}/success?session_id={{CHECKOUT_SESSION_ID}}",
+        cancel_url=f"{base_url}/#pricing",
+    )
+    return redirect(session.url, code=303)
+
+
+@app.route("/webhook", methods=["POST"])
+def webhook():
+    payload = request.get_data()
+    sig_header = request.headers.get("Stripe-Signature", "")
+    try:
+        if STRIPE_WEBHOOK_SECRET:
+            event = stripe.Webhook.construct_event(payload, sig_header, STRIPE_WEBHOOK_SECRET)
+        else:
+            event = json.loads(payload)
+    except Exception as e:
+        return str(e), 400
+
+    if event["type"] == "checkout.session.completed":
+        session_data = event["data"]["object"]
+        email = (session_data.get("customer_email") or
+                 session_data.get("metadata", {}).get("email", "")).strip().lower()
+        plan = session_data.get("metadata", {}).get("plan", "starter")
+        if email and plan in PLAN_CREDITS:
+            users = load_users()
+            existing = users.get(email, {})
+            users[email] = {
+                "plan": PLAN_CREDITS[plan]["plan"],
+                "credits": existing.get("credits", 0) + PLAN_CREDITS[plan]["credits"],
+            }
+            save_users(users)
+    return jsonify({"status": "ok"})
+
+
+@app.route("/success")
+def success():
+    with open("success.html", encoding="utf-8") as f:
+        return f.read()
 
 
 if __name__ == "__main__":
