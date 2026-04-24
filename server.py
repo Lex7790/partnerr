@@ -82,7 +82,7 @@ def send_welcome_email(email):
     try:
         import urllib.request
         payload = json.dumps({
-            "from": "Partnerr <hello@usepartnerr.com>",
+            "from": "Partnerr <contact@usepartnerr.com>",
             "to": [email],
             "subject": "Bienvenue sur Partnerr 👋",
             "html": f"""
