@@ -157,15 +157,15 @@
     /* ── Field labels ── */
     .field-label {
       display: block;
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--text-soft);
+      font-size: 15px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.95);
       margin-bottom: 8px;
       margin-top: 18px;
     }
 
     .field-label:first-of-type { margin-top: 0; }
-    .field-hint { font-weight: 400; color: var(--text-muted); }
+    .field-hint { font-weight: 400; color: rgba(255,255,255,0.7); }
 
     /* ── Text inputs ── */
     .field-input {
@@ -447,11 +447,11 @@
       font-size: 14px;
     }
 
-    .pi-label { color: rgba(255,255,255,0.5); transition: color 0.2s; }
-    .pi-value { color: rgba(255,255,255,0.35); font-family: 'Plus Jakarta Sans', sans-serif; font-size: 13px; font-weight: 500; transition: color 0.2s; }
+    .pi-label { color: rgba(255,255,255,0.72); transition: color 0.2s; }
+    .pi-value { color: rgba(255,255,255,0.55); font-family: 'Plus Jakarta Sans', sans-serif; font-size: 13px; font-weight: 500; transition: color 0.2s; }
 
-    .progress-item.done .pi-label { color: rgba(255,255,255,0.82); }
-    .progress-item.done .pi-value { color: rgba(255,255,255,0.5); }
+    .progress-item.done .pi-label { color: rgba(255,255,255,0.95); }
+    .progress-item.done .pi-value { color: rgba(255,255,255,0.72); }
 
     .pi-check {
       width: 15px; height: 15px;
@@ -481,7 +481,7 @@
       border-radius: 8px;
       padding: 10px 12px;
       font-size: 13px;
-      color: rgba(255,255,255,0.55);
+      color: rgba(255,255,255,0.82);
       line-height: 1.5;
     }
 
@@ -680,7 +680,7 @@
         <span class="field-label">Décrivez votre activité, votre cible et votre objectif</span>
         <textarea id="context" name="context" class="field-textarea" placeholder="Ex : Nous accompagnons des marques beauté qui veulent se développer à l'international. Nous cherchons des distributeurs, revendeurs ou partenaires capables d'ouvrir de nouveaux marchés."></textarea>
         <span id="context-hint" style="display:none; font-size:12px; color:#F59E0B; margin-top:6px;">💡 Ajoutez du contexte pour améliorer la qualité des résultats.</span>
-        <span style="font-size:12px; color:var(--text-muted); margin-top:6px; display:block;">Plus vous décrivez votre activité, votre cible et votre objectif, plus les partenaires proposés seront précis.</span>
+        <span style="font-size:13px; color:rgba(255,255,255,0.82); margin-top:6px; display:block;">Plus vous décrivez votre activité, votre cible et votre objectif, plus les partenaires proposés seront précis.</span>
 
         <span class="field-label">Entreprises à exclure <span class="field-hint">· séparez par des virgules</span></span>
         <input type="text" id="exclude_manual" name="exclude_manual" class="field-input" placeholder="Ex : Salesforce, HubSpot, Monday.com">
