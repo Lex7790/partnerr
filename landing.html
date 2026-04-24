@@ -887,7 +887,7 @@
       Partnerr analyse votre marché et identifie des collaborations pertinentes, avec le bon contact et un premier angle d'approche activable immédiatement.
     </p>
 
-    <form class="hero-cta-row" data-anim data-delay="3" style="gap:10px;" onsubmit="return openRegisterModal(this)">
+    <form action="/register" method="POST" class="hero-cta-row" data-anim data-delay="3" style="gap:10px;">
       <input type="email" name="email" id="landing-email" required placeholder="votre@email.pro"
         style="padding:14px 18px; border-radius:10px; border:1.5px solid rgba(255,255,255,0.2); background:rgba(255,255,255,0.08); color:white; font-family:'DM Sans',sans-serif; font-size:15px; width:280px; outline:none; height:52px; box-sizing:border-box;"
         onfocus="this.style.borderColor='rgba(123,86,245,0.6)'" onblur="this.style.borderColor='rgba(255,255,255,0.2)'">
@@ -898,7 +898,8 @@
         Tester gratuitement
       </button>
     </form>
-    <p id="landing-email-error" style="display:none; margin-top:8px; font-size:13px; color:#F87171;">Partnerr est réservé aux adresses email professionnelles.</p>
+    <p id="landing-email-error" style="display:none; margin-top:8px; font-size:13px; color:#F87171;"></p>
+    <p style="margin-top:10px; font-size:12px; color:rgba(255,255,255,0.35);">Email professionnel recommandé · Utilisé uniquement pour sauvegarder vos résultats</p>
     <p style="margin-top:12px; font-size:12px; color:rgba(255,255,255,0.3);">1 recherche gratuite · Aucune carte bancaire requise</p>
 
     <!-- PRODUCT MOCK -->
@@ -1297,101 +1298,14 @@
   </div>
 </footer>
 
-<!-- MODALE INSCRIPTION -->
-<div id="register-modal" style="display:none; position:fixed; inset:0; z-index:9999; background:rgba(0,0,0,0.75); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); align-items:center; justify-content:center;">
-  <div style="background:#0B0718; border:1px solid rgba(255,255,255,0.1); border-radius:20px; padding:48px 40px; max-width:440px; width:calc(100% - 48px); position:relative;">
-    <button onclick="closeRegisterModal()" style="position:absolute; top:20px; right:20px; background:none; border:none; cursor:pointer; color:rgba(255,255,255,0.4); font-size:22px; line-height:1;">×</button>
-    <div style="margin-bottom:32px;">
-      <span style="font-family:'Plus Jakarta Sans',sans-serif; font-size:20px; font-weight:800; color:#ffffff;">Partnerr<span style="color:#7B56F5;">.</span></span>
-    </div>
-    <p style="font-size:11px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:#7B56F5; margin:0 0 10px;">Nouveau compte</p>
-    <h2 style="font-family:'Plus Jakarta Sans',sans-serif; font-size:22px; font-weight:800; color:#ffffff; margin:0 0 8px; line-height:1.3;">Créer votre compte</h2>
-    <p style="font-size:14px; color:rgba(255,255,255,0.5); margin:0 0 32px; line-height:1.6;">1 recherche gratuite · Aucune carte bancaire requise</p>
-    <form action="/register" method="POST" onsubmit="return validateModal(this)">
-      <div style="margin-bottom:16px;">
-        <label style="display:block; font-size:13px; font-weight:600; color:rgba(255,255,255,0.6); margin-bottom:8px;">Prénom</label>
-        <input type="text" name="prenom" id="modal-prenom" required placeholder="Votre prénom"
-          style="width:100%; padding:13px 16px; border-radius:10px; border:1.5px solid rgba(255,255,255,0.12); background:rgba(255,255,255,0.06); color:white; font-family:'DM Sans',sans-serif; font-size:15px; outline:none; box-sizing:border-box;"
-          onfocus="this.style.borderColor='rgba(123,86,245,0.6)'" onblur="this.style.borderColor='rgba(255,255,255,0.12)'">
-      </div>
-      <div style="margin-bottom:8px;">
-        <label style="display:block; font-size:13px; font-weight:600; color:rgba(255,255,255,0.6); margin-bottom:8px;">Email professionnel</label>
-        <input type="email" name="email" id="modal-email" required placeholder="votre@email.pro"
-          style="width:100%; padding:13px 16px; border-radius:10px; border:1.5px solid rgba(255,255,255,0.12); background:rgba(255,255,255,0.06); color:white; font-family:'DM Sans',sans-serif; font-size:15px; outline:none; box-sizing:border-box;"
-          onfocus="this.style.borderColor='rgba(123,86,245,0.6)'" onblur="this.style.borderColor='rgba(255,255,255,0.12)'">
-      </div>
-      <p id="modal-email-error" style="display:none; font-size:13px; color:#F87171; margin:0 0 16px;">Partnerr est réservé aux adresses email professionnelles.</p>
-      <button type="submit" style="width:100%; margin-top:20px; padding:15px; background:#5E35E0; color:white; border:none; border-radius:10px; font-family:'Plus Jakarta Sans',sans-serif; font-size:15px; font-weight:700; cursor:pointer; transition:background 0.2s;" onmouseover="this.style.background='#7B56F5'" onmouseout="this.style.background='#5E35E0'">
-        Accéder à Partnerr →
-      </button>
-    </form>
-  </div>
-</div>
-
 <script>
-  const BLOCKED_DOMAINS = ['gmail.com','googlemail.com','hotmail.com','hotmail.fr','outlook.com','outlook.fr','live.com','live.fr','yahoo.com','yahoo.fr','icloud.com','me.com','mac.com','laposte.net','orange.fr','sfr.fr','free.fr','wanadoo.fr','bbox.fr','neuf.fr','aol.com','protonmail.com','proton.me'];
-  function checkProEmail(form) {
-    const email = form.querySelector('input[type="email"]').value.trim();
-    const domain = email.split('@')[1]?.toLowerCase();
-    const errorEl = document.getElementById('landing-email-error');
-    if (!domain || BLOCKED_DOMAINS.includes(domain)) {
-      errorEl.style.display = 'block';
-      form.querySelector('input[type="email"]').style.borderColor = 'rgba(248,113,113,0.8)';
-      return false;
-    }
-    errorEl.style.display = 'none';
-    return true;
-  }
-
   // ─────────────────────────────────────────────
   // CONFIGURATION : changer cette URL pour déploiement
   const TOOL_URL = "/app";
   // ─────────────────────────────────────────────
 
   document.querySelectorAll('#nav-cta, #hero-cta, #final-cta').forEach(el => {
-    el.href = '#';
-    el.addEventListener('click', function(e) { e.preventDefault(); openRegisterModal(null); });
-  });
-
-  function openRegisterModal(form) {
-    if (form) {
-      const email = form.querySelector('input[type="email"]').value.trim();
-      const domain = email.split('@')[1]?.toLowerCase();
-      const errorEl = document.getElementById('landing-email-error');
-      if (!domain || BLOCKED_DOMAINS.includes(domain)) {
-        errorEl.style.display = 'block';
-        form.querySelector('input[type="email"]').style.borderColor = 'rgba(248,113,113,0.8)';
-        return false;
-      }
-      errorEl.style.display = 'none';
-      document.getElementById('modal-email').value = email;
-    }
-    const modal = document.getElementById('register-modal');
-    modal.style.display = 'flex';
-    document.body.style.overflow = 'hidden';
-    setTimeout(() => document.getElementById('modal-prenom').focus(), 100);
-    return false;
-  }
-
-  function closeRegisterModal() {
-    document.getElementById('register-modal').style.display = 'none';
-    document.body.style.overflow = '';
-  }
-
-  function validateModal(form) {
-    const email = form.querySelector('#modal-email').value.trim();
-    const domain = email.split('@')[1]?.toLowerCase();
-    const errorEl = document.getElementById('modal-email-error');
-    if (!domain || BLOCKED_DOMAINS.includes(domain)) {
-      errorEl.style.display = 'block';
-      return false;
-    }
-    errorEl.style.display = 'none';
-    return true;
-  }
-
-  document.getElementById('register-modal').addEventListener('click', function(e) {
-    if (e.target === this) closeRegisterModal();
+    el.href = TOOL_URL;
   });
 
   // Scroll animations
