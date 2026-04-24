@@ -110,7 +110,7 @@ def send_welcome_email(email):
 
                 <!-- Footer -->
                 <p style="margin-top:28px; font-size:13px; color:rgba(255,255,255,0.35); text-align:center; line-height:1.6;">
-                  Une question ? Écrivez-nous à <a href="mailto:hello@usepartnerr.com" style="color:rgba(255,255,255,0.5); text-decoration:none;">hello@usepartnerr.com</a>
+                  Une question ? Écrivez-nous à <a href="mailto:contact@usepartnerr.com" style="color:rgba(255,255,255,0.5); text-decoration:none;">contact@usepartnerr.com</a>
                 </p>
 
               </div>
