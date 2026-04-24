@@ -77,60 +77,42 @@ def save_users(users):
 
 
 def send_welcome_email(email):
-    print(f"[EMAIL] Tentative envoi à {email} — clé présente: {bool(RESEND_API_KEY)} — début clé: {RESEND_API_KEY[:8] if RESEND_API_KEY else 'VIDE'}", flush=True)
     if not RESEND_API_KEY:
+        print("[EMAIL] Clé RESEND_API_KEY manquante", flush=True)
         return
     try:
-        import urllib.request
-        import urllib.error
-        payload = json.dumps({
+        import resend
+        resend.api_key = RESEND_API_KEY
+        resend.Emails.send({
             "from": "Partnerr <contact@usepartnerr.com>",
             "to": [email],
             "subject": "Bienvenue sur Partnerr 👋",
-            "html": f"""
-            <div style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; background:#0B0718; padding:48px 24px; min-height:100vh;">
+            "html": """
+            <div style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; background:#0B0718; padding:48px 24px;">
               <div style="max-width:480px; margin:0 auto;">
-
-                <!-- Logo -->
                 <div style="margin-bottom:36px;">
-                  <span style="font-size:20px; font-weight:800; color:#ffffff; letter-spacing:-0.01em;">Partnerr<span style="color:#7B56F5;">.</span></span>
+                  <span style="font-size:20px; font-weight:800; color:#ffffff;">Partnerr<span style="color:#7B56F5;">.</span></span>
                 </div>
-
-                <!-- Card -->
                 <div style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:16px; padding:36px 32px;">
-
                   <p style="font-size:12px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:#7B56F5; margin:0 0 12px;">Nouveau compte</p>
                   <h1 style="font-size:24px; font-weight:800; color:#ffffff; margin:0 0 16px; line-height:1.3;">Bienvenue sur Partnerr !</h1>
                   <p style="font-size:15px; color:rgba(255,255,255,0.75); line-height:1.7; margin:0 0 28px;">
                     Votre compte est créé. Vous disposez d'<strong style="color:#ffffff;">1 recherche gratuite</strong> pour identifier vos premiers partenaires B2B qualifiés — avec le bon contact et une stratégie concrète.
                   </p>
-
-                  <a href="https://usepartnerr.com/app" style="display:inline-block; padding:14px 28px; background:#5E35E0; color:#ffffff; border-radius:10px; text-decoration:none; font-size:15px; font-weight:700; letter-spacing:-0.01em;">
+                  <a href="https://usepartnerr.com/app" style="display:inline-block; padding:14px 28px; background:#5E35E0; color:#ffffff; border-radius:10px; text-decoration:none; font-size:15px; font-weight:700;">
                     Lancer ma première recherche →
                   </a>
                 </div>
-
-                <!-- Footer -->
                 <p style="margin-top:28px; font-size:13px; color:rgba(255,255,255,0.35); text-align:center; line-height:1.6;">
-                  Une question ? Écrivez-nous à <a href="mailto:contact@usepartnerr.com" style="color:rgba(255,255,255,0.5); text-decoration:none;">contact@usepartnerr.com</a>
+                  Une question ? <a href="mailto:contact@usepartnerr.com" style="color:rgba(255,255,255,0.5); text-decoration:none;">contact@usepartnerr.com</a>
                 </p>
-
               </div>
             </div>
             """
-        }).encode("utf-8")
-        req = urllib.request.Request(
-            "https://api.resend.com/emails",
-            data=payload,
-            headers={"Authorization": f"Bearer {RESEND_API_KEY}", "Content-Type": "application/json"}
-        )
-        urllib.request.urlopen(req)
+        })
         print(f"[EMAIL] Envoi réussi à {email}", flush=True)
-    except urllib.error.HTTPError as e:
-        body = e.read().decode("utf-8")
-        print(f"[EMAIL] Erreur {e.code} : {body}", flush=True)
     except Exception as e:
-        print(f"[EMAIL] Erreur envoi : {e}", flush=True)
+        print(f"[EMAIL] Erreur : {e}", flush=True)
 
 
 @app.route("/register", methods=["POST"])
