@@ -86,17 +86,34 @@ def send_welcome_email(email):
             "to": [email],
             "subject": "Bienvenue sur Partnerr 👋",
             "html": f"""
-            <div style="font-family:sans-serif; max-width:480px; margin:0 auto; padding:32px; color:#0B0718;">
-              <h2 style="font-size:22px; margin-bottom:16px;">Bienvenue sur Partnerr !</h2>
-              <p style="color:#4B4565; line-height:1.6; margin-bottom:24px;">
-                Votre compte est créé. Vous disposez d'<strong>1 recherche gratuite</strong> pour trouver vos premiers partenaires B2B qualifiés.
-              </p>
-              <a href="https://usepartnerr.com/app" style="display:inline-block; padding:12px 24px; background:#5E35E0; color:white; border-radius:8px; text-decoration:none; font-weight:600;">
-                Lancer ma première recherche →
-              </a>
-              <p style="margin-top:32px; font-size:13px; color:#8B87A3;">
-                Des questions ? Répondez à cet email ou écrivez-nous à contact@partnerr.fr
-              </p>
+            <div style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; background:#0B0718; padding:48px 24px; min-height:100vh;">
+              <div style="max-width:480px; margin:0 auto;">
+
+                <!-- Logo -->
+                <div style="margin-bottom:36px;">
+                  <span style="font-size:20px; font-weight:800; color:#ffffff; letter-spacing:-0.01em;">Partnerr<span style="color:#7B56F5;">.</span></span>
+                </div>
+
+                <!-- Card -->
+                <div style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:16px; padding:36px 32px;">
+
+                  <p style="font-size:12px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:#7B56F5; margin:0 0 12px;">Nouveau compte</p>
+                  <h1 style="font-size:24px; font-weight:800; color:#ffffff; margin:0 0 16px; line-height:1.3;">Bienvenue sur Partnerr !</h1>
+                  <p style="font-size:15px; color:rgba(255,255,255,0.75); line-height:1.7; margin:0 0 28px;">
+                    Votre compte est créé. Vous disposez d'<strong style="color:#ffffff;">1 recherche gratuite</strong> pour identifier vos premiers partenaires B2B qualifiés — avec le bon contact et une stratégie concrète.
+                  </p>
+
+                  <a href="https://usepartnerr.com/app" style="display:inline-block; padding:14px 28px; background:#5E35E0; color:#ffffff; border-radius:10px; text-decoration:none; font-size:15px; font-weight:700; letter-spacing:-0.01em;">
+                    Lancer ma première recherche →
+                  </a>
+                </div>
+
+                <!-- Footer -->
+                <p style="margin-top:28px; font-size:13px; color:rgba(255,255,255,0.35); text-align:center; line-height:1.6;">
+                  Une question ? Écrivez-nous à <a href="mailto:hello@usepartnerr.com" style="color:rgba(255,255,255,0.5); text-decoration:none;">hello@usepartnerr.com</a>
+                </p>
+
+              </div>
             </div>
             """
         }).encode("utf-8")
