@@ -95,13 +95,16 @@ def send_welcome_email(email, prenom=""):
                   <span style="font-size:20px; font-weight:800; color:#ffffff;">Partnerr<span style="color:#7B56F5;">.</span></span>
                 </div>
                 <div style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:16px; padding:36px 32px;">
-                  <p style="font-size:12px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:#7B56F5; margin:0 0 12px;">Nouveau compte</p>
+                  <p style="font-size:12px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:#7B56F5; margin:0 0 12px;">Votre accès est prêt</p>
                   <h1 style="font-size:24px; font-weight:800; color:#ffffff; margin:0 0 16px; line-height:1.3;">{salutation}</h1>
+                  <p style="font-size:15px; color:rgba(255,255,255,0.75); line-height:1.7; margin:0 0 12px;">
+                    Vous avez <strong style="color:#ffffff;">1 recherche gratuite</strong> disponible maintenant.
+                  </p>
                   <p style="font-size:15px; color:rgba(255,255,255,0.75); line-height:1.7; margin:0 0 28px;">
-                    Votre compte est créé. Vous disposez d'<strong style="color:#ffffff;">1 recherche gratuite</strong> pour identifier vos premiers partenaires B2B qualifiés — avec le bon contact et une stratégie concrète.
+                    Décrivez votre activité, Partnerr identifie les entreprises avec qui vous pouvez générer du business. Contact, angle d'approche, stratégie concrète. Tout de suite.
                   </p>
                   <a href="https://usepartnerr.com/app" style="display:inline-block; padding:14px 28px; background:#5E35E0; color:#ffffff; border-radius:10px; text-decoration:none; font-size:15px; font-weight:700;">
-                    Lancer ma première recherche →
+                    Trouver mes partenaires maintenant →
                   </a>
                 </div>
                 <p style="margin-top:28px; font-size:13px; color:rgba(255,255,255,0.35); text-align:center; line-height:1.6;">
