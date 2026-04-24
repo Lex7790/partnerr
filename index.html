@@ -477,12 +477,12 @@
     .pi-left { display: flex; align-items: center; }
 
     .progress-tip {
-      background: rgba(94,53,224,0.18);
-      border: 1px solid rgba(94,53,224,0.25);
+      background: rgba(94,53,224,0.28);
+      border: 1px solid rgba(94,53,224,0.6);
       border-radius: 8px;
       padding: 10px 12px;
       font-size: 13px;
-      color: rgba(255,255,255,0.82);
+      color: rgba(255,255,255,0.92);
       line-height: 1.5;
     }
 
@@ -670,7 +670,7 @@
         </div>
         <p class="email-note">Utilisé uniquement pour sauvegarder tes résultats et éviter les doublons. Aucune utilisation commerciale.</p>
 
-        <div id="welcome-back" style="display:none; align-items:flex-start; gap:10px; background:rgba(94,53,224,0.12); border:1px solid rgba(94,53,224,0.3); border-radius:10px; padding:12px 16px; margin-top:8px;">
+        <div id="welcome-back" style="display:none; align-items:flex-start; gap:10px; background:rgba(94,53,224,0.28); border:1px solid rgba(94,53,224,0.6); border-radius:10px; padding:12px 16px; margin-top:8px;">
           <span style="font-size:18px; flex-shrink:0; margin-top:2px;">✨</span>
           <div style="flex:1; min-width:0;">
             <p id="welcome-back-msg" style="font-size:14px; color:rgba(255,255,255,0.88); line-height:1.5;">Heureux de vous revoir !</p>
@@ -1149,7 +1149,7 @@
               showExportButtons(resultContent);
               if (isLimited) {
                 const upsell = document.createElement('div');
-                upsell.style.cssText = 'margin-top:16px; padding:16px 20px; background:rgba(94,53,224,0.1); border:1px solid rgba(94,53,224,0.25); border-radius:10px; font-size:14px; color:rgba(255,255,255,0.6); text-align:center; line-height:1.6;';
+                upsell.style.cssText = 'margin-top:16px; padding:16px 20px; background:rgba(94,53,224,0.28); border:1px solid rgba(94,53,224,0.6); border-radius:10px; font-size:14px; color:rgba(255,255,255,0.88); text-align:center; line-height:1.6;';
                 upsell.innerHTML = '<div style="font-size:12px;font-weight:600;color:rgba(255,255,255,0.78);letter-spacing:0.04em;text-transform:uppercase;margin-bottom:8px;">2 partenaires affichés</div><span style="color:rgba(255,255,255,0.88);">D\'autres opportunités ont été identifiées pour toi.</span> <strong style="color:#A590FF">Passe à la version complète pour y accéder.</strong>';
                 result.appendChild(upsell);
               }
