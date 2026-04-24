@@ -818,7 +818,7 @@
     </div>
 
     <div id="result"></div>
-    <p id="sources-mention" style="display:none; margin-top:12px; font-size:13px; color:rgba(255,255,255,0.55); text-align:center;">Les informations de contact affichées proviennent de sources publiques professionnelles.</p>
+    <p id="sources-mention" style="display:none; margin-top:12px; font-size:13px; color:rgba(255,255,255,0.78); text-align:center;">Les informations de contact affichées proviennent de sources publiques professionnelles.</p>
   </div>
 
   <!-- PROGRESSION -->
@@ -1020,7 +1020,7 @@
     result.appendChild(div);
 
     const reliabilityNote = document.createElement('p');
-    reliabilityNote.style.cssText = 'margin-top:16px; font-size:13px; color:rgba(255,255,255,0.55); text-align:center; line-height:1.6;';
+    reliabilityNote.style.cssText = 'margin-top:16px; font-size:13px; color:rgba(255,255,255,0.78); text-align:center; line-height:1.6;';
     reliabilityNote.textContent = 'Partnerr sélectionne des entreprises actives. Vérification recommandée avant prise de contact.';
     result.appendChild(reliabilityNote);
 
@@ -1150,7 +1150,7 @@
               if (isLimited) {
                 const upsell = document.createElement('div');
                 upsell.style.cssText = 'margin-top:16px; padding:16px 20px; background:rgba(94,53,224,0.1); border:1px solid rgba(94,53,224,0.25); border-radius:10px; font-size:14px; color:rgba(255,255,255,0.6); text-align:center; line-height:1.6;';
-                upsell.innerHTML = '<div style="font-size:12px;font-weight:600;color:rgba(255,255,255,0.55);letter-spacing:0.04em;text-transform:uppercase;margin-bottom:8px;">2 partenaires affichés</div><span style="color:rgba(255,255,255,0.75);">D\'autres opportunités ont été identifiées pour toi.</span> <strong style="color:#A590FF">Passe à la version complète pour y accéder.</strong>';
+                upsell.innerHTML = '<div style="font-size:12px;font-weight:600;color:rgba(255,255,255,0.78);letter-spacing:0.04em;text-transform:uppercase;margin-bottom:8px;">2 partenaires affichés</div><span style="color:rgba(255,255,255,0.88);">D\'autres opportunités ont été identifiées pour toi.</span> <strong style="color:#A590FF">Passe à la version complète pour y accéder.</strong>';
                 result.appendChild(upsell);
               }
             }
