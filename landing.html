@@ -887,8 +887,8 @@
       Partnerr analyse votre marché et identifie des collaborations pertinentes, avec le bon contact et un premier angle d'approche activable immédiatement.
     </p>
 
-    <form action="/register" method="POST" class="hero-cta-row" data-anim data-delay="3" style="gap:10px;">
-      <input type="email" name="email" required placeholder="votre@email.pro"
+    <form action="/register" method="POST" class="hero-cta-row" data-anim data-delay="3" style="gap:10px;" onsubmit="return checkProEmail(this)">
+      <input type="email" name="email" id="landing-email" required placeholder="votre@email.pro"
         style="padding:14px 18px; border-radius:10px; border:1.5px solid rgba(255,255,255,0.2); background:rgba(255,255,255,0.08); color:white; font-family:'DM Sans',sans-serif; font-size:15px; width:280px; outline:none; height:52px; box-sizing:border-box;"
         onfocus="this.style.borderColor='rgba(123,86,245,0.6)'" onblur="this.style.borderColor='rgba(255,255,255,0.2)'">
       <button type="submit" class="btn-hero" style="border:none; cursor:pointer; height:52px; box-sizing:border-box;">
@@ -898,6 +898,7 @@
         Tester gratuitement
       </button>
     </form>
+    <p id="landing-email-error" style="display:none; margin-top:8px; font-size:13px; color:#F87171;">Partnerr est réservé aux adresses email professionnelles.</p>
     <p style="margin-top:12px; font-size:12px; color:rgba(255,255,255,0.3);">1 recherche gratuite · Aucune carte bancaire requise</p>
 
     <!-- PRODUCT MOCK -->
@@ -1297,6 +1298,20 @@
 </footer>
 
 <script>
+  const BLOCKED_DOMAINS = ['gmail.com','googlemail.com','hotmail.com','hotmail.fr','outlook.com','outlook.fr','live.com','live.fr','yahoo.com','yahoo.fr','icloud.com','me.com','mac.com','laposte.net','orange.fr','sfr.fr','free.fr','wanadoo.fr','bbox.fr','neuf.fr','aol.com','protonmail.com','proton.me'];
+  function checkProEmail(form) {
+    const email = form.querySelector('input[type="email"]').value.trim();
+    const domain = email.split('@')[1]?.toLowerCase();
+    const errorEl = document.getElementById('landing-email-error');
+    if (!domain || BLOCKED_DOMAINS.includes(domain)) {
+      errorEl.style.display = 'block';
+      form.querySelector('input[type="email"]').style.borderColor = 'rgba(248,113,113,0.8)';
+      return false;
+    }
+    errorEl.style.display = 'none';
+    return true;
+  }
+
   // ─────────────────────────────────────────────
   // CONFIGURATION : changer cette URL pour déploiement
   const TOOL_URL = "/app";
