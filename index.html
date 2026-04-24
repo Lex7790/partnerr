@@ -674,11 +674,13 @@
       <div class="section-card">
         <div class="section-header">
           <span class="section-badge">B3</span>
-          <span class="section-title">Contexte <span style="font-weight:400; color:var(--text-muted); font-size:13px;">(optionnel)</span></span>
+          <span class="section-title">Contexte pour affiner les résultats</span>
         </div>
 
-        <span class="field-label">Précisions <span class="field-hint">· recommandé pour de meilleurs résultats</span></span>
-        <textarea id="context" name="context" class="field-textarea" placeholder="Ex : On édite un logiciel de gestion RH pour TPE. Si votre boîte est peu connue, décrivez votre activité en 2 lignes pour affiner la recherche."></textarea>
+        <span class="field-label">Décrivez votre activité, votre cible et votre objectif</span>
+        <textarea id="context" name="context" class="field-textarea" placeholder="Ex : Nous accompagnons des marques beauté qui veulent se développer à l'international. Nous cherchons des distributeurs, revendeurs ou partenaires capables d'ouvrir de nouveaux marchés."></textarea>
+        <span id="context-hint" style="display:none; font-size:12px; color:#F59E0B; margin-top:6px;">💡 Ajoutez du contexte pour améliorer la qualité des résultats.</span>
+        <span style="font-size:12px; color:var(--text-muted); margin-top:6px; display:block;">Plus vous décrivez votre activité, votre cible et votre objectif, plus les partenaires proposés seront précis.</span>
 
         <span class="field-label">Entreprises à exclure <span class="field-hint">· séparez par des virgules</span></span>
         <input type="text" id="exclude_manual" name="exclude_manual" class="field-input" placeholder="Ex : Salesforce, HubSpot, Monday.com">
@@ -919,6 +921,14 @@
     const themeSelected = document.querySelector('[name="theme"]:checked');
     if (!sizeSelected) { alert('Sélectionne la taille de ta boîte.'); return; }
     if (!themeSelected) { alert('Sélectionne un type de partenariat.'); return; }
+
+    const contextField = document.getElementById('context');
+    const contextHint = document.getElementById('context-hint');
+    if (!contextField.value.trim()) {
+      contextHint.style.display = 'block';
+    } else {
+      contextHint.style.display = 'none';
+    }
 
     const blockedDomains = ['gmail.com','googlemail.com','hotmail.com','hotmail.fr','outlook.com','outlook.fr','live.com','live.fr','yahoo.com','yahoo.fr','icloud.com','me.com','mac.com','laposte.net','orange.fr','sfr.fr','free.fr','wanadoo.fr','bbox.fr','neuf.fr','aol.com','protonmail.com','proton.me'];
     const emailDomain = emailInput.value.trim().split('@')[1]?.toLowerCase();
