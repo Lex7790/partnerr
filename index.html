@@ -911,14 +911,10 @@
     try {
       const res = await fetch('/check-email', { method: 'POST', body: fd });
       const data = await res.json();
-      if (data.known) {
+      if (data.known && data.searches > 0) {
         welcomeBack.style.display = 'flex';
         const msgEl = document.getElementById('welcome-back-msg');
-        if (data.searches > 0) {
-          msgEl.textContent = `Heureux de vous revoir ! vous avez déjà identifié ${data.searches} partenaire${data.searches > 1 ? 's' : ''} avec Partnerr. Lancez une nouvelle recherche pour explorer un autre angle.`;
-        } else {
-          msgEl.textContent = 'Heureux de vous revoir ! votre prochaine recherche peut vous aider à explorer un nouveau marché, une nouvelle cible ou un autre type de partenariat.';
-        }
+        msgEl.textContent = `Heureux de vous revoir ! Vous avez déjà identifié ${data.searches} partenaire${data.searches > 1 ? 's' : ''} avec Partnerr. Lancez une nouvelle recherche pour explorer un autre angle.`;
       } else {
         welcomeBack.style.display = 'none';
       }
