@@ -565,6 +565,11 @@
         </div>
         <p class="email-note">Utilisé uniquement pour sauvegarder tes résultats et éviter les doublons. Aucune utilisation commerciale.</p>
 
+        <div id="welcome-back" style="display:none; align-items:center; gap:10px; background:rgba(94,53,224,0.12); border:1px solid rgba(94,53,224,0.3); border-radius:10px; padding:12px 16px; margin-top:8px;">
+          <span style="font-size:18px;">👋</span>
+          <p style="font-size:14px; color:rgba(255,255,255,0.88); line-height:1.5;">Heureux de vous revoir ! Votre prochaine recherche peut vous aider à explorer un nouveau marché, une nouvelle cible ou un autre type de partenariat.</p>
+        </div>
+
         <span class="field-label">Secteur de ta boîte</span>
         <div class="chip-group" id="sector-chips">
           <input type="checkbox" id="s-ecom"    name="sector" value="E-commerce"             class="chip-input"><label for="s-ecom"    class="chip">E-commerce</label>
@@ -777,6 +782,24 @@
   const savedEmail = localStorage.getItem('b2b_user_email');
   if (emailFromUrl) emailInput.value = emailFromUrl;
   else if (savedEmail) emailInput.value = savedEmail;
+
+  // ── Message de retour ──
+  const welcomeBack = document.getElementById('welcome-back');
+  async function checkKnownEmail(email) {
+    if (!email || !email.includes('@')) return;
+    const fd = new FormData(); fd.append('email', email);
+    try {
+      const res = await fetch('/check-email', { method: 'POST', body: fd });
+      const data = await res.json();
+      if (data.known) {
+        welcomeBack.style.display = 'flex';
+      } else {
+        welcomeBack.style.display = 'none';
+      }
+    } catch(e) {}
+  }
+  emailInput.addEventListener('blur', () => checkKnownEmail(emailInput.value.trim()));
+  if (emailInput.value) checkKnownEmail(emailInput.value.trim());
 
   const form      = document.getElementById('matchForm');
   const loading   = document.getElementById('loading');

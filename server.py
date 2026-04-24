@@ -142,6 +142,19 @@ def legal():
         return f.read()
 
 
+@app.route("/check-email", methods=["POST"])
+def check_email():
+    email = request.form.get("email", "").strip().lower()
+    if not email or "@" not in email:
+        return jsonify({"known": False})
+    users = load_users()
+    history = load_history()
+    if email not in users:
+        return jsonify({"known": False})
+    searches = len(history.get(email, []))
+    return jsonify({"known": True, "searches": searches})
+
+
 @app.route("/match", methods=["POST"])
 def match():
     user_email      = request.form.get("user_email", "").strip().lower()
