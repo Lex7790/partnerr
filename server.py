@@ -91,7 +91,7 @@ def send_welcome_email(email):
               <p style="color:#4B4565; line-height:1.6; margin-bottom:24px;">
                 Votre compte est créé. Vous disposez d'<strong>1 recherche gratuite</strong> pour trouver vos premiers partenaires B2B qualifiés.
               </p>
-              <a href="https://partnerr.onrender.com/app" style="display:inline-block; padding:12px 24px; background:#5E35E0; color:white; border-radius:8px; text-decoration:none; font-weight:600;">
+              <a href="https://usepartnerr.com/app" style="display:inline-block; padding:12px 24px; background:#5E35E0; color:white; border-radius:8px; text-decoration:none; font-weight:600;">
                 Lancer ma première recherche →
               </a>
               <p style="margin-top:32px; font-size:13px; color:#8B87A3;">
@@ -463,11 +463,6 @@ def my_history():
     return jsonify({"searches": user_logs[:20]})
 
 
-@app.route("/debug-history")
-def debug_history():
-    history = load_history()
-    users = load_users()
-    return jsonify({"history": history, "users": users})
 
 
 @app.route("/success")
