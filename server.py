@@ -76,10 +76,11 @@ def save_users(users):
         json.dump(users, f, ensure_ascii=False, indent=2)
 
 
-def send_welcome_email(email):
+def send_welcome_email(email, prenom=""):
     if not RESEND_API_KEY:
         print("[EMAIL] Clé RESEND_API_KEY manquante", flush=True)
         return
+    salutation = f"Bonjour {prenom} !" if prenom else "Bienvenue sur Partnerr !"
     try:
         import resend
         resend.api_key = RESEND_API_KEY
@@ -87,7 +88,7 @@ def send_welcome_email(email):
             "from": "Partnerr <hello@usepartnerr.com>",
             "to": [email],
             "subject": "Bienvenue sur Partnerr 👋",
-            "html": """
+            "html": f"""
             <div style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; background:#0B0718; padding:48px 24px;">
               <div style="max-width:480px; margin:0 auto;">
                 <div style="margin-bottom:36px;">
@@ -95,7 +96,7 @@ def send_welcome_email(email):
                 </div>
                 <div style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:16px; padding:36px 32px;">
                   <p style="font-size:12px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:#7B56F5; margin:0 0 12px;">Nouveau compte</p>
-                  <h1 style="font-size:24px; font-weight:800; color:#ffffff; margin:0 0 16px; line-height:1.3;">Bienvenue sur Partnerr !</h1>
+                  <h1 style="font-size:24px; font-weight:800; color:#ffffff; margin:0 0 16px; line-height:1.3;">{salutation}</h1>
                   <p style="font-size:15px; color:rgba(255,255,255,0.75); line-height:1.7; margin:0 0 28px;">
                     Votre compte est créé. Vous disposez d'<strong style="color:#ffffff;">1 recherche gratuite</strong> pour identifier vos premiers partenaires B2B qualifiés — avec le bon contact et une stratégie concrète.
                   </p>
@@ -118,14 +119,15 @@ def send_welcome_email(email):
 @app.route("/register", methods=["POST"])
 def register():
     email = request.form.get("email", "").strip().lower()
+    prenom = request.form.get("prenom", "").strip()
     if not email or "@" not in email:
         return redirect("/")
     users = load_users()
     is_new = email not in users
     if is_new:
-        users[email] = {"plan": "free", "credits": 1}
+        users[email] = {"plan": "free", "credits": 1, "prenom": prenom}
         save_users(users)
-        send_welcome_email(email)
+        send_welcome_email(email, prenom)
     return redirect(f"/app?email={email}")
 
 
