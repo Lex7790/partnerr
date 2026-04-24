@@ -386,14 +386,13 @@ def webhook():
     sig_header = request.headers.get("Stripe-Signature", "")
     try:
         if STRIPE_WEBHOOK_SECRET:
-            event = stripe.Webhook.construct_event(payload, sig_header, STRIPE_WEBHOOK_SECRET)
-        else:
-            event = json.loads(payload)
+            stripe.Webhook.construct_event(payload, sig_header, STRIPE_WEBHOOK_SECRET)
+        event = json.loads(payload)
     except Exception as e:
         return str(e), 400
 
     if event["type"] == "checkout.session.completed":
-        session_data = event["data"]["object"].to_dict_recursive()
+        session_data = event["data"]["object"]
         email = (session_data.get("customer_email") or
                  session_data.get("metadata", {}).get("email", "")).strip().lower()
         plan = session_data.get("metadata", {}).get("plan", "starter")
