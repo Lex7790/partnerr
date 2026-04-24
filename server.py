@@ -393,10 +393,10 @@ def webhook():
         return str(e), 400
 
     if event["type"] == "checkout.session.completed":
-        session_data = event["data"]["object"]
-        email = (getattr(session_data, "customer_email", None) or
-                 session_data.metadata.get("email", "")).strip().lower()
-        plan = session_data.metadata.get("plan", "starter")
+        session_data = event["data"]["object"].to_dict_recursive()
+        email = (session_data.get("customer_email") or
+                 session_data.get("metadata", {}).get("email", "")).strip().lower()
+        plan = session_data.get("metadata", {}).get("plan", "starter")
         if email and plan in PLAN_CREDITS:
             users = load_users()
             existing = users.get(email, {})
