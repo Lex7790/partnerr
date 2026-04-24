@@ -221,7 +221,8 @@ Lance une recherche web sur "{company_name}" pour enrichir ton analyse, puis tro
             def save_results():
                 from datetime import datetime, timezone
                 names = re.findall(r'## Partenaire \d+\s*:\s*(.+)', accumulated_text)
-                names = [n.strip() for n in names if n.strip()]
+                names = [re.split(r'[✓✗\n|·—]', n)[0].strip() for n in names if n.strip()]
+                names = [n for n in names if n]
                 if names and user_email:
                     save_history(user_email, names)
                 append_log({
