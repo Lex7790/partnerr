@@ -123,6 +123,9 @@ def send_welcome_email(email):
             headers={"Authorization": f"Bearer {RESEND_API_KEY}", "Content-Type": "application/json"}
         )
         urllib.request.urlopen(req)
+    except urllib.error.HTTPError as e:
+        body = e.read().decode("utf-8")
+        print(f"[EMAIL] Erreur {e.code} : {body}", flush=True)
     except Exception as e:
         print(f"[EMAIL] Erreur envoi : {e}", flush=True)
 
