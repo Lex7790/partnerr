@@ -821,11 +821,23 @@
     }
 
     @media (max-width: 600px) {
-      .hero { padding: 80px 24px 72px; }
-      .section { padding: 72px 24px; }
-      .hero-cta-row { flex-direction: column; align-items: center; }
+      /* Nav : on cache les liens, garde logo + CTA */
+      nav .nav-inner a:not(.logo):not(.btn-nav) { display: none; }
       nav .nav-inner { padding: 0 20px; }
-      .hero-mock { margin-top: 48px; }
+
+      /* Hero */
+      .hero { padding: 72px 20px 64px; }
+      .hero h1 { font-size: 28px; line-height: 1.18; }
+      .hero-sub { font-size: 15px; margin-bottom: 32px; }
+      .hero-cta-row { flex-direction: column; align-items: stretch; width: 100%; max-width: 360px; margin: 0 auto; }
+      .hero-cta-row input[type="email"] { width: 100% !important; }
+
+      /* Browser mock : masque la carte Progression */
+      .hero-mock { margin-top: 40px; }
+      .hero-mock-body > div:last-child { display: none !important; }
+
+      /* Sections */
+      .section { padding: 64px 20px; }
       .mock-card:nth-child(n+2) { display: none; }
     }
   </style>
