@@ -128,17 +128,6 @@
       pointer-events: none;
     }
 
-    .hero-inner::before {
-      content: '';
-      position: absolute;
-      top: -120px;
-      left: -160px;
-      width: 500px;
-      height: 500px;
-      background: radial-gradient(circle, rgba(94, 53, 224, 0.22) 0%, transparent 65%);
-      pointer-events: none;
-    }
-
     .hero-inner {
       max-width: 900px;
       margin: 0 auto;
@@ -868,6 +857,7 @@
 
 <!-- HERO -->
 <section class="hero">
+  <div style="position:absolute; top:0; left:0; width:480px; height:480px; background:radial-gradient(circle at top left, rgba(94,53,224,0.25) 0%, transparent 65%); pointer-events:none; z-index:0;"></div>
   <div class="hero-inner">
 
     <div class="hero-social-proof" data-anim>
