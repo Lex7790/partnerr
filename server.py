@@ -84,7 +84,7 @@ def send_welcome_email(email):
         import resend
         resend.api_key = RESEND_API_KEY
         resend.Emails.send({
-            "from": "Partnerr <contact@usepartnerr.com>",
+            "from": "Partnerr <noreply@usepartnerr.com>",
             "to": [email],
             "subject": "Bienvenue sur Partnerr 👋",
             "html": """
