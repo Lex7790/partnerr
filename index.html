@@ -1076,10 +1076,8 @@
       contextHint.style.display = 'none';
     }
 
-    const blockedDomains = ['gmail.com','googlemail.com','hotmail.com','hotmail.fr','outlook.com','outlook.fr','live.com','live.fr','yahoo.com','yahoo.fr','icloud.com','me.com','mac.com','laposte.net','orange.fr','sfr.fr','free.fr','wanadoo.fr','bbox.fr','neuf.fr','aol.com','protonmail.com','proton.me'];
     const emailDomain = emailInput.value.trim().split('@')[1]?.toLowerCase();
-    if (!emailDomain || blockedDomains.includes(emailDomain)) {
-      alert('Partnerr est réservé aux adresses email professionnelles. Merci d\'utiliser votre email entreprise.');
+    if (!emailDomain) {
       emailInput.focus();
       return;
     }
