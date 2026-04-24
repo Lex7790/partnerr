@@ -101,7 +101,7 @@ def send_welcome_email(email, prenom=""):
                     Vous avez <strong style="color:#ffffff;">1 recherche gratuite</strong> disponible maintenant.
                   </p>
                   <p style="font-size:15px; color:rgba(255,255,255,0.75); line-height:1.7; margin:0 0 28px;">
-                    Décrivez votre activité, Partnerr identifie les entreprises avec qui vous pouvez générer du business. Contact, angle d'approche, stratégie concrète. Tout de suite.
+                    Décrivez votre activité. En quelques minutes, Partnerr vous dit quelles entreprises cibler, comment les approcher et pourquoi ça peut convertir.
                   </p>
                   <a href="https://usepartnerr.com/app" style="display:inline-block; padding:14px 28px; background:#5E35E0; color:#ffffff; border-radius:10px; text-decoration:none; font-size:15px; font-weight:700;">
                     Trouver mes partenaires maintenant →
