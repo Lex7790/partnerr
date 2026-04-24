@@ -216,6 +216,7 @@ def match():
                 f"\nBoîtes déjà proposées à EXCLURE IMPÉRATIVEMENT (propose uniquement des nouvelles boîtes) : {', '.join(excluded)}"
                 if excluded else ""
             )
+            print(f"[DEDUP] Recherche pour email={user_email!r} — exclus: {excluded}", flush=True)
 
             user_message = f"""Boîte à analyser : {company_name}
 Secteur : {sectors_str}
@@ -233,11 +234,17 @@ Lance une recherche web sur "{company_name}" pour enrichir ton analyse, puis tro
 
             def save_results():
                 from datetime import datetime, timezone
-                names = re.findall(r'## Partenaire \d+\s*:\s*(.+)', accumulated_text)
-                names = [re.split(r'[✓✗\n|·—]', n)[0].strip() for n in names if n.strip()]
+                # Regex flexible : ##/# Partenaire N : / — / – nom
+                names = re.findall(r'#{1,3}\s*Partenaire\s+\d+\s*[:\-–—]\s*(.+)', accumulated_text, re.IGNORECASE)
+                names = [re.split(r'[✓✗\n|·—\*]', n)[0].strip() for n in names if n.strip()]
                 names = [n for n in names if n]
+                print(f"[DEDUP] save_results() — email={user_email!r} — noms extraits: {names}", flush=True)
+                print(f"[DEDUP] Début accumulated_text: {accumulated_text[:300]!r}", flush=True)
                 if names and user_email:
                     save_history(user_email, names)
+                    print(f"[DEDUP] Sauvegardé dans history.json pour {user_email}", flush=True)
+                else:
+                    print(f"[DEDUP] RIEN sauvegardé — names={names!r} user_email={user_email!r}", flush=True)
                 append_log({
                     "date":      datetime.now(timezone.utc).isoformat(),
                     "email":     user_email,
@@ -251,7 +258,7 @@ Lance une recherche web sur "{company_name}" pour enrichir ton analyse, puis tro
             def find_duplicates():
                 found = []
                 for name in excluded:
-                    if re.search(r'## Partenaire \d+\s*:\s*' + re.escape(name), accumulated_text, re.IGNORECASE):
+                    if re.search(re.escape(name), accumulated_text, re.IGNORECASE):
                         found.append(name)
                 return found
 
@@ -427,6 +434,30 @@ def webhook():
             }
             save_users(users)
     return jsonify({"status": "ok"})
+
+
+@app.route("/my-history", methods=["POST"])
+def my_history():
+    email = request.form.get("email", "").strip().lower()
+    if not email or "@" not in email:
+        return jsonify({"searches": []})
+    logs = []
+    if os.path.exists(LOG_FILE):
+        with open(LOG_FILE, "r", encoding="utf-8") as f:
+            logs = json.load(f)
+    user_logs = [
+        l for l in logs
+        if l.get("email") == email and l.get("status") == "success" and l.get("partners")
+    ]
+    user_logs.sort(key=lambda x: x.get("date", ""), reverse=True)
+    return jsonify({"searches": user_logs[:20]})
+
+
+@app.route("/debug-history")
+def debug_history():
+    history = load_history()
+    users = load_users()
+    return jsonify({"history": history, "users": users})
 
 
 @app.route("/success")

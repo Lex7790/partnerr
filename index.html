@@ -502,6 +502,110 @@
       .site-header { padding: 0 20px; }
     }
 
+    /* ── History panel ── */
+    .history-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.55);
+      z-index: 200;
+      backdrop-filter: blur(4px);
+    }
+    .history-overlay.open { display: block; }
+
+    .history-panel {
+      position: fixed;
+      top: 0; right: 0;
+      width: 380px;
+      max-width: 100vw;
+      height: 100vh;
+      background: #130E25;
+      border-left: 1px solid rgba(255,255,255,0.08);
+      z-index: 201;
+      display: flex;
+      flex-direction: column;
+      transform: translateX(100%);
+      transition: transform 0.3s cubic-bezier(0.22,1,0.36,1);
+      overflow: hidden;
+    }
+    .history-panel.open { transform: translateX(0); }
+
+    .history-panel-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 24px;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      flex-shrink: 0;
+    }
+    .history-panel-title {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: white;
+    }
+    .history-panel-close {
+      background: none;
+      border: none;
+      color: rgba(255,255,255,0.45);
+      font-size: 20px;
+      cursor: pointer;
+      padding: 4px;
+      line-height: 1;
+      transition: color 0.15s;
+    }
+    .history-panel-close:hover { color: white; }
+
+    .history-panel-body {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px 24px;
+    }
+
+    .history-entry {
+      margin-bottom: 20px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .history-entry:last-child { border-bottom: none; margin-bottom: 0; }
+
+    .history-entry-date {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+      margin-bottom: 4px;
+    }
+    .history-entry-company {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.9);
+      margin-bottom: 8px;
+    }
+    .history-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+    }
+    .history-tag {
+      padding: 3px 10px;
+      border-radius: 100px;
+      background: rgba(94,53,224,0.15);
+      border: 1px solid rgba(94,53,224,0.3);
+      font-size: 12px;
+      color: #C4B5FF;
+    }
+
+    .history-empty {
+      text-align: center;
+      color: rgba(255,255,255,0.4);
+      font-size: 14px;
+      padding: 40px 0;
+      line-height: 1.6;
+    }
+
     @media print {
       .site-header, .form-col > *:not(#result), .progress-col { display: none !important; }
       body { background: white; }
@@ -565,9 +669,12 @@
         </div>
         <p class="email-note">Utilisé uniquement pour sauvegarder tes résultats et éviter les doublons. Aucune utilisation commerciale.</p>
 
-        <div id="welcome-back" style="display:none; align-items:center; gap:10px; background:rgba(94,53,224,0.12); border:1px solid rgba(94,53,224,0.3); border-radius:10px; padding:12px 16px; margin-top:8px;">
-          <span style="font-size:18px; flex-shrink:0;">👋</span>
-          <p id="welcome-back-msg" style="font-size:14px; color:rgba(255,255,255,0.88); line-height:1.5;">Heureux de vous revoir 👋</p>
+        <div id="welcome-back" style="display:none; align-items:flex-start; gap:10px; background:rgba(94,53,224,0.12); border:1px solid rgba(94,53,224,0.3); border-radius:10px; padding:12px 16px; margin-top:8px;">
+          <span style="font-size:18px; flex-shrink:0; margin-top:2px;">👋</span>
+          <div style="flex:1; min-width:0;">
+            <p id="welcome-back-msg" style="font-size:14px; color:rgba(255,255,255,0.88); line-height:1.5;">Heureux de vous revoir 👋</p>
+            <button type="button" id="open-history-btn" onclick="openHistory()" style="margin-top:8px; background:none; border:none; padding:0; font-size:13px; color:#A590FF; cursor:pointer; font-family:'DM Sans',sans-serif; text-decoration:underline; text-underline-offset:3px;">Voir mes recherches précédentes →</button>
+          </div>
         </div>
 
         <span class="field-label">Secteur de ta boîte</span>
@@ -751,6 +858,18 @@
   </div>
 
 </div>
+</div>
+
+<!-- History panel -->
+<div class="history-overlay" id="history-overlay" onclick="closeHistory()"></div>
+<div class="history-panel" id="history-panel">
+  <div class="history-panel-header">
+    <span class="history-panel-title">📋 Mes recherches</span>
+    <button class="history-panel-close" onclick="closeHistory()">✕</button>
+  </div>
+  <div class="history-panel-body" id="history-panel-body">
+    <div class="history-empty">Chargement...</div>
+  </div>
 </div>
 
 <script>
@@ -1046,6 +1165,53 @@
       submitBtn.textContent = '🔍 Trouver mes partenaires';
       result.innerHTML = `<div class="error-box">❌ ${error.message}</div>`;
     }
+  });
+
+  // ── History panel ──
+  function openHistory() {
+    const email = document.getElementById('user_email').value.trim();
+    if (!email) return;
+    document.getElementById('history-overlay').classList.add('open');
+    document.getElementById('history-panel').classList.add('open');
+    document.body.style.overflow = 'hidden';
+    loadHistory(email);
+  }
+
+  function closeHistory() {
+    document.getElementById('history-overlay').classList.remove('open');
+    document.getElementById('history-panel').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  async function loadHistory(email) {
+    const body = document.getElementById('history-panel-body');
+    body.innerHTML = '<div class="history-empty">Chargement...</div>';
+    try {
+      const fd = new FormData();
+      fd.append('email', email);
+      const res = await fetch('/my-history', { method: 'POST', body: fd });
+      const data = await res.json();
+      if (!data.searches || data.searches.length === 0) {
+        body.innerHTML = '<div class="history-empty">Aucune recherche enregistrée pour cette adresse.</div>';
+        return;
+      }
+      body.innerHTML = data.searches.map(s => {
+        const date = new Date(s.date);
+        const dateStr = date.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' });
+        const tags = (s.partners || []).map(p => `<span class="history-tag">${p}</span>`).join('');
+        return `<div class="history-entry">
+          <div class="history-entry-date">${dateStr}</div>
+          <div class="history-entry-company">Recherche pour ${s.company || '—'}</div>
+          <div class="history-tags">${tags}</div>
+        </div>`;
+      }).join('');
+    } catch(e) {
+      body.innerHTML = '<div class="history-empty">Impossible de charger l\'historique.</div>';
+    }
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeHistory();
   });
 </script>
 </body>
