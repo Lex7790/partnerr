@@ -77,10 +77,12 @@ def save_users(users):
 
 
 def send_welcome_email(email):
+    print(f"[EMAIL] Tentative envoi à {email} — clé présente: {bool(RESEND_API_KEY)} — début clé: {RESEND_API_KEY[:8] if RESEND_API_KEY else 'VIDE'}", flush=True)
     if not RESEND_API_KEY:
         return
     try:
         import urllib.request
+        import urllib.error
         payload = json.dumps({
             "from": "Partnerr <contact@usepartnerr.com>",
             "to": [email],
@@ -123,6 +125,7 @@ def send_welcome_email(email):
             headers={"Authorization": f"Bearer {RESEND_API_KEY}", "Content-Type": "application/json"}
         )
         urllib.request.urlopen(req)
+        print(f"[EMAIL] Envoi réussi à {email}", flush=True)
     except urllib.error.HTTPError as e:
         body = e.read().decode("utf-8")
         print(f"[EMAIL] Erreur {e.code} : {body}", flush=True)
