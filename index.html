@@ -1140,6 +1140,13 @@
             document.getElementById('sources-mention').style.display = 'block';
             submitBtn.disabled = false;
             submitBtn.innerHTML = '🔍 Lancer une nouvelle recherche';
+            // Si l'agent s'est corrigé en cours de route, ne garder que la dernière version
+            const lastP1 = resultContent.search(/#{1,3}\s*Partenaire\s+1/i);
+            const lastP1Idx = resultContent.lastIndexOf(resultContent.match(/#{1,3}\s*Partenaire\s+1/i)?.[0] || '');
+            if (lastP1 !== -1 && lastP1Idx > lastP1) {
+              resultContent = resultContent.substring(lastP1Idx);
+              if (resultPre) resultPre.innerHTML = marked.parse(resultContent);
+            }
             if (resultContent) {
               showExportButtons(resultContent);
               if (isLimited) {
