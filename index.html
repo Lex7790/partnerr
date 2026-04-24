@@ -670,9 +670,9 @@
         <p class="email-note">Utilisé uniquement pour sauvegarder tes résultats et éviter les doublons. Aucune utilisation commerciale.</p>
 
         <div id="welcome-back" style="display:none; align-items:flex-start; gap:10px; background:rgba(94,53,224,0.12); border:1px solid rgba(94,53,224,0.3); border-radius:10px; padding:12px 16px; margin-top:8px;">
-          <span style="font-size:18px; flex-shrink:0; margin-top:2px;">👋</span>
+          <span style="font-size:18px; flex-shrink:0; margin-top:2px;">✨</span>
           <div style="flex:1; min-width:0;">
-            <p id="welcome-back-msg" style="font-size:14px; color:rgba(255,255,255,0.88); line-height:1.5;">Heureux de vous revoir 👋</p>
+            <p id="welcome-back-msg" style="font-size:14px; color:rgba(255,255,255,0.88); line-height:1.5;">Heureux de vous revoir</p>
             <button type="button" id="open-history-btn" onclick="openHistory()" style="margin-top:8px; background:none; border:none; padding:0; font-size:13px; color:#A590FF; cursor:pointer; font-family:'DM Sans',sans-serif; text-decoration:underline; text-underline-offset:3px;">Voir mes recherches précédentes →</button>
           </div>
         </div>
@@ -914,9 +914,9 @@
         welcomeBack.style.display = 'flex';
         const msgEl = document.getElementById('welcome-back-msg');
         if (data.searches > 0) {
-          msgEl.textContent = `Heureux de vous revoir 👋 Vous avez déjà identifié ${data.searches} partenaire${data.searches > 1 ? 's' : ''} avec Partnerr. Lancez une nouvelle recherche pour explorer un autre angle.`;
+          msgEl.textContent = `Heureux de vous revoir — vous avez déjà identifié ${data.searches} partenaire${data.searches > 1 ? 's' : ''} avec Partnerr. Lancez une nouvelle recherche pour explorer un autre angle.`;
         } else {
-          msgEl.textContent = 'Heureux de vous revoir 👋 Votre prochaine recherche peut vous aider à explorer un nouveau marché, une nouvelle cible ou un autre type de partenariat.';
+          msgEl.textContent = 'Heureux de vous revoir — votre prochaine recherche peut vous aider à explorer un nouveau marché, une nouvelle cible ou un autre type de partenariat.';
         }
       } else {
         welcomeBack.style.display = 'none';
