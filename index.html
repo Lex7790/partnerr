@@ -652,6 +652,7 @@
   <div class="form-col">
     <p class="nouvelle-recherche">— Nouvelle recherche</p>
     <h1 class="page-title">Trouve tes partenaires B2B.</h1>
+    <p style="font-size:13px; color:rgba(255,255,255,0.45); margin:4px 0 16px; font-style:italic;">Utilisé par des professionnels pour identifier des partenaires B2B activables.</p>
     <p class="form-desc" id="page-subtitle">Remplis le formulaire. Partnerr analyse le marché et te propose des partenaires qualifiés avec le bon contact et une stratégie concrète.</p>
 
     <form id="matchForm">
@@ -660,7 +661,7 @@
       <div class="section-card">
         <div class="section-header">
           <span class="section-badge">B1</span>
-          <span class="section-title">Parle-nous de toi</span>
+          <span class="section-title">Ton entreprise</span>
         </div>
 
         <span class="field-label">Ton email <span class="field-hint">· pour mémoriser tes résultats</span></span>
@@ -914,7 +915,7 @@
       if (data.known && data.searches > 0) {
         welcomeBack.style.display = 'flex';
         const msgEl = document.getElementById('welcome-back-msg');
-        msgEl.textContent = `Heureux de vous revoir ! Vous avez déjà identifié ${data.searches} partenaire${data.searches > 1 ? 's' : ''} avec Partnerr. Lancez une nouvelle recherche pour explorer un autre angle.`;
+        msgEl.textContent = `Heureux de vous revoir 👋 Vous avez déjà identifié des partenaires avec Partnerr. Lancez une nouvelle recherche pour explorer un autre angle.`;
       } else {
         welcomeBack.style.display = 'none';
       }
