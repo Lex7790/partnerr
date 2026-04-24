@@ -653,7 +653,7 @@
     <p class="nouvelle-recherche">— Nouvelle recherche</p>
     <h1 class="page-title">Trouve tes partenaires B2B.</h1>
     <p style="font-size:13px; color:rgba(255,255,255,0.45); margin:4px 0 16px; font-style:italic;">Utilisé par des professionnels pour identifier des partenaires B2B activables.</p>
-    <p class="form-desc" id="page-subtitle">Remplis le formulaire. Partnerr analyse le marché et te propose des partenaires qualifiés avec le bon contact et une stratégie concrète.</p>
+    <p class="form-desc" id="page-subtitle">Identifiez des partenaires B2B activables avec le bon contact et une stratégie de collaboration concrète.</p>
 
     <form id="matchForm">
 
@@ -889,7 +889,7 @@
   const isLimited = currentPlan === 'free' || currentPlan === 'starter';
 
   if (isLimited) {
-    document.getElementById('page-subtitle').textContent = 'Remplis le formulaire, Partnerr analyse le marché et te propose des partenaires B2B qualifiés avec le bon contact et une stratégie concrète.';
+    document.getElementById('page-subtitle').textContent = 'Identifiez des partenaires B2B activables avec le bon contact et une stratégie de collaboration concrète.';
   }
 
   const planInput = document.createElement('input');
@@ -1152,7 +1152,7 @@
               if (isLimited) {
                 const upsell = document.createElement('div');
                 upsell.style.cssText = 'margin-top:16px; padding:16px 20px; background:rgba(94,53,224,0.28); border:1px solid rgba(94,53,224,0.6); border-radius:10px; font-size:14px; color:rgba(255,255,255,0.88); text-align:center; line-height:1.6;';
-                upsell.innerHTML = '<div style="font-size:12px;font-weight:600;color:rgba(255,255,255,0.78);letter-spacing:0.04em;text-transform:uppercase;margin-bottom:8px;">2 partenaires affichés</div><span style="color:rgba(255,255,255,0.88);">D\'autres opportunités ont été identifiées pour toi.</span> <strong style="color:#A590FF">Passe à la version complète pour y accéder.</strong>';
+                upsell.innerHTML = '<div style="font-size:12px;font-weight:600;color:rgba(255,255,255,0.78);letter-spacing:0.04em;text-transform:uppercase;margin-bottom:8px;">Premier angle identifié</div><span style="color:rgba(255,255,255,0.88);">Vous avez identifié un premier angle.</span> <strong style="color:#A590FF">Débloquez une recherche complète pour accéder à des opportunités directement exploitables.</strong>';
                 result.appendChild(upsell);
               }
             }
