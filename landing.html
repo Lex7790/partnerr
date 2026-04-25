@@ -1416,7 +1416,7 @@
       if (!target) return;
       e.preventDefault();
       const navH = document.querySelector('nav')?.offsetHeight || 64;
-      const top = target.getBoundingClientRect().top + window.scrollY - navH - 8;
+      const top = target.offsetTop - navH - 8;
       window.scrollTo({ top, behavior: 'smooth' });
     });
   });
