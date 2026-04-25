@@ -324,68 +324,133 @@
     /* ── Results ── */
     #result { margin-top: 20px; }
 
+    /* Fallback pour streaming en cours */
     #result-content {
       font-family: 'DM Sans', sans-serif;
       font-size: 15px;
       line-height: 1.8;
-      background: var(--card-bg);
-      border-radius: 14px;
-      padding: 28px;
-      border: 1px solid var(--card-border);
-      border-left: 3px solid var(--accent);
       color: rgba(255,255,255,0.88);
     }
+    #result-content h2 { font-family:'Plus Jakarta Sans',sans-serif; font-size:18px; font-weight:700; color:#C4B5FF; margin:32px 0 12px; padding-bottom:8px; border-bottom:1px solid rgba(94,53,224,0.25); }
+    #result-content h2:first-child { margin-top:0; }
+    #result-content strong { color:rgba(255,255,255,0.95); font-weight:600; }
+    #result-content p { margin:8px 0; color:rgba(255,255,255,0.80); line-height:1.7; }
+    #result-content a { color:#A590FF; text-decoration:none; }
+    #result-content a:hover { text-decoration:underline; }
+    #result-content hr { display:none; }
+    #result-content ul { padding-left:20px; margin:6px 0; }
+    #result-content li { margin:4px 0; color:rgba(255,255,255,0.82); }
 
-    #result-content h2 {
+    /* ── Partner cards ── */
+    .partner-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      overflow: hidden;
+      margin-bottom: 14px;
+    }
+
+    .pc-main { padding: 22px 24px; }
+
+    .pc-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .pc-avatar {
+      width: 40px; height: 40px; border-radius: 10px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
       font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 18px;
-      font-weight: 700;
-      color: #C4B5FF;
-      margin: 40px 0 16px;
-      padding-bottom: 10px;
-      border-bottom: 1px solid rgba(94,53,224,0.25);
-      letter-spacing: -0.01em;
+      font-weight: 700; font-size: 14px; color: white;
     }
 
-    #result-content h2:first-child { margin-top: 0; }
-    #result-content strong { color: rgba(255,255,255,0.95); font-weight: 600; }
-    #result-content p { margin: 8px 0; color: rgba(255,255,255,0.80); line-height: 1.7; }
-    #result-content a { color: #A590FF; text-decoration: none; }
-    #result-content a:hover { text-decoration: underline; }
-    #result-content hr { border: none; border-top: 1px solid rgba(255,255,255,0.06); margin: 32px 0; }
-    #result-content ul { padding-left: 20px; margin: 6px 0; }
-    #result-content li { margin: 4px 0; color: rgba(255,255,255,0.82); }
+    .pc-header-text { flex: 1; min-width: 0; }
+    .pc-num { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.35); }
+    .pc-name { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 19px; font-weight: 700; color: white; line-height: 1.2; }
+    .pc-url { font-size: 12px; margin-top: 2px; }
+    .pc-url a { color: rgba(255,255,255,0.30); text-decoration: none; }
+    .pc-url a:hover { color: rgba(255,255,255,0.6); }
 
-    #result-content .r-opportunity {
-      background: rgba(94,53,224,0.14);
-      border-left: 3px solid #7B56F5;
-      padding: 10px 14px;
-      border-radius: 0 8px 8px 0;
-      margin: 14px 0;
-      color: rgba(255,255,255,0.92) !important;
+    .pc-angle-label {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; color: #7B56F5; margin-bottom: 6px;
     }
-    #result-content .r-opportunity strong { color: #C4B5FF; }
 
-    #result-content .r-action {
-      background: rgba(5,150,105,0.1);
-      border-left: 3px solid #10b981;
-      padding: 10px 14px;
-      border-radius: 0 8px 8px 0;
-      margin: 14px 0;
-      color: rgba(255,255,255,0.90) !important;
+    .pc-angle {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 15px; font-weight: 600; color: white; line-height: 1.45;
+      margin-bottom: 18px;
     }
-    #result-content .r-action strong { color: #6ee7b7; }
 
-    #result-content .r-signal,
-    #result-content .r-partnerships {
-      display: inline-block;
-      margin: 6px 6px 6px 0;
-      padding: 5px 12px;
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.12);
-      border-radius: 100px;
-      font-size: 13px;
-      color: rgba(255,255,255,0.75);
+    .pc-info-row {
+      display: flex; gap: 8px; flex-wrap: wrap; align-items: center;
+      padding-top: 16px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .pc-info-cell {
+      font-size: 13px; color: rgba(255,255,255,0.60);
+      padding: 4px 10px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 6px;
+    }
+
+    .pc-info-cell strong { color: rgba(255,255,255,0.85); font-weight: 500; }
+
+    .pc-badge {
+      padding: 4px 10px; border-radius: 100px; font-size: 12px; white-space: nowrap;
+    }
+    .pc-badge-signal { background: rgba(94,53,224,0.18); border: 1px solid rgba(94,53,224,0.35); color: #C4B5FF; }
+    .pc-badge-partner { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.10); color: rgba(255,255,255,0.60); }
+
+    .pc-playbook-btn {
+      margin-left: auto;
+      background: none; border: 1px solid rgba(94,53,224,0.4);
+      color: #A590FF; border-radius: 8px;
+      padding: 6px 14px; font-size: 13px; font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 600; cursor: pointer; transition: all 0.15s; white-space: nowrap;
+    }
+    .pc-playbook-btn:hover { background: rgba(94,53,224,0.15); border-color: rgba(94,53,224,0.6); }
+
+    /* Accordion playbook */
+    .pc-playbook-drawer {
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.35s cubic-bezier(0.22,1,0.36,1);
+      border-top: 0px solid rgba(255,255,255,0.06);
+    }
+    .pc-playbook-drawer.open {
+      max-height: 600px;
+      border-top-width: 1px;
+    }
+
+    .pc-playbook-inner { padding: 20px 24px; }
+
+    .pc-playbook-section-label {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; color: rgba(255,255,255,0.30); margin-bottom: 8px;
+    }
+
+    .pc-why {
+      font-size: 14px; color: rgba(255,255,255,0.72); line-height: 1.6;
+      margin-bottom: 18px;
+    }
+
+    .pc-actions { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; }
+
+    .action-card {
+      background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 10px; padding: 12px;
+    }
+    .action-num { font-size: 10px; font-weight: 700; color: #7B56F5; letter-spacing: 0.05em; margin-bottom: 5px; }
+    .action-title { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 13px; font-weight: 600; color: rgba(255,255,255,0.88); margin-bottom: 4px; }
+    .action-desc { font-size: 12px; color: rgba(255,255,255,0.48); line-height: 1.5; }
+
+    @media (max-width: 600px) {
+      .pc-actions { grid-template-columns: 1fr; }
+      .pc-playbook-drawer.open { max-height: 1200px; }
     }
 
     .error-box {
@@ -1030,21 +1095,104 @@
   document.querySelectorAll('.chip-input').forEach(input => input.addEventListener('change', updateProgress));
   updateProgress();
 
-  // ── Post-processing visuel des résultats ──
+  // ── Partner cards avec accordion playbook ──
+  const PC_COLORS = [
+    ['#5E35E0','#9B7BFF'], ['#059669','#34d399'], ['#0891B2','#22d3ee'],
+    ['#D97706','#fbbf24'], ['#7C3AED','#c084fc'], ['#be185d','#f472b6']
+  ];
+
+  function togglePlaybook(btn) {
+    const drawer = btn.closest('.partner-card').querySelector('.pc-playbook-drawer');
+    const isOpen = drawer.classList.toggle('open');
+    btn.textContent = isOpen ? 'Fermer ↑' : 'Voir le playbook →';
+  }
+
   function enhanceResultContent(container) {
-    container.querySelectorAll('p').forEach(p => {
-      const strong = p.querySelector('strong');
-      if (!strong || strong !== p.firstChild && strong !== p.firstElementChild) return;
-      const label = strong.textContent.toLowerCase();
-      if (label.includes('opportunité')) {
-        p.classList.add('r-opportunity');
-      } else if (label.includes('action recommandée') || label.includes('approche proposée')) {
-        p.classList.add('r-action');
-      } else if (label.includes('signal')) {
-        p.classList.add('r-signal');
-      } else if (label.includes('partenariats')) {
-        p.classList.add('r-partnerships');
-      }
+    container.querySelectorAll('h2').forEach(h2 => {
+      if (!/partenaire\s+\d+/i.test(h2.textContent)) return;
+      if (h2.closest('.partner-card')) return;
+
+      // Collecter les éléments jusqu'au prochain h2
+      const elems = [];
+      let cur = h2.nextElementSibling;
+      while (cur && cur.tagName !== 'H2') { elems.push(cur); cur = cur.nextElementSibling; }
+
+      // Attendre que la section soit complète
+      const isComplete = elems.some(e => (e.querySelector?.('strong')?.textContent||'').toLowerCase().includes('partenariats'));
+      if (!isComplete) return;
+
+      // Extraire les données
+      const fullTitle   = h2.textContent.trim();
+      const partnerNum  = (fullTitle.match(/\d+/)||['?'])[0];
+      const partnerName = fullTitle.replace(/partenaire\s+\d+\s*[:\-–—]\s*/i,'').trim();
+      const initials    = partnerName.split(/\s+/).slice(0,2).map(w=>w[0]?.toUpperCase()||'').join('') || partnerName.slice(0,2).toUpperCase();
+
+      let url='', sector='', contact='', opportunity='', whyMatch='', signal='', partnerships='', actions=[];
+
+      elems.forEach(el => {
+        const strong = el.querySelector('strong');
+        const label  = (strong?.textContent||'').toLowerCase().replace(/\s*:?\s*$/,'').trim();
+        const rest   = el.textContent.replace(strong?.textContent||'','').trim();
+        if (el.tagName==='P') {
+          if (el.innerHTML.includes('🔗')) { const a=el.querySelector('a'); url=a?a.href:rest.replace('🔗','').trim(); }
+          else if (label==='secteur')                                    sector=rest;
+          else if (label==='contact')                                    contact=rest;
+          else if (label.includes('opportunit'))                         opportunity=rest;
+          else if (label.includes('pourquoi')&&label.includes('matche')) whyMatch=rest;
+          else if (label==='signal')                                     signal=rest;
+          else if (label==='partenariats')                               partnerships=rest;
+        } else if (el.tagName==='OL') {
+          actions=[...el.querySelectorAll('li')].map(li=>li.textContent.trim());
+        }
+      });
+
+      const [c1,c2] = PC_COLORS[partnerName.charCodeAt(0) % PC_COLORS.length];
+      const urlDisplay = url.replace(/^https?:\/\/(www\.)?/,'').replace(/\/.*$/,'');
+
+      const actionHTML = actions.map((a,i)=>{
+        const m = a.match(/^(.+?)\s*[→–>]\s*(.+)$/);
+        const title = m?m[1].trim():`Action ${i+1}`;
+        const desc  = m?m[2].trim():a;
+        return `<div class="action-card">
+          <div class="action-num">0${i+1}</div>
+          <div class="action-title">${title}</div>
+          <div class="action-desc">${desc}</div>
+        </div>`;
+      }).join('');
+
+      const card = document.createElement('div');
+      card.className = 'partner-card';
+      card.innerHTML = `
+        <div class="pc-main">
+          <div class="pc-header">
+            <div class="pc-avatar" style="background:linear-gradient(135deg,${c1},${c2})">${initials}</div>
+            <div class="pc-header-text">
+              <div class="pc-num">PARTENAIRE ${String(partnerNum).padStart(2,'0')}</div>
+              <div class="pc-name">${partnerName}</div>
+              ${urlDisplay?`<div class="pc-url"><a href="${url}" target="_blank" rel="noopener">${urlDisplay}</a></div>`:''}
+            </div>
+          </div>
+          <div class="pc-angle-label">L'ANGLE</div>
+          <div class="pc-angle">${opportunity}</div>
+          <div class="pc-info-row">
+            ${contact?`<span class="pc-info-cell"><strong>Contact</strong> · ${contact}</span>`:''}
+            ${sector?`<span class="pc-info-cell"><strong>Secteur</strong> · ${sector}</span>`:''}
+            ${signal?`<span class="pc-badge pc-badge-signal">${signal}</span>`:''}
+            ${partnerships?`<span class="pc-badge pc-badge-partner">${partnerships}</span>`:''}
+            ${(whyMatch||actions.length)?`<button class="pc-playbook-btn" onclick="togglePlaybook(this)">Voir le playbook →</button>`:''}
+          </div>
+        </div>
+        <div class="pc-playbook-drawer">
+          <div class="pc-playbook-inner">
+            ${whyMatch?`<div class="pc-playbook-section-label">Pourquoi ça matche</div><div class="pc-why">${whyMatch}</div>`:''}
+            ${actions.length?`<div class="pc-playbook-section-label">Action recommandée</div><div class="pc-actions">${actionHTML}</div>`:''}
+          </div>
+        </div>
+      `;
+
+      h2.parentNode.insertBefore(card, h2);
+      h2.remove();
+      elems.forEach(e=>e.remove());
     });
   }
 
