@@ -89,7 +89,7 @@
 
     /* ── Page header ── */
     .nouvelle-recherche {
-      font-size: 11px;
+      font-size: 15px;
       font-weight: 600;
       letter-spacing: 0.12em;
       text-transform: uppercase;
@@ -409,7 +409,11 @@
     .pc-badge {
       padding: 7px 14px; border-radius: 100px; font-size: 14px; white-space: nowrap; font-weight: 500;
     }
-    .pc-badge-signal { background: rgba(94,53,224,0.20); border: 1px solid rgba(94,53,224,0.40); color: #C4B5FF; }
+    .pc-badge-signal { border-radius: 100px; }
+    .pc-badge-evident  { background: rgba(239,68,68,0.18);  border: 1px solid rgba(239,68,68,0.45);  color: #fca5a5; }
+    .pc-badge-rapide   { background: rgba(245,158,11,0.18); border: 1px solid rgba(245,158,11,0.45); color: #fcd34d; }
+    .pc-badge-tester   { background: rgba(6,182,212,0.18);  border: 1px solid rgba(6,182,212,0.45);  color: #67e8f9; }
+    .pc-badge-strat    { background: rgba(94,53,224,0.22);  border: 1px solid rgba(94,53,224,0.55);  color: #C4B5FF; }
     .pc-badge-partner { background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.14); color: rgba(255,255,255,0.85); }
 
     @keyframes glowPulse {
@@ -440,7 +444,7 @@
 
     .pc-playbook-section-label {
       font-size: 14px; font-weight: 700; letter-spacing: 0.08em;
-      text-transform: uppercase; color: rgba(255,255,255,0.60); margin-bottom: 14px;
+      text-transform: uppercase; color: #A590FF; margin-bottom: 14px;
     }
 
     .pc-why {
@@ -1086,7 +1090,8 @@
     document.getElementById('pv-taille').textContent      = size?.value.split(' ')[0] || '—';
     document.getElementById('pv-cibles').textContent      = clients.length > 1 ? clients.length + ' cochées' : clients[0]?.value || '—';
     document.getElementById('pv-zone').textContent        = geo?.value || '—';
-    document.getElementById('pv-partenariat').textContent = theme ? theme.value.charAt(0).toUpperCase() + theme.value.slice(1, 10) : '—';
+    const themeLabels = {'co-marketing':'Co-mkt','technologie':'Techno','affiliation':'Affiliation','distribution':'Distribut.','commercial':'Co-vente','événementiel':'Événement.'};
+    document.getElementById('pv-partenariat').textContent = theme ? (themeLabels[theme.value] || theme.value) : '—';
 
     Object.entries(checks).forEach(([key, isDone]) => {
       document.querySelector(`[data-check="${key}"]`)?.classList.toggle('done', isDone);
@@ -1181,7 +1186,7 @@
             ${sector?`<span class="pc-info-cell"><strong>Secteur</strong> · ${sector}</span>`:''}
           </div>
           <div class="pc-info-row">
-            <div>${signal?`<span class="pc-badge pc-badge-signal">${signal}</span>`:''}</div>
+            <div>${signal?`<span class="pc-badge pc-badge-signal ${signal.toLowerCase().includes('vident')?'pc-badge-evident':signal.toLowerCase().includes('rapide')?'pc-badge-rapide':signal.toLowerCase().includes('tester')?'pc-badge-tester':'pc-badge-strat'}">${signal}</span>`:''}</div>
             ${(whyMatch||actions.length)?`<button class="pc-playbook-btn" onclick="togglePlaybook(this)">Voir le playbook →</button>`:''}
           </div>
         </div>
