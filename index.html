@@ -384,10 +384,15 @@
       margin-bottom: 26px;
     }
 
-    .pc-info-row {
-      display: flex; gap: 10px; flex-wrap: wrap; align-items: center;
+    .pc-info-cells {
+      display: flex; gap: 10px; flex-wrap: wrap;
       padding-top: 20px;
       border-top: 1px solid rgba(255,255,255,0.08);
+      margin-bottom: 12px;
+    }
+
+    .pc-info-row {
+      display: flex; align-items: center; justify-content: space-between; gap: 10px;
     }
 
     .pc-info-cell {
@@ -408,7 +413,6 @@
     .pc-badge-partner { background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.14); color: rgba(255,255,255,0.85); }
 
     .pc-playbook-btn {
-      margin-left: auto;
       background: none; border: 1px solid rgba(94,53,224,0.5);
       color: #C4B5FF; border-radius: 8px;
       padding: 8px 18px; font-size: 15px; font-family: 'Plus Jakarta Sans', sans-serif;
@@ -475,7 +479,7 @@
       text-align: center;
     }
 
-    #export-buttons { display: flex; flex-direction: column; gap: 10px; margin-top: 16px; }
+    #export-buttons { display: flex; flex-direction: column; gap: 10px; margin-top: 32px; }
     .export-row-main { display: flex; gap: 12px; }
     #export-buttons button { margin-top: 0; flex: 1; padding: 12px; font-size: 14px; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 600; border: none; border-radius: 10px; cursor: pointer; transition: background 0.15s; }
     .btn-csv { background: #059669; color: white; }
@@ -1179,10 +1183,12 @@
           </div>
           <div class="pc-angle-label">L'ANGLE</div>
           <div class="pc-angle">${opportunity}</div>
-          <div class="pc-info-row">
+          <div class="pc-info-cells">
             ${contact?`<span class="pc-info-cell"><strong>Contact</strong> · ${contact}</span>`:''}
             ${sector?`<span class="pc-info-cell"><strong>Secteur</strong> · ${sector}</span>`:''}
-            ${signal?`<span class="pc-badge pc-badge-signal">${signal}</span>`:''}
+          </div>
+          <div class="pc-info-row">
+            <div>${signal?`<span class="pc-badge pc-badge-signal">${signal}</span>`:''}</div>
             ${(whyMatch||actions.length)?`<button class="pc-playbook-btn" onclick="togglePlaybook(this)">Voir le playbook →</button>`:''}
           </div>
         </div>
