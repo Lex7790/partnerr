@@ -473,60 +473,84 @@
 
     /* ── STEPS ── */
     .steps-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
+      display: flex;
+      flex-direction: column;
+      max-width: 640px;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     .step {
-      background: var(--white);
-      padding: 40px 36px;
+      display: flex;
+      gap: 28px;
+      padding-bottom: 48px;
+      background: none;
+      border: none;
+      border-radius: 0;
       position: relative;
-      border: 1.5px solid var(--border);
-      border-radius: 16px;
-      transition: border-color 0.3s, box-shadow 0.3s, transform 0.22s;
     }
-    .step:hover {
-      border-color: rgba(94,53,224,0.5);
-      box-shadow: 0 0 0 3px rgba(94,53,224,0.08), 0 0 24px rgba(94,53,224,0.12);
-      transform: translateY(-5px);
+
+    .step:last-child {
+      padding-bottom: 0;
+    }
+
+    .step-rail {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex-shrink: 0;
+    }
+
+    .step-rail::after {
+      content: '';
+      flex: 1;
+      width: 1px;
+      background: var(--border);
+      margin-top: 10px;
+    }
+
+    .step:last-child .step-rail::after {
+      display: none;
     }
 
     .step-num {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      color: var(--accent);
-      margin-bottom: 20px;
+      width: 40px;
+      height: 40px;
+      min-width: 40px;
+      border-radius: 50%;
+      background: var(--accent-lo);
+      border: 1.5px solid rgba(94,53,224,0.25);
       display: flex;
       align-items: center;
-      gap: 8px;
+      justify-content: center;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      color: var(--accent);
     }
 
-    .step-num::after {
-      content: '';
+    .step-body {
       flex: 1;
-      height: 1px;
-      background: var(--border);
+      padding-top: 6px;
     }
 
     .step-icon {
-      width: 44px;
-      height: 44px;
+      width: 40px;
+      height: 40px;
       background: var(--accent-lo);
       border-radius: 10px;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-bottom: 20px;
+      margin-bottom: 16px;
       color: var(--accent);
     }
 
     .step h3 {
       font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 17px;
-      font-weight: 600;
+      font-size: 18px;
+      font-weight: 700;
       color: var(--ink);
       margin-bottom: 10px;
       line-height: 1.4;
@@ -815,7 +839,7 @@
 
     /* ── RESPONSIVE ── */
     @media (max-width: 900px) {
-      .steps-grid { grid-template-columns: 1fr; }
+      .steps-grid { max-width: 100%; }
       .features-grid { grid-template-columns: 1fr; }
       .stats-inner { gap: 36px; }
       .mock-card:nth-child(n+3) { display: none; }
@@ -1017,42 +1041,56 @@
     <h2 class="section-title" data-anim>Simple comme une conversation</h2>
     <p class="section-sub" data-anim>Pas de configuration, pas d'abonnement. Juste un formulaire et des résultats concrets.</p>
 
-    <div class="steps-grid">
+    <div class="steps-grid" style="margin-top:48px;">
+
       <div class="step" data-anim data-delay="0">
-        <div class="step-num">01</div>
-        <div class="step-icon">
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-            <path d="M10 2a8 8 0 100 16A8 8 0 0010 2zM6 10a4 4 0 118 0 4 4 0 01-8 0z" fill="currentColor" opacity=".3"/>
-            <path d="M10 6v4l3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-          </svg>
+        <div class="step-rail">
+          <div class="step-num">01</div>
         </div>
-        <h3>Décrivez votre entreprise</h3>
-        <p>Nom, secteur, type de partenariat recherché, secteur cible. 30 secondes, pas plus.</p>
+        <div class="step-body">
+          <div class="step-icon">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <path d="M10 2a8 8 0 100 16A8 8 0 0010 2zM6 10a4 4 0 118 0 4 4 0 01-8 0z" fill="currentColor" opacity=".3"/>
+              <path d="M10 6v4l3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h3>Décrivez votre entreprise</h3>
+          <p>Nom, secteur, type de partenariat recherché, secteur cible. 30 secondes, pas plus.</p>
+        </div>
       </div>
 
       <div class="step" data-anim data-delay="1">
-        <div class="step-num">02</div>
-        <div class="step-icon">
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-            <path d="M4 10a6 6 0 1012 0A6 6 0 004 10z" fill="currentColor" opacity=".2"/>
-            <path d="M10 7v3l2 2M15.5 4.5l1-1M4.5 4.5l-1-1M4.5 15.5l-1 1M15.5 15.5l1 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-          </svg>
+        <div class="step-rail">
+          <div class="step-num">02</div>
         </div>
-        <h3>Analyse et sélection</h3>
-        <p>Partnerr identifie les partenaires les plus pertinents pour votre profil en analysant leur positionnement, leur cible et les opportunités de collaboration.</p>
+        <div class="step-body">
+          <div class="step-icon">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <path d="M4 10a6 6 0 1012 0A6 6 0 004 10z" fill="currentColor" opacity=".2"/>
+              <path d="M10 7v3l2 2M15.5 4.5l1-1M4.5 4.5l-1-1M4.5 15.5l-1 1M15.5 15.5l1 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h3>Analyse et sélection</h3>
+          <p>Partnerr identifie les partenaires les plus pertinents pour votre profil en analysant leur positionnement, leur cible et les opportunités de collaboration.</p>
+        </div>
       </div>
 
       <div class="step" data-anim data-delay="2">
-        <div class="step-num">03</div>
-        <div class="step-icon">
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-            <rect x="3" y="4" width="14" height="12" rx="2" fill="currentColor" opacity=".2"/>
-            <path d="M7 9h6M7 12h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-          </svg>
+        <div class="step-rail">
+          <div class="step-num">03</div>
         </div>
-        <h3>Un premier angle activable immédiatement</h3>
-        <p>Pour chaque opportunité : profil complet, stratégie d'approche, format de collaboration et contact identifié. Exportable en CSV.</p>
+        <div class="step-body">
+          <div class="step-icon">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <rect x="3" y="4" width="14" height="12" rx="2" fill="currentColor" opacity=".2"/>
+              <path d="M7 9h6M7 12h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h3>Un premier angle activable immédiatement</h3>
+          <p>Pour chaque opportunité : profil complet, stratégie d'approche, format de collaboration et contact identifié. Exportable en CSV.</p>
+        </div>
       </div>
+
     </div>
   </div>
 </section>
