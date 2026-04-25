@@ -8,6 +8,8 @@ import anthropic
 import os
 import re
 import json
+import fcntl
+import threading
 import stripe
 from flask import Flask, request, Response, stream_with_context, redirect, jsonify
 from dotenv import load_dotenv
@@ -36,6 +38,8 @@ PLAN_CREDITS = {
     "growth":  {"plan": "growth",  "credits": 3},
     "scale":   {"plan": "scale",   "credits": 6},
 }
+
+_users_lock = threading.Lock()
 
 
 def load_history():
@@ -74,6 +78,26 @@ def load_users():
 def save_users(users):
     with open(USERS_FILE, "w", encoding="utf-8") as f:
         json.dump(users, f, ensure_ascii=False, indent=2)
+
+
+def atomic_decrement_credits(email):
+    """Lit, vérifie et décrémente les crédits de façon atomique (thread-safe + multi-process)."""
+    lock_path = USERS_FILE + ".lock"
+    with _users_lock:
+        with open(lock_path, "w") as lf:
+            fcntl.flock(lf, fcntl.LOCK_EX)
+            try:
+                users = load_users()
+                user_data = users.get(email, {})
+                plan = user_data.get("plan", "free")
+                credits = user_data.get("credits", 0)
+                if credits <= 0:
+                    return None, 0
+                users[email]["credits"] = credits - 1
+                save_users(users)
+                return plan, credits
+            finally:
+                fcntl.flock(lf, fcntl.LOCK_UN)
 
 
 def send_welcome_email(email, prenom=""):
@@ -180,22 +204,13 @@ def match():
     geo             = request.form.get("geo", "France").strip()
     exclude_manual  = request.form.get("exclude_manual", "").strip()
 
-    # Plan lu depuis users.json (pas depuis le formulaire — non falsifiable)
-    users = load_users()
-    user_data = users.get(user_email, {})
-    plan = user_data.get("plan", "free")
-    credits = user_data.get("credits", 0)
-
     if not company_name or not theme or not user_email:
         return "Veuillez remplir tous les champs obligatoires.", 400
 
-    # Vérification des crédits
-    if credits <= 0:
+    # Vérification + décrémentation atomique (protège contre les requêtes simultanées)
+    plan, credits = atomic_decrement_credits(user_email)
+    if plan is None:
         return "Vous n'avez plus de recherches disponibles. Passez à un plan supérieur pour continuer.", 403
-
-    # Décrémentation immédiate pour éviter les doublons en cas de requêtes simultanées
-    users[user_email]["credits"] = credits - 1
-    save_users(users)
 
     # Nombre de partenaires selon le plan réel
     if plan == "free":
@@ -431,14 +446,14 @@ def create_checkout_session():
 
 @app.route("/webhook", methods=["POST"])
 def webhook():
+    if not STRIPE_WEBHOOK_SECRET:
+        return "Webhook secret non configuré.", 500
     payload = request.get_data()
     sig_header = request.headers.get("Stripe-Signature", "")
     try:
-        if STRIPE_WEBHOOK_SECRET:
-            stripe.Webhook.construct_event(payload, sig_header, STRIPE_WEBHOOK_SECRET)
-        event = json.loads(payload)
-    except Exception as e:
-        return str(e), 400
+        event = stripe.Webhook.construct_event(payload, sig_header, STRIPE_WEBHOOK_SECRET)
+    except Exception:
+        return "Signature invalide.", 400
 
     if event["type"] == "checkout.session.completed":
         session_data = event["data"]["object"]

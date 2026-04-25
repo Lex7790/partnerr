@@ -901,8 +901,13 @@
   const emailInput = document.getElementById('user_email');
   const emailFromUrl = urlParams.get('email');
   const savedEmail = localStorage.getItem('b2b_user_email');
-  if (emailFromUrl) emailInput.value = emailFromUrl;
-  else if (savedEmail) emailInput.value = savedEmail;
+  if (emailFromUrl) {
+    emailInput.value = emailFromUrl;
+    localStorage.setItem('b2b_user_email', emailFromUrl);
+    history.replaceState({}, '', '/app');
+  } else if (savedEmail) {
+    emailInput.value = savedEmail;
+  }
 
   // ── Message de retour ──
   const welcomeBack = document.getElementById('welcome-back');
