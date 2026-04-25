@@ -343,114 +343,115 @@
 
     /* ── Partner cards ── */
     .partner-card {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
+      background: rgba(230,230,250,0.07);
+      border: 1px solid rgba(230,230,250,0.14);
       border-radius: 14px;
       overflow: hidden;
       margin-bottom: 14px;
     }
 
-    .pc-main { padding: 22px 24px; }
+    .pc-main { padding: 24px 28px; }
 
     .pc-header {
       display: flex;
       align-items: center;
-      gap: 12px;
-      margin-bottom: 16px;
+      gap: 14px;
+      margin-bottom: 20px;
     }
 
     .pc-avatar {
-      width: 40px; height: 40px; border-radius: 10px; flex-shrink: 0;
+      width: 44px; height: 44px; border-radius: 10px; flex-shrink: 0;
       display: flex; align-items: center; justify-content: center;
       font-family: 'Plus Jakarta Sans', sans-serif;
-      font-weight: 700; font-size: 14px; color: white;
+      font-weight: 700; font-size: 15px; color: white;
     }
 
     .pc-header-text { flex: 1; min-width: 0; }
-    .pc-num { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.35); }
-    .pc-name { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 19px; font-weight: 700; color: white; line-height: 1.2; }
-    .pc-url { font-size: 12px; margin-top: 2px; }
-    .pc-url a { color: rgba(255,255,255,0.30); text-decoration: none; }
-    .pc-url a:hover { color: rgba(255,255,255,0.6); }
+    .pc-num { font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.55); margin-bottom: 2px; }
+    .pc-name { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 22px; font-weight: 700; color: white; line-height: 1.2; }
+    .pc-url { font-size: 13px; margin-top: 3px; }
+    .pc-url a { color: rgba(255,255,255,0.45); text-decoration: none; }
+    .pc-url a:hover { color: rgba(255,255,255,0.75); }
 
     .pc-angle-label {
-      font-size: 10px; font-weight: 700; letter-spacing: 0.1em;
-      text-transform: uppercase; color: #7B56F5; margin-bottom: 6px;
+      font-size: 13px; font-weight: 700; letter-spacing: 0.08em;
+      text-transform: uppercase; color: #A590FF; margin-bottom: 8px;
     }
 
     .pc-angle {
       font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 15px; font-weight: 600; color: white; line-height: 1.45;
-      margin-bottom: 18px;
+      font-size: 18px; font-weight: 600; color: white; line-height: 1.45;
+      margin-bottom: 22px;
     }
 
     .pc-info-row {
       display: flex; gap: 8px; flex-wrap: wrap; align-items: center;
-      padding-top: 16px;
-      border-top: 1px solid rgba(255,255,255,0.06);
+      padding-top: 18px;
+      border-top: 1px solid rgba(255,255,255,0.08);
     }
 
     .pc-info-cell {
-      font-size: 13px; color: rgba(255,255,255,0.60);
-      padding: 4px 10px;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 6px;
+      font-size: 14px; color: white;
+      padding: 6px 12px;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 8px;
     }
 
-    .pc-info-cell strong { color: rgba(255,255,255,0.85); font-weight: 500; }
+    .pc-info-cell strong { color: rgba(255,255,255,0.55); font-weight: 500; font-size: 12px; }
 
     .pc-badge {
-      padding: 4px 10px; border-radius: 100px; font-size: 12px; white-space: nowrap;
+      padding: 6px 12px; border-radius: 100px; font-size: 13px; white-space: nowrap; font-weight: 500;
     }
-    .pc-badge-signal { background: rgba(94,53,224,0.18); border: 1px solid rgba(94,53,224,0.35); color: #C4B5FF; }
-    .pc-badge-partner { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.10); color: rgba(255,255,255,0.60); }
+    .pc-badge-signal { background: rgba(94,53,224,0.20); border: 1px solid rgba(94,53,224,0.40); color: #C4B5FF; }
+    .pc-badge-partner { background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.14); color: rgba(255,255,255,0.85); }
 
     .pc-playbook-btn {
       margin-left: auto;
-      background: none; border: 1px solid rgba(94,53,224,0.4);
-      color: #A590FF; border-radius: 8px;
-      padding: 6px 14px; font-size: 13px; font-family: 'Plus Jakarta Sans', sans-serif;
+      background: none; border: 1px solid rgba(94,53,224,0.5);
+      color: #C4B5FF; border-radius: 8px;
+      padding: 7px 16px; font-size: 14px; font-family: 'Plus Jakarta Sans', sans-serif;
       font-weight: 600; cursor: pointer; transition: all 0.15s; white-space: nowrap;
     }
-    .pc-playbook-btn:hover { background: rgba(94,53,224,0.15); border-color: rgba(94,53,224,0.6); }
+    .pc-playbook-btn:hover { background: rgba(94,53,224,0.18); border-color: rgba(94,53,224,0.7); }
 
     /* Accordion playbook */
     .pc-playbook-drawer {
       max-height: 0; overflow: hidden;
       transition: max-height 0.35s cubic-bezier(0.22,1,0.36,1);
-      border-top: 0px solid rgba(255,255,255,0.06);
+      border-top: 0px solid rgba(255,255,255,0.08);
     }
     .pc-playbook-drawer.open {
-      max-height: 600px;
+      max-height: 700px;
       border-top-width: 1px;
     }
 
-    .pc-playbook-inner { padding: 20px 24px; }
+    .pc-playbook-inner { padding: 22px 28px; }
 
     .pc-playbook-section-label {
-      font-size: 10px; font-weight: 700; letter-spacing: 0.1em;
-      text-transform: uppercase; color: rgba(255,255,255,0.30); margin-bottom: 8px;
+      font-size: 13px; font-weight: 700; letter-spacing: 0.08em;
+      text-transform: uppercase; color: rgba(255,255,255,0.55); margin-bottom: 12px;
     }
 
     .pc-why {
-      font-size: 14px; color: rgba(255,255,255,0.72); line-height: 1.6;
-      margin-bottom: 18px;
+      font-size: 16px; color: white; line-height: 1.65;
+      margin-bottom: 24px;
     }
 
-    .pc-actions { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; }
+    .pc-actions { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; }
 
     .action-card {
-      background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07);
-      border-radius: 10px; padding: 12px;
+      background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.10);
+      border-radius: 10px; padding: 16px;
     }
-    .action-num { font-size: 10px; font-weight: 700; color: #7B56F5; letter-spacing: 0.05em; margin-bottom: 5px; }
-    .action-title { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 13px; font-weight: 600; color: rgba(255,255,255,0.88); margin-bottom: 4px; }
-    .action-desc { font-size: 12px; color: rgba(255,255,255,0.48); line-height: 1.5; }
+    .action-num { font-size: 12px; font-weight: 700; color: #A590FF; letter-spacing: 0.05em; margin-bottom: 7px; }
+    .action-title { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 15px; font-weight: 600; color: white; margin-bottom: 6px; }
+    .action-desc { font-size: 14px; color: rgba(255,255,255,0.75); line-height: 1.55; }
 
     @media (max-width: 600px) {
       .pc-actions { grid-template-columns: 1fr; }
-      .pc-playbook-drawer.open { max-height: 1200px; }
+      .pc-playbook-drawer.open { max-height: 1400px; }
+      .pc-angle { font-size: 16px; }
     }
 
     .error-box {
