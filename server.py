@@ -147,7 +147,7 @@ def send_welcome_email(email, prenom=""):
 def register():
     email = request.form.get("email", "").strip().lower()
     prenom = request.form.get("prenom", "").strip()
-    if not email or "@" not in email:
+    if not email or not re.match(r'^[^@\s]+@[^@\s]+\.[^@\s]+$', email):
         return redirect("/")
     users = load_users()
     is_new = email not in users
@@ -185,7 +185,7 @@ def legal():
 @app.route("/check-email", methods=["POST"])
 def check_email():
     email = request.form.get("email", "").strip().lower()
-    if not email or "@" not in email:
+    if not email or not re.match(r'^[^@\s]+@[^@\s]+\.[^@\s]+$', email):
         return jsonify({"known": False})
     users = load_users()
     history = load_history()
@@ -416,9 +416,9 @@ Lance une recherche web sur "{company_name}" pour enrichir ton analyse, puis tro
             append_log({"date": __import__('datetime').datetime.utcnow().isoformat(), "email": user_email, "company": company_name, "plan": plan, "status": "error", "error": msg})
             yield f"data: {json.dumps({'error': msg})}\n\n"
         except Exception as e:
-            msg = f"Erreur : {str(e)}"
-            append_log({"date": __import__('datetime').datetime.utcnow().isoformat(), "email": user_email, "company": company_name, "plan": plan, "status": "error", "error": msg})
-            yield f"data: {json.dumps({'error': msg})}\n\n"
+            print(f"[ERROR] {str(e)}", flush=True)
+            append_log({"date": __import__('datetime').datetime.utcnow().isoformat(), "email": user_email, "company": company_name, "plan": plan, "status": "error", "error": str(e)})
+            yield f"data: {json.dumps({'error': 'Une erreur inattendue est survenue. Réessaie dans quelques instants.'})}\n\n"
 
     return Response(
         stream_with_context(generate()),
@@ -480,7 +480,7 @@ def webhook():
 @app.route("/my-history", methods=["POST"])
 def my_history():
     email = request.form.get("email", "").strip().lower()
-    if not email or "@" not in email:
+    if not email or not re.match(r'^[^@\s]+@[^@\s]+\.[^@\s]+$', email):
         return jsonify({"searches": []})
     logs = []
     if os.path.exists(LOG_FILE):
