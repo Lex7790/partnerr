@@ -343,65 +343,66 @@
 
     /* ── Partner cards ── */
     .partner-card {
-      background: rgba(230,230,250,0.07);
-      border: 1px solid rgba(230,230,250,0.14);
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
       border-radius: 14px;
       overflow: hidden;
       margin-bottom: 14px;
     }
 
-    .pc-main { padding: 24px 28px; }
+    .pc-main { padding: 28px 32px; }
 
     .pc-header {
       display: flex;
       align-items: center;
-      gap: 14px;
-      margin-bottom: 20px;
+      gap: 16px;
+      margin-bottom: 24px;
     }
 
     .pc-avatar {
-      width: 44px; height: 44px; border-radius: 10px; flex-shrink: 0;
+      width: 52px; height: 52px; border-radius: 12px; flex-shrink: 0;
       display: flex; align-items: center; justify-content: center;
       font-family: 'Plus Jakarta Sans', sans-serif;
-      font-weight: 700; font-size: 15px; color: white;
+      font-weight: 700; font-size: 18px; color: white;
     }
 
     .pc-header-text { flex: 1; min-width: 0; }
-    .pc-num { font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.55); margin-bottom: 2px; }
-    .pc-name { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 22px; font-weight: 700; color: white; line-height: 1.2; }
-    .pc-url { font-size: 13px; margin-top: 3px; }
+    .pc-num { font-size: 13px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.55); margin-bottom: 3px; }
+    .pc-name { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 26px; font-weight: 700; color: white; line-height: 1.2; }
+    .pc-url { font-size: 15px; margin-top: 4px; }
     .pc-url a { color: rgba(255,255,255,0.45); text-decoration: none; }
     .pc-url a:hover { color: rgba(255,255,255,0.75); }
 
     .pc-angle-label {
-      font-size: 13px; font-weight: 700; letter-spacing: 0.08em;
-      text-transform: uppercase; color: #A590FF; margin-bottom: 8px;
+      font-size: 14px; font-weight: 700; letter-spacing: 0.08em;
+      text-transform: uppercase; color: #A590FF; margin-bottom: 10px;
     }
 
     .pc-angle {
       font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 18px; font-weight: 600; color: white; line-height: 1.45;
-      margin-bottom: 22px;
+      font-size: 20px; font-weight: 600; color: white; line-height: 1.45;
+      margin-bottom: 26px;
     }
 
     .pc-info-row {
-      display: flex; gap: 8px; flex-wrap: wrap; align-items: center;
-      padding-top: 18px;
+      display: flex; gap: 10px; flex-wrap: wrap; align-items: center;
+      padding-top: 20px;
       border-top: 1px solid rgba(255,255,255,0.08);
     }
 
     .pc-info-cell {
-      font-size: 14px; color: white;
-      padding: 6px 12px;
+      font-size: 15px; color: white;
+      padding: 8px 14px;
       background: rgba(255,255,255,0.07);
       border: 1px solid rgba(255,255,255,0.12);
       border-radius: 8px;
+      line-height: 1.4;
     }
 
-    .pc-info-cell strong { color: rgba(255,255,255,0.55); font-weight: 500; font-size: 12px; }
+    .pc-info-cell strong { color: rgba(255,255,255,0.50); font-weight: 500; font-size: 13px; display: block; margin-bottom: 2px; }
 
     .pc-badge {
-      padding: 6px 12px; border-radius: 100px; font-size: 13px; white-space: nowrap; font-weight: 500;
+      padding: 7px 14px; border-radius: 100px; font-size: 14px; white-space: nowrap; font-weight: 500;
     }
     .pc-badge-signal { background: rgba(94,53,224,0.20); border: 1px solid rgba(94,53,224,0.40); color: #C4B5FF; }
     .pc-badge-partner { background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.14); color: rgba(255,255,255,0.85); }
@@ -410,7 +411,7 @@
       margin-left: auto;
       background: none; border: 1px solid rgba(94,53,224,0.5);
       color: #C4B5FF; border-radius: 8px;
-      padding: 7px 16px; font-size: 14px; font-family: 'Plus Jakarta Sans', sans-serif;
+      padding: 8px 18px; font-size: 15px; font-family: 'Plus Jakarta Sans', sans-serif;
       font-weight: 600; cursor: pointer; transition: all 0.15s; white-space: nowrap;
     }
     .pc-playbook-btn:hover { background: rgba(94,53,224,0.18); border-color: rgba(94,53,224,0.7); }
@@ -422,36 +423,39 @@
       border-top: 0px solid rgba(255,255,255,0.08);
     }
     .pc-playbook-drawer.open {
-      max-height: 700px;
+      max-height: 800px;
       border-top-width: 1px;
     }
 
-    .pc-playbook-inner { padding: 22px 28px; }
+    .pc-playbook-inner { padding: 26px 32px; }
 
     .pc-playbook-section-label {
-      font-size: 13px; font-weight: 700; letter-spacing: 0.08em;
-      text-transform: uppercase; color: rgba(255,255,255,0.55); margin-bottom: 12px;
+      font-size: 14px; font-weight: 700; letter-spacing: 0.08em;
+      text-transform: uppercase; color: rgba(255,255,255,0.60); margin-bottom: 14px;
     }
 
     .pc-why {
-      font-size: 16px; color: white; line-height: 1.65;
-      margin-bottom: 24px;
+      font-size: 17px; color: white; line-height: 1.7;
+      margin-bottom: 28px;
     }
 
-    .pc-actions { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; }
+    .pc-actions { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; }
 
     .action-card {
       background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.10);
-      border-radius: 10px; padding: 16px;
+      border-radius: 12px; padding: 18px;
     }
-    .action-num { font-size: 12px; font-weight: 700; color: #A590FF; letter-spacing: 0.05em; margin-bottom: 7px; }
-    .action-title { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 15px; font-weight: 600; color: white; margin-bottom: 6px; }
-    .action-desc { font-size: 14px; color: rgba(255,255,255,0.75); line-height: 1.55; }
+    .action-num { font-size: 13px; font-weight: 700; color: #A590FF; letter-spacing: 0.05em; margin-bottom: 8px; }
+    .action-title { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 16px; font-weight: 600; color: white; margin-bottom: 8px; }
+    .action-desc { font-size: 15px; color: rgba(255,255,255,0.78); line-height: 1.6; }
 
     @media (max-width: 600px) {
       .pc-actions { grid-template-columns: 1fr; }
-      .pc-playbook-drawer.open { max-height: 1400px; }
-      .pc-angle { font-size: 16px; }
+      .pc-playbook-drawer.open { max-height: 1600px; }
+      .pc-angle { font-size: 18px; }
+      .pc-name { font-size: 22px; }
+      .pc-main { padding: 22px 20px; }
+      .pc-playbook-inner { padding: 20px; }
     }
 
     .error-box {
