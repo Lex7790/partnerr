@@ -864,17 +864,23 @@
     [data-anim].in-view[data-delay="3"] { animation-delay: 0.45s; }
 
     /* ── RESPONSIVE ── */
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
     @media (max-width: 900px) {
       .steps-grid { max-width: 100%; }
       .feature { flex-direction: column !important; gap: 32px; }
       .feature-visual { width: 100%; height: 100px; }
-
       .stats-inner { gap: 36px; }
       .mock-card:nth-child(n+3) { display: none; }
+      .reviews-grid { grid-template-columns: 1fr; max-width: 520px; margin-left: auto; margin-right: auto; }
     }
 
     @media (max-width: 600px) {
-      /* Nav : on cache les liens, garde logo + CTA */
+      /* Nav */
       nav .nav-inner a:not(.logo):not(.btn-nav) { display: none; }
       nav .nav-inner { padding: 0 20px; }
 
@@ -885,13 +891,25 @@
       .hero-cta-row { flex-direction: column; align-items: stretch; width: 100%; max-width: 360px; margin: 0 auto; }
       .hero-cta-row input[type="email"] { width: 100% !important; }
 
-      /* Browser mock : masque la carte Progression */
+      /* Browser mock */
       .hero-mock { margin-top: 40px; }
       .hero-mock-body > div:last-child { display: none !important; }
 
       /* Sections */
       .section { padding: 64px 20px; }
+      .section-title { font-size: 22px; max-width: 100%; }
+      .section-sub { font-size: 15px; margin-bottom: 40px; max-width: 100%; }
       .mock-card:nth-child(n+2) { display: none; }
+
+      /* Avis */
+      .reviews-grid { grid-template-columns: 1fr; max-width: 100%; }
+      .social-card { min-height: auto !important; }
+
+      /* Pricing */
+      .pricing-card { padding: 24px 20px; }
+
+      /* Feature zigzag */
+      .feature-visual { height: 80px; }
     }
   </style>
 </head>
@@ -1127,7 +1145,7 @@
 <section class="section">
   <div class="section-inner">
     <p class="section-label" data-anim>Ils ont testé</p>
-    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:20px; margin-top:40px;">
+    <div class="reviews-grid" style="margin-top:40px;">
 
       <div class="social-card" data-anim data-delay="0" style="display:flex; flex-direction:column; min-height:220px;">
         <p style="font-size:15px; color:var(--ink-soft); line-height:1.7; margin-bottom:auto; padding-bottom:20px;">"En 5 minutes j'avais plusieurs opportunités concrètes avec une vraie stratégie d'approche. J'aurais mis une semaine à faire ça manuellement."</p>
