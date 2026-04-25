@@ -1020,7 +1020,6 @@
     emailInput.readOnly = true;
     emailInput.style.opacity = '0.6';
     emailInput.style.cursor = 'default';
-    document.getElementById('change-email-link').style.display = 'inline';
   }
 
   if (emailFromUrl) {
@@ -1031,16 +1030,6 @@
     lockEmail(savedEmail);
   }
 
-  document.getElementById('change-email-link').addEventListener('click', function(e) {
-    e.preventDefault();
-    localStorage.removeItem('b2b_user_email');
-    emailInput.value = '';
-    emailInput.readOnly = false;
-    emailInput.style.opacity = '1';
-    emailInput.style.cursor = 'text';
-    this.style.display = 'none';
-    emailInput.focus();
-  });
 
   // ── Message de retour ──
   const welcomeBack = document.getElementById('welcome-back');
