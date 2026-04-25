@@ -1127,7 +1127,13 @@
           let data;
           try { data = JSON.parse(line.slice(6)); } catch { continue; }
 
-          if (data.status) statusEl.textContent = data.status;
+          if (data.status) {
+            statusEl.textContent = data.status;
+            if (data.status.includes('doublon') || data.status.includes('Remplacement')) {
+              resultContent = '';
+              if (resultPre) { resultPre.innerHTML = ''; }
+            }
+          }
 
           if (data.text) {
             if (!resultPre) {
