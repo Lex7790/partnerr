@@ -291,6 +291,8 @@ FORMAT OBLIGATOIRE — respecte exactement cette structure pour chaque partenair
 
 **Signal :** [Choisir UN seul parmi : 🔥 Évident / ⚡ Rapide à activer / 🧪 À tester / 🧠 Stratégique]
 
+**Partenariats :** [Choisir UN seul parmi : 🤝 Actifs (uniquement si preuve claire : page partenaires, programme partenaire, cas client public, co-marketing visible, intégrations listées) / 👀 Non visibles (aucune preuve trouvée) / ❓ Inconnu (données insuffisantes)]
+
 ---
 
 Ne mentionne jamais d'outil, de plateforme ou de technologie qui génère ces résultats. Présente chaque partenaire comme une opportunité business directement exploitable."""

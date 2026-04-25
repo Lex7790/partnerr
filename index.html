@@ -376,9 +376,10 @@
     }
     #result-content .r-action strong { color: #6ee7b7; }
 
-    #result-content .r-signal {
+    #result-content .r-signal,
+    #result-content .r-partnerships {
       display: inline-block;
-      margin: 10px 0;
+      margin: 6px 6px 6px 0;
       padding: 5px 12px;
       background: rgba(255,255,255,0.06);
       border: 1px solid rgba(255,255,255,0.12);
@@ -1041,6 +1042,8 @@
         p.classList.add('r-action');
       } else if (label.includes('signal')) {
         p.classList.add('r-signal');
+      } else if (label.includes('partenariats')) {
+        p.classList.add('r-partnerships');
       }
     });
   }
