@@ -280,9 +280,9 @@ FORMAT OBLIGATOIRE — respecte exactement cette structure pour chaque partenair
 **Secteur :** [secteur]
 **Contact :** [Prénom Nom — Rôle] ou [Rôle à identifier — LinkedIn recommandé]
 
-**Opportunité :** [Une seule phrase, très courte et directe — le bénéfice concret de ce partenariat. Pas de contexte, pas d'explication. Exemple : "Générer des leads qualifiés via un réseau d'architectes déjà prescripteurs."]
+**Opportunité :** [1 phrase, très courte, orientée levier business. Pas de contexte, pas d'historique, pas de description d'entreprise. Aller droit au but. Exemple : "Accélérer la digitalisation des chantiers via un partenaire IT déjà implanté chez les grands comptes."]
 
-**Pourquoi ça matche :** [1 à 2 phrases maximum — la complémentarité principale. Pas de liste, pas de bullet points.]
+**Pourquoi ça matche :** [1 phrase maximum — uniquement la complémentarité principale. Supprimer tout détail secondaire, chiffre long ou description d'entreprise. Exemple : "Même cible grands comptes + expertise terrain sur la transformation digitale."]
 
 **Action recommandée :**
 1. [Premier angle — court et concret, ex : "Pilote terrain → tester sur un cas client réel."]
