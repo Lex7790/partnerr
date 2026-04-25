@@ -1183,7 +1183,7 @@
             ${contact?`<span class="pc-info-cell"><strong>Contact</strong> · ${contact}</span>`:''}
             ${sector?`<span class="pc-info-cell"><strong>Secteur</strong> · ${sector}</span>`:''}
             ${signal?`<span class="pc-badge pc-badge-signal">${signal}</span>`:''}
-            ${partnerships?`<span class="pc-badge pc-badge-partner">${partnerships}</span>`:''}
+            ${partnerships&&partnerships.toLowerCase().includes('actif')?`<span class="pc-badge pc-badge-partner">${partnerships}</span>`:''}
             ${(whyMatch||actions.length)?`<button class="pc-playbook-btn" onclick="togglePlaybook(this)">Voir le playbook →</button>`:''}
           </div>
         </div>
