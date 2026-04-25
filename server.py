@@ -280,11 +280,14 @@ FORMAT OBLIGATOIRE — respecte exactement cette structure pour chaque partenair
 **Secteur :** [secteur]
 **Contact :** [Prénom Nom — Rôle] ou [Rôle à identifier — LinkedIn recommandé]
 
-**Opportunité :** [Une phrase business directe et concrète — ce que ce partenariat peut générer]
+**Opportunité :** [Une seule phrase, très courte et directe — le bénéfice concret de ce partenariat. Pas de contexte, pas d'explication. Exemple : "Générer des leads qualifiés via un réseau d'architectes déjà prescripteurs."]
 
 **Pourquoi ça matche :** [1 à 2 phrases maximum — la complémentarité principale. Pas de liste, pas de bullet points.]
 
-**Action recommandée :** [Action concrète et spécifique à proposer dès maintenant — pas une idée générale]
+**Action recommandée :**
+1. [Premier angle — court et concret, ex : "Pilote terrain → tester sur un cas client réel."]
+2. [Deuxième angle — différent du premier, ex : "Co-marketing → webinar ou contenu commun pour la cible partagée."]
+3. [Troisième angle — ex : "Affiliation → commission sur les leads transformés."]
 
 **Signal :** [Choisir UN seul parmi : 🔥 Évident / ⚡ Rapide à activer / 🧪 À tester / 🧠 Stratégique]
 
