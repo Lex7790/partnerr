@@ -158,6 +158,12 @@ def register():
     return redirect(f"/app?email={email}")
 
 
+@app.route("/favicon.svg")
+def favicon():
+    from flask import send_file
+    return send_file("favicon.svg", mimetype="image/svg+xml")
+
+
 @app.route("/")
 def landing():
     with open("landing.html", encoding="utf-8") as f:
