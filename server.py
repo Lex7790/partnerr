@@ -278,7 +278,7 @@ FORMAT OBLIGATOIRE — respecte exactement cette structure pour chaque partenair
 ## Partenaire [N] : [Nom de l'entreprise]
 🔗 [URL du site]
 **Secteur :** [secteur]
-**Contact :** [Prénom Nom — Rôle] ou [Rôle à identifier — LinkedIn recommandé]
+**Contact recommandé :** [Rôle exact, ex : Head of Partnerships (LinkedIn)]
 
 **Opportunité :** [1 phrase, très courte, orientée levier business. Pas de contexte, pas d'historique, pas de description d'entreprise. Aller droit au but. Exemple : "Accélérer la digitalisation des chantiers via un partenaire IT déjà implanté chez les grands comptes."]
 
