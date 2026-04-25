@@ -574,51 +574,70 @@
     .why .section-sub { color: rgba(255,255,255,0.82); }
 
     .features-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
+      display: flex;
+      flex-direction: column;
+      max-width: 760px;
+      margin: 56px auto 0;
     }
 
     .feature {
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 16px;
-      padding: 36px 32px;
-      transition: background 0.3s, border-color 0.3s, box-shadow 0.3s, transform 0.22s;
+      display: flex;
+      align-items: center;
+      gap: 56px;
+      padding: 52px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      background: none;
+      border-radius: 0;
     }
 
-    .feature:hover {
+    .feature:last-child {
+      border-bottom: none;
+    }
+
+    .feature:nth-child(even) {
+      flex-direction: row-reverse;
+    }
+
+    .feature-visual {
+      flex-shrink: 0;
+      width: 180px;
+      height: 148px;
       background: rgba(94,53,224,0.1);
-      border-color: rgba(94,53,224,0.45);
-      box-shadow: 0 0 0 3px rgba(94,53,224,0.08), 0 0 28px rgba(94,53,224,0.15);
-      transform: translateY(-5px);
+      border: 1px solid rgba(94,53,224,0.22);
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .feature-icon {
-      width: 44px;
-      height: 44px;
-      background: rgba(94, 53, 224, 0.2);
-      border-radius: 10px;
+      width: 56px;
+      height: 56px;
+      background: rgba(94,53,224,0.28);
+      border-radius: 14px;
       display: flex;
       align-items: center;
       justify-content: center;
       color: #A590FF;
-      margin-bottom: 24px;
+    }
+
+    .feature-content {
+      flex: 1;
     }
 
     .feature h3 {
       font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 17px;
-      font-weight: 600;
+      font-size: 20px;
+      font-weight: 700;
       color: var(--white);
-      margin-bottom: 12px;
-      line-height: 1.4;
+      margin-bottom: 14px;
+      line-height: 1.3;
     }
 
     .feature p {
       font-size: 15px;
-      color: rgba(255,255,255,0.82);
-      line-height: 1.7;
+      color: rgba(255,255,255,0.72);
+      line-height: 1.75;
     }
 
     /* ── FAQ ── */
@@ -844,7 +863,9 @@
     /* ── RESPONSIVE ── */
     @media (max-width: 900px) {
       .steps-grid { max-width: 100%; }
-      .features-grid { grid-template-columns: 1fr; }
+      .feature { flex-direction: column !important; gap: 32px; }
+      .feature-visual { width: 100%; height: 100px; }
+
       .stats-inner { gap: 36px; }
       .mock-card:nth-child(n+3) { display: none; }
     }
@@ -1137,38 +1158,52 @@
     <p class="section-sub" data-anim>La différence entre une liste et un vrai premier angle business.</p>
 
     <div class="features-grid">
+
       <div class="feature" data-anim data-delay="0">
-        <div class="feature-icon">
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-            <path d="M10 2l2.4 4.9 5.4.8-3.9 3.8.9 5.4L10 14.4l-4.8 2.5.9-5.4L2.2 7.7l5.4-.8L10 2z" fill="currentColor" opacity=".4" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/>
-          </svg>
+        <div class="feature-visual">
+          <div class="feature-icon">
+            <svg width="26" height="26" viewBox="0 0 20 20" fill="none">
+              <path d="M10 2l2.4 4.9 5.4.8-3.9 3.8.9 5.4L10 14.4l-4.8 2.5.9-5.4L2.2 7.7l5.4-.8L10 2z" fill="currentColor" opacity=".4" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/>
+            </svg>
+          </div>
         </div>
-        <h3>Complémentarité réelle</h3>
-        <p>Partnerr ne fait pas une recherche Google. Il évalue l'adéquation entre votre offre et celle du partenaire potentiel : secteur, positionnement, taille, timing.</p>
+        <div class="feature-content">
+          <h3>Complémentarité réelle</h3>
+          <p>Partnerr ne fait pas une recherche Google. Il évalue l'adéquation entre votre offre et celle du partenaire potentiel : secteur, positionnement, taille, timing.</p>
+        </div>
       </div>
 
       <div class="feature" data-anim data-delay="1">
-        <div class="feature-icon">
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-            <circle cx="10" cy="7" r="3" fill="currentColor" opacity=".4"/>
-            <path d="M4 17c0-3.3 2.7-6 6-6s6 2.7 6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-          </svg>
+        <div class="feature-visual">
+          <div class="feature-icon">
+            <svg width="26" height="26" viewBox="0 0 20 20" fill="none">
+              <circle cx="10" cy="7" r="3" fill="currentColor" opacity=".4"/>
+              <path d="M4 17c0-3.3 2.7-6 6-6s6 2.7 6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </div>
         </div>
-        <h3>Interlocuteurs identifiés</h3>
-        <p>Chaque résultat inclut un rôle ou un nom de contact à approcher, pas juste un site web. Vous savez à qui parler avant même d'ouvrir LinkedIn.</p>
+        <div class="feature-content">
+          <h3>Interlocuteurs identifiés</h3>
+          <p>Chaque résultat inclut un rôle ou un nom de contact à approcher, pas juste un site web. Vous savez à qui parler avant même d'ouvrir LinkedIn.</p>
+        </div>
       </div>
 
       <div class="feature" data-anim data-delay="2">
-        <div class="feature-icon">
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-            <path d="M3 6h14M3 10h10M3 14h7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-          </svg>
+        <div class="feature-visual">
+          <div class="feature-icon">
+            <svg width="26" height="26" viewBox="0 0 20 20" fill="none">
+              <path d="M3 6h14M3 10h10M3 14h7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </div>
         </div>
-        <h3>Stratégie incluse</h3>
-        <p>Pour chaque partenaire : pourquoi ça matche (en 2 phrases précises), quelle collaboration proposer et comment la mettre en œuvre concrètement.</p>
+        <div class="feature-content">
+          <h3>Stratégie incluse</h3>
+          <p>Pour chaque partenaire : pourquoi ça matche (en 2 phrases précises), quelle collaboration proposer et comment la mettre en œuvre concrètement.</p>
+        </div>
       </div>
+
     </div>
-    <p data-anim style="margin-top:40px; font-size:14px; color:var(--ink-muted); text-align:center; font-style:italic;">Chaque résultat est pensé pour être utilisé immédiatement, pas pour être retravaillé.</p>
+    <p data-anim style="margin-top:48px; font-size:14px; color:rgba(255,255,255,0.35); text-align:center; font-style:italic;">Chaque résultat est pensé pour être utilisé immédiatement, pas pour être retravaillé.</p>
   </div>
 </section>
 
