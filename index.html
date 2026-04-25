@@ -439,11 +439,11 @@
       margin-bottom: 28px;
     }
 
-    .pc-actions { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; }
+    .pc-actions { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; overflow: hidden; }
 
     .action-card {
       background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.10);
-      border-radius: 12px; padding: 18px;
+      border-radius: 12px; padding: 18px; min-width: 0;
     }
     .action-num { font-size: 13px; font-weight: 700; color: #A590FF; letter-spacing: 0.05em; margin-bottom: 8px; }
     .action-title { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 16px; font-weight: 600; color: white; margin-bottom: 8px; }
@@ -1183,7 +1183,6 @@
             ${contact?`<span class="pc-info-cell"><strong>Contact</strong> · ${contact}</span>`:''}
             ${sector?`<span class="pc-info-cell"><strong>Secteur</strong> · ${sector}</span>`:''}
             ${signal?`<span class="pc-badge pc-badge-signal">${signal}</span>`:''}
-            ${partnerships&&partnerships.toLowerCase().includes('actif')?`<span class="pc-badge pc-badge-partner">${partnerships}</span>`:''}
             ${(whyMatch||actions.length)?`<button class="pc-playbook-btn" onclick="togglePlaybook(this)">Voir le playbook →</button>`:''}
           </div>
         </div>
