@@ -115,12 +115,6 @@
       max-width: 580px;
     }
 
-    .blur-linkedin {
-      filter: blur(4px);
-      user-select: none;
-      cursor: default;
-    }
-
     /* ── Section cards ── */
     .section-card {
       background: var(--card-bg);
@@ -1150,7 +1144,7 @@
               result.appendChild(resultPre);
             }
             resultContent += data.text;
-            resultPre.innerHTML = marked.parse(resultContent).replace(/à identifier sur LinkedIn/gi, '<span class="blur-linkedin">à identifier sur LinkedIn</span>');
+            resultPre.innerHTML = marked.parse(resultContent);
             resultPre.scrollIntoView({ behavior: 'smooth', block: 'end' });
           }
 
