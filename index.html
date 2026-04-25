@@ -338,22 +338,54 @@
 
     #result-content h2 {
       font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 17px;
+      font-size: 18px;
       font-weight: 700;
-      color: #A590FF;
-      margin: 26px 0 10px;
-      padding-bottom: 6px;
-      border-bottom: 1px solid rgba(255,255,255,0.07);
+      color: #C4B5FF;
+      margin: 40px 0 16px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid rgba(94,53,224,0.25);
+      letter-spacing: -0.01em;
     }
 
     #result-content h2:first-child { margin-top: 0; }
     #result-content strong { color: rgba(255,255,255,0.95); font-weight: 600; }
-    #result-content p { margin: 7px 0; color: rgba(255,255,255,0.82); }
+    #result-content p { margin: 8px 0; color: rgba(255,255,255,0.80); line-height: 1.7; }
     #result-content a { color: #A590FF; text-decoration: none; }
     #result-content a:hover { text-decoration: underline; }
-    #result-content hr { border: none; border-top: 1px solid rgba(255,255,255,0.07); margin: 20px 0; }
+    #result-content hr { border: none; border-top: 1px solid rgba(255,255,255,0.06); margin: 32px 0; }
     #result-content ul { padding-left: 20px; margin: 6px 0; }
     #result-content li { margin: 4px 0; color: rgba(255,255,255,0.82); }
+
+    #result-content .r-opportunity {
+      background: rgba(94,53,224,0.14);
+      border-left: 3px solid #7B56F5;
+      padding: 10px 14px;
+      border-radius: 0 8px 8px 0;
+      margin: 14px 0;
+      color: rgba(255,255,255,0.92) !important;
+    }
+    #result-content .r-opportunity strong { color: #C4B5FF; }
+
+    #result-content .r-action {
+      background: rgba(5,150,105,0.1);
+      border-left: 3px solid #10b981;
+      padding: 10px 14px;
+      border-radius: 0 8px 8px 0;
+      margin: 14px 0;
+      color: rgba(255,255,255,0.90) !important;
+    }
+    #result-content .r-action strong { color: #6ee7b7; }
+
+    #result-content .r-signal {
+      display: inline-block;
+      margin: 10px 0;
+      padding: 5px 12px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 100px;
+      font-size: 13px;
+      color: rgba(255,255,255,0.75);
+    }
 
     .error-box {
       background: rgba(220,38,38,0.1);
@@ -997,15 +1029,33 @@
   document.querySelectorAll('.chip-input').forEach(input => input.addEventListener('change', updateProgress));
   updateProgress();
 
+  // ── Post-processing visuel des résultats ──
+  function enhanceResultContent(container) {
+    container.querySelectorAll('p').forEach(p => {
+      const strong = p.querySelector('strong');
+      if (!strong || strong !== p.firstChild && strong !== p.firstElementChild) return;
+      const label = strong.textContent.toLowerCase();
+      if (label.includes('opportunité')) {
+        p.classList.add('r-opportunity');
+      } else if (label.includes('action recommandée') || label.includes('approche proposée')) {
+        p.classList.add('r-action');
+      } else if (label.includes('signal')) {
+        p.classList.add('r-signal');
+      }
+    });
+  }
+
   // ── Export ──
   function showExportButtons(text) {
     const existing = document.getElementById('export-buttons');
     if (existing) existing.remove();
     const theme = document.querySelector('[name="theme"]:checked')?.value || '';
 
+    const partnerCount = (text.match(/## Partenaire \d+/gi) || []).length;
+    const countLabel = partnerCount > 0 ? `${partnerCount} opportunité${partnerCount > 1 ? 's' : ''} activable${partnerCount > 1 ? 's' : ''} identifiée${partnerCount > 1 ? 's' : ''}` : 'Opportunités activables identifiées';
     const successMsg = document.createElement('div');
     successMsg.style.cssText = 'margin-bottom:16px; padding:14px 20px; background:rgba(94,53,224,0.1); border:1px solid rgba(94,53,224,0.25); border-radius:10px; font-family:\'Plus Jakarta Sans\',sans-serif; font-size:14px; font-weight:600; color:#A590FF; text-align:center;';
-    successMsg.textContent = '✅ Matching terminé, à vous de jouer.';
+    successMsg.textContent = '✅ ' + countLabel;
     result.insertBefore(successMsg, result.firstChild);
 
     const div = document.createElement('div');
@@ -1165,6 +1215,7 @@
             }
             resultContent += data.text;
             resultPre.innerHTML = marked.parse(resultContent);
+            enhanceResultContent(resultPre);
             resultPre.scrollIntoView({ behavior: 'smooth', block: 'end' });
           }
 
@@ -1179,7 +1230,7 @@
             const lastP1Idx = resultContent.lastIndexOf(resultContent.match(/#{1,3}\s*Partenaire\s+1/i)?.[0] || '');
             if (lastP1 !== -1 && lastP1Idx > lastP1) {
               resultContent = resultContent.substring(lastP1Idx);
-              if (resultPre) resultPre.innerHTML = marked.parse(resultContent);
+              if (resultPre) { resultPre.innerHTML = marked.parse(resultContent); enhanceResultContent(resultPre); }
             }
             if (resultContent) {
               showExportButtons(resultContent);

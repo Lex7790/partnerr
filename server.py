@@ -271,7 +271,26 @@ Thématique : {theme}{context_line}{excluded_line}
 
 Lance une recherche web sur "{company_name}" pour enrichir ton analyse, puis trouve {n_partners} partenaires B2B qualifiés selon les règles. Oriente tes recherches vers les secteurs partenaires indiqués. Les partenaires proposés doivent être basés ou actifs en priorité dans la zone géographique suivante : {geo}.
 
-⚠️ QUALITÉ OBLIGATOIRE : Pour chaque partenaire proposé, vérifie qu'il existe une présence en ligne cohérente et récente (site web fonctionnel, activité visible, actualités récentes). Si l'activité d'une entreprise est incertaine, douteuse ou introuvable en ligne, ne la propose pas et choisis une alternative active et vérifiable."""
+⚠️ QUALITÉ OBLIGATOIRE : Pour chaque partenaire proposé, vérifie qu'il existe une présence en ligne cohérente et récente (site web fonctionnel, activité visible, actualités récentes). Si l'activité d'une entreprise est incertaine, douteuse ou introuvable en ligne, ne la propose pas et choisis une alternative active et vérifiable.
+
+FORMAT OBLIGATOIRE — respecte exactement cette structure pour chaque partenaire :
+
+## Partenaire [N] : [Nom de l'entreprise]
+🔗 [URL du site]
+**Secteur :** [secteur]
+**Contact :** [Prénom Nom — Rôle] ou [Rôle à identifier — LinkedIn recommandé]
+
+**Opportunité :** [Une phrase business directe et concrète — ce que ce partenariat peut générer]
+
+**Pourquoi ça matche :** [1 à 2 phrases maximum — la complémentarité principale. Pas de liste, pas de bullet points.]
+
+**Action recommandée :** [Action concrète et spécifique à proposer dès maintenant — pas une idée générale]
+
+**Signal :** [Choisir UN seul parmi : 🔥 Évident / ⚡ Rapide à activer / 🧪 À tester / 🧠 Stratégique]
+
+---
+
+Ne mentionne jamais d'outil, de plateforme ou de technologie qui génère ces résultats. Présente chaque partenaire comme une opportunité business directement exploitable."""
 
             def save_results():
                 from datetime import datetime, timezone
