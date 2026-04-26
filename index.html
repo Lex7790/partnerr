@@ -742,6 +742,7 @@
       .section-summary { font-size: 12px; max-width: 120px; }
       .section-title { font-size: 17px; }
       .section-continue-btn { font-size: 14px; padding: 11px; }
+      .section-chevron { font-size: 16px; }
     }
 
     @media (max-width: 360px) {
@@ -1683,7 +1684,11 @@
       document.getElementById('skeleton-container').classList.remove('visible');
       submitBtn.disabled = false;
       submitBtn.textContent = '🔍 Trouver mes partenaires';
-      result.innerHTML = `<div class="error-box">❌ ${error.message}</div>`;
+      const errBox = document.createElement('div');
+      errBox.className = 'error-box';
+      errBox.textContent = '❌ ' + error.message;
+      result.innerHTML = '';
+      result.appendChild(errBox);
     }
   });
 

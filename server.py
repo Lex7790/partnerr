@@ -206,7 +206,7 @@ def check_email():
 @app.route("/match", methods=["POST"])
 def match():
     user_email      = request.form.get("user_email", "").strip().lower()
-    company_name    = request.form.get("company_name", "").strip()
+    company_name    = request.form.get("company_name", "").strip()[:200]
     theme           = request.form.get("theme", "").strip()[:50]
     sectors         = request.form.getlist("sector")[:15]
     sector_other    = request.form.get("sector_other", "").strip()[:100]
