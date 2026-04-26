@@ -1506,7 +1506,7 @@
 
     const saveNote = document.createElement('p');
     saveNote.style.cssText = 'margin-top:10px; font-size:14px; color:rgba(255,255,255,0.90); text-align:center; line-height:1.6; font-weight:500;';
-    saveNote.textContent = '💾 Pensez à copier ou exporter vos résultats, ils ne sont pas sauvegardés.';
+    saveNote.innerHTML = '<strong>💾 Pensez à copier ou exporter vos résultats, ils ne sont pas sauvegardés.</strong>';
     result.appendChild(saveNote);
 
     result.querySelectorAll('h2').forEach(h2 => {
