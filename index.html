@@ -1310,6 +1310,8 @@
   // ── Message de retour ──
   const welcomeBack = document.getElementById('welcome-back');
   const saturationMsg = document.getElementById('saturation-msg');
+  let knownSearchCount = 0;
+
   async function checkKnownEmail(email) {
     if (!email || !email.includes('@')) return;
     const fd = new FormData(); fd.append('email', email);
@@ -1318,13 +1320,13 @@
       const data = await res.json();
       if (data.known && data.searches > 0) {
         welcomeBack.style.display = 'flex';
+        knownSearchCount = data.searches;
       } else {
         welcomeBack.style.display = 'none';
+        knownSearchCount = 0;
       }
-      // Message de saturation si >= 40 partenaires déjà explorés
-      if (saturationMsg) {
-        saturationMsg.style.display = (data.known && data.searches >= 40) ? 'block' : 'none';
-      }
+      // Masquer le message de saturation au chargement
+      if (saturationMsg) saturationMsg.style.display = 'none';
     } catch(e) {}
   }
   emailInput.addEventListener('blur', () => checkKnownEmail(emailInput.value.trim()));
@@ -1749,6 +1751,10 @@
             }
             if (resultContent) {
               showExportButtons(resultContent);
+              // Message saturation après résultats si historique >= 40
+              if (saturationMsg && knownSearchCount >= 40) {
+                saturationMsg.style.display = 'block';
+              }
               if (isLimited) {
                 const upsell = document.createElement('div');
                 upsell.style.cssText = 'margin-top:16px; padding:16px 20px; background:rgba(94,53,224,0.28); border:1px solid rgba(94,53,224,0.6); border-radius:10px; font-size:14px; color:rgba(255,255,255,0.88); text-align:center; line-height:1.6;';
