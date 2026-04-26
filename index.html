@@ -1220,7 +1220,11 @@
           else if (label.includes('pourquoi')&&label.includes('matche')) whyMatch=rest;
           else if (label==='signal')                                     signal=rest;
           else if (label==='partenariats')                               partnerships=rest;
-          else if (label.includes('traction') || label.includes('ca estimé') || label.includes('chiffre')) ca=rest;
+          else if (label.includes('traction') || label.includes('ca estimé') || label.includes('chiffre')) {
+            // Tronquer à 6 mots max, garder les séparateurs •
+            const words = rest.replace(/^[·\s]+/,'').split(/\s+/);
+            ca = words.slice(0,6).join(' ');
+          }
         } else if (el.tagName==='OL') {
           actions=[...el.querySelectorAll('li')].map(li=>li.textContent.trim());
         }
