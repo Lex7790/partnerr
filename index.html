@@ -346,6 +346,7 @@
     .partner-card {
       background: rgba(230,230,250,0.07);
       border: 1px solid rgba(230,230,250,0.14);
+      border-left: 3px solid var(--accent);
       border-radius: 14px;
       overflow: hidden;
       margin-bottom: 14px;
@@ -383,6 +384,9 @@
       font-family: 'Plus Jakarta Sans', sans-serif;
       font-size: 20px; font-weight: 600; color: white; line-height: 1.45;
       margin-bottom: 26px;
+      background: rgba(94,53,224,0.12);
+      border-radius: 10px;
+      padding: 16px 18px;
     }
 
     .pc-info-cells {
@@ -1172,6 +1176,7 @@
 
       const card = document.createElement('div');
       card.className = 'partner-card';
+      card.style.borderLeftColor = c1;
       card.innerHTML = `
         <div class="pc-main">
           <div class="pc-header">
