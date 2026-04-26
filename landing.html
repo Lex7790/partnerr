@@ -984,59 +984,37 @@
       </div>
       <div class="hero-mock-body" style="display:flex; gap:18px; padding:24px 24px 20px;">
 
-        <!-- Formulaire gauche -->
+        <!-- Wizard step -->
         <div style="flex:1; min-width:0;">
-          <p style="font-size:10px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:#9B7BFF; margin-bottom:8px;">— Nouvelle recherche</p>
-          <p style="font-family:'Plus Jakarta Sans',sans-serif; font-size:18px; font-weight:700; color:white; margin-bottom:16px; line-height:1.2;">Trouve tes partenaires B2B.</p>
 
-          <!-- B1 -->
-          <div style="background:rgba(230,230,250,0.07); border:1px solid rgba(230,230,250,0.14); border-radius:12px; padding:14px; margin-bottom:10px;">
-            <div style="display:flex; align-items:center; gap:8px; margin-bottom:12px;">
-              <span style="background:#5E35E0; color:white; font-family:'Plus Jakarta Sans',sans-serif; font-size:9px; font-weight:700; width:20px; height:20px; border-radius:5px; display:flex; align-items:center; justify-content:center; flex-shrink:0;">B1</span>
-              <span style="font-family:'Plus Jakarta Sans',sans-serif; font-size:13px; font-weight:600; color:white;">Ton entreprise</span>
-            </div>
-            <div style="display:flex; gap:7px; margin-bottom:10px;">
-              <div style="flex:1; background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.14); border-radius:7px; padding:6px 10px; font-size:11px; color:rgba(255,255,255,0.55); font-family:'DM Sans',sans-serif;">sophie@acme.fr</div>
-              <div style="flex:1; background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.14); border-radius:7px; padding:6px 10px; font-size:11px; color:rgba(255,255,255,0.55); font-family:'DM Sans',sans-serif;">Acme SaaS</div>
-            </div>
-            <div style="display:flex; flex-wrap:wrap; gap:5px;">
-              <span style="background:rgba(94,53,224,0.35); border:1px solid rgba(94,53,224,0.6); border-radius:100px; padding:3px 10px; font-size:11px; color:#E0D9FF;">SaaS</span>
-              <span style="background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.16); border-radius:100px; padding:3px 10px; font-size:11px; color:rgba(255,255,255,0.75);">E-commerce</span>
-              <span style="background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.16); border-radius:100px; padding:3px 10px; font-size:11px; color:rgba(255,255,255,0.75);">Marketing</span>
-              <span style="background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.16); border-radius:100px; padding:3px 10px; font-size:11px; color:rgba(255,255,255,0.75);">RH</span>
-            </div>
+          <!-- Step header -->
+          <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:28px;">
+            <p style="font-size:11px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:#9B7BFF;">B2 — CLIENTS</p>
+            <p style="font-size:11px; font-weight:600; color:rgba(255,255,255,0.35); font-family:'Plus Jakarta Sans',sans-serif;">2/3</p>
           </div>
 
-          <!-- B2 -->
-          <div style="background:rgba(230,230,250,0.07); border:1px solid rgba(230,230,250,0.14); border-radius:12px; padding:14px; margin-bottom:10px;">
-            <div style="display:flex; align-items:center; gap:8px; margin-bottom:12px;">
-              <span style="background:#5E35E0; color:white; font-family:'Plus Jakarta Sans',sans-serif; font-size:9px; font-weight:700; width:20px; height:20px; border-radius:5px; display:flex; align-items:center; justify-content:center; flex-shrink:0;">B2</span>
-              <span style="font-family:'Plus Jakarta Sans',sans-serif; font-size:13px; font-weight:600; color:white;">Qui cherches-tu ?</span>
-            </div>
-            <div style="display:flex; flex-wrap:wrap; gap:5px; margin-bottom:8px;">
-              <span style="background:rgba(94,53,224,0.35); border:1px solid rgba(94,53,224,0.6); border-radius:100px; padding:3px 10px; font-size:11px; color:#E0D9FF;">PME</span>
-              <span style="background:rgba(94,53,224,0.35); border:1px solid rgba(94,53,224,0.6); border-radius:100px; padding:3px 10px; font-size:11px; color:#E0D9FF;">Grands comptes</span>
-              <span style="background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.16); border-radius:100px; padding:3px 10px; font-size:11px; color:rgba(255,255,255,0.75);">Startups</span>
-            </div>
-            <div style="display:flex; flex-wrap:wrap; gap:5px;">
-              <span style="background:rgba(94,53,224,0.35); border:1px solid rgba(94,53,224,0.6); border-radius:100px; padding:3px 10px; font-size:11px; color:#E0D9FF;">🇫🇷 France</span>
-              <span style="background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.16); border-radius:100px; padding:3px 10px; font-size:11px; color:rgba(255,255,255,0.75);">🇧🇪 Belgique</span>
-              <span style="background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.16); border-radius:100px; padding:3px 10px; font-size:11px; color:rgba(255,255,255,0.75);">Affiliation</span>
-            </div>
+          <!-- Question -->
+          <p style="font-family:'Plus Jakarta Sans',sans-serif; font-size:22px; font-weight:700; color:white; margin-bottom:24px; line-height:1.25;">Quel est ton client type ?</p>
+
+          <!-- Chips -->
+          <div style="display:flex; flex-wrap:wrap; gap:8px; margin-bottom:32px;">
+            <span style="background:rgba(94,53,224,0.45); border:1px solid rgba(123,86,245,0.8); border-radius:100px; padding:8px 18px; font-size:13px; font-weight:600; color:#fff; box-shadow:0 0 10px rgba(94,53,224,0.3);">✓ PME</span>
+            <span style="background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.14); border-radius:100px; padding:8px 18px; font-size:13px; color:rgba(255,255,255,0.75);">Grands comptes</span>
+            <span style="background:rgba(94,53,224,0.45); border:1px solid rgba(123,86,245,0.8); border-radius:100px; padding:8px 18px; font-size:13px; font-weight:600; color:#fff; box-shadow:0 0 10px rgba(94,53,224,0.3);">✓ Startups</span>
+            <span style="background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.14); border-radius:100px; padding:8px 18px; font-size:13px; color:rgba(255,255,255,0.75);">E-commerçants</span>
+            <span style="background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.14); border-radius:100px; padding:8px 18px; font-size:13px; color:rgba(255,255,255,0.75);">Artisans</span>
+            <span style="background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.14); border-radius:100px; padding:8px 18px; font-size:13px; color:rgba(255,255,255,0.75);">ETI</span>
           </div>
 
-          <!-- B3 -->
-          <div style="background:rgba(230,230,250,0.07); border:1px solid rgba(230,230,250,0.14); border-radius:12px; padding:14px; margin-bottom:12px;">
-            <div style="display:flex; align-items:center; gap:8px; margin-bottom:10px;">
-              <span style="background:#5E35E0; color:white; font-family:'Plus Jakarta Sans',sans-serif; font-size:9px; font-weight:700; width:20px; height:20px; border-radius:5px; display:flex; align-items:center; justify-content:center; flex-shrink:0;">B3</span>
-              <span style="font-family:'Plus Jakarta Sans',sans-serif; font-size:13px; font-weight:600; color:white;">Contexte</span>
+          <!-- Progress bar + bouton -->
+          <div style="display:flex; align-items:center; gap:16px;">
+            <div style="flex:1; height:4px; background:rgba(255,255,255,0.08); border-radius:2px;">
+              <div style="width:66%; height:100%; background:linear-gradient(90deg,#5E35E0,#9B7BFF); border-radius:2px;"></div>
             </div>
-            <div style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:7px; padding:8px 10px; font-size:11px; color:rgba(255,255,255,0.4); font-family:'DM Sans',sans-serif; line-height:1.5;">Nous accompagnons des PME e-commerce. Nous cherchons des partenaires tech pour co-distribuer...</div>
-          </div>
-
-          <!-- Bouton -->
-          <div style="background:#5E35E0; border-radius:10px; padding:11px 18px; display:flex; align-items:center; justify-content:center; gap:8px; cursor:default;">
-            <span style="font-family:'Plus Jakarta Sans',sans-serif; font-size:13px; font-weight:700; color:white;">🔍 Trouver mes partenaires</span>
+            <span style="font-size:12px; color:rgba(255,255,255,0.4); font-family:'Plus Jakarta Sans',sans-serif;">66%</span>
+            <div style="background:#5E35E0; border-radius:8px; padding:8px 18px; display:flex; align-items:center; gap:6px; cursor:default; flex-shrink:0;">
+              <span style="font-family:'Plus Jakarta Sans',sans-serif; font-size:13px; font-weight:700; color:white;">Suivant ↵</span>
+            </div>
           </div>
         </div>
 
