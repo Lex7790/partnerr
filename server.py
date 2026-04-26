@@ -279,7 +279,7 @@ FORMAT OBLIGATOIRE — respecte exactement cette structure pour chaque partenair
 🔗 [URL du site]
 **Secteur :** [secteur]
 **Contact recommandé :** [Rôle exact, ex : Head of Partnerships (LinkedIn)]
-**Traction :** [Format STRICT : 2 à 3 faits courts séparés par " • ", sur une seule ligne. Exemples de format : "260k clients PME • écosystème partenaires actif" ou "Leader niche • 50k utilisateurs • programme partenaire documenté". Uniquement des faits observables et vérifiables. Pas de phrases complètes, pas d'explication, pas de contexte, pas de paragraphe. Si rien de trouvable : "Données non visibles".]
+**Traction :** [UNE SEULE LIGNE. 2 à 3 mots-clés courts séparés par " • ". Zéro phrase, zéro explication, zéro paragraphe. Exemple exact : "260k clients PME • partenaires actifs • blog actif 2025". Si rien de trouvable : "Données non visibles".]
 
 **Opportunité :** [1 phrase, très courte, orientée levier business. Pas de contexte, pas d'historique, pas de description d'entreprise. Aller droit au but. Exemple : "Accélérer la digitalisation des chantiers via un partenaire IT déjà implanté chez les grands comptes."]
 

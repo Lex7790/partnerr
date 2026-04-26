@@ -444,6 +444,7 @@
     }
 
     .pc-info-cell strong { color: rgba(255,255,255,0.50); font-weight: 500; font-size: 13px; display: block; margin-bottom: 2px; }
+    .pc-info-cell.pc-traction { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
     .pc-badge {
       padding: 7px 14px; border-radius: 100px; font-size: 14px; white-space: nowrap; font-weight: 500;
@@ -810,7 +811,7 @@
   <div class="form-col">
     <p class="nouvelle-recherche">— Nouvelle recherche</p>
     <h1 class="page-title">Trouve tes partenaires B2B.</h1>
-    <p style="font-size:13px; color:rgba(255,255,255,0.45); margin:4px 0 16px; font-style:italic;">Utilisé par des professionnels pour identifier des partenaires B2B activables.</p>
+    <p style="font-size:13px; color:rgba(255,255,255,0.80); margin:4px 0 16px; font-style:italic;">Utilisé par des professionnels pour identifier des partenaires B2B activables.</p>
     <p class="form-desc" id="page-subtitle">Identifiez des partenaires B2B activables avec le bon contact et une stratégie de collaboration concrète.</p>
 
     <form id="matchForm">
@@ -1245,7 +1246,7 @@
           <div class="pc-info-cells">
             ${contact?`<span class="pc-info-cell"><strong>Contact recommandé</strong> · ${contact}</span>`:''}
             ${sector?`<span class="pc-info-cell"><strong>Secteur</strong> · ${sector}</span>`:''}
-            ${ca?`<span class="pc-info-cell"><strong>Traction</strong> · ${ca}</span>`:''}
+            ${ca?`<span class="pc-info-cell pc-traction"><strong>Traction</strong> · ${ca}</span>`:''}
           </div>
           <div class="pc-info-row">
             <div>${signal?`<span class="pc-badge pc-badge-signal ${signal.toLowerCase().includes('vident')?'pc-badge-evident':signal.toLowerCase().includes('rapide')?'pc-badge-rapide':signal.toLowerCase().includes('tester')?'pc-badge-tester':'pc-badge-strat'}">${signal}</span>`:''}</div>
