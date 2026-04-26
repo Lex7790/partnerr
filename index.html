@@ -498,6 +498,19 @@
       background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.10);
       border-radius: 12px; padding: 18px; min-width: 0;
     }
+    .action-card.recommended {
+      background: rgba(94,53,224,0.28);
+      border: 1px solid rgba(123,86,245,0.55);
+      box-shadow: 0 0 20px rgba(94,53,224,0.15);
+      animation: glowPulse 2.4s ease-in-out infinite;
+    }
+    .action-badge-recommended {
+      display: inline-block; margin-bottom: 8px;
+      padding: 2px 10px; border-radius: 100px;
+      background: rgba(123,86,245,0.35); border: 1px solid rgba(123,86,245,0.6);
+      font-size: 11px; font-weight: 700; letter-spacing: 0.06em;
+      text-transform: uppercase; color: #C4B5FF;
+    }
     .action-num { font-size: 13px; font-weight: 700; color: #A590FF; letter-spacing: 0.05em; margin-bottom: 8px; }
     .action-title { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 16px; font-weight: 600; color: white; margin-bottom: 8px; }
     .action-desc { font-size: 15px; color: rgba(255,255,255,0.78); line-height: 1.6; }
@@ -1217,11 +1230,14 @@
       const urlDisplay = url.replace(/^https?:\/\/(www\.)?/,'').replace(/\/.*$/,'');
 
       const actionHTML = actions.map((a,i)=>{
-        const m = a.match(/^(.+?)\s*[→–>]\s*(.+)$/);
+        const isReco = a.includes('[Recommandé]') || a.includes('[Recommande]');
+        const clean = a.replace(/\[Recommand[eé]\]\s*/i,'');
+        const m = clean.match(/^(.+?)\s*[→–>]\s*(.+)$/);
         const title = m?m[1].trim():`Action ${i+1}`;
-        const rawDesc = m?m[2].trim():a;
+        const rawDesc = m?m[2].trim():clean;
         const desc = rawDesc.charAt(0).toUpperCase() + rawDesc.slice(1);
-        return `<div class="action-card">
+        return `<div class="action-card${isReco?' recommended':''}">
+          ${isReco?'<span class="action-badge-recommended">Recommandé</span>':''}
           <div class="action-num">0${i+1}</div>
           <div class="action-title">${title}</div>
           <div class="action-desc">${desc}</div>
@@ -1248,8 +1264,7 @@
             ${sector?`<span class="pc-info-cell"><strong>Secteur</strong> · ${sector}</span>`:''}
             ${ca?`<span class="pc-info-cell pc-traction"><strong>Traction</strong> · ${ca}</span>`:''}
           </div>
-          <div class="pc-info-row">
-            <div>${signal?`<span class="pc-badge pc-badge-signal ${signal.toLowerCase().includes('vident')?'pc-badge-evident':signal.toLowerCase().includes('rapide')?'pc-badge-rapide':signal.toLowerCase().includes('tester')?'pc-badge-tester':'pc-badge-strat'}">${signal}</span>`:''}</div>
+          <div class="pc-info-row" style="justify-content:center;">
             ${(whyMatch||actions.length)?`<button class="pc-playbook-btn" onclick="togglePlaybook(this)">Voir le playbook →</button>`:''}
           </div>
         </div>

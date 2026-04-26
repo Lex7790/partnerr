@@ -286,11 +286,9 @@ FORMAT OBLIGATOIRE — respecte exactement cette structure pour chaque partenair
 **Pourquoi ça matche :** [1 phrase maximum — uniquement la complémentarité principale. Supprimer tout détail secondaire, chiffre long ou description d'entreprise. Exemple : "Même cible grands comptes + expertise terrain sur la transformation digitale."]
 
 **Action recommandée :**
-1. [Premier angle — court et concret, ex : "Pilote terrain → tester sur un cas client réel."]
-2. [Deuxième angle — différent du premier, ex : "Co-marketing → webinar ou contenu commun pour la cible partagée."]
-3. [Troisième angle — ex : "Affiliation → commission sur les leads transformés."]
-
-**Signal :** [Choisir UN seul parmi : 🔥 Évident / ⚡ Rapide à activer / 🧪 À tester / 🧠 Stratégique]
+1. [Recommandé] [Premier angle — court et concret. Cet angle est à lancer en priorité.]
+2. [Deuxième angle — différent du premier.]
+3. [Troisième angle.]
 
 **Partenariats :** [Choisir UN seul parmi : 🤝 Actifs (uniquement si preuve claire : page partenaires, programme partenaire, cas client public, co-marketing visible, intégrations listées) / 👀 Non visibles (aucune preuve trouvée) / ❓ Inconnu (données insuffisantes)]
 
