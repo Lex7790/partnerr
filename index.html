@@ -1230,7 +1230,8 @@
         }
       });
 
-      const [c1,c2] = PC_COLORS[partnerName.charCodeAt(0) % PC_COLORS.length];
+      const nameHash = [...partnerName].reduce((acc,c) => acc + c.charCodeAt(0), 0);
+      const [c1,c2] = PC_COLORS[nameHash % PC_COLORS.length];
       const urlDisplay = url.replace(/^https?:\/\/(www\.)?/,'').replace(/\/.*$/,'');
 
       const actionHTML = actions.map((a,i)=>{
