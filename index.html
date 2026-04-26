@@ -1197,7 +1197,12 @@
   function isB1Complete() {
     const email = document.getElementById('user_email')?.value?.trim() || '';
     const company = document.getElementById('company_name')?.value?.trim() || '';
-    return email.includes('@') && email.length > 3 && company.length > 0;
+    const hasSector = document.querySelectorAll('[name="sector"]:checked').length > 0;
+    const sectorAutre = document.getElementById('sector-autre-cb')?.checked;
+    const sectorOther = document.getElementById('sector-other-input')?.value?.trim() || '';
+    const sectorOk = hasSector && (!sectorAutre || sectorOther.length > 0);
+    const hasSize = !!document.querySelector('[name="size"]:checked');
+    return email.includes('@') && email.length > 3 && company.length > 0 && sectorOk && hasSize;
   }
 
   function isB2Complete() {
@@ -1215,7 +1220,8 @@
 
   document.getElementById('user_email')?.addEventListener('input', refreshContinueBtns);
   document.getElementById('company_name')?.addEventListener('input', refreshContinueBtns);
-  document.querySelectorAll('[name="clients"],[name="geo"],[name="theme"]').forEach(el => el.addEventListener('change', refreshContinueBtns));
+  document.getElementById('sector-other-input')?.addEventListener('input', refreshContinueBtns);
+  document.querySelectorAll('[name="sector"],[name="size"],[name="clients"],[name="geo"],[name="theme"]').forEach(el => el.addEventListener('change', refreshContinueBtns));
 
   // Toggle "Autre" champs texte
   document.getElementById('sector-autre-cb').addEventListener('change', function() {
