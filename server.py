@@ -192,7 +192,7 @@ def legal():
 
 @app.route("/check-email", methods=["POST"])
 def check_email():
-    email = request.form.get("email", "").strip().lower()
+    email = request.form.get("email", "").strip().lower()[:254]
     if not email or not re.match(r'^[^@\s]+@[^@\s]+\.[^@\s]+$', email):
         return jsonify({"known": False})
     users = load_users()
@@ -205,7 +205,7 @@ def check_email():
 
 @app.route("/match", methods=["POST"])
 def match():
-    user_email      = request.form.get("user_email", "").strip().lower()
+    user_email      = request.form.get("user_email", "").strip().lower()[:254]
     company_name    = request.form.get("company_name", "").strip()[:200]
     theme           = request.form.get("theme", "").strip()[:50]
     sectors         = request.form.getlist("sector")[:15]
