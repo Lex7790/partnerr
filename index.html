@@ -143,7 +143,7 @@
       margin-left: auto;
       font-size: 20px;
       color: rgba(255,255,255,0.30);
-      transition: transform 0.45s cubic-bezier(0.22,1,0.36,1), color 0.2s;
+      transition: transform 0.55s cubic-bezier(0.4,0,0.2,1), color 0.25s;
       transform: rotate(90deg);
       line-height: 1;
       flex-shrink: 0;
@@ -165,7 +165,7 @@
 
     .section-body {
       overflow: hidden;
-      transition: max-height 0.52s cubic-bezier(0.22,1,0.36,1);
+      transition: max-height 0.65s cubic-bezier(0.4,0,0.2,1);
     }
 
     .section-continue-btn {
@@ -524,7 +524,7 @@
     /* Accordion playbook */
     .pc-playbook-drawer {
       max-height: 0; overflow: hidden;
-      transition: max-height 0.35s cubic-bezier(0.22,1,0.36,1);
+      transition: max-height 0.55s cubic-bezier(0.4,0,0.2,1), border-top-width 0.55s cubic-bezier(0.4,0,0.2,1);
       border-top: 0px solid rgba(255,255,255,0.08);
     }
     .pc-playbook-drawer.open {
@@ -1151,7 +1151,7 @@
     card.classList.add('open');
     body.style.maxHeight = body.scrollHeight + 'px';
     // Libère la contrainte après l'animation pour permettre le redimensionnement
-    setTimeout(() => { if (card.classList.contains('open')) body.style.maxHeight = 'none'; }, 560);
+    setTimeout(() => { if (card.classList.contains('open')) body.style.maxHeight = 'none'; }, 680);
     setTimeout(() => { card.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }, 80);
   }
 
@@ -1176,7 +1176,7 @@
 
   function nextSection(currentId, nextId) {
     collapseSection(currentId);
-    setTimeout(() => { openSection(nextId); }, 320);
+    setTimeout(() => { openSection(nextId); }, 380);
   }
 
   function updateSummary(id) {
