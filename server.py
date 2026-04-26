@@ -296,7 +296,9 @@ FORMAT OBLIGATOIRE — respecte exactement cette structure pour chaque partenair
 
 ---
 
-Ne mentionne jamais d'outil, de plateforme ou de technologie qui génère ces résultats. Présente chaque partenaire comme une opportunité business directement exploitable."""
+Ne mentionne jamais d'outil, de plateforme ou de technologie qui génère ces résultats. Présente chaque partenaire comme une opportunité business directement exploitable.
+
+STYLE D'ÉCRITURE OBLIGATOIRE : N'utilise jamais de tiret long (—). Reformule les phrases pour qu'elles soient fluides et naturelles avec des virgules ou des points. Exemple à éviter : "Shine cible les PME — le segment clé de Boxtal". À écrire à la place : "Shine cible les PME, soit le segment clé de Boxtal." ou "Shine cible les PME. C'est précisément le segment clé de Boxtal." """
 
             def save_results():
                 from datetime import datetime, timezone
