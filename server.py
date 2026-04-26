@@ -230,7 +230,7 @@ def match():
     if plan == "free":
         n_partners = 2
     elif plan == "starter":
-        n_partners = 3
+        n_partners = 2
     else:  # growth, scale
         n_partners = 5
 
