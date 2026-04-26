@@ -232,7 +232,7 @@ def match():
     elif plan == "starter":
         n_partners = 2
     else:  # growth, scale
-        n_partners = 5
+        n_partners = 3
 
     if not AGENT_ID or AGENT_ID == "agent_...":
         return "Configuration manquante. Lance d'abord : python3 setup_agent.py", 500
