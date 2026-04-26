@@ -1265,6 +1265,11 @@
       h2.remove();
       elems.forEach(e=>e.remove());
     });
+
+    // Masquer tout texte résiduel hors des cards (intro, conclusion, étapes)
+    container.querySelectorAll('p, h1, h2, h3, ol, ul').forEach(el => {
+      if (!el.closest('.partner-card')) el.style.display = 'none';
+    });
   }
 
   // ── Export ──

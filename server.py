@@ -298,6 +298,8 @@ FORMAT OBLIGATOIRE — respecte exactement cette structure pour chaque partenair
 
 Ne mentionne jamais d'outil, de plateforme ou de technologie qui génère ces résultats. Présente chaque partenaire comme une opportunité business directement exploitable.
 
+STRUCTURE OBLIGATOIRE : Commence DIRECTEMENT par ## Partenaire 1. Pas de phrase d'introduction, pas de résumé, pas de conclusion, pas d'étape numérotée, pas de contexte avant les partenaires. Rien avant ## Partenaire 1.
+
 STYLE D'ÉCRITURE OBLIGATOIRE : N'utilise jamais de tiret long (—). Reformule les phrases pour qu'elles soient fluides et naturelles avec des virgules ou des points. Exemple à éviter : "Shine cible les PME — le segment clé de Boxtal". À écrire à la place : "Shine cible les PME, soit le segment clé de Boxtal." ou "Shine cible les PME. C'est précisément le segment clé de Boxtal." """
 
             def save_results():
