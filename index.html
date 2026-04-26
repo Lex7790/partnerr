@@ -386,14 +386,15 @@
     }
 
     .pc-info-cells {
-      display: flex; gap: 10px; flex-wrap: wrap;
-      padding-top: 20px;
+      display: flex; flex-direction: column; gap: 10px;
+      padding-top: 22px;
       border-top: 1px solid rgba(255,255,255,0.08);
-      margin-bottom: 12px;
+      margin-bottom: 18px;
     }
 
     .pc-info-row {
       display: flex; align-items: center; justify-content: space-between; gap: 10px;
+      padding-top: 6px;
     }
 
     .pc-info-cell {
@@ -1134,7 +1135,7 @@
       const partnerName = fullTitle.replace(/partenaire\s+\d+\s*[:\-–—]\s*/i,'').trim();
       const initials    = partnerName.split(/\s+/).slice(0,2).map(w=>w[0]?.toUpperCase()||'').join('') || partnerName.slice(0,2).toUpperCase();
 
-      let url='', sector='', contact='', opportunity='', whyMatch='', signal='', partnerships='', actions=[];
+      let url='', sector='', contact='', opportunity='', whyMatch='', signal='', partnerships='', ca='', actions=[];
 
       elems.forEach(el => {
         const strong = el.querySelector('strong');
@@ -1148,6 +1149,7 @@
           else if (label.includes('pourquoi')&&label.includes('matche')) whyMatch=rest;
           else if (label==='signal')                                     signal=rest;
           else if (label==='partenariats')                               partnerships=rest;
+          else if (label.includes('ca ') || label.includes('ca ') || label==='ca estimé' || label.includes('chiffre')) ca=rest;
         } else if (el.tagName==='OL') {
           actions=[...el.querySelectorAll('li')].map(li=>li.textContent.trim());
         }
@@ -1185,6 +1187,7 @@
           <div class="pc-info-cells">
             ${contact?`<span class="pc-info-cell"><strong>Contact recommandé</strong> · ${contact}</span>`:''}
             ${sector?`<span class="pc-info-cell"><strong>Secteur</strong> · ${sector}</span>`:''}
+            ${ca?`<span class="pc-info-cell"><strong>CA estimé</strong> · ${ca}</span>`:''}
           </div>
           <div class="pc-info-row">
             <div>${signal?`<span class="pc-badge pc-badge-signal ${signal.toLowerCase().includes('vident')?'pc-badge-evident':signal.toLowerCase().includes('rapide')?'pc-badge-rapide':signal.toLowerCase().includes('tester')?'pc-badge-tester':'pc-badge-strat'}">${signal}</span>`:''}</div>
