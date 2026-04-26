@@ -749,6 +749,32 @@
       .section-summary { display: none; }
     }
 
+    @media (max-width: 600px) {
+      .chip-group.chips-collapsed {
+        max-height: 90px;
+        overflow: hidden;
+        transition: max-height 0.45s cubic-bezier(0.4,0,0.2,1);
+      }
+      .chip-group.chips-expanded {
+        max-height: 1200px;
+        overflow: visible;
+        transition: max-height 0.45s cubic-bezier(0.4,0,0.2,1);
+      }
+      .chips-toggle-btn {
+        display: block;
+        padding: 7px 0 2px;
+        font-size: 13px;
+        color: #A590FF;
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        font-weight: 600;
+        text-align: left;
+      }
+      .chips-toggle-btn:hover { color: #C4B5FF; }
+    }
+
     /* ── History panel ── */
     .history-overlay {
       display: none;
@@ -1349,6 +1375,56 @@
     const card2 = document.getElementById('card-b2');
     if (card2) card2.classList.remove('locked');
   }
+
+  // ── Collapse chips sur mobile ──
+  function initChipCollapse() {
+    if (window.innerWidth > 600) return;
+
+    document.querySelectorAll('.chip-group').forEach(group => {
+      const allChips = group.querySelectorAll('.chip-input');
+      if (allChips.length <= 7) return; // ne replie pas les petits groupes
+
+      const total = allChips.length;
+
+      // Replie uniquement si aucune sélection existante
+      const hasSelected = group.querySelectorAll('.chip-input:checked').length > 0;
+      if (!hasSelected) group.classList.add('chips-collapsed');
+
+      // Bouton toggle
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'chips-toggle-btn';
+      btn.textContent = hasSelected ? 'Voir moins −' : `Voir tout (${total}) +`;
+      group.after(btn);
+
+      btn.addEventListener('click', () => {
+        if (group.classList.contains('chips-collapsed')) {
+          group.classList.remove('chips-collapsed');
+          group.classList.add('chips-expanded');
+          btn.textContent = 'Voir moins −';
+        } else {
+          // Ne referme pas si des chips sont sélectionnés
+          if (group.querySelectorAll('.chip-input:checked').length > 0) return;
+          group.classList.remove('chips-expanded');
+          group.classList.add('chips-collapsed');
+          btn.textContent = `Voir tout (${total}) +`;
+        }
+      });
+
+      // Auto-ouvre si on sélectionne un chip dans un groupe replié
+      allChips.forEach(input => {
+        input.addEventListener('change', () => {
+          if (input.checked && group.classList.contains('chips-collapsed')) {
+            group.classList.remove('chips-collapsed');
+            group.classList.add('chips-expanded');
+            btn.textContent = 'Voir moins −';
+          }
+        });
+      });
+    });
+  }
+
+  initChipCollapse();
 
   // ── Partner cards avec accordion playbook ──
   const PC_COLORS = [
