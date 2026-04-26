@@ -279,7 +279,7 @@ FORMAT OBLIGATOIRE — respecte exactement cette structure pour chaque partenair
 🔗 [URL du site]
 **Secteur :** [secteur]
 **Contact recommandé :** [Rôle exact, ex : Head of Partnerships (LinkedIn)]
-**Traction :** [MAXIMUM 6 MOTS. Uniquement des signaux de crédibilité ou d'activité business : clients, partenaires, intégrations, présence marché, contenu récent, programme partenaire. NE PAS répéter le secteur ou le type de produit déjà indiqués dans Secteur. Séparés par " • ". Exemples valides : "260k clients • programme partenaires actif" / "partenaire EBP • présence marché active". Exemples interdits : "ERP belge • PME industrie" (= secteur). Si aucun signal trouvable : "signal public limité".]
+**Traction :** [MAXIMUM 6 MOTS. Uniquement des signaux de crédibilité ou d'activité business : clients, partenaires, intégrations, présence marché, contenu récent, programme partenaire. NE PAS répéter le secteur ou le type de produit déjà indiqués dans Secteur. Séparés par " • ". Exemples valides : "260k clients • réseau partenaires actif" / "partenaire EBP • programme partenaires actif". Exemples interdits : "ERP belge • PME industrie" (= secteur). Si aucun signal trouvable : "signal public limité".]
 
 **Opportunité :** [1 phrase, très courte, orientée levier business. Pas de contexte, pas d'historique, pas de description d'entreprise. Aller droit au but. Exemple : "Accélérer la digitalisation des chantiers via un partenaire IT déjà implanté chez les grands comptes."]
 
