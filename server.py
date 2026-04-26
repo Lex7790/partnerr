@@ -18,6 +18,13 @@ load_dotenv()
 
 app = Flask(__name__)
 
+@app.after_request
+def set_security_headers(response):
+    response.headers['X-Frame-Options'] = 'SAMEORIGIN'
+    response.headers['X-Content-Type-Options'] = 'nosniff'
+    response.headers['Referrer-Policy'] = 'strict-origin-when-cross-origin'
+    return response
+
 client = anthropic.Anthropic(api_key=os.environ.get("ANTHROPIC_API_KEY"))
 AGENT_ID = os.environ.get("AGENT_ID")
 ENV_ID = os.environ.get("ENVIRONMENT_ID")
@@ -145,8 +152,9 @@ def send_welcome_email(email, prenom=""):
 
 @app.route("/register", methods=["POST"])
 def register():
-    email = request.form.get("email", "").strip().lower()
-    prenom = request.form.get("prenom", "").strip()
+    from html import escape
+    email = request.form.get("email", "").strip().lower()[:254]
+    prenom = escape(request.form.get("prenom", "").strip()[:50])
     if not email or not re.match(r'^[^@\s]+@[^@\s]+\.[^@\s]+$', email):
         return redirect("/")
     users = load_users()
@@ -199,16 +207,16 @@ def check_email():
 def match():
     user_email      = request.form.get("user_email", "").strip().lower()
     company_name    = request.form.get("company_name", "").strip()
-    theme           = request.form.get("theme", "").strip()
-    sectors         = request.form.getlist("sector")
-    sector_other    = request.form.get("sector_other", "").strip()
-    clients         = request.form.getlist("clients")
-    size            = request.form.get("size", "").strip()
-    partner_sectors = request.form.getlist("partner_sectors")
-    ps_other        = request.form.get("partner_sectors_other", "").strip()
-    context         = request.form.get("context", "").strip()
-    geo             = request.form.get("geo", "France").strip()
-    exclude_manual  = request.form.get("exclude_manual", "").strip()
+    theme           = request.form.get("theme", "").strip()[:50]
+    sectors         = request.form.getlist("sector")[:15]
+    sector_other    = request.form.get("sector_other", "").strip()[:100]
+    clients         = request.form.getlist("clients")[:10]
+    size            = request.form.get("size", "").strip()[:30]
+    partner_sectors = request.form.getlist("partner_sectors")[:15]
+    ps_other        = request.form.get("partner_sectors_other", "").strip()[:100]
+    context         = request.form.get("context", "").strip()[:2000]
+    geo             = request.form.get("geo", "France").strip()[:50]
+    exclude_manual  = request.form.get("exclude_manual", "").strip()[:500]
 
     if not company_name or not theme or not user_email:
         return "Veuillez remplir tous les champs obligatoires.", 400
