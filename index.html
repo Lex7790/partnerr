@@ -1591,11 +1591,11 @@
     const copyBtn = document.createElement('button');
     copyBtn.type = 'button';
     copyBtn.className = 'btn-copy';
-    copyBtn.textContent = '📋 Copier le rapport';
+    copyBtn.textContent = '📋 Copier les résultats';
     copyBtn.onclick = () => {
       navigator.clipboard.writeText(text).then(() => {
         copyBtn.textContent = '✓ Copié';
-        setTimeout(() => { copyBtn.textContent = '📋 Copier le rapport'; }, 2000);
+        setTimeout(() => { copyBtn.textContent = '📋 Copier les résultats'; }, 2000);
       });
     };
 
