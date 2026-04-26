@@ -254,9 +254,11 @@
     }
 
     .chip-input:checked + .chip {
-      background: rgba(94,53,224,0.32);
-      border-color: rgba(94,53,224,0.65);
-      color: #C4B5FF;
+      background: rgba(94,53,224,0.45);
+      border-color: rgba(123,86,245,0.85);
+      color: #ffffff;
+      font-weight: 600;
+      box-shadow: 0 0 10px rgba(94,53,224,0.3);
     }
 
     .other-input {
@@ -413,9 +415,11 @@
       font-family: 'Plus Jakarta Sans', sans-serif;
       font-size: 20px; font-weight: 600; color: white; line-height: 1.45;
       margin-bottom: 26px;
-      background: rgba(94,53,224,0.12);
+      background: rgba(94,53,224,0.28);
+      border: 1px solid rgba(123,86,245,0.45);
       border-radius: 10px;
       padding: 16px 18px;
+      box-shadow: 0 0 20px rgba(94,53,224,0.15);
     }
 
     .pc-info-cells {
@@ -827,7 +831,7 @@
 
         <div id="welcome-back" style="display:none; align-items:center; gap:10px; background:rgba(94,53,224,0.28); border:1px solid rgba(94,53,224,0.6); border-radius:10px; padding:12px 16px; margin-top:8px;">
           <div style="flex:1; min-width:0;">
-            <button type="button" id="open-history-btn" onclick="openHistory()" style="background:none; border:none; padding:0; font-size:14px; color:#A590FF; cursor:pointer; font-family:'DM Sans',sans-serif; text-decoration:underline; text-underline-offset:3px;">Voir mes recherches précédentes →</button>
+            <button type="button" id="open-history-btn" onclick="openHistory()" style="background:none; border:none; padding:0; font-size:15px; font-weight:600; color:#C4B5FF; cursor:pointer; font-family:'Plus Jakarta Sans',sans-serif; text-decoration:none; letter-spacing:0.01em;">Voir mes recherches précédentes →</button>
           </div>
         </div>
 
