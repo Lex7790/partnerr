@@ -279,7 +279,7 @@ FORMAT OBLIGATOIRE — respecte exactement cette structure pour chaque partenair
 🔗 [URL du site]
 **Secteur :** [secteur]
 **Contact recommandé :** [Rôle exact, ex : Head of Partnerships (LinkedIn)]
-**CA estimé :** [Fourchette approximative si trouvable sur Societe.com, Pappers ou sources publiques : ex "2-5M€", "10-20M€", ">50M€". Si introuvable : "Non public". Ne jamais inventer un chiffre.]
+**Traction :** [1 à 3 signaux business observables et vérifiables, séparés par " · " : volume de clients, présence marché, équipe partenariats détectée, positionnement (leader, acteur fort, niche). Uniquement des faits observables. Pas de CA, pas d'invention. Si rien de trouvable : "Données non visibles".]
 
 **Opportunité :** [1 phrase, très courte, orientée levier business. Pas de contexte, pas d'historique, pas de description d'entreprise. Aller droit au but. Exemple : "Accélérer la digitalisation des chantiers via un partenaire IT déjà implanté chez les grands comptes."]
 
