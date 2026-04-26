@@ -126,15 +126,66 @@
       transition: border-color 0.2s;
     }
 
-    .section-card:focus-within {
-      border-color: rgba(94,53,224,0.3);
-    }
+    .section-card:focus-within { border-color: rgba(94,53,224,0.3); }
+    .section-card.locked { opacity: 0.38; pointer-events: none; }
 
     .section-header {
       display: flex;
       align-items: center;
       gap: 10px;
-      margin-bottom: 20px;
+      margin-bottom: 0;
+      cursor: pointer;
+      user-select: none;
+    }
+    .section-card.open .section-header { margin-bottom: 20px; }
+
+    .section-chevron {
+      margin-left: auto;
+      font-size: 20px;
+      color: rgba(255,255,255,0.30);
+      transition: transform 0.45s cubic-bezier(0.22,1,0.36,1), color 0.2s;
+      transform: rotate(90deg);
+      line-height: 1;
+      flex-shrink: 0;
+    }
+    .section-card.collapsed .section-chevron { transform: rotate(0deg); }
+
+    .section-summary {
+      flex: 1;
+      font-size: 13px;
+      color: rgba(255,255,255,0.42);
+      font-family: 'DM Sans', sans-serif;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .section-card.collapsed .section-summary { opacity: 1; }
+
+    .section-body {
+      overflow: hidden;
+      transition: max-height 0.52s cubic-bezier(0.22,1,0.36,1);
+    }
+
+    .section-continue-btn {
+      width: 100%;
+      margin-top: 20px;
+      padding: 13px;
+      background: rgba(94,53,224,0.22);
+      color: #C4B5FF;
+      border: 1.5px solid rgba(196,181,255,0.4);
+      border-radius: 10px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .section-continue-btn:hover {
+      background: rgba(94,53,224,0.38);
+      border-color: rgba(196,181,255,0.65);
+      color: white;
     }
 
     .section-badge {
@@ -842,11 +893,14 @@
     <form id="matchForm">
 
       <!-- B1 -->
-      <div class="section-card">
-        <div class="section-header">
+      <div class="section-card open" id="card-b1">
+        <div class="section-header" onclick="toggleSection('b1')">
           <span class="section-badge">B1</span>
           <span class="section-title">Ton entreprise</span>
+          <span class="section-summary" id="summary-b1"></span>
+          <span class="section-chevron">›</span>
         </div>
+        <div class="section-body" id="body-b1">
 
         <span class="field-label">Ton email <span class="field-hint">· pour mémoriser tes résultats</span></span>
         <div class="inputs-row">
@@ -897,14 +951,19 @@
           <input type="radio" id="sz-eti"   name="size" value="ETI (250-5k)"    class="chip-input"><label for="sz-eti"   class="chip">ETI (250–5k)</label>
           <input type="radio" id="sz-gc"    name="size" value="Grand compte (5k+)" class="chip-input"><label for="sz-gc"    class="chip">Grand compte</label>
         </div>
-      </div>
+        <button type="button" class="section-continue-btn" id="continue-b1" style="display:none;" onclick="nextSection('b1','b2')">Continuer →</button>
+        </div><!-- /body-b1 -->
+      </div><!-- /card-b1 -->
 
       <!-- B2 -->
-      <div class="section-card">
-        <div class="section-header">
+      <div class="section-card collapsed locked" id="card-b2">
+        <div class="section-header" onclick="toggleSection('b2')">
           <span class="section-badge">B2</span>
           <span class="section-title">Qui cherches-tu ?</span>
+          <span class="section-summary" id="summary-b2"></span>
+          <span class="section-chevron">›</span>
         </div>
+        <div class="section-body" id="body-b2" style="max-height:0;">
 
         <span class="field-label">Ton client type <span class="field-hint">· plusieurs choix possibles</span></span>
         <div class="chip-group">
@@ -964,14 +1023,19 @@
           <input type="radio" id="t-com"   name="theme" value="commercial"    class="chip-input"><label for="t-com"   class="chip">🤝 Co-vente</label>
           <input type="radio" id="t-event" name="theme" value="événementiel"  class="chip-input"><label for="t-event" class="chip">🎪 Événementiel</label>
         </div>
-      </div>
+        <button type="button" class="section-continue-btn" id="continue-b2" style="display:none;" onclick="nextSection('b2','b3')">Continuer →</button>
+        </div><!-- /body-b2 -->
+      </div><!-- /card-b2 -->
 
       <!-- B3 -->
-      <div class="section-card">
-        <div class="section-header">
+      <div class="section-card collapsed locked" id="card-b3">
+        <div class="section-header" onclick="toggleSection('b3')">
           <span class="section-badge">B3</span>
           <span class="section-title">Contexte pour affiner les résultats</span>
+          <span class="section-summary" id="summary-b3"></span>
+          <span class="section-chevron">›</span>
         </div>
+        <div class="section-body" id="body-b3" style="max-height:0;">
 
         <span class="field-label">Décrivez votre activité, votre cible et votre objectif</span>
         <textarea id="context" name="context" class="field-textarea" placeholder="Ex : Nous accompagnons des marques beauté qui veulent se développer à l'international. Nous cherchons des distributeurs, revendeurs ou partenaires capables d'ouvrir de nouveaux marchés."></textarea>
@@ -980,7 +1044,8 @@
 
         <span class="field-label">Entreprises à exclure <span class="field-hint">· séparez par des virgules</span></span>
         <input type="text" id="exclude_manual" name="exclude_manual" class="field-input" placeholder="Ex : Salesforce, HubSpot, Monday.com">
-      </div>
+        </div><!-- /body-b3 -->
+      </div><!-- /card-b3 -->
 
       <button type="submit" id="submitBtn" class="submit-btn">
         Trouver mes partenaires →
@@ -1077,6 +1142,81 @@
 </div>
 
 <script>
+  // ── Accordion form ──
+  function openSection(id) {
+    const card = document.getElementById('card-' + id);
+    const body = document.getElementById('body-' + id);
+    if (!card || !body) return;
+    card.classList.remove('collapsed', 'locked');
+    card.classList.add('open');
+    body.style.maxHeight = body.scrollHeight + 'px';
+    // Libère la contrainte après l'animation pour permettre le redimensionnement
+    setTimeout(() => { if (card.classList.contains('open')) body.style.maxHeight = 'none'; }, 560);
+    setTimeout(() => { card.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }, 80);
+  }
+
+  function collapseSection(id) {
+    const card = document.getElementById('card-' + id);
+    const body = document.getElementById('body-' + id);
+    if (!card || !body) return;
+    // Fixe la hauteur actuelle avant d'animer
+    body.style.maxHeight = body.scrollHeight + 'px';
+    card.classList.remove('open');
+    card.classList.add('collapsed');
+    updateSummary(id);
+    requestAnimationFrame(() => { requestAnimationFrame(() => { body.style.maxHeight = '0px'; }); });
+  }
+
+  function toggleSection(id) {
+    const card = document.getElementById('card-' + id);
+    if (!card || card.classList.contains('locked')) return;
+    if (card.classList.contains('open')) collapseSection(id);
+    else openSection(id);
+  }
+
+  function nextSection(currentId, nextId) {
+    collapseSection(currentId);
+    setTimeout(() => { openSection(nextId); }, 320);
+  }
+
+  function updateSummary(id) {
+    const el = document.getElementById('summary-' + id);
+    if (!el) return;
+    if (id === 'b1') {
+      const company = document.getElementById('company_name')?.value?.trim() || '';
+      const sectors = [...document.querySelectorAll('[name="sector"]:checked')].map(c => c.value.split('/')[0]).slice(0,2).join(', ');
+      el.textContent = [company, sectors].filter(Boolean).join(' · ');
+    } else if (id === 'b2') {
+      const clients = [...document.querySelectorAll('[name="clients"]:checked')].map(c => c.value.split('/')[0]).slice(0,2).join(', ');
+      const geo = document.querySelector('[name="geo"]:checked')?.value || '';
+      const theme = document.querySelector('[name="theme"]:checked')?.value || '';
+      el.textContent = [clients, geo, theme].filter(Boolean).join(' · ');
+    }
+  }
+
+  function isB1Complete() {
+    const email = document.getElementById('user_email')?.value?.trim() || '';
+    const company = document.getElementById('company_name')?.value?.trim() || '';
+    return email.includes('@') && email.length > 3 && company.length > 0;
+  }
+
+  function isB2Complete() {
+    return document.querySelectorAll('[name="clients"]:checked').length > 0
+      && !!document.querySelector('[name="geo"]:checked')
+      && !!document.querySelector('[name="theme"]:checked');
+  }
+
+  function refreshContinueBtns() {
+    const btn1 = document.getElementById('continue-b1');
+    const btn2 = document.getElementById('continue-b2');
+    if (btn1) btn1.style.display = isB1Complete() ? 'block' : 'none';
+    if (btn2) btn2.style.display = isB2Complete() ? 'block' : 'none';
+  }
+
+  document.getElementById('user_email')?.addEventListener('input', refreshContinueBtns);
+  document.getElementById('company_name')?.addEventListener('input', refreshContinueBtns);
+  document.querySelectorAll('[name="clients"],[name="geo"],[name="theme"]').forEach(el => el.addEventListener('change', refreshContinueBtns));
+
   // Toggle "Autre" champs texte
   document.getElementById('sector-autre-cb').addEventListener('change', function() {
     document.getElementById('sector-other-input').style.display = this.checked ? 'block' : 'none';
@@ -1185,6 +1325,13 @@
 
   document.querySelectorAll('.chip-input').forEach(input => input.addEventListener('change', updateProgress));
   updateProgress();
+  refreshContinueBtns();
+
+  // Si email pré-rempli, activer B2 directement
+  if (isB1Complete()) {
+    const card2 = document.getElementById('card-b2');
+    if (card2) card2.classList.remove('locked');
+  }
 
   // ── Partner cards avec accordion playbook ──
   const PC_COLORS = [
