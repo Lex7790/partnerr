@@ -279,7 +279,7 @@ FORMAT OBLIGATOIRE — respecte exactement cette structure pour chaque partenair
 🔗 [URL du site]
 **Secteur :** [secteur]
 **Contact recommandé :** [Rôle exact, ex : Head of Partnerships (LinkedIn)]
-**Traction :** [UNE SEULE LIGNE. 2 à 3 mots-clés courts séparés par " • ". Zéro phrase, zéro explication, zéro paragraphe. Exemple exact : "260k clients PME • partenaires actifs • blog actif 2025". Si rien de trouvable : "Données non visibles".]
+**Traction :** [MAXIMUM 6 MOTS AU TOTAL. Mots-clés uniquement, séparés par " • ". Zéro verbe, zéro phrase, zéro explication. Exemple exact : "50k clients • partenaires actifs". Si rien : "Données non visibles".]
 
 **Opportunité :** [1 phrase, très courte, orientée levier business. Pas de contexte, pas d'historique, pas de description d'entreprise. Aller droit au but. Exemple : "Accélérer la digitalisation des chantiers via un partenaire IT déjà implanté chez les grands comptes."]
 
