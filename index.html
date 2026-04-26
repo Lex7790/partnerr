@@ -299,19 +299,20 @@
       display: none;
       margin-top: 20px;
       padding: 16px 20px;
-      background: rgba(94,53,224,0.1);
-      border: 1px solid rgba(94,53,224,0.25);
+      background: rgba(94,53,224,0.12);
+      border: 1px solid rgba(94,53,224,0.35);
       border-radius: 10px;
       align-items: center;
       gap: 12px;
+      box-shadow: 0 0 20px rgba(94,53,224,0.15);
     }
     #loading.visible { display: flex; }
 
     .spinner {
       flex-shrink: 0;
-      width: 18px; height: 18px;
+      width: 20px; height: 20px;
       border: 2.5px solid rgba(94,53,224,0.2);
-      border-top-color: var(--accent);
+      border-top-color: #A590FF;
       border-radius: 50%;
       animation: spin 0.7s linear infinite;
     }
@@ -320,7 +321,35 @@
     @keyframes flip { 0%,100% { transform: rotate(0deg); } 50% { transform: rotate(180deg); } }
     .hourglass-spin { display: inline-block; animation: flip 1.4s ease-in-out infinite; }
 
-    #status { color: #A590FF; font-size: 14px; font-weight: 500; }
+    #status { color: #C4B5FF; font-size: 15px; font-weight: 600; }
+
+    /* ── Skeleton cards ── */
+    @keyframes shimmer {
+      0%   { background-position: -600px 0; }
+      100% { background-position: 600px 0; }
+    }
+    .skeleton-card {
+      background: rgba(230,230,250,0.07);
+      border: 1px solid rgba(230,230,250,0.14);
+      border-left: 3px solid rgba(94,53,224,0.4);
+      border-radius: 14px;
+      padding: 28px 32px;
+      margin-bottom: 14px;
+    }
+    .skel {
+      border-radius: 6px;
+      background: linear-gradient(90deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.10) 50%, rgba(255,255,255,0.04) 100%);
+      background-size: 600px 100%;
+      animation: shimmer 1.6s ease-in-out infinite;
+    }
+    .skel-avatar { width: 52px; height: 52px; border-radius: 12px; margin-bottom: 20px; }
+    .skel-title  { height: 22px; width: 40%; margin-bottom: 8px; }
+    .skel-url    { height: 14px; width: 20%; margin-bottom: 24px; }
+    .skel-line-lg { height: 18px; width: 90%; margin-bottom: 10px; }
+    .skel-line-md { height: 18px; width: 70%; margin-bottom: 24px; }
+    .skel-box  { height: 54px; border-radius: 8px; margin-bottom: 10px; }
+    #skeleton-container { display: none; margin-top: 20px; }
+    #skeleton-container.visible { display: block; }
 
     /* ── Results ── */
     #result { margin-top: 20px; }
@@ -499,8 +528,8 @@
     #export-buttons button { margin-top: 0; flex: 1; padding: 12px; font-size: 14px; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 600; border: none; border-radius: 10px; cursor: pointer; transition: background 0.15s; }
     .btn-csv { background: #059669; color: white; }
     .btn-csv:hover { background: #047857; }
-    .btn-copy { background: rgba(94,53,224,0.18); color: #C4B5FF; border: 1px solid rgba(94,53,224,0.35) !important; }
-    .btn-copy:hover { background: rgba(94,53,224,0.28); }
+    .btn-copy { background: rgba(255,255,255,0.08); color: white; border: 1.5px solid rgba(255,255,255,0.35) !important; }
+    .btn-copy:hover { background: rgba(255,255,255,0.15); border-color: rgba(255,255,255,0.6) !important; }
     .btn-feedback-link { display: block; text-align: center; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 13px; color: rgba(255,255,255,0.4); text-decoration: none; padding: 4px 0; transition: color 0.15s; }
     .btn-feedback-link:hover { color: rgba(255,255,255,0.65); }
 
@@ -941,6 +970,26 @@
       </div>
     </div>
 
+    <div id="skeleton-container">
+      <div class="skeleton-card">
+        <div class="skel skel-avatar"></div>
+        <div class="skel skel-title"></div>
+        <div class="skel skel-url"></div>
+        <div class="skel skel-line-lg"></div>
+        <div class="skel skel-line-md"></div>
+        <div class="skel skel-box"></div>
+        <div class="skel skel-box"></div>
+      </div>
+      <div class="skeleton-card">
+        <div class="skel skel-avatar"></div>
+        <div class="skel skel-title"></div>
+        <div class="skel skel-url"></div>
+        <div class="skel skel-line-lg"></div>
+        <div class="skel skel-line-md"></div>
+        <div class="skel skel-box"></div>
+        <div class="skel skel-box"></div>
+      </div>
+    </div>
     <div id="result"></div>
     <p id="sources-mention" style="display:none; margin-top:12px; font-size:13px; color:rgba(255,255,255,0.78); text-align:center;">Les informations de contact affichées proviennent de sources publiques professionnelles.</p>
   </div>
@@ -1332,6 +1381,7 @@
 
     loading.classList.add('visible');
     document.getElementById('search-tips').style.display = 'block';
+    document.getElementById('skeleton-container').classList.add('visible');
     result.innerHTML = '';
     submitBtn.disabled = true;
     submitBtn.innerHTML = '<span class="hourglass-spin">⏳</span> Recherche en cours...';
@@ -1377,6 +1427,7 @@
 
           if (data.text) {
             if (!resultPre) {
+              document.getElementById('skeleton-container').classList.remove('visible');
               resultPre = document.createElement('div');
               resultPre.id = 'result-content';
               result.appendChild(resultPre);
@@ -1420,6 +1471,7 @@
 
     } catch (error) {
       loading.classList.remove('visible');
+      document.getElementById('skeleton-container').classList.remove('visible');
       submitBtn.disabled = false;
       submitBtn.textContent = '🔍 Trouver mes partenaires';
       result.innerHTML = `<div class="error-box">❌ ${error.message}</div>`;
