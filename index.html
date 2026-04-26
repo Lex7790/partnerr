@@ -1089,6 +1089,10 @@
       </button>
     </form>
 
+    <div id="saturation-msg" style="display:none; margin-top:14px; padding:14px 18px; background:rgba(196,181,255,0.07); border:1px solid rgba(196,181,255,0.22); border-radius:10px; font-size:14px; color:rgba(255,255,255,0.78); line-height:1.6;">
+      💡 Vous avez déjà exploré un large panel de partenaires sur cet angle.<br>Essayez un autre segment, une autre cible ou un autre type de collaboration pour découvrir de nouvelles opportunités.
+    </div>
+
     <div id="search-tips" style="display:none;">
       <p class="tip">☕ Prends une pause, les résultats arrivent dans quelques minutes</p>
       <p class="tip" style="margin-top:6px;">Chaque recherche propose de nouveaux partenaires (aucun doublon).</p>
@@ -1305,6 +1309,7 @@
 
   // ── Message de retour ──
   const welcomeBack = document.getElementById('welcome-back');
+  const saturationMsg = document.getElementById('saturation-msg');
   async function checkKnownEmail(email) {
     if (!email || !email.includes('@')) return;
     const fd = new FormData(); fd.append('email', email);
@@ -1313,10 +1318,12 @@
       const data = await res.json();
       if (data.known && data.searches > 0) {
         welcomeBack.style.display = 'flex';
-        const msgEl = document.getElementById('welcome-back-msg');
-        msgEl.textContent = `Heureux de vous revoir 👋 Vous avez déjà identifié des partenaires avec Partnerr. Lancez une nouvelle recherche pour explorer un autre angle.`;
       } else {
         welcomeBack.style.display = 'none';
+      }
+      // Message de saturation si >= 40 partenaires déjà explorés
+      if (saturationMsg) {
+        saturationMsg.style.display = (data.known && data.searches >= 40) ? 'block' : 'none';
       }
     } catch(e) {}
   }
