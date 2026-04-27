@@ -11,6 +11,7 @@ import json
 import fcntl
 import threading
 import stripe
+import urllib.request
 from flask import Flask, request, Response, stream_with_context, redirect, jsonify
 from dotenv import load_dotenv
 
@@ -32,6 +33,7 @@ HISTORY_FILE  = os.environ.get("HISTORY_FILE",  "/data/history.json")
 LOG_FILE      = os.environ.get("LOG_FILE",      "/data/logs.json")
 USERS_FILE    = os.environ.get("USERS_FILE",    "/data/users.json")
 RESEND_API_KEY = os.environ.get("RESEND_API_KEY", "")
+HUBSPOT_TOKEN  = os.environ.get("HUBSPOT_TOKEN", "")
 
 stripe.api_key = os.environ.get("STRIPE_SECRET_KEY", "")
 STRIPE_WEBHOOK_SECRET = os.environ.get("STRIPE_WEBHOOK_SECRET", "")
@@ -107,6 +109,33 @@ def atomic_decrement_credits(email):
                 fcntl.flock(lf, fcntl.LOCK_UN)
 
 
+def sync_to_hubspot(email, prenom=""):
+    if not HUBSPOT_TOKEN:
+        return
+    try:
+        payload = json.dumps({
+            "properties": {
+                "email": email,
+                "firstname": prenom or "",
+                "hs_lead_status": "NEW",
+                "lifecyclestage": "lead"
+            }
+        }).encode("utf-8")
+        req = urllib.request.Request(
+            "https://api.hubapi.com/crm/v3/objects/contacts",
+            data=payload,
+            headers={
+                "Authorization": f"Bearer {HUBSPOT_TOKEN}",
+                "Content-Type": "application/json"
+            },
+            method="POST"
+        )
+        urllib.request.urlopen(req, timeout=5)
+        print(f"[HUBSPOT] Contact créé : {email}", flush=True)
+    except Exception as e:
+        print(f"[HUBSPOT] Erreur : {e}", flush=True)
+
+
 def send_welcome_email(email, prenom=""):
     if not RESEND_API_KEY:
         print("[EMAIL] Clé RESEND_API_KEY manquante", flush=True)
@@ -172,6 +201,7 @@ def register():
                 fcntl.flock(lf, fcntl.LOCK_UN)
     if is_new:
         send_welcome_email(email, prenom)
+        sync_to_hubspot(email, prenom)
     return redirect(f"/app?email={email}")
 
 
