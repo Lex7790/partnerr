@@ -158,7 +158,7 @@ def send_welcome_email(email, prenom=""):
                   <p style="font-size:12px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:#7B56F5; margin:0 0 12px;">Votre accès est prêt</p>
                   <h1 style="font-size:24px; font-weight:800; color:#ffffff; margin:0 0 16px; line-height:1.3;">{salutation}</h1>
                   <p style="font-size:15px; color:rgba(255,255,255,0.75); line-height:1.7; margin:0 0 12px;">
-                    Vous avez <strong style="color:#ffffff;">1 recherche gratuite</strong> disponible maintenant.
+                    Vous avez <strong style="color:#ffffff;">2 recherches gratuites</strong> disponibles maintenant.
                   </p>
                   <p style="font-size:15px; color:rgba(255,255,255,0.75); line-height:1.7; margin:0 0 28px;">
                     Décrivez votre activité. En quelques minutes, Partnerr vous dit quelles entreprises cibler, comment les approcher et pourquoi ça peut convertir.
@@ -195,7 +195,7 @@ def register():
                 users = load_users()
                 is_new = email not in users
                 if is_new:
-                    users[email] = {"plan": "free", "credits": 1, "prenom": prenom}
+                    users[email] = {"plan": "free", "credits": 2, "prenom": prenom}
                     save_users(users)
             finally:
                 fcntl.flock(lf, fcntl.LOCK_UN)
