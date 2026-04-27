@@ -288,11 +288,13 @@ def match():
 
     def generate():
         try:
+            print(f"[CLAUDE API CALLED] email={user_email!r} company={company_name!r} plan={plan}", flush=True)
             session = client.beta.sessions.create(
                 agent=AGENT_ID,
                 environment_id=ENV_ID,
                 title=f"Matching B2B : {company_name[:60]}",
             )
+            print(f"[CLAUDE SESSION CREATED] session_id={session.id}", flush=True)
 
             context_line = f"\nContexte : {context}" if context else ""
 
@@ -357,7 +359,7 @@ STYLE D'ÉCRITURE OBLIGATOIRE : N'utilise jamais de tiret long (—). Reformule 
                 print(f"[DEDUP] Début accumulated_text: {accumulated_text[:300]!r}", flush=True)
                 if names and user_email:
                     save_history(user_email, names)
-                    print(f"[DEDUP] Sauvegardé dans history.json pour {user_email}", flush=True)
+                    print(f"[RESULT GENERATED FROM: claude] email={user_email!r} partners={names}", flush=True)
                 else:
                     print(f"[DEDUP] RIEN sauvegardé — names={names!r} user_email={user_email!r}", flush=True)
                 append_log({
@@ -483,14 +485,16 @@ STYLE D'ÉCRITURE OBLIGATOIRE : N'utilise jamais de tiret long (—). Reformule 
 
         except anthropic.APIConnectionError:
             msg = "Connexion impossible à l'API Anthropic."
+            print(f"[CLAUDE API ERROR] APIConnectionError — email={user_email!r}", flush=True)
             append_log({"date": __import__('datetime').datetime.utcnow().isoformat(), "email": user_email, "company": company_name, "plan": plan, "status": "error", "error": msg})
             yield f"data: {json.dumps({'error': msg})}\n\n"
         except anthropic.AuthenticationError:
             msg = "Clé API invalide. Vérifie ANTHROPIC_API_KEY dans .env"
+            print(f"[CLAUDE API ERROR] AuthenticationError — clé API invalide", flush=True)
             append_log({"date": __import__('datetime').datetime.utcnow().isoformat(), "email": user_email, "company": company_name, "plan": plan, "status": "error", "error": msg})
             yield f"data: {json.dumps({'error': msg})}\n\n"
         except Exception as e:
-            print(f"[ERROR] {str(e)}", flush=True)
+            print(f"[CLAUDE API ERROR] {str(e)} — email={user_email!r}", flush=True)
             append_log({"date": __import__('datetime').datetime.utcnow().isoformat(), "email": user_email, "company": company_name, "plan": plan, "status": "error", "error": str(e)})
             yield f"data: {json.dumps({'error': 'Une erreur inattendue est survenue. Réessaie dans quelques instants.'})}\n\n"
 
