@@ -157,11 +157,20 @@ def register():
     prenom = escape(request.form.get("prenom", "").strip()[:50])
     if not email or not re.match(r'^[^@\s]+@[^@\s]+\.[^@\s]+$', email):
         return redirect("/")
-    users = load_users()
-    is_new = email not in users
+    lock_path = USERS_FILE + ".lock"
+    is_new = False
+    with _users_lock:
+        with open(lock_path, "w") as lf:
+            fcntl.flock(lf, fcntl.LOCK_EX)
+            try:
+                users = load_users()
+                is_new = email not in users
+                if is_new:
+                    users[email] = {"plan": "free", "credits": 1, "prenom": prenom}
+                    save_users(users)
+            finally:
+                fcntl.flock(lf, fcntl.LOCK_UN)
     if is_new:
-        users[email] = {"plan": "free", "credits": 1, "prenom": prenom}
-        save_users(users)
         send_welcome_email(email, prenom)
     return redirect(f"/app?email={email}")
 
