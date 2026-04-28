@@ -341,13 +341,19 @@
       header { padding: 0 20px; height: 64px; }
       .logo { font-size: 20px; }
       .hero { padding: 60px 20px 56px; }
+      .hero h1 { font-size: 28px; }
+      .hero p { font-size: 16px; }
       .section { padding: 52px 20px; }
+      .section h2 { font-size: 22px; }
       .pricing-form-wrap { padding: 52px 20px; }
       .audit-form { padding: 24px 20px; }
       .field-group { flex-direction: column; }
       .example-grid { grid-template-columns: 1fr !important; }
+      .price-amount { font-size: 44px; }
+      .deliverable { padding: 14px 16px; }
       footer { padding: 24px 20px; }
       .footer-inner { flex-direction: column; align-items: center; text-align: center; gap: 12px; }
+      .footer-inner > div:last-child { gap: 14px !important; justify-content: center; }
     }
   </style>
 </head>
@@ -376,7 +382,7 @@
   <div class="hero">
     <span class="hero-label">Service</span>
     <h1>Audit Partenariat Express</h1>
-    <p>Recevez 3 opportunités de partenariat prêtes à activer pour votre offre, livrées en 48–72h.</p>
+    <p>Recevez 3 opportunités de partenariat adaptées à votre offre, avec angle d'approche prêt à envoyer, livrées en 48–72h.</p>
     <a href="#formulaire" class="btn-primary">Demander un audit</a>
   </div>
 
@@ -487,7 +493,7 @@
       </div>
       <div class="step">
         <div class="step-num">2</div>
-        <div class="step-content"><strong>J'analyse les opportunités</strong> avec Partnerr et une validation manuelle pour garantir la pertinence.</div>
+        <div class="step-content"><strong>Analyse assistée par Partnerr</strong> + sélection et priorisation humaine pour garantir la pertinence.</div>
       </div>
       <div class="step">
         <div class="step-num">3</div>
@@ -503,11 +509,17 @@
 
     <div class="price-block">
       <div class="price-amount">250€</div>
-      <p class="price-sub">Paiement après réception du livrable — par virement ou lien de paiement sécurisé.</p>
+      <p class="price-sub">Par virement ou lien de paiement sécurisé.</p>
+      <div style="display:flex; justify-content:center; gap:20px; flex-wrap:wrap; margin-top:20px;">
+        <span style="font-size:13px; color:rgba(255,255,255,0.60); display:flex; align-items:center; gap:6px;"><span style="color:#6ee7b7;">✓</span> Paiement après réception</span>
+        <span style="font-size:13px; color:rgba(255,255,255,0.60); display:flex; align-items:center; gap:6px;"><span style="color:#6ee7b7;">✓</span> Aucun engagement avant validation</span>
+        <span style="font-size:13px; color:rgba(255,255,255,0.60); display:flex; align-items:center; gap:6px;"><span style="color:#6ee7b7;">✓</span> Livrable personnalisé, pas un rapport automatique</span>
+      </div>
     </div>
 
     <div class="audit-form">
       <p class="form-title">Demander mon audit</p>
+      <p style="font-size:14px; color:rgba(255,255,255,0.55); margin-bottom:24px; line-height:1.5;">Plus votre contexte est précis, plus les opportunités seront pertinentes.</p>
 
       <!-- Alertes -->
       <script>
