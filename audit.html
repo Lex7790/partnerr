@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DFC2XSEN7L"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-DFC2XSEN7L');</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Audit Partenariat Express — Partnerr</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=DM+Sans:opsz,wght@9..40,400;9..40,500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --ink: #0B0718;
+      --accent: #5E35E0;
+      --accent-hi: #7B56F5;
+      --lavande: #C4B5FF;
+      --card-bg: rgba(230,230,250,0.07);
+      --card-border: rgba(230,230,250,0.14);
+    }
+    body {
+      font-family: 'DM Sans', system-ui, sans-serif;
+      background: var(--ink);
+      color: rgba(255,255,255,0.88);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      -webkit-font-smoothing: antialiased;
+    }
+    /* Header */
+    header {
+      background: rgba(11,7,24,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(230,230,250,0.14);
+      padding: 0 40px;
+      height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .logo {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 800;
+      font-size: 24px;
+      color: white;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .back-link {
+      font-size: 14px;
+      color: rgba(255,255,255,0.5);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .back-link:hover { color: rgba(255,255,255,0.85); }
+
+    /* Layout */
+    main { flex: 1; }
+
+    /* Hero */
+    .hero {
+      padding: 88px 32px 80px;
+      text-align: center;
+      max-width: 760px;
+      margin: 0 auto;
+    }
+    .hero-label {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--lavande);
+      margin-bottom: 24px;
+      padding: 6px 16px;
+      background: rgba(94,53,224,0.15);
+      border: 1px solid rgba(94,53,224,0.3);
+      border-radius: 100px;
+    }
+    .hero h1 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: clamp(32px, 5vw, 52px);
+      font-weight: 800;
+      color: white;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin-bottom: 24px;
+    }
+    .hero p {
+      font-size: 18px;
+      color: rgba(255,255,255,0.72);
+      line-height: 1.65;
+      max-width: 560px;
+      margin: 0 auto 40px;
+    }
+    .btn-primary {
+      display: inline-block;
+      background: var(--accent);
+      color: white;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      padding: 15px 36px;
+      border-radius: 10px;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.1s;
+    }
+    .btn-primary:hover { background: var(--accent-hi); transform: translateY(-1px); }
+
+    /* Sections */
+    .section {
+      padding: 72px 32px;
+      max-width: 760px;
+      margin: 0 auto;
+    }
+    .section-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--lavande);
+      margin-bottom: 16px;
+    }
+    .section h2 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: clamp(22px, 3vw, 30px);
+      font-weight: 700;
+      color: white;
+      margin-bottom: 20px;
+      line-height: 1.3;
+    }
+    .section p {
+      font-size: 16px;
+      color: rgba(255,255,255,0.72);
+      line-height: 1.7;
+    }
+
+    /* Divider */
+    .divider {
+      border: none;
+      border-top: 1px solid rgba(230,230,250,0.10);
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    /* Deliverables */
+    .deliverables {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-top: 28px;
+    }
+    .deliverable {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 16px 20px;
+    }
+    .deliverable-icon {
+      width: 36px;
+      height: 36px;
+      background: rgba(94,53,224,0.25);
+      border: 1px solid rgba(94,53,224,0.4);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+    .deliverable-text {
+      font-size: 15px;
+      color: rgba(255,255,255,0.85);
+      line-height: 1.5;
+    }
+    .deliverable-text strong {
+      color: white;
+      font-weight: 600;
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    /* Steps */
+    .steps {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      margin-top: 28px;
+    }
+    .step {
+      display: flex;
+      gap: 18px;
+      align-items: flex-start;
+    }
+    .step-num {
+      width: 36px;
+      height: 36px;
+      background: rgba(94,53,224,0.25);
+      border: 1px solid rgba(94,53,224,0.45);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--lavande);
+      flex-shrink: 0;
+    }
+    .step-content { font-size: 15px; color: rgba(255,255,255,0.80); line-height: 1.6; padding-top: 6px; }
+    .step-content strong { color: white; }
+
+    /* Pricing + Form */
+    .pricing-form-wrap {
+      padding: 72px 32px;
+      max-width: 760px;
+      margin: 0 auto;
+    }
+    .price-block {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .price-amount {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 56px;
+      font-weight: 800;
+      color: white;
+      line-height: 1;
+    }
+    .price-sub {
+      font-size: 15px;
+      color: rgba(255,255,255,0.5);
+      margin-top: 8px;
+    }
+
+    /* Form */
+    .audit-form {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 36px 32px;
+    }
+    .form-title {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 28px;
+    }
+    .field-group {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    .field {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    label {
+      font-size: 14px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.85);
+    }
+    input, textarea {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 10px;
+      padding: 12px 14px;
+      font-size: 15px;
+      font-family: 'DM Sans', sans-serif;
+      color: white;
+      transition: border-color 0.15s;
+      width: 100%;
+    }
+    input::placeholder, textarea::placeholder { color: rgba(255,255,255,0.3); }
+    input:focus, textarea:focus { outline: none; border-color: rgba(94,53,224,0.55); }
+    textarea { resize: vertical; min-height: 90px; line-height: 1.6; }
+    .submit-btn {
+      width: 100%;
+      margin-top: 24px;
+      padding: 15px;
+      background: var(--accent);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .submit-btn:hover { background: var(--accent-hi); }
+    .form-note {
+      margin-top: 14px;
+      font-size: 13px;
+      color: rgba(255,255,255,0.4);
+      text-align: center;
+      line-height: 1.5;
+    }
+
+    /* Success / Error */
+    .alert {
+      padding: 14px 20px;
+      border-radius: 10px;
+      font-size: 15px;
+      margin-bottom: 24px;
+      text-align: center;
+    }
+    .alert-success { background: rgba(5,150,105,0.15); border: 1px solid rgba(5,150,105,0.4); color: #6ee7b7; }
+    .alert-error { background: rgba(220,38,38,0.12); border: 1px solid rgba(220,38,38,0.35); color: #fca5a5; }
+
+    /* Footer */
+    footer {
+      padding: 24px 40px;
+      border-top: 1px solid rgba(230,230,250,0.10);
+    }
+    .footer-inner {
+      max-width: 760px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      header { padding: 0 20px; height: 64px; }
+      .logo { font-size: 20px; }
+      .hero { padding: 60px 20px 56px; }
+      .section { padding: 52px 20px; }
+      .pricing-form-wrap { padding: 52px 20px; }
+      .audit-form { padding: 24px 20px; }
+      .field-group { flex-direction: column; }
+      footer { padding: 24px 20px; }
+      .footer-inner { flex-direction: column; align-items: center; text-align: center; gap: 12px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <a href="/" class="logo">
+    <svg width="30" height="29" viewBox="0 0 24 23" fill="none" style="flex-shrink:0;">
+      <defs>
+        <linearGradient id="vg-audit" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#EDE9FF"/>
+          <stop offset="100%" stop-color="#5E35E0"/>
+        </linearGradient>
+      </defs>
+      <polygon points="15,7 21.1,10.5 21.1,17.5 15,21 8.9,17.5 8.9,10.5" fill="white" stroke="rgba(94,53,224,0.55)" stroke-width="1.5"/>
+      <polygon points="9,2 15.1,5.5 15.1,12.5 9,16 2.9,12.5 2.9,5.5" fill="url(#vg-audit)"/>
+    </svg>
+    Partnerr
+  </a>
+  <a href="/" class="back-link">← Retour à l'outil</a>
+</header>
+
+<main>
+
+  <!-- HERO -->
+  <div class="hero">
+    <span class="hero-label">Service</span>
+    <h1>Audit Partenariat Express</h1>
+    <p>Recevez 3 opportunités de partenariat prêtes à activer pour votre offre, livrées en 48–72h.</p>
+    <a href="#formulaire" class="btn-primary">Demander un audit</a>
+  </div>
+
+  <hr class="divider">
+
+  <!-- POUR QUI -->
+  <div class="section">
+    <p class="section-label">Pour qui</p>
+    <h2>Vous développez une activité B2B et vous manquez de temps.</h2>
+    <p>Pour freelances, agences, consultants et petites équipes B2B qui veulent identifier des partenaires pertinents sans passer des heures à sourcer à la main.</p>
+  </div>
+
+  <hr class="divider">
+
+  <!-- CE QUE VOUS RECEVEZ -->
+  <div class="section">
+    <p class="section-label">Ce que vous recevez</p>
+    <h2>Un livrable court, concret et actionnable.</h2>
+    <div class="deliverables">
+      <div class="deliverable">
+        <div class="deliverable-icon">🎯</div>
+        <div class="deliverable-text">
+          <strong>3 partenaires prioritaires</strong>
+          Sélectionnés pour leur pertinence avec votre offre et votre marché.
+        </div>
+      </div>
+      <div class="deliverable">
+        <div class="deliverable-icon">🔍</div>
+        <div class="deliverable-text">
+          <strong>Pourquoi ils matchent</strong>
+          L'analyse de complémentarité pour chaque partenaire.
+        </div>
+      </div>
+      <div class="deliverable">
+        <div class="deliverable-icon">🤝</div>
+        <div class="deliverable-text">
+          <strong>L'angle de collaboration recommandé</strong>
+          Co-marketing, affiliation, distribution, intégration — ce qui fait sens pour chaque cas.
+        </div>
+      </div>
+      <div class="deliverable">
+        <div class="deliverable-icon">💡</div>
+        <div class="deliverable-text">
+          <strong>Le bénéfice pour chaque partie</strong>
+          Ce que vous y gagnez, ce que le partenaire y gagne.
+        </div>
+      </div>
+      <div class="deliverable">
+        <div class="deliverable-icon">✉️</div>
+        <div class="deliverable-text">
+          <strong>Un premier message d'approche</strong>
+          Prêt à adapter et envoyer, sans partir d'une page blanche.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- COMMENT ÇA MARCHE -->
+  <div class="section">
+    <p class="section-label">Comment ça marche</p>
+    <h2>Simple et rapide.</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content"><strong>Vous décrivez votre activité et votre cible</strong> via le formulaire ci-dessous.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content"><strong>J'analyse les opportunités</strong> avec Partnerr et une validation manuelle pour garantir la pertinence.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content"><strong>Vous recevez votre shortlist sous 48–72h</strong>, au format PDF ou document partagé.</div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- PRIX + FORMULAIRE -->
+  <div class="pricing-form-wrap" id="formulaire">
+
+    <div class="price-block">
+      <div class="price-amount">250€</div>
+      <p class="price-sub">Paiement après réception du livrable — par virement ou lien de paiement sécurisé.</p>
+    </div>
+
+    <div class="audit-form">
+      <p class="form-title">Demander mon audit</p>
+
+      <!-- Alertes -->
+      <script>
+        const params = new URLSearchParams(window.location.search);
+      </script>
+      <div id="alert-success" class="alert alert-success" style="display:none;">
+        ✓ Demande envoyée. Je reviens vers vous sous 48h.
+      </div>
+      <div id="alert-error" class="alert alert-error" style="display:none;">
+        Une erreur est survenue. Réessayez ou écrivez-moi directement.
+      </div>
+
+      <form action="/audit-submit" method="POST">
+        <div class="field-group">
+          <div class="field">
+            <label for="nom">Nom complet</label>
+            <input type="text" id="nom" name="nom" placeholder="Sophie Martin" required>
+          </div>
+          <div class="field">
+            <label for="email">Email professionnel</label>
+            <input type="email" id="email" name="email" placeholder="sophie@monentreprise.com" required>
+          </div>
+        </div>
+        <div class="field" style="margin-bottom:16px;">
+          <label for="site">Site web ou profil LinkedIn</label>
+          <input type="text" id="site" name="site" placeholder="https://monentreprise.com ou linkedin.com/in/...">
+        </div>
+        <div class="field" style="margin-bottom:16px;">
+          <label for="activite">Décrivez votre activité</label>
+          <textarea id="activite" name="activite" placeholder="Ce que vous faites, votre offre principale, votre marché..." required></textarea>
+        </div>
+        <div class="field">
+          <label for="cible">Quelle est votre cible ?</label>
+          <textarea id="cible" name="cible" placeholder="Qui sont vos clients, dans quel secteur, quelle taille..." style="min-height:70px;" required></textarea>
+        </div>
+        <button type="submit" class="submit-btn">Envoyer ma demande →</button>
+      </form>
+      <p class="form-note">Aucun engagement avant réception du livrable. Réponse sous 24h pour confirmer la prise en charge.</p>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div style="display:flex; align-items:center; gap:8px; font-family:'Plus Jakarta Sans',sans-serif; font-size:18px; font-weight:800; color:rgba(255,255,255,0.8);">
+      <svg width="24" height="23" viewBox="0 0 24 23" fill="none"><defs><linearGradient id="vg-ft2" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#EDE9FF"/><stop offset="100%" stop-color="#5E35E0"/></linearGradient></defs><polygon points="15,7 21.1,10.5 21.1,17.5 15,21 8.9,17.5 8.9,10.5" fill="white" stroke="rgba(94,53,224,0.55)" stroke-width="1.5"/><polygon points="9,2 15.1,5.5 15.1,12.5 9,16 2.9,12.5 2.9,5.5" fill="url(#vg-ft2)"/></svg>
+      Partnerr
+    </div>
+    <div style="display:flex; align-items:center; gap:24px; flex-wrap:wrap;">
+      <a href="mailto:contact@usepartnerr.com" style="font-size:15px; color:rgba(255,255,255,0.55); text-decoration:none;">contact@usepartnerr.com</a>
+      <a href="/legal" style="font-size:15px; color:rgba(255,255,255,0.55); text-decoration:none;">Mentions légales</a>
+      <span style="font-size:15px; color:rgba(255,255,255,0.35);">© 2026 Partnerr</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Afficher alerte selon URL param
+  const p = new URLSearchParams(window.location.search);
+  if (p.get('success') === '1') {
+    document.getElementById('alert-success').style.display = 'block';
+    document.getElementById('formulaire').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+  if (p.get('error') === '1') {
+    document.getElementById('alert-error').style.display = 'block';
+  }
+</script>
+
+</body>
+</html>
