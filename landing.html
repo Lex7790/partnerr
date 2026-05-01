@@ -830,15 +830,47 @@
       position: relative;
       overflow: hidden;
     }
-    .reseau-section::before {
-      content: '';
+
+    @keyframes orbFloat1 {
+      0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.55; }
+      33%       { transform: translate(18px, -24px) scale(1.06); opacity: 0.7; }
+      66%       { transform: translate(-12px, 14px) scale(0.96); opacity: 0.45; }
+    }
+    @keyframes orbFloat2 {
+      0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.4; }
+      40%       { transform: translate(-20px, 18px) scale(1.08); opacity: 0.6; }
+      75%       { transform: translate(14px, -10px) scale(0.94); opacity: 0.35; }
+    }
+    @keyframes orbFloat3 {
+      0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.3; }
+      50%       { transform: translate(22px, 20px) scale(1.1); opacity: 0.5; }
+    }
+
+    .reseau-orb {
       position: absolute;
-      bottom: -200px;
-      right: -100px;
-      width: 600px;
-      height: 600px;
-      background: radial-gradient(circle, rgba(94,53,224,0.18) 0%, transparent 65%);
+      border-radius: 50%;
       pointer-events: none;
+      filter: blur(60px);
+    }
+    .reseau-orb-1 {
+      width: 320px; height: 320px;
+      bottom: -60px; right: -40px;
+      background: radial-gradient(circle, rgba(94,53,224,0.45) 0%, transparent 70%);
+      animation: orbFloat1 9s ease-in-out infinite;
+    }
+    .reseau-orb-2 {
+      width: 200px; height: 200px;
+      bottom: 80px; right: 260px;
+      background: radial-gradient(circle, rgba(123,86,245,0.3) 0%, transparent 70%);
+      animation: orbFloat2 12s ease-in-out infinite;
+      animation-delay: -4s;
+    }
+    .reseau-orb-3 {
+      width: 140px; height: 140px;
+      top: 60px; right: 80px;
+      background: radial-gradient(circle, rgba(165,144,255,0.25) 0%, transparent 70%);
+      animation: orbFloat3 15s ease-in-out infinite;
+      animation-delay: -7s;
     }
     .reseau-inner { max-width: 900px; margin: 0 auto; position: relative; z-index: 1; }
     .reseau-section .section-label { color: #A590FF; }
@@ -2029,6 +2061,9 @@
 
 <!-- RÉSEAU -->
 <section class="reseau-section" id="reseau">
+  <div class="reseau-orb reseau-orb-1"></div>
+  <div class="reseau-orb reseau-orb-2"></div>
+  <div class="reseau-orb reseau-orb-3"></div>
   <div class="reseau-inner">
 
     <p class="section-label" data-anim>Réseau Partnerr</p>
