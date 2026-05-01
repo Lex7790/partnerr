@@ -2076,7 +2076,8 @@
         <div class="reseau-form-row">
           <div class="reseau-field">
             <label>Email professionnel</label>
-            <input class="reseau-input" type="email" name="email" placeholder="vous@votreentreprise.com" required />
+            <input class="reseau-input" type="email" name="email" id="reseau-email" placeholder="vous@votreentreprise.com" required />
+            <p id="reseau-email-error" style="display:none; margin-top:7px; font-size:13px; color:#FCA5A5; line-height:1.5;">Veuillez utiliser une adresse email professionnelle pour rejoindre le réseau.</p>
           </div>
           <div class="reseau-field">
             <label>Votre rôle / poste</label>
@@ -2345,6 +2346,38 @@
     draw();
   })();
 
+  // Réseau — validation domaines perso
+  const PERSONAL_DOMAINS = [
+    'gmail.com','googlemail.com','yahoo.com','yahoo.fr','yahoo.co.uk','yahoo.es','yahoo.de',
+    'hotmail.com','hotmail.fr','hotmail.co.uk','hotmail.es','hotmail.de',
+    'outlook.com','outlook.fr','live.com','live.fr','msn.com',
+    'orange.fr','sfr.fr','sfr.net','free.fr','wanadoo.fr','laposte.net',
+    'bbox.fr','numericable.fr','neuf.fr','cegetel.net',
+    'icloud.com','me.com','mac.com','aol.com','protonmail.com','proton.me',
+    'yandex.com','yandex.ru','mail.ru','gmx.com','gmx.fr','gmx.de',
+  ];
+
+  function isPersonalEmail(email) {
+    const domain = email.split('@')[1]?.toLowerCase();
+    if (!domain) return false;
+    return PERSONAL_DOMAINS.some(d => domain === d || domain.endsWith('.' + d));
+  }
+
+  const reseauEmailInput = document.getElementById('reseau-email');
+  const reseauEmailError = document.getElementById('reseau-email-error');
+
+  if (reseauEmailInput) {
+    reseauEmailInput.addEventListener('blur', function() {
+      if (this.value && isPersonalEmail(this.value)) {
+        reseauEmailError.style.display = 'block';
+        this.style.borderColor = 'rgba(239,68,68,0.6)';
+      } else {
+        reseauEmailError.style.display = 'none';
+        this.style.borderColor = '';
+      }
+    });
+  }
+
   // Réseau — soumission AJAX
   const reseauForm = document.getElementById('reseau-form');
   if (reseauForm) {
@@ -2352,6 +2385,16 @@
       e.preventDefault();
       const btn = document.getElementById('reseau-submit-btn');
       const errEl = document.getElementById('reseau-error');
+
+      // Vérification domaine perso avant envoi
+      const emailVal = document.getElementById('reseau-email')?.value || '';
+      if (isPersonalEmail(emailVal)) {
+        reseauEmailError.style.display = 'block';
+        reseauEmailInput.style.borderColor = 'rgba(239,68,68,0.6)';
+        reseauEmailInput.focus();
+        return;
+      }
+
       btn.disabled = true;
       btn.textContent = 'Inscription en cours...';
       errEl.style.display = 'none';

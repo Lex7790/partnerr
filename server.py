@@ -748,6 +748,16 @@ def reseau_submit():
     return redirect("/#reseau")
 
 
+PERSONAL_DOMAINS = {
+    'gmail.com','googlemail.com','yahoo.com','yahoo.fr','yahoo.co.uk','yahoo.es','yahoo.de',
+    'hotmail.com','hotmail.fr','hotmail.co.uk','hotmail.es','hotmail.de',
+    'outlook.com','outlook.fr','live.com','live.fr','msn.com',
+    'orange.fr','sfr.fr','sfr.net','free.fr','wanadoo.fr','laposte.net',
+    'bbox.fr','numericable.fr','neuf.fr','cegetel.net',
+    'icloud.com','me.com','mac.com','aol.com','protonmail.com','proton.me',
+    'yandex.com','yandex.ru','mail.ru','gmx.com','gmx.fr','gmx.de',
+}
+
 @app.route("/api/network-signup", methods=["POST"])
 def network_signup():
     from html import escape
@@ -759,6 +769,10 @@ def network_signup():
 
     if not email or not re.match(r'^[^@\s]+@[^@\s]+\.[^@\s]+$', email):
         return jsonify({"status": "error", "error": "Email invalide."}), 400
+
+    domain = email.split('@')[-1]
+    if domain in PERSONAL_DOMAINS:
+        return jsonify({"status": "error", "error": "Veuillez utiliser une adresse email professionnelle pour rejoindre le réseau."}), 400
 
     members = []
     if os.path.exists(RESEAU_FILE):
