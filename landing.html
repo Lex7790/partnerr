@@ -733,6 +733,108 @@
       line-height: 1.6;
     }
 
+    /* ── RÉSEAU ── */
+    .reseau-section {
+      background: var(--ink);
+      padding: 100px 32px;
+      position: relative;
+      overflow: hidden;
+    }
+    .reseau-section::before {
+      content: '';
+      position: absolute;
+      bottom: -200px;
+      right: -100px;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(94,53,224,0.18) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .reseau-inner { max-width: 900px; margin: 0 auto; position: relative; z-index: 1; }
+    .reseau-section .section-label { color: #A590FF; }
+    .reseau-section .section-title { color: white; max-width: 640px; }
+    .reseau-section .section-sub { color: rgba(255,255,255,0.82); max-width: 620px; }
+
+    .reseau-pillars {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin: 48px 0 52px;
+    }
+    .reseau-pillar {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px;
+      padding: 28px 24px;
+    }
+    .reseau-pillar-num {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #7B56F5;
+      margin-bottom: 12px;
+      display: block;
+    }
+    .reseau-pillar h3 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 8px;
+      line-height: 1.3;
+    }
+    .reseau-pillar p { font-size: 14px; color: rgba(255,255,255,0.75); line-height: 1.6; }
+
+    .reseau-form-box {
+      background: rgba(94,53,224,0.10);
+      border: 1px solid rgba(94,53,224,0.30);
+      border-radius: 20px;
+      padding: 44px 48px;
+    }
+    .reseau-form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    .reseau-field { display: flex; flex-direction: column; gap: 7px; }
+    .reseau-field label {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.72);
+    }
+    .reseau-input {
+      background: rgba(255,255,255,0.05);
+      border: 1.5px solid rgba(255,255,255,0.1);
+      border-radius: 10px;
+      padding: 12px 16px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      color: white;
+      outline: none;
+      transition: border-color 0.2s, background 0.2s;
+      width: 100%;
+    }
+    .reseau-input::placeholder { color: rgba(255,255,255,0.25); }
+    .reseau-input:focus { border-color: rgba(94,53,224,0.7); background: rgba(94,53,224,0.07); }
+    .reseau-textarea { min-height: 88px; resize: none; }
+    .reseau-note { font-size: 12px; color: rgba(255,255,255,0.45); line-height: 1.6; max-width: 500px; margin-top: 10px; }
+
+    .reseau-success {
+      display: none;
+      background: rgba(94,53,224,0.15);
+      border: 1px solid rgba(94,53,224,0.35);
+      border-radius: 12px;
+      padding: 20px 24px;
+      font-size: 15px;
+      color: #C4B5FF;
+      text-align: center;
+      margin-top: 16px;
+    }
+
     /* ── OUTIL SECTION ── */
     .tool-section {
       background: var(--surface);
@@ -1054,6 +1156,10 @@
       .problem-row { border-right: none !important; }
       .problem-row:nth-child(3) { border-bottom: 1.5px solid rgba(0,0,0,0.07) !important; }
       .unlock-grid { grid-template-columns: 1fr; max-width: 480px; margin-left: auto; margin-right: auto; }
+      .reseau-pillars { grid-template-columns: 1fr; }
+      .reseau-form-box { padding: 28px 20px; }
+      .reseau-form-row { grid-template-columns: 1fr; }
+      .reseau-section { padding: 64px 20px; }
     }
 
     @media (max-width: 600px) {
@@ -1141,6 +1247,7 @@
     </a>
     <a href="#comment-ca-marche" class="nav-link">Comment ça marche</a>
     <a href="#faq" class="nav-link">FAQ</a>
+    <a href="#reseau" class="nav-link" style="color:var(--accent); font-weight:600;">Réseau (Gratuit)</a>
     <a href="#pack" class="btn-nav" id="nav-cta">Commander mon pack →</a>
   </div>
 </nav>
@@ -1609,6 +1716,61 @@
   </div>
 </section>
 
+<!-- RÉSEAU -->
+<section class="reseau-section" id="reseau">
+  <div class="reseau-inner">
+
+    <p class="section-label" data-anim>Réseau Partnerr</p>
+    <h2 class="section-title" data-anim>Rejoignez le réseau de matching Partnerr</h2>
+    <p class="section-sub" data-anim>Vous n'avez pas de besoin immédiat ? Laissez les opportunités venir à vous. Inscrivez votre entreprise gratuitement pour figurer dans notre base et être sollicité dès qu'un partenaire stratégique cherche un profil comme le vôtre.</p>
+
+    <div class="reseau-pillars">
+      <div class="reseau-pillar" data-anim data-delay="0">
+        <span class="reseau-pillar-num">01</span>
+        <h3>Inscription gratuite</h3>
+        <p>Soyez référencé dans notre base de données pour être visible par notre algorithme de sourcing.</p>
+      </div>
+      <div class="reseau-pillar" data-anim data-delay="1">
+        <span class="reseau-pillar-num">02</span>
+        <h3>Opportunités entrantes</h3>
+        <p>Recevez des alertes dès qu'une synergie réelle est identifiée avec un autre membre du réseau.</p>
+      </div>
+      <div class="reseau-pillar" data-anim data-delay="2">
+        <span class="reseau-pillar-num">03</span>
+        <h3>Zéro effort</h3>
+        <p>Vous n'avez rien à chercher. On vous trouve les partenaires pendant que vous développez votre business.</p>
+      </div>
+    </div>
+
+    <div class="reseau-form-box" data-anim>
+      <div id="reseau-success" class="reseau-success">
+        ✓ Votre entreprise a bien été ajoutée au réseau. Nous reviendrons vers vous dès qu'une opportunité pertinente est identifiée.
+      </div>
+      <form action="/reseau-submit" method="POST" id="reseau-form">
+        <div class="reseau-form-row">
+          <div class="reseau-field">
+            <label>Email professionnel</label>
+            <input class="reseau-input" type="email" name="email" placeholder="vous@votreentreprise.com" required />
+          </div>
+          <div class="reseau-field">
+            <label>Site web</label>
+            <input class="reseau-input" type="text" name="site" placeholder="https://votresite.com" />
+          </div>
+        </div>
+        <div class="reseau-field">
+          <label>Décrivez brièvement votre cible et ce que vous proposez</label>
+          <textarea class="reseau-input reseau-textarea" name="description" placeholder="Ex : échange de visibilité avec des marques D2C, co-marketing, distribution croisée..." required></textarea>
+        </div>
+        <div style="margin-top:24px;">
+          <button type="submit" class="btn-pack">Lister mon entreprise gratuitement →</button>
+          <p class="reseau-note">Inscription gratuite. Vos données sont utilisées uniquement pour le matching interne. Vous ne payez que si vous décidez d'activer une mise en relation identifiée par nos soins.</p>
+        </div>
+      </form>
+    </div>
+
+  </div>
+</section>
+
 <!-- FAQ -->
 <section class="section" id="faq" style="background:var(--surface); border-top:1px solid rgba(0,0,0,0.06);">
   <div class="section-inner" style="text-align:center;">
@@ -1729,6 +1891,13 @@
 </footer>
 
 <script>
+  // Réseau success state
+  if (new URLSearchParams(window.location.search).get('reseau') === 'ok') {
+    const s = document.getElementById('reseau-success');
+    const f = document.getElementById('reseau-form');
+    if (s && f) { s.style.display = 'block'; f.style.display = 'none'; }
+  }
+
   document.querySelectorAll('a[href^="#"]').forEach(link => {
     link.addEventListener('click', function(e) {
       const href = this.getAttribute('href');

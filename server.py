@@ -45,6 +45,7 @@ STRIPE_PRICES = {
 }
 PACK_ORDERS_FILE   = os.environ.get("PACK_ORDERS_FILE",   "/data/pack_orders.json")
 PACK_CONTEXT_FILE  = os.environ.get("PACK_CONTEXT_FILE",  "/data/pack_context.json")
+RESEAU_FILE        = os.environ.get("RESEAU_FILE",        "/data/reseau.json")
 PLAN_CREDITS = {
     "starter": {"plan": "starter", "credits": 2},
     "growth":  {"plan": "growth",  "credits": 3},
@@ -732,6 +733,34 @@ def pack_submit():
 def merci():
     with open("merci.html", encoding="utf-8") as f:
         return f.read()
+
+
+@app.route("/reseau-submit", methods=["POST"])
+def reseau_submit():
+    from html import escape
+    from datetime import datetime, timezone
+    email       = request.form.get("email", "").strip().lower()[:254]
+    site        = escape(request.form.get("site", "").strip()[:200])
+    description = escape(request.form.get("description", "").strip()[:1000])
+
+    if not email or not re.match(r'^[^@\s]+@[^@\s]+\.[^@\s]+$', email):
+        return redirect("/#reseau")
+
+    members = []
+    if os.path.exists(RESEAU_FILE):
+        with open(RESEAU_FILE, "r", encoding="utf-8") as f:
+            members = json.load(f)
+    members.append({
+        "date": datetime.now(timezone.utc).isoformat(),
+        "email": email,
+        "site": site,
+        "description": description,
+    })
+    with open(RESEAU_FILE, "w", encoding="utf-8") as f:
+        json.dump(members, f, ensure_ascii=False, indent=2)
+    print(f"[RESEAU] Inscription — email={email!r}", flush=True)
+    sync_to_hubspot(email)
+    return redirect("/?reseau=ok#reseau")
 
 
 if __name__ == "__main__":
