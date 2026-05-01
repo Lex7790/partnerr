@@ -1937,9 +1937,9 @@
 
     <div class="reseau-form-box" data-anim>
       <div id="reseau-success" class="reseau-success">
-        ✓ Votre entreprise a bien été ajoutée au réseau. Nous reviendrons vers vous dès qu'une opportunité pertinente est identifiée.
+        ✓ Merci ! Votre inscription au réseau Partnerr est confirmée. Vous recevrez un email prochainement.
       </div>
-      <form action="/reseau-submit" method="POST" id="reseau-form">
+      <form id="reseau-form">
         <div class="reseau-form-row">
           <div class="reseau-field">
             <label>Email professionnel</label>
@@ -1947,13 +1947,13 @@
           </div>
           <div class="reseau-field">
             <label>Votre rôle / poste</label>
-            <input class="reseau-input" type="text" name="poste" placeholder="Ex : Fondateur, Head of Partnerships..." required />
+            <input class="reseau-input" type="text" name="role" placeholder="Ex : Fondateur, Head of Partnerships..." required />
           </div>
         </div>
         <div class="reseau-form-row">
           <div class="reseau-field" style="grid-column: 1 / -1;">
             <label>Site web</label>
-            <input class="reseau-input" type="text" name="site" placeholder="https://votresite.com" />
+            <input class="reseau-input" type="text" name="website" placeholder="https://votresite.com" />
           </div>
         </div>
         <div class="reseau-field">
@@ -1961,7 +1961,8 @@
           <textarea class="reseau-input reseau-textarea" name="description" placeholder="Ex : échange de visibilité avec des marques D2C, co-marketing, distribution croisée..." required></textarea>
         </div>
         <div style="margin-top:24px;">
-          <button type="submit" class="btn-pack">Rejoindre le réseau (Gratuit) →</button>
+          <button type="submit" class="btn-pack" id="reseau-submit-btn">Rejoindre le réseau (Gratuit) →</button>
+          <p id="reseau-error" style="display:none; margin-top:10px; font-size:13px; color:#FCA5A5;"></p>
           <p class="reseau-note">L'inscription et les alertes par email sont 100% gratuites. Le Réseau Partnerr est un service d'intérêt mutuel pour dynamiser les collaborations B2B.</p>
         </div>
       </form>
@@ -2163,11 +2164,36 @@
     draw();
   })();
 
-  // Réseau success state
-  if (new URLSearchParams(window.location.search).get('reseau') === 'ok') {
-    const s = document.getElementById('reseau-success');
-    const f = document.getElementById('reseau-form');
-    if (s && f) { s.style.display = 'block'; f.style.display = 'none'; }
+  // Réseau — soumission AJAX
+  const reseauForm = document.getElementById('reseau-form');
+  if (reseauForm) {
+    reseauForm.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const btn = document.getElementById('reseau-submit-btn');
+      const errEl = document.getElementById('reseau-error');
+      btn.disabled = true;
+      btn.textContent = 'Inscription en cours...';
+      errEl.style.display = 'none';
+      try {
+        const res = await fetch('/api/network-signup', {
+          method: 'POST',
+          body: new FormData(reseauForm),
+        });
+        const data = await res.json();
+        if (res.ok && data.status === 'ok') {
+          reseauForm.style.display = 'none';
+          const s = document.getElementById('reseau-success');
+          if (s) { s.style.display = 'block'; }
+        } else {
+          throw new Error(data.error || 'Erreur serveur');
+        }
+      } catch(err) {
+        errEl.textContent = 'Une erreur est survenue. Réessayez ou contactez contact@usepartnerr.com';
+        errEl.style.display = 'block';
+        btn.disabled = false;
+        btn.textContent = 'Rejoindre le réseau (Gratuit) →';
+      }
+    });
   }
 
   document.querySelectorAll('a[href^="#"]').forEach(link => {

@@ -739,15 +739,20 @@ def merci():
 
 @app.route("/reseau-submit", methods=["POST"])
 def reseau_submit():
+    return redirect("/#reseau")
+
+
+@app.route("/api/network-signup", methods=["POST"])
+def network_signup():
     from html import escape
     from datetime import datetime, timezone
     email       = request.form.get("email", "").strip().lower()[:254]
-    poste       = escape(request.form.get("poste", "").strip()[:100])
-    site        = escape(request.form.get("site", "").strip()[:200])
+    role        = escape(request.form.get("role", "").strip()[:100])
+    website     = escape(request.form.get("website", "").strip()[:200])
     description = escape(request.form.get("description", "").strip()[:1000])
 
     if not email or not re.match(r'^[^@\s]+@[^@\s]+\.[^@\s]+$', email):
-        return redirect("/#reseau")
+        return jsonify({"status": "error", "error": "Email invalide."}), 400
 
     members = []
     if os.path.exists(RESEAU_FILE):
@@ -756,15 +761,15 @@ def reseau_submit():
     members.append({
         "date": datetime.now(timezone.utc).isoformat(),
         "email": email,
-        "poste": poste,
-        "site": site,
+        "role": role,
+        "website": website,
         "description": description,
     })
     with open(RESEAU_FILE, "w", encoding="utf-8") as f:
         json.dump(members, f, ensure_ascii=False, indent=2)
     print(f"[RESEAU] Inscription — email={email!r}", flush=True)
     sync_to_hubspot(email)
-    return redirect("/?reseau=ok#reseau")
+    return jsonify({"status": "ok"})
 
 
 if __name__ == "__main__":
