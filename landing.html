@@ -1016,30 +1016,67 @@
     }
 
     @media (max-width: 600px) {
+      /* Nav */
       nav .nav-inner { padding: 0 20px; height: 64px; }
       nav .nav-link { display: none; }
       .logo { font-size: 20px; }
       .logo svg { width: 24px; height: 23px; }
 
+      /* Footer */
       footer { padding: 28px 20px; }
       .footer-inner { flex-direction: column; align-items: center; text-align: center; gap: 16px; }
       .footer-logo { font-size: 18px; }
-      .footer-inner > div:last-child { gap: 20px; justify-content: center; }
+      .footer-inner > div:last-child { gap: 16px; justify-content: center; flex-wrap: wrap; }
+      .footer-inner > div:last-child a,
+      .footer-inner > div:last-child span { font-size: 14px; }
 
+      /* Hero */
       .hero { padding: 72px 20px 64px; }
-      .hero h1 { font-size: 30px; line-height: 1.18; }
+      .hero h1 { font-size: 28px; line-height: 1.18; }
       .hero-sub { font-size: 15px; margin-bottom: 32px; }
-      .hero-cta-row { flex-direction: column; align-items: stretch; width: 100%; max-width: 360px; margin: 0 auto 16px; }
-      .btn-hero-secondary { text-align: center; }
+      .hero-cta-row { flex-direction: column; align-items: stretch; width: 100%; max-width: 340px; margin: 0 auto 12px; }
+      .btn-hero { text-align: center; justify-content: center; }
+      .btn-hero-secondary { text-align: center; justify-content: center; }
 
-      .section { padding: 64px 20px; }
-      .offer-section { padding: 64px 20px; }
-      .method-section { padding: 64px 20px; }
+      /* Proof bar */
+      .proof-bar { padding: 20px; }
+      .proof-bar-inner { gap: 16px; flex-direction: column; align-items: flex-start; }
+
+      /* Sections */
+      .section { padding: 56px 20px; }
+      .offer-section { padding: 56px 20px; }
+      .method-section { padding: 56px 20px; }
       .section-title { font-size: 22px; max-width: 100%; }
-      .section-sub { font-size: 15px; margin-bottom: 40px; max-width: 100%; }
+      .section-sub { font-size: 15px; margin-bottom: 36px; max-width: 100%; }
 
-      .offer-cta-box { padding: 28px 24px; }
-      .proof-bar-inner { gap: 20px; flex-direction: column; align-items: flex-start; }
+      /* Problème */
+      .problem-row { padding: 24px 20px; gap: 14px; }
+      .problem-big-num { font-size: 32px; width: 40px; }
+
+      /* Pack list */
+      .pack-row { gap: 18px; padding: 22px 0; }
+      .pack-row h3 { font-size: 15px; }
+
+      /* Offer CTA box */
+      .offer-cta-box { padding: 32px 24px; }
+      .price-big { font-size: 32px; }
+
+      /* Method cards */
+      .method-grid { grid-template-columns: 1fr; }
+
+      /* Targets */
+      .targets-grid { grid-template-columns: 1fr 1fr; }
+
+      /* Pricing */
+      .pricing-card { padding: 22px 18px; }
+
+      /* ROI */
+      .roi-highlight { padding: 16px 20px; font-size: 14px; }
+
+      /* CTA final */
+      .cta-final { padding: 72px 20px; }
+      .cta-final h2 { font-size: 26px; }
+      .btn-pack { width: 100%; justify-content: center; }
     }
   </style>
 </head>
@@ -1063,7 +1100,6 @@
     </a>
     <a href="#comment-ca-marche" class="nav-link">Comment ça marche</a>
     <a href="#faq" class="nav-link">FAQ</a>
-    <a href="/audit-partenariat" class="nav-link">Audit</a>
     <a href="#pack" class="btn-nav" id="nav-cta">Commander mon pack →</a>
   </div>
 </nav>

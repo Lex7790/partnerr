@@ -111,36 +111,6 @@ def atomic_decrement_credits(email):
                 fcntl.flock(lf, fcntl.LOCK_UN)
 
 
-def sync_audit_to_hubspot(nom, email, site, activite, cible):
-    if not HUBSPOT_TOKEN:
-        return
-    try:
-        parts = nom.strip().split(" ", 1)
-        firstname = parts[0]
-        lastname = parts[1] if len(parts) > 1 else ""
-        description = f"Activité : {activite}\nCible : {cible}\nSite/LinkedIn : {site}"
-        payload = json.dumps({
-            "properties": {
-                "email": email,
-                "firstname": firstname,
-                "lastname": lastname,
-                "website": site if site.startswith("http") else "",
-                "description": description,
-                "hs_lead_status": "NEW",
-                "lifecyclestage": "lead"
-            }
-        }).encode("utf-8")
-        req = urllib.request.Request(
-            "https://api.hubapi.com/crm/v3/objects/contacts",
-            data=payload,
-            headers={"Authorization": f"Bearer {HUBSPOT_TOKEN}", "Content-Type": "application/json"},
-            method="POST"
-        )
-        urllib.request.urlopen(req, timeout=5)
-        print(f"[HUBSPOT AUDIT] Contact créé : {email}", flush=True)
-    except Exception as e:
-        print(f"[HUBSPOT AUDIT] Erreur : {e}", flush=True)
-
 
 def sync_to_hubspot(email, prenom=""):
     if not HUBSPOT_TOKEN:
@@ -628,41 +598,6 @@ def my_history():
 
 
 
-
-@app.route("/audit-partenariat")
-def audit():
-    with open("audit.html", encoding="utf-8") as f:
-        return f.read()
-
-
-@app.route("/audit-submit", methods=["POST"])
-def audit_submit():
-    from html import escape
-    from datetime import datetime, timezone
-    nom     = escape(request.form.get("nom", "").strip()[:100])
-    email   = request.form.get("email", "").strip().lower()[:254]
-    site    = escape(request.form.get("site", "").strip()[:200])
-    activite = escape(request.form.get("activite", "").strip()[:1000])
-    cible   = escape(request.form.get("cible", "").strip()[:500])
-
-    if not nom or not email or not re.match(r'^[^@\s]+@[^@\s]+\.[^@\s]+$', email):
-        return redirect("/audit-partenariat?error=1")
-
-    # Sauvegarde JSON
-    leads_file = os.environ.get("AUDIT_FILE", "/data/audit_leads.json")
-    leads = []
-    if os.path.exists(leads_file):
-        with open(leads_file, "r", encoding="utf-8") as f:
-            leads = json.load(f)
-    leads.append({"date": datetime.now(timezone.utc).isoformat(), "nom": nom, "email": email, "site": site, "activite": activite, "cible": cible})
-    with open(leads_file, "w", encoding="utf-8") as f:
-        json.dump(leads, f, ensure_ascii=False, indent=2)
-    print(f"[AUDIT] Nouvelle demande — email={email!r} nom={nom!r}", flush=True)
-
-    # HubSpot
-    sync_audit_to_hubspot(nom, email, site, activite, cible)
-
-    return redirect("/audit-partenariat?success=1")
 
 
 @app.route("/success")
