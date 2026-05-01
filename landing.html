@@ -752,31 +752,34 @@
 
     /* ── POUR QUI ── */
     .targets-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 14px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
       margin-top: 48px;
     }
 
     .target-item {
-      background: var(--surface);
-      border: 1.5px solid rgba(0,0,0,0.07);
-      border-radius: 10px;
-      padding: 16px 18px;
+      background: rgba(255,255,255,0.07);
+      border: 1.5px solid rgba(255,255,255,0.12);
+      border-radius: 100px;
+      padding: 14px 24px;
       display: flex;
       align-items: center;
       gap: 10px;
       font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 14px;
+      font-size: 15px;
       font-weight: 600;
-      color: var(--ink);
+      color: rgba(255,255,255,0.88);
+      backdrop-filter: blur(6px);
+      white-space: nowrap;
     }
 
     .target-dot {
-      width: 8px;
-      height: 8px;
+      width: 7px;
+      height: 7px;
       border-radius: 50%;
-      background: var(--accent);
+      background: #A590FF;
       flex-shrink: 0;
     }
 
@@ -933,13 +936,7 @@
     .pour-qui-section .section-label { color: #A590FF; }
     .pour-qui-section .section-title { color: white; }
     .pour-qui-section .section-sub { color: rgba(255,255,255,0.78); }
-    .pour-qui-section .target-item {
-      background: rgba(255,255,255,0.07);
-      border-color: rgba(255,255,255,0.12);
-      color: rgba(255,255,255,0.88);
-      backdrop-filter: blur(6px);
-    }
-    .pour-qui-section .target-dot { background: #A590FF; }
+    .pour-qui-section .section-title { max-width: 700px; }
 
     /* ── OUTIL SECTION ── */
     .tool-section {
@@ -1406,8 +1403,8 @@
       .step p { font-size: 14px; }
 
       /* Targets */
-      .targets-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
-      .target-item { padding: 13px 14px; font-size: 13px; }
+      .targets-grid { gap: 10px; }
+      .target-item { padding: 12px 18px; font-size: 14px; }
 
       /* Réseau */
       .reseau-pillar { padding: 22px 18px; }
