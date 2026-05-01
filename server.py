@@ -41,7 +41,8 @@ STRIPE_PRICES = {
     "starter": os.environ.get("STRIPE_PRICE_STARTER", ""),
     "growth":  os.environ.get("STRIPE_PRICE_GROWTH",  ""),
     "scale":   os.environ.get("STRIPE_PRICE_SCALE",   ""),
-    "pack":    os.environ.get("STRIPE_PRICE_PACK",    "price_1TSD69IcIDgMctx4o02p4nSj"),
+    "pack":          os.environ.get("STRIPE_PRICE_PACK",          "price_1TSD69IcIDgMctx4o02p4nSj"),
+    "pack-business": os.environ.get("STRIPE_PRICE_PACK_BUSINESS", "price_1TSIuQIcIDgMctx4frlN4DUc"),
 }
 PACK_ORDERS_FILE   = os.environ.get("PACK_ORDERS_FILE",   "/data/pack_orders.json")
 PACK_CONTEXT_FILE  = os.environ.get("PACK_CONTEXT_FILE",  "/data/pack_context.json")
@@ -592,7 +593,7 @@ def create_checkout_session():
     if not price_id:
         return "Plan invalide.", 400
     base_url = request.host_url.rstrip("/")
-    if plan == "pack":
+    if plan in ("pack", "pack-business"):
         success_url = f"{base_url}/pack-onboarding?session_id={{CHECKOUT_SESSION_ID}}"
         cancel_url  = f"{base_url}/"
     else:
@@ -627,7 +628,7 @@ def webhook():
         email = (session_data.get("customer_email") or
                  session_data.get("metadata", {}).get("email", "")).strip().lower()
         plan = session_data.get("metadata", {}).get("plan", "starter")
-        if plan == "pack":
+        if plan in ("pack", "pack-business"):
             orders = []
             if os.path.exists(PACK_ORDERS_FILE):
                 with open(PACK_ORDERS_FILE, "r", encoding="utf-8") as f:

@@ -1030,30 +1030,98 @@
     }
 
     /* ── OFFER CTA BOX ── */
-    .offer-cta-box {
+    /* ── PACK OFFERS ── */
+    .pack-offers-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
       margin-top: 56px;
-      background: rgba(94,53,224,0.15);
-      border: 1px solid rgba(94,53,224,0.35);
-      border-radius: 20px;
-      padding: 52px 48px;
-      text-align: center;
+    }
+
+    .pack-offer-card {
+      border-radius: 18px;
+      padding: 36px 32px;
       display: flex;
       flex-direction: column;
-      align-items: center;
-      gap: 10px;
+      gap: 0;
+      position: relative;
     }
-    .offer-cta-box h3 {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 20px;
-      font-weight: 700;
+
+    .pack-offer-card.start {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .pack-offer-card.business {
+      background: rgba(94,53,224,0.18);
+      border: 1.5px solid rgba(123,86,245,0.7);
+      box-shadow: 0 0 48px rgba(94,53,224,0.22);
+    }
+
+    .pack-offer-badge {
+      position: absolute;
+      top: -13px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--accent);
       color: white;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 4px 16px;
+      border-radius: 100px;
+      white-space: nowrap;
     }
-    .offer-cta-box > p {
+
+    .pack-offer-name {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #A590FF;
+      margin-bottom: 12px;
+    }
+
+    .pack-offer-price {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 44px;
+      font-weight: 800;
+      color: white;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .pack-offer-billing {
+      font-size: 13px;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 28px;
+      padding-bottom: 28px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .pack-offer-features {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 11px;
+      flex: 1;
+      margin-bottom: 28px;
+    }
+
+    .pack-offer-features li {
       font-size: 15px;
       color: rgba(255,255,255,0.82);
-      max-width: 480px;
-      line-height: 1.55;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      line-height: 1.45;
     }
+
+    .pack-offer-features li strong { color: white; font-weight: 700; }
+    .pack-offer-features li .check { color: #A590FF; flex-shrink: 0; font-size: 16px; }
 
     /* ── METHOD LAYOUT ── */
     .method-layout {
@@ -1236,6 +1304,7 @@
 
     /* ── RESPONSIVE ── */
     @media (max-width: 900px) {
+      .pack-offers-grid { grid-template-columns: 1fr; max-width: 480px; margin-left: auto; margin-right: auto; }
       .roi-grid { grid-template-columns: 1fr; max-width: 480px; margin-left: auto; margin-right: auto; }
       .reviews-grid { grid-template-columns: 1fr; max-width: 520px; margin-left: auto; margin-right: auto; }
       .method-layout { grid-template-columns: 1fr; gap: 40px; }
@@ -1533,7 +1602,7 @@
       <div class="pack-row" data-anim data-delay="0">
         <span class="pack-row-num">01</span>
         <div>
-          <h3>5 partenaires qualifiés</h3>
+          <h3>Partenaires stratégiques validés</h3>
           <p>Sélectionnés pour leur potentiel d'acquisition, de distribution ou de visibilité qualifiée.</p>
         </div>
       </div>
@@ -1554,28 +1623,56 @@
       <div class="pack-row" data-anim data-delay="3">
         <span class="pack-row-num">04</span>
         <div>
-          <h3>Le bon interlocuteur</h3>
-          <p>Le contact à approcher identifié, avec le rôle exact pour chaque partenaire.</p>
+          <h3>Le bon interlocuteur identifié</h3>
+          <p>Le contact à approcher avec le rôle exact pour chaque partenaire.</p>
         </div>
       </div>
       <div class="pack-row" data-anim data-delay="3">
         <span class="pack-row-num">05</span>
         <div>
-          <h3>5 messages prêts à envoyer</h3>
+          <h3>Messages d'approche prêts à envoyer</h3>
           <p>Rédigés pour ouvrir une discussion concrète, pas juste faire une prise de contact générique.</p>
         </div>
       </div>
     </div>
 
-    <div class="offer-cta-box" data-anim>
-      <div class="price-big">350€</div>
-      <div class="price-note">paiement unique · aucun abonnement · livraison sous 48h</div>
-      <h3>Pack Partnerr</h3>
-      <p>Commandez maintenant. Décrivez votre activité après paiement.<br>Votre pack arrive par email sous 48h.</p>
-      <form action="/create-checkout-session" method="POST" style="margin-top:8px;">
-        <input type="hidden" name="plan" value="pack">
-        <button type="submit" class="btn-pack">Commander mon pack →</button>
-      </form>
+    <div class="pack-offers-grid">
+
+      <!-- Pack Start -->
+      <div class="pack-offer-card start" data-anim data-delay="0">
+        <p class="pack-offer-name">Pack Start</p>
+        <p class="pack-offer-price">350€</p>
+        <p class="pack-offer-billing">paiement unique · livraison sous 48h</p>
+        <ul class="pack-offer-features">
+          <li><span class="check">✓</span><span><strong>5 partenaires</strong> stratégiques validés manuellement</span></li>
+          <li><span class="check">✓</span><span><strong>5 angles</strong> de collaboration</span></li>
+          <li><span class="check">✓</span><span><strong>5 messages</strong> d'approche prêts à envoyer</span></li>
+          <li><span class="check">✓</span><span>Livraison sous <strong>48h</strong></span></li>
+        </ul>
+        <form action="/create-checkout-session" method="POST">
+          <input type="hidden" name="plan" value="pack">
+          <button type="submit" class="btn-pack" style="width:100%; justify-content:center;">Commander mon pack →</button>
+        </form>
+      </div>
+
+      <!-- Pack Business -->
+      <div class="pack-offer-card business" data-anim data-delay="1">
+        <div class="pack-offer-badge">Plus populaire</div>
+        <p class="pack-offer-name">Pack Business</p>
+        <p class="pack-offer-price">499€</p>
+        <p class="pack-offer-billing">paiement unique · livraison prioritaire sous 24h</p>
+        <ul class="pack-offer-features">
+          <li><span class="check">✓</span><span><strong>8 partenaires</strong> stratégiques validés manuellement</span></li>
+          <li><span class="check">✓</span><span><strong>8 angles</strong> de collaboration</span></li>
+          <li><span class="check">✓</span><span><strong>8 messages</strong> d'approche prêts à envoyer</span></li>
+          <li><span class="check">✓</span><span>Livraison prioritaire sous <strong>24h</strong></span></li>
+        </ul>
+        <form action="/create-checkout-session" method="POST">
+          <input type="hidden" name="plan" value="pack-business">
+          <button type="submit" class="btn-pack" style="width:100%; justify-content:center;">Commander le Pack Business →</button>
+        </form>
+      </div>
+
     </div>
   </div>
 </section>
