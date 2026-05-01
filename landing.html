@@ -232,6 +232,57 @@
       margin-top: 12px;
     }
 
+    /* ── HERO MOCK ── */
+    .hero-mock {
+      max-width: 720px;
+      margin: 52px auto 0;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: 0 40px 100px rgba(0,0,0,0.55), 0 0 0 1px rgba(94,53,224,0.15), 0 0 120px 40px rgba(94,53,224,0.18);
+      position: relative;
+    }
+
+    .hero-mock::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 120px;
+      background: linear-gradient(to bottom, transparent, #0B0718);
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .hero-mock-bar {
+      background: #13102A;
+      padding: 12px 18px;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .mock-dot { width: 11px; height: 11px; border-radius: 50%; background: rgba(255,255,255,0.1); }
+
+    .mock-url {
+      flex: 1;
+      margin: 0 10px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 5px;
+      padding: 3px 10px;
+      font-size: 11px;
+      color: rgba(255,255,255,0.2);
+      font-family: 'Inter', sans-serif;
+      text-align: center;
+    }
+
+    .hero-mock-body {
+      background: #0B0718;
+      padding: 28px 32px 32px;
+    }
+
     /* ── PROOF BAR ── */
     .proof-bar {
       background: rgba(94,53,224,0.08);
@@ -1178,6 +1229,7 @@
       .footer-inner > div:last-child span { font-size: 14px; }
 
       /* Hero */
+      .hero-mock { display: none; }
       .hero { padding: 72px 20px 64px; }
       .hero h1 { font-size: 28px; line-height: 1.18; }
       .hero-sub { font-size: 15px; margin-bottom: 32px; }
@@ -1272,6 +1324,53 @@
       <a href="#pack" class="btn-hero">Commander mon pack →</a>
     </div>
     <p data-anim data-delay="3" style="margin-top:16px; font-size:14px; color:rgba(255,255,255,0.72); letter-spacing:0.01em;">Paiement sécurisé · formulaire rapide après paiement · livraison sous 48h</p>
+
+    <!-- BROWSER MOCK -->
+    <div class="hero-mock" data-anim data-delay="2">
+      <div class="hero-mock-bar">
+        <span class="mock-dot"></span>
+        <span class="mock-dot"></span>
+        <span class="mock-dot"></span>
+        <div class="mock-url">usepartnerr.com/pack-onboarding</div>
+      </div>
+      <div class="hero-mock-body">
+
+        <!-- Step pills -->
+        <div style="display:flex; align-items:center; justify-content:center; gap:0; margin-bottom:28px;">
+          <div style="display:flex; align-items:center; gap:7px; padding:6px 14px; border-radius:100px; background:rgba(94,53,224,0.2); font-family:'Plus Jakarta Sans',sans-serif; font-size:12px; font-weight:600; color:#A590FF;">
+            <span style="width:5px;height:5px;border-radius:50%;background:currentColor;flex-shrink:0;"></span>Paiement
+          </div>
+          <div style="width:28px;height:1px;background:rgba(255,255,255,0.1);flex-shrink:0;"></div>
+          <div style="display:flex; align-items:center; gap:7px; padding:6px 14px; border-radius:100px; background:#5E35E0; font-family:'Plus Jakarta Sans',sans-serif; font-size:12px; font-weight:600; color:white; box-shadow:0 0 16px rgba(94,53,224,0.4);">
+            <span style="width:5px;height:5px;border-radius:50%;background:currentColor;flex-shrink:0;"></span>Votre contexte
+          </div>
+          <div style="width:28px;height:1px;background:rgba(255,255,255,0.1);flex-shrink:0;"></div>
+          <div style="display:flex; align-items:center; gap:7px; padding:6px 14px; border-radius:100px; font-family:'Plus Jakarta Sans',sans-serif; font-size:12px; font-weight:600; color:rgba(255,255,255,0.3);">
+            <span style="width:5px;height:5px;border-radius:50%;background:currentColor;flex-shrink:0;"></span>Livraison
+          </div>
+        </div>
+
+        <!-- Card -->
+        <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(94,53,224,0.25); border-radius:14px; padding:28px 28px 24px;">
+          <p style="font-size:11px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:#7B56F5; margin-bottom:10px; font-family:'Plus Jakarta Sans',sans-serif;">Paiement confirmé ✓</p>
+          <p style="font-family:'Plus Jakarta Sans',sans-serif; font-size:18px; font-weight:800; color:white; margin-bottom:6px; letter-spacing:-0.01em;">Dernière étape avant la livraison</p>
+          <p style="font-size:13px; color:rgba(255,255,255,0.55); margin-bottom:24px;">Pour sourcer les bons partenaires, décrivez votre activité.</p>
+
+          <!-- Field 1 -->
+          <div style="margin-bottom:14px;">
+            <p style="font-size:12px; font-weight:600; color:rgba(255,255,255,0.65); margin-bottom:6px; font-family:'Plus Jakarta Sans',sans-serif;">Votre rôle / poste <span style="color:#7B56F5;">*</span></p>
+            <div style="background:rgba(255,255,255,0.05); border:1.5px solid rgba(94,53,224,0.6); border-radius:8px; padding:10px 14px; font-size:13px; color:rgba(255,255,255,0.5);">Fondateur, Head of Partnerships...</div>
+          </div>
+
+          <!-- Field 2 (partial) -->
+          <div>
+            <p style="font-size:12px; font-weight:600; color:rgba(255,255,255,0.65); margin-bottom:6px; font-family:'Plus Jakarta Sans',sans-serif;">Décrivez votre activité <span style="color:#7B56F5;">*</span></p>
+            <div style="background:rgba(255,255,255,0.03); border:1.5px solid rgba(255,255,255,0.08); border-radius:8px; padding:10px 14px; font-size:13px; color:rgba(255,255,255,0.22); min-height:52px;">Nous aidons les...</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
 
   </div>
 </section>
