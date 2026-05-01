@@ -1228,6 +1228,7 @@
       nav .nav-link { display: none; }
       .logo { font-size: 20px; }
       .logo svg { width: 24px; height: 23px; }
+      .btn-nav { font-size: 13px; padding: 8px 14px; }
 
       /* Footer */
       footer { padding: 28px 20px; }
@@ -1238,53 +1239,85 @@
       .footer-inner > div:last-child span { font-size: 14px; }
 
       /* Hero */
+      #hero-canvas { display: none; }
       .hero-mock { display: none; }
-      .hero { padding: 72px 20px 64px; }
-      .hero h1 { font-size: 28px; line-height: 1.18; }
-      .hero-sub { font-size: 15px; margin-bottom: 32px; }
+      .hero { padding: 64px 20px 56px; }
+      .hero h1 { font-size: 26px; line-height: 1.2; }
+      .hero-sub { font-size: 15px; margin-bottom: 28px; }
+      .hero-tag { font-size: 12px; padding: 5px 12px; margin-bottom: 24px; }
       .hero-cta-row { flex-direction: column; align-items: stretch; width: 100%; max-width: 340px; margin: 0 auto 12px; }
-      .btn-hero { text-align: center; justify-content: center; }
-      .btn-hero-secondary { text-align: center; justify-content: center; }
+      .btn-hero { text-align: center; justify-content: center; font-size: 15px; padding: 14px 24px; }
 
       /* Proof bar */
       .proof-bar { padding: 20px; }
-      .proof-bar-inner { gap: 16px; flex-direction: column; align-items: flex-start; }
+      .proof-bar-inner { gap: 14px; flex-direction: column; align-items: flex-start; }
 
       /* Sections */
-      .section { padding: 56px 20px; }
-      .offer-section { padding: 56px 20px; }
-      .method-section { padding: 56px 20px; }
-      .section-title { font-size: 22px; max-width: 100%; }
-      .section-sub { font-size: 15px; margin-bottom: 36px; max-width: 100%; }
+      .section { padding: 52px 20px; }
+      .offer-section { padding: 52px 20px; }
+      .method-section { padding: 52px 20px; }
+      .reseau-section { padding: 52px 20px; }
+      .section-label { font-size: 11px; }
+      .section-title { font-size: 21px; max-width: 100%; }
+      .section-sub { font-size: 15px; margin-bottom: 32px; max-width: 100%; }
 
       /* Problème */
-      .problem-row { padding: 24px 20px; gap: 14px; }
-      .problem-big-num { font-size: 32px; width: 40px; }
+      .problem-row { padding: 22px 18px; gap: 12px; }
+      .problem-big-num { font-size: 28px; width: 36px; }
+      .problem-row h3 { font-size: 15px; }
 
       /* Pack list */
-      .pack-row { gap: 18px; padding: 22px 0; }
+      .pack-row { gap: 16px; padding: 20px 0; }
       .pack-row h3 { font-size: 15px; }
+      .pack-row-num { font-size: 11px; }
 
       /* Offer CTA box */
-      .offer-cta-box { padding: 32px 24px; }
-      .price-big { font-size: 32px; }
+      .offer-cta-box { padding: 28px 20px; }
+      .price-big { font-size: 30px; }
+      .price-note { font-size: 12px; }
+
+      /* Ce que le pack peut débloquer */
+      .unlock-grid { grid-template-columns: 1fr; max-width: 100%; }
+      .unlock-card { padding: 22px 18px; }
 
       /* Method cards */
       .method-grid { grid-template-columns: 1fr; }
+      .method-card { padding: 22px 18px; }
+      .method-note { font-size: 13px; }
+
+      /* Steps */
+      .step h3 { font-size: 16px; }
+      .step p { font-size: 14px; }
 
       /* Targets */
-      .targets-grid { grid-template-columns: 1fr 1fr; }
+      .targets-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+      .target-item { padding: 13px 14px; font-size: 13px; }
+
+      /* Réseau */
+      .reseau-pillar { padding: 22px 18px; }
+      .reseau-form-box { padding: 24px 18px; }
+      .reseau-form-row { grid-template-columns: 1fr; }
+
+      /* Reviews */
+      .reviews-grid { grid-template-columns: 1fr; }
 
       /* Pricing */
       .pricing-card { padding: 22px 18px; }
 
       /* ROI */
+      .roi-card { padding: 22px 18px; }
       .roi-highlight { padding: 16px 20px; font-size: 14px; }
 
       /* CTA final */
-      .cta-final { padding: 72px 20px; }
-      .cta-final h2 { font-size: 26px; }
-      .btn-pack { width: 100%; justify-content: center; }
+      .cta-final { padding: 64px 20px; }
+      .cta-final h2 { font-size: 24px; }
+      .btn-pack { width: 100%; justify-content: center; font-size: 15px; }
+    }
+
+    @media (max-width: 380px) {
+      .hero h1 { font-size: 23px; }
+      .btn-nav { font-size: 12px; padding: 7px 12px; }
+      .targets-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
