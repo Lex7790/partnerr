@@ -115,6 +115,59 @@ def atomic_decrement_credits(email):
 
 
 
+def sync_pack_context_to_hubspot(email, poste, activite, cible, offre, partenariats, site):
+    if not HUBSPOT_TOKEN or not email:
+        return
+    try:
+        description = f"Activité : {activite}\nCible : {cible}\nOffre : {offre}\nPartenariats : {partenariats}"
+        payload = json.dumps({
+            "properties": {
+                "email": email,
+                "jobtitle": poste,
+                "website": site if site.startswith("http") else "",
+                "description": description,
+                "hs_lead_status": "NEW",
+                "lifecyclestage": "lead"
+            }
+        }).encode("utf-8")
+        req = urllib.request.Request(
+            "https://api.hubapi.com/crm/v3/objects/contacts",
+            data=payload,
+            headers={"Authorization": f"Bearer {HUBSPOT_TOKEN}", "Content-Type": "application/json"},
+            method="POST"
+        )
+        urllib.request.urlopen(req, timeout=5)
+        print(f"[HUBSPOT PACK] Contact créé : {email}", flush=True)
+    except Exception as e:
+        print(f"[HUBSPOT PACK] Erreur : {e}", flush=True)
+
+
+def sync_reseau_to_hubspot(email, role, website, description):
+    if not HUBSPOT_TOKEN or not email:
+        return
+    try:
+        payload = json.dumps({
+            "properties": {
+                "email": email,
+                "jobtitle": role,
+                "website": website if website.startswith("http") else "",
+                "description": description,
+                "hs_lead_status": "NEW",
+                "lifecyclestage": "lead"
+            }
+        }).encode("utf-8")
+        req = urllib.request.Request(
+            "https://api.hubapi.com/crm/v3/objects/contacts",
+            data=payload,
+            headers={"Authorization": f"Bearer {HUBSPOT_TOKEN}", "Content-Type": "application/json"},
+            method="POST"
+        )
+        urllib.request.urlopen(req, timeout=5)
+        print(f"[HUBSPOT RÉSEAU] Contact créé : {email}", flush=True)
+    except Exception as e:
+        print(f"[HUBSPOT RÉSEAU] Erreur : {e}", flush=True)
+
+
 def sync_to_hubspot(email, prenom=""):
     if not HUBSPOT_TOKEN:
         return
@@ -734,6 +787,7 @@ def pack_submit():
     print(f"[PACK CONTEXT] Reçu — email={email!r}", flush=True)
 
     send_pack_context_to_admin(email, activite, cible, offre, partenariats, site, poste)
+    sync_pack_context_to_hubspot(email, poste, activite, cible, offre, partenariats, site)
     return redirect("/merci")
 
 
@@ -788,7 +842,7 @@ def network_signup():
     with open(RESEAU_FILE, "w", encoding="utf-8") as f:
         json.dump(members, f, ensure_ascii=False, indent=2)
     print(f"[RESEAU] Inscription — email={email!r}", flush=True)
-    sync_to_hubspot(email)
+    sync_reseau_to_hubspot(email, role, website, description)
     return jsonify({"status": "ok"})
 
 
