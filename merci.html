@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DFC2XSEN7L"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-DFC2XSEN7L');</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pack en cours de préparation — Partnerr</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: #0B0718;
+      color: white;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 32px 24px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .logo {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 800;
+      font-size: 18px;
+      color: white;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      justify-content: center;
+      margin-bottom: 48px;
+    }
+
+    /* Steps */
+    .steps {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      margin-bottom: 48px;
+    }
+
+    .step-pill {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 16px;
+      border-radius: 100px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .step-pill.done {
+      background: rgba(94,53,224,0.2);
+      color: #A590FF;
+    }
+
+    .step-pill.active {
+      background: #5E35E0;
+      color: white;
+      box-shadow: 0 0 20px rgba(94,53,224,0.4);
+    }
+
+    .step-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: currentColor;
+      flex-shrink: 0;
+    }
+
+    .step-line {
+      width: 32px;
+      height: 1px;
+      background: rgba(255,255,255,0.12);
+      flex-shrink: 0;
+    }
+
+    /* Card */
+    .card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(94,53,224,0.3);
+      border-radius: 20px;
+      padding: 52px 48px;
+      max-width: 520px;
+      width: 100%;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: -80px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 500px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(94,53,224,0.2) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    .card-inner { position: relative; z-index: 1; }
+
+    .icon {
+      width: 64px;
+      height: 64px;
+      background: rgba(94,53,224,0.2);
+      border: 1px solid rgba(94,53,224,0.45);
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 28px;
+    }
+
+    h1 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 26px;
+      font-weight: 800;
+      color: white;
+      margin-bottom: 12px;
+      letter-spacing: -0.02em;
+    }
+
+    .lead {
+      font-size: 16px;
+      color: rgba(255,255,255,0.75);
+      line-height: 1.6;
+      margin-bottom: 36px;
+    }
+
+    /* Timeline */
+    .timeline {
+      background: rgba(94,53,224,0.08);
+      border: 1px solid rgba(94,53,224,0.2);
+      border-radius: 12px;
+      padding: 24px 28px;
+      margin-bottom: 36px;
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .timeline-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+
+    .tl-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      margin-top: 6px;
+    }
+
+    .tl-dot.done { background: #7B56F5; }
+    .tl-dot.active { background: #A590FF; box-shadow: 0 0 6px rgba(165,144,255,0.6); }
+    .tl-dot.pending { background: rgba(255,255,255,0.2); }
+
+    .tl-text { font-size: 14px; line-height: 1.5; }
+    .tl-text strong { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 600; color: white; display: block; margin-bottom: 2px; }
+    .tl-text span { color: rgba(255,255,255,0.55); font-size: 13px; }
+
+    .btn {
+      display: inline-block;
+      background: transparent;
+      color: rgba(255,255,255,0.55);
+      border: 1px solid rgba(255,255,255,0.12);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      padding: 12px 28px;
+      border-radius: 10px;
+      text-decoration: none;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn:hover { border-color: rgba(255,255,255,0.3); color: rgba(255,255,255,0.85); }
+
+    .note {
+      margin-top: 20px;
+      font-size: 13px;
+      color: rgba(255,255,255,0.35);
+    }
+
+    @media (max-width: 600px) {
+      .card { padding: 36px 24px; }
+      h1 { font-size: 22px; }
+      .steps { gap: 0; }
+      .step-pill { padding: 6px 12px; font-size: 12px; }
+      .step-line { width: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <a href="/" class="logo">
+    <svg width="22" height="21" viewBox="0 0 24 23" fill="none">
+      <defs>
+        <linearGradient id="vg-merci" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#EDE9FF"/>
+          <stop offset="100%" stop-color="#5E35E0"/>
+        </linearGradient>
+      </defs>
+      <polygon points="15,7 21.1,10.5 21.1,17.5 15,21 8.9,17.5 8.9,10.5" fill="white" stroke="rgba(94,53,224,0.55)" stroke-width="1.5"/>
+      <polygon points="9,2 15.1,5.5 15.1,12.5 9,16 2.9,12.5 2.9,5.5" fill="url(#vg-merci)"/>
+    </svg>
+    Partnerr
+  </a>
+
+  <div class="steps">
+    <div class="step-pill done">
+      <span class="step-dot"></span>
+      Paiement
+    </div>
+    <div class="step-line"></div>
+    <div class="step-pill done">
+      <span class="step-dot"></span>
+      Contexte
+    </div>
+    <div class="step-line"></div>
+    <div class="step-pill active">
+      <span class="step-dot"></span>
+      Livraison
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-inner">
+      <div class="icon">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+          <path d="M20 6L9 17l-5-5" stroke="#C4B5FF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <h1>Votre pack est en préparation</h1>
+      <p class="lead">Nous avons bien reçu vos informations. Votre pack de 5 partenaires qualifiés sera livré par email sous 48h.</p>
+
+      <div class="timeline">
+        <div class="timeline-row">
+          <span class="tl-dot done"></span>
+          <div class="tl-text">
+            <strong>Paiement confirmé</strong>
+            <span>Reçu avec succès</span>
+          </div>
+        </div>
+        <div class="timeline-row">
+          <span class="tl-dot done"></span>
+          <div class="tl-text">
+            <strong>Contexte reçu</strong>
+            <span>Votre activité et vos cibles ont bien été transmises</span>
+          </div>
+        </div>
+        <div class="timeline-row">
+          <span class="tl-dot active"></span>
+          <div class="tl-text">
+            <strong>Sourcing en cours</strong>
+            <span>Partnerr identifie et valide vos 5 partenaires</span>
+          </div>
+        </div>
+        <div class="timeline-row">
+          <span class="tl-dot pending"></span>
+          <div class="tl-text">
+            <strong>Livraison sous 48h</strong>
+            <span>Par email — 5 partenaires, 5 angles, 5 messages</span>
+          </div>
+        </div>
+      </div>
+
+      <a href="/" class="btn">Retour à l'accueil</a>
+      <p class="note">Une question ? <a href="mailto:contact@usepartnerr.com" style="color:rgba(255,255,255,0.45); text-decoration:none;">contact@usepartnerr.com</a></p>
+    </div>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DFC2XSEN7L"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-DFC2XSEN7L');</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Votre pack est en cours — Partnerr</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: #0B0718;
+      color: white;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      padding: 48px 24px 80px;
+    }
+
+    /* ── LOGO ── */
+    .logo {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 800;
+      font-size: 18px;
+      color: white;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      justify-content: center;
+      margin-bottom: 48px;
+    }
+
+    /* ── STEPS ── */
+    .steps {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      margin-bottom: 48px;
+    }
+
+    .step-pill {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 16px;
+      border-radius: 100px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .step-pill.done {
+      background: rgba(94,53,224,0.2);
+      color: #A590FF;
+    }
+
+    .step-pill.active {
+      background: #5E35E0;
+      color: white;
+      box-shadow: 0 0 20px rgba(94,53,224,0.4);
+    }
+
+    .step-pill.pending {
+      color: rgba(255,255,255,0.3);
+    }
+
+    .step-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: currentColor;
+      flex-shrink: 0;
+    }
+
+    .step-line {
+      width: 32px;
+      height: 1px;
+      background: rgba(255,255,255,0.12);
+      flex-shrink: 0;
+    }
+
+    /* ── CARD ── */
+    .card {
+      max-width: 600px;
+      margin: 0 auto;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(94,53,224,0.3);
+      border-radius: 20px;
+      padding: 48px 48px 40px;
+      position: relative;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: -120px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(94,53,224,0.18) 0%, transparent 65%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .card-inner { position: relative; z-index: 1; }
+
+    .card-label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #7B56F5;
+      margin-bottom: 14px;
+    }
+
+    .card-title {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 26px;
+      font-weight: 800;
+      color: white;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      margin-bottom: 10px;
+    }
+
+    .card-sub {
+      font-size: 15px;
+      color: rgba(255,255,255,0.72);
+      line-height: 1.6;
+      margin-bottom: 36px;
+    }
+
+    /* ── FORM ── */
+    .form-group {
+      margin-bottom: 22px;
+    }
+
+    label {
+      display: block;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.82);
+      margin-bottom: 8px;
+      letter-spacing: 0.01em;
+    }
+
+    label span {
+      color: #7B56F5;
+      margin-left: 2px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="url"],
+    textarea {
+      width: 100%;
+      background: rgba(255,255,255,0.05);
+      border: 1.5px solid rgba(255,255,255,0.1);
+      border-radius: 10px;
+      padding: 13px 16px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      color: white;
+      outline: none;
+      transition: border-color 0.2s, background 0.2s;
+      resize: none;
+    }
+
+    input::placeholder,
+    textarea::placeholder {
+      color: rgba(255,255,255,0.28);
+    }
+
+    input:focus,
+    textarea:focus {
+      border-color: rgba(94,53,224,0.7);
+      background: rgba(94,53,224,0.07);
+    }
+
+    textarea { min-height: 100px; }
+
+    /* ── SUBMIT ── */
+    .form-footer {
+      margin-top: 32px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn-submit {
+      width: 100%;
+      padding: 16px;
+      background: #5E35E0;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s;
+      box-shadow: 0 8px 28px rgba(94,53,224,0.35);
+    }
+
+    .btn-submit:hover { background: #7B56F5; }
+
+    .form-note {
+      font-size: 13px;
+      color: rgba(255,255,255,0.4);
+      text-align: center;
+    }
+
+    /* ── ERROR ── */
+    .error-banner {
+      display: none;
+      background: rgba(239,68,68,0.12);
+      border: 1px solid rgba(239,68,68,0.3);
+      border-radius: 10px;
+      padding: 12px 16px;
+      font-size: 14px;
+      color: #FCA5A5;
+      margin-bottom: 24px;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      body { padding: 32px 16px 60px; }
+      .card { padding: 32px 24px 28px; }
+      .card-title { font-size: 22px; }
+      .steps { gap: 0; }
+      .step-pill { padding: 6px 12px; font-size: 12px; }
+      .step-line { width: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <a href="/" class="logo">
+    <svg width="22" height="21" viewBox="0 0 24 23" fill="none">
+      <defs>
+        <linearGradient id="vg-ob" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#EDE9FF"/>
+          <stop offset="100%" stop-color="#5E35E0"/>
+        </linearGradient>
+      </defs>
+      <polygon points="15,7 21.1,10.5 21.1,17.5 15,21 8.9,17.5 8.9,10.5" fill="white" stroke="rgba(94,53,224,0.55)" stroke-width="1.5"/>
+      <polygon points="9,2 15.1,5.5 15.1,12.5 9,16 2.9,12.5 2.9,5.5" fill="url(#vg-ob)"/>
+    </svg>
+    Partnerr
+  </a>
+
+  <!-- Steps -->
+  <div class="steps">
+    <div class="step-pill done">
+      <span class="step-dot"></span>
+      Paiement
+    </div>
+    <div class="step-line"></div>
+    <div class="step-pill active">
+      <span class="step-dot"></span>
+      Votre contexte
+    </div>
+    <div class="step-line"></div>
+    <div class="step-pill pending">
+      <span class="step-dot"></span>
+      Livraison
+    </div>
+  </div>
+
+  <!-- Card -->
+  <div class="card">
+    <div class="card-inner">
+
+      <p class="card-label">Paiement confirmé ✓</p>
+      <h1 class="card-title">Dernière étape avant la livraison</h1>
+      <p class="card-sub">Pour sourcer les bons partenaires, nous avons besoin de comprendre votre activité. 2 à 3 minutes.</p>
+
+      <div class="error-banner" id="error-banner">
+        Merci de remplir au minimum votre activité et votre cible.
+      </div>
+
+      <form action="/pack-submit" method="POST" id="onboarding-form">
+        <input type="hidden" name="session_id" id="session-id-field" value="">
+        <input type="hidden" name="email" id="email-field" value="">
+
+        <div class="form-group">
+          <label>Décrivez votre activité<span>*</span></label>
+          <textarea name="activite" placeholder="Ex : nous aidons les PME industrielles à réduire leurs délais de livraison grâce à un logiciel de planification..." required></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>Votre client type<span>*</span></label>
+          <input type="text" name="cible" placeholder="Ex : PME manufacturières, 10–200 salariés, France" required />
+        </div>
+
+        <div class="form-group">
+          <label>Votre offre principale</label>
+          <input type="text" name="offre" placeholder="Ex : logiciel SaaS de planification industrielle, abonnement mensuel" />
+        </div>
+
+        <div class="form-group">
+          <label>Type de partenariats recherchés</label>
+          <input type="text" name="partenariats" placeholder="Ex : intégrateurs ERP, cabinets de conseil industrie, distributeurs logiciels" />
+        </div>
+
+        <div class="form-group">
+          <label>Site web ou profil LinkedIn</label>
+          <input type="text" name="site" placeholder="https://" />
+        </div>
+
+        <div class="form-footer">
+          <button type="submit" class="btn-submit">Lancer mon pack →</button>
+          <p class="form-note">Livraison par email sous 48h · Aucun paiement supplémentaire</p>
+        </div>
+      </form>
+
+    </div>
+  </div>
+
+  <script>
+    // Injecter le session_id depuis l'URL
+    const params = new URLSearchParams(window.location.search);
+    const sessionId = params.get('session_id') || '';
+    document.getElementById('session-id-field').value = sessionId;
+
+    // Afficher l'erreur si redirigé avec ?error=1
+    if (params.get('error') === '1') {
+      document.getElementById('error-banner').style.display = 'block';
+    }
+
+    // Récupérer l'email stocké localement si dispo
+    const storedEmail = localStorage.getItem('partnerr_email') || '';
+    document.getElementById('email-field').value = storedEmail;
+  </script>
+
+</body>
+</html>

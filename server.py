@@ -43,7 +43,8 @@ STRIPE_PRICES = {
     "scale":   os.environ.get("STRIPE_PRICE_SCALE",   ""),
     "pack":    os.environ.get("STRIPE_PRICE_PACK",    "price_1TSD69IcIDgMctx4o02p4nSj"),
 }
-PACK_ORDERS_FILE = os.environ.get("PACK_ORDERS_FILE", "/data/pack_orders.json")
+PACK_ORDERS_FILE   = os.environ.get("PACK_ORDERS_FILE",   "/data/pack_orders.json")
+PACK_CONTEXT_FILE  = os.environ.get("PACK_CONTEXT_FILE",  "/data/pack_context.json")
 PLAN_CREDITS = {
     "starter": {"plan": "starter", "credits": 2},
     "growth":  {"plan": "growth",  "credits": 3},
@@ -137,6 +138,77 @@ def sync_to_hubspot(email, prenom=""):
         print(f"[HUBSPOT] Contact créé : {email}", flush=True)
     except Exception as e:
         print(f"[HUBSPOT] Erreur : {e}", flush=True)
+
+
+def send_pack_onboarding_email(email, session_id):
+    if not RESEND_API_KEY or not email:
+        return
+    onboarding_url = f"https://usepartnerr.com/pack-onboarding?session_id={session_id}"
+    try:
+        import resend
+        resend.api_key = RESEND_API_KEY
+        resend.Emails.send({
+            "from": "Partnerr <hello@usepartnerr.com>",
+            "to": [email],
+            "subject": "Une dernière étape pour recevoir votre pack",
+            "html": f"""
+            <div style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; background:#0B0718; padding:48px 24px;">
+              <div style="max-width:480px; margin:0 auto;">
+                <div style="margin-bottom:36px; text-align:center;">
+                  <span style="font-size:20px; font-weight:800; color:#ffffff;">Partnerr<span style="color:#7B56F5;">.</span></span>
+                </div>
+                <div style="background:rgba(255,255,255,0.04); border:1px solid rgba(94,53,224,0.35); border-radius:16px; padding:36px 32px;">
+                  <p style="font-size:12px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:#7B56F5; margin:0 0 12px;">Paiement confirmé ✓</p>
+                  <h1 style="font-size:22px; font-weight:800; color:#ffffff; margin:0 0 16px; line-height:1.3;">Dernière étape avant la livraison</h1>
+                  <p style="font-size:15px; color:rgba(255,255,255,0.78); line-height:1.7; margin:0 0 28px;">
+                    Pour préparer votre pack, nous avons besoin de quelques informations sur votre activité. Cela prend 2 minutes.
+                  </p>
+                  <a href="{onboarding_url}" style="display:inline-block; padding:14px 28px; background:#5E35E0; color:#ffffff; border-radius:10px; text-decoration:none; font-size:15px; font-weight:700;">
+                    Remplir le formulaire →
+                  </a>
+                </div>
+                <p style="margin-top:24px; font-size:13px; color:rgba(255,255,255,0.4); text-align:center;">
+                  Votre pack sera livré sous 48h après réception. Une question ? <a href="mailto:contact@usepartnerr.com" style="color:rgba(255,255,255,0.5); text-decoration:none;">contact@usepartnerr.com</a>
+                </p>
+              </div>
+            </div>
+            """
+        })
+        print(f"[EMAIL PACK ONBOARDING] Envoi réussi à {email}", flush=True)
+    except Exception as e:
+        print(f"[EMAIL PACK ONBOARDING] Erreur : {e}", flush=True)
+
+
+def send_pack_context_to_admin(email, activite, cible, offre, partenariats, site):
+    if not RESEND_API_KEY:
+        return
+    try:
+        import resend
+        resend.api_key = RESEND_API_KEY
+        resend.Emails.send({
+            "from": "Partnerr <hello@usepartnerr.com>",
+            "to": ["contact@usepartnerr.com"],
+            "reply_to": email,
+            "subject": f"Pack à préparer — {email}",
+            "html": f"""
+            <div style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; background:#f9f9f9; padding:40px 24px;">
+              <div style="max-width:560px; margin:0 auto; background:white; border-radius:12px; padding:36px 32px; border:1px solid #e5e7eb;">
+                <h2 style="font-size:20px; font-weight:700; color:#0B0718; margin:0 0 24px;">Nouveau pack à préparer</h2>
+                <table style="width:100%; border-collapse:collapse;">
+                  <tr><td style="padding:10px 0; border-bottom:1px solid #f0f0f0; font-size:13px; color:#8B87A3; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; width:140px;">Client</td><td style="padding:10px 0; border-bottom:1px solid #f0f0f0; font-size:15px; color:#0B0718;">{email}</td></tr>
+                  <tr><td style="padding:10px 0; border-bottom:1px solid #f0f0f0; font-size:13px; color:#8B87A3; font-weight:600; text-transform:uppercase; letter-spacing:0.08em;">Activité</td><td style="padding:10px 0; border-bottom:1px solid #f0f0f0; font-size:15px; color:#0B0718;">{activite}</td></tr>
+                  <tr><td style="padding:10px 0; border-bottom:1px solid #f0f0f0; font-size:13px; color:#8B87A3; font-weight:600; text-transform:uppercase; letter-spacing:0.08em;">Cible</td><td style="padding:10px 0; border-bottom:1px solid #f0f0f0; font-size:15px; color:#0B0718;">{cible}</td></tr>
+                  <tr><td style="padding:10px 0; border-bottom:1px solid #f0f0f0; font-size:13px; color:#8B87A3; font-weight:600; text-transform:uppercase; letter-spacing:0.08em;">Offre</td><td style="padding:10px 0; border-bottom:1px solid #f0f0f0; font-size:15px; color:#0B0718;">{offre}</td></tr>
+                  <tr><td style="padding:10px 0; border-bottom:1px solid #f0f0f0; font-size:13px; color:#8B87A3; font-weight:600; text-transform:uppercase; letter-spacing:0.08em;">Partenariats</td><td style="padding:10px 0; border-bottom:1px solid #f0f0f0; font-size:15px; color:#0B0718;">{partenariats}</td></tr>
+                  <tr><td style="padding:10px 0; font-size:13px; color:#8B87A3; font-weight:600; text-transform:uppercase; letter-spacing:0.08em;">Site / LinkedIn</td><td style="padding:10px 0; font-size:15px; color:#0B0718;">{site}</td></tr>
+                </table>
+              </div>
+            </div>
+            """
+        })
+        print(f"[EMAIL ADMIN PACK] Envoi réussi pour {email}", flush=True)
+    except Exception as e:
+        print(f"[EMAIL ADMIN PACK] Erreur : {e}", flush=True)
 
 
 def send_welcome_email(email, prenom=""):
@@ -520,7 +592,7 @@ def create_checkout_session():
         return "Plan invalide.", 400
     base_url = request.host_url.rstrip("/")
     if plan == "pack":
-        success_url = f"{base_url}/success-pack?session_id={{CHECKOUT_SESSION_ID}}"
+        success_url = f"{base_url}/pack-onboarding?session_id={{CHECKOUT_SESSION_ID}}"
         cancel_url  = f"{base_url}/"
     else:
         success_url = f"{base_url}/success?session_id={{CHECKOUT_SESSION_ID}}"
@@ -569,6 +641,8 @@ def webhook():
             with open(PACK_ORDERS_FILE, "w", encoding="utf-8") as f:
                 json.dump(orders, f, ensure_ascii=False, indent=2)
             print(f"[PACK] Commande reçue — email={email!r}", flush=True)
+            if email:
+                send_pack_onboarding_email(email, session_data.get("id", ""))
         elif email and plan in PLAN_CREDITS:
             users = load_users()
             existing = users.get(email, {})
@@ -608,7 +682,55 @@ def success():
 
 @app.route("/success-pack")
 def success_pack():
-    with open("success_pack.html", encoding="utf-8") as f:
+    return redirect("/pack-onboarding")
+
+
+@app.route("/pack-onboarding")
+def pack_onboarding():
+    with open("pack_onboarding.html", encoding="utf-8") as f:
+        return f.read()
+
+
+@app.route("/pack-submit", methods=["POST"])
+def pack_submit():
+    from html import escape
+    from datetime import datetime, timezone
+    email        = request.form.get("email", "").strip().lower()[:254]
+    session_id   = request.form.get("session_id", "").strip()[:200]
+    activite     = escape(request.form.get("activite", "").strip()[:2000])
+    cible        = escape(request.form.get("cible", "").strip()[:500])
+    offre        = escape(request.form.get("offre", "").strip()[:500])
+    partenariats = escape(request.form.get("partenariats", "").strip()[:500])
+    site         = escape(request.form.get("site", "").strip()[:200])
+
+    if not activite or not cible:
+        return redirect("/pack-onboarding?error=1")
+
+    contexts = []
+    if os.path.exists(PACK_CONTEXT_FILE):
+        with open(PACK_CONTEXT_FILE, "r", encoding="utf-8") as f:
+            contexts = json.load(f)
+    contexts.append({
+        "date": datetime.now(timezone.utc).isoformat(),
+        "email": email,
+        "session_id": session_id,
+        "activite": activite,
+        "cible": cible,
+        "offre": offre,
+        "partenariats": partenariats,
+        "site": site,
+    })
+    with open(PACK_CONTEXT_FILE, "w", encoding="utf-8") as f:
+        json.dump(contexts, f, ensure_ascii=False, indent=2)
+    print(f"[PACK CONTEXT] Reçu — email={email!r}", flush=True)
+
+    send_pack_context_to_admin(email, activite, cible, offre, partenariats, site)
+    return redirect("/merci")
+
+
+@app.route("/merci")
+def merci():
+    with open("merci.html", encoding="utf-8") as f:
         return f.read()
 
 
