@@ -594,43 +594,70 @@
     .method-section .section-sub { color: rgba(255,255,255,0.90); }
 
     .method-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 20px;
+      display: flex;
+      flex-direction: column;
       margin-top: 56px;
     }
 
     .method-card {
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 14px;
-      padding: 28px 24px;
+      display: flex;
+      align-items: center;
+      gap: 64px;
+      padding: 48px 0;
+      border-top: 1px solid rgba(255,255,255,0.07);
+      background: none;
+      border-radius: 0;
+    }
+
+    .method-card:last-child { border-bottom: 1px solid rgba(255,255,255,0.07); }
+    .method-card:nth-child(even) { flex-direction: row-reverse; }
+
+    .method-icon-side {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+      width: 96px;
+    }
+
+    .method-card-num {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #7B56F5;
     }
 
     .method-icon {
-      width: 44px;
-      height: 44px;
-      background: rgba(94,53,224,0.3);
-      border-radius: 12px;
+      width: 72px;
+      height: 72px;
+      background: rgba(94,53,224,0.25);
+      border: 1px solid rgba(94,53,224,0.4);
+      border-radius: 20px;
       display: flex;
       align-items: center;
       justify-content: center;
       color: #C4B5FF;
-      margin-bottom: 18px;
     }
+
+    .method-text { flex: 1; }
 
     .method-card h3 {
       font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 16px;
+      font-size: 20px;
       font-weight: 700;
       color: white;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
+      line-height: 1.3;
     }
 
     .method-card p {
       font-size: 15px;
       color: rgba(255,255,255,0.82);
-      line-height: 1.6;
+      line-height: 1.65;
+      max-width: 480px;
     }
 
     .method-note {
@@ -1281,8 +1308,9 @@
       .unlock-card { padding: 22px 18px; }
 
       /* Method cards */
-      .method-grid { grid-template-columns: 1fr; }
-      .method-card { padding: 22px 18px; }
+      .method-card { flex-direction: column !important; gap: 24px; padding: 32px 0; text-align: left; }
+      .method-icon-side { flex-direction: row; width: auto; gap: 14px; align-items: center; }
+      .method-card p { max-width: 100%; }
       .method-note { font-size: 13px; }
 
       /* Steps */
@@ -1636,43 +1664,66 @@
 
     <div class="method-grid">
       <div class="method-card" data-anim data-delay="0">
-        <div class="method-icon">
-          <svg width="22" height="22" viewBox="0 0 20 20" fill="none">
-            <path d="M4 10a6 6 0 1012 0A6 6 0 004 10z" fill="currentColor" opacity=".2"/>
-            <path d="M10 7v3l2 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-          </svg>
+        <div class="method-icon-side">
+          <span class="method-card-num">01</span>
+          <div class="method-icon">
+            <svg width="26" height="26" viewBox="0 0 20 20" fill="none">
+              <path d="M4 10a6 6 0 1012 0A6 6 0 004 10z" fill="currentColor" opacity=".2"/>
+              <path d="M10 7v3l2 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </div>
         </div>
-        <h3>Analyse du marché</h3>
-        <p>Partnerr identifie les zones de complémentarité dans votre secteur : acteurs adjacents, cibles communes, dynamiques business.</p>
+        <div class="method-text">
+          <h3>Analyse du marché</h3>
+          <p>Partnerr identifie les zones de complémentarité dans votre secteur : acteurs adjacents, cibles communes, dynamiques business.</p>
+        </div>
       </div>
+
       <div class="method-card" data-anim data-delay="1">
-        <div class="method-icon">
-          <svg width="22" height="22" viewBox="0 0 20 20" fill="none">
-            <path d="M10 2l2.4 4.9 5.4.8-3.9 3.8.9 5.4L10 14.4l-4.8 2.5.9-5.4L2.2 7.7l5.4-.8L10 2z" fill="currentColor" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/>
-          </svg>
+        <div class="method-icon-side">
+          <span class="method-card-num">02</span>
+          <div class="method-icon">
+            <svg width="26" height="26" viewBox="0 0 20 20" fill="none">
+              <path d="M10 2l2.4 4.9 5.4.8-3.9 3.8.9 5.4L10 14.4l-4.8 2.5.9-5.4L2.2 7.7l5.4-.8L10 2z" fill="currentColor" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/>
+            </svg>
+          </div>
         </div>
-        <h3>Fit sectoriel et cible</h3>
-        <p>Chaque partenaire est sélectionné sur sa complémentarité réelle : même cible, positionnements qui se renforcent.</p>
+        <div class="method-text">
+          <h3>Fit sectoriel et cible</h3>
+          <p>Chaque partenaire est sélectionné sur sa complémentarité réelle : même cible, positionnements qui se renforcent.</p>
+        </div>
       </div>
+
       <div class="method-card" data-anim data-delay="2">
-        <div class="method-icon">
-          <svg width="22" height="22" viewBox="0 0 20 20" fill="none">
-            <circle cx="10" cy="7" r="3" fill="currentColor"/>
-            <path d="M4 17c0-3.3 2.7-6 6-6s6 2.7 6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-          </svg>
+        <div class="method-icon-side">
+          <span class="method-card-num">03</span>
+          <div class="method-icon">
+            <svg width="26" height="26" viewBox="0 0 20 20" fill="none">
+              <circle cx="10" cy="7" r="3" fill="currentColor"/>
+              <path d="M4 17c0-3.3 2.7-6 6-6s6 2.7 6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </div>
         </div>
-        <h3>Signaux business</h3>
-        <p>Chaque partenaire est vérifié : actif, visible en ligne, pertinent aujourd'hui.</p>
+        <div class="method-text">
+          <h3>Signaux business</h3>
+          <p>Chaque partenaire est vérifié : actif, visible en ligne, pertinent aujourd'hui.</p>
+        </div>
       </div>
+
       <div class="method-card" data-anim data-delay="3">
-        <div class="method-icon">
-          <svg width="22" height="22" viewBox="0 0 20 20" fill="none">
-            <path d="M7 10l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            <rect x="3" y="4" width="14" height="12" rx="2" stroke="currentColor" stroke-width="1.5" fill="none"/>
-          </svg>
+        <div class="method-icon-side">
+          <span class="method-card-num">04</span>
+          <div class="method-icon">
+            <svg width="26" height="26" viewBox="0 0 20 20" fill="none">
+              <path d="M7 10l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <rect x="3" y="4" width="14" height="12" rx="2" stroke="currentColor" stroke-width="1.5" fill="none"/>
+            </svg>
+          </div>
         </div>
-        <h3>Validation manuelle</h3>
-        <p>Le pack est relu avant livraison. Seules les opportunités concrètes et activables sont conservées.</p>
+        <div class="method-text">
+          <h3>Validation manuelle</h3>
+          <p>Le pack est relu avant livraison. Seules les opportunités concrètes et activables sont conservées.</p>
+        </div>
       </div>
     </div>
 
