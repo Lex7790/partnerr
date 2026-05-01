@@ -717,6 +717,125 @@
       box-shadow: 0 0 0 3px rgba(94,53,224,0.08);
       transform: translateY(-2px);
     }
+    .pricing-card form,
+    .pricing-card > a { margin-top: auto; }
+
+    /* ── PROBLEM LIST ── */
+    .problem-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      margin-top: 48px;
+      border: 1.5px solid rgba(0,0,0,0.07);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+    .problem-row {
+      padding: 36px 32px;
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+      border-right: 1.5px solid rgba(0,0,0,0.07);
+      border-bottom: 1.5px solid rgba(0,0,0,0.07);
+    }
+    .problem-row:nth-child(2n) { border-right: none; }
+    .problem-row:nth-child(3),
+    .problem-row:nth-child(4) { border-bottom: none; }
+    .problem-big-num {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 44px;
+      font-weight: 800;
+      color: rgba(94,53,224,0.13);
+      line-height: 1;
+      flex-shrink: 0;
+      width: 56px;
+    }
+    .problem-row h3 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 6px;
+    }
+    .problem-row p {
+      font-size: 14px;
+      color: var(--ink-soft);
+      line-height: 1.6;
+    }
+
+    /* ── PACK LIST ── */
+    .pack-list {
+      margin-top: 32px;
+      display: flex;
+      flex-direction: column;
+    }
+    .pack-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 28px;
+      padding: 28px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .pack-row:last-child { border-bottom: none; }
+    .pack-row-num {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      color: #9B7BFF;
+      letter-spacing: 0.08em;
+      width: 24px;
+      flex-shrink: 0;
+      padding-top: 3px;
+    }
+    .pack-row h3 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 17px;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 5px;
+    }
+    .pack-row p {
+      font-size: 14px;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.55;
+    }
+
+    /* ── OFFER CTA BOX ── */
+    .offer-cta-box {
+      margin-top: 56px;
+      background: rgba(94,53,224,0.15);
+      border: 1px solid rgba(94,53,224,0.35);
+      border-radius: 20px;
+      padding: 52px 48px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+    .offer-cta-box h3 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: white;
+    }
+    .offer-cta-box > p {
+      font-size: 15px;
+      color: rgba(255,255,255,0.6);
+      max-width: 480px;
+      line-height: 1.55;
+    }
+
+    /* ── METHOD LAYOUT ── */
+    .method-layout {
+      display: grid;
+      grid-template-columns: 1fr 1.6fr;
+      gap: 80px;
+      align-items: start;
+    }
+    .method-layout .section-label,
+    .method-layout .section-title,
+    .method-layout .section-sub { margin-bottom: 0; }
+    .method-layout .section-sub { margin-bottom: 0; }
 
     /* ── FAQ ── */
     .faq-list {
@@ -889,8 +1008,10 @@
     @media (max-width: 900px) {
       .roi-grid { grid-template-columns: 1fr; max-width: 480px; margin-left: auto; margin-right: auto; }
       .reviews-grid { grid-template-columns: 1fr; max-width: 520px; margin-left: auto; margin-right: auto; }
-      .offer-cta-box { flex-direction: column; align-items: flex-start; }
-      .offer-cta-box-right { align-items: flex-start; }
+      .method-layout { grid-template-columns: 1fr; gap: 40px; }
+      .problem-list { grid-template-columns: 1fr; }
+      .problem-row { border-right: none !important; }
+      .problem-row:nth-child(3) { border-bottom: 1.5px solid rgba(0,0,0,0.07) !important; }
     }
 
     @media (max-width: 600px) {
@@ -1012,26 +1133,34 @@
     <h2 class="section-title" data-anim>Vous savez que les partenariats peuvent générer du business. Le problème, c'est de savoir où commencer.</h2>
     <p class="section-sub" data-anim>La plupart des entreprises passent à côté de leurs meilleures opportunités de croissance faute de méthode.</p>
 
-    <div class="problem-grid">
-      <div class="problem-card" data-anim data-delay="0">
-        <span class="problem-emoji">📈</span>
-        <h3>Les Ads coûtent de plus en plus cher</h3>
-        <p>Les coûts d'acquisition augmentent. Les campagnes payantes deviennent moins rentables.</p>
+    <div class="problem-list">
+      <div class="problem-row" data-anim data-delay="0">
+        <span class="problem-big-num">01</span>
+        <div>
+          <h3>Les Ads coûtent de plus en plus cher</h3>
+          <p>Les coûts d'acquisition augmentent. Les campagnes payantes deviennent moins rentables.</p>
+        </div>
       </div>
-      <div class="problem-card" data-anim data-delay="1">
-        <span class="problem-emoji">⏱️</span>
-        <h3>La prospection prend trop de temps</h3>
-        <p>Chercher, qualifier, contacter... des semaines de travail pour des résultats souvent décevants.</p>
+      <div class="problem-row" data-anim data-delay="1">
+        <span class="problem-big-num">02</span>
+        <div>
+          <h3>La prospection prend trop de temps</h3>
+          <p>Chercher, qualifier, contacter... des semaines de travail pour des résultats souvent décevants.</p>
+        </div>
       </div>
-      <div class="problem-card" data-anim data-delay="2">
-        <span class="problem-emoji">🎯</span>
-        <h3>On ne sait pas quoi proposer</h3>
-        <p>Trouver un partenaire, c'est bien. Savoir quoi lui proposer et comment l'approcher, c'est autre chose.</p>
+      <div class="problem-row" data-anim data-delay="2">
+        <span class="problem-big-num">03</span>
+        <div>
+          <h3>On ne sait pas quoi proposer</h3>
+          <p>Trouver un partenaire, c'est bien. Savoir quoi lui proposer et comment l'approcher, c'est autre chose.</p>
+        </div>
       </div>
-      <div class="problem-card" data-anim data-delay="3">
-        <span class="problem-emoji">💸</span>
-        <h3>Les agences sont trop chères</h3>
-        <p>Une mission de business development externalisé coûte plusieurs milliers d'euros. Sans garantie.</p>
+      <div class="problem-row" data-anim data-delay="3">
+        <span class="problem-big-num">04</span>
+        <div>
+          <h3>Les agences sont trop chères</h3>
+          <p>Une mission de business development externalisé coûte plusieurs milliers d'euros. Sans garantie.</p>
+        </div>
       </div>
     </div>
   </div>
@@ -1046,38 +1175,38 @@
 
     <p data-anim style="font-size:13px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:rgba(255,255,255,0.45); margin-bottom:0; margin-top:48px;">Ce que vous recevez concrètement :</p>
 
-    <div class="pack-grid" style="margin-top:20px;">
-      <div class="pack-item" data-anim data-delay="0">
-        <div class="pack-num">1</div>
-        <div class="pack-item-content">
+    <div class="pack-list">
+      <div class="pack-row" data-anim data-delay="0">
+        <span class="pack-row-num">01</span>
+        <div>
           <h3>5 partenaires qualifiés</h3>
           <p>Sélectionnés selon votre secteur, votre cible et votre positionnement. Pas une liste générique.</p>
         </div>
       </div>
-      <div class="pack-item" data-anim data-delay="1">
-        <div class="pack-num">2</div>
-        <div class="pack-item-content">
+      <div class="pack-row" data-anim data-delay="1">
+        <span class="pack-row-num">02</span>
+        <div>
           <h3>Pourquoi ils matchent</h3>
           <p>Pour chaque partenaire, l'explication précise de la complémentarité et du levier business.</p>
         </div>
       </div>
-      <div class="pack-item" data-anim data-delay="2">
-        <div class="pack-num">3</div>
-        <div class="pack-item-content">
+      <div class="pack-row" data-anim data-delay="2">
+        <span class="pack-row-num">03</span>
+        <div>
           <h3>L'angle de collaboration</h3>
-          <p>Co-marketing, distribution croisée, intégration produit, apporteur d'affaires... l'angle le plus actionnable pour chaque cas.</p>
+          <p>Co-marketing, distribution croisée, intégration produit, apporteur d'affaires... l'angle le plus actionnable.</p>
         </div>
       </div>
-      <div class="pack-item" data-anim data-delay="3">
-        <div class="pack-num">4</div>
-        <div class="pack-item-content">
+      <div class="pack-row" data-anim data-delay="3">
+        <span class="pack-row-num">04</span>
+        <div>
           <h3>Le bon interlocuteur</h3>
           <p>Le contact à approcher identifié, avec le rôle exact pour chaque partenaire.</p>
         </div>
       </div>
-      <div class="pack-item" data-anim data-delay="1">
-        <div class="pack-num">5</div>
-        <div class="pack-item-content">
+      <div class="pack-row" data-anim data-delay="3">
+        <span class="pack-row-num">05</span>
+        <div>
           <h3>5 messages prêts à envoyer</h3>
           <p>Un premier message d'approche rédigé pour chaque partenaire. Personnalisé, direct, activable immédiatement.</p>
         </div>
@@ -1085,18 +1214,14 @@
     </div>
 
     <div class="offer-cta-box" data-anim>
-      <div class="offer-cta-box-text">
-        <h3>Pack Partnerr — livraison sous 48h</h3>
-        <p>Commandez maintenant. Décrivez votre activité après paiement. Vous recevez votre pack par email sous 48h.</p>
-      </div>
-      <div class="offer-cta-box-right">
-        <div class="price-big">350€</div>
-        <div class="price-note">paiement unique · aucun abonnement</div>
-        <form action="/create-checkout-session" method="POST" style="margin-top:4px;">
-          <input type="hidden" name="plan" value="pack">
-          <button type="submit" class="btn-pack">Commander mon pack →</button>
-        </form>
-      </div>
+      <div class="price-big">350€</div>
+      <div class="price-note">paiement unique · aucun abonnement · livraison sous 48h</div>
+      <h3>Pack Partnerr</h3>
+      <p>Commandez maintenant. Décrivez votre activité après paiement.<br>Votre pack arrive par email sous 48h.</p>
+      <form action="/create-checkout-session" method="POST" style="margin-top:8px;">
+        <input type="hidden" name="plan" value="pack">
+        <button type="submit" class="btn-pack">Commander mon pack →</button>
+      </form>
     </div>
   </div>
 </section>
@@ -1135,10 +1260,12 @@
 <!-- MÉTHODE -->
 <section class="method-section">
   <div class="method-inner">
-    <p class="section-label" data-anim>Comment c'est fait</p>
-    <h2 class="section-title" data-anim>Le moteur Partnerr, plus une validation manuelle.</h2>
-    <p class="section-sub" data-anim>Chaque pack est généré avec le moteur de sourcing Partnerr, puis validé pour ne garder que les opportunités réellement activables.</p>
-
+    <div class="method-layout">
+      <div>
+        <p class="section-label" data-anim>Comment c'est fait</p>
+        <h2 class="section-title" data-anim>Le moteur Partnerr, plus une validation manuelle.</h2>
+        <p class="section-sub" data-anim style="margin-bottom:0;">Chaque pack est généré avec le moteur de sourcing Partnerr, puis validé pour ne garder que les opportunités réellement activables.</p>
+      </div>
     <div class="method-grid">
       <div class="method-card" data-anim data-delay="0">
         <div class="method-icon">
@@ -1181,6 +1308,8 @@
       </div>
     </div>
 
+    </div><!-- end method-grid -->
+    </div><!-- end method-layout -->
     <p class="method-note" data-anim>Le moteur Partnerr source vite et large. La validation humaine garantit que le pack reste pertinent et actionnable.</p>
   </div>
 </section>
@@ -1451,7 +1580,7 @@
     <p data-anim data-delay="1">5 partenaires qualifiés. 5 angles de collaboration. 5 messages prêts à envoyer. Rien à chercher, tout à activer.</p>
     <form action="/create-checkout-session" method="POST" data-anim data-delay="2">
       <input type="hidden" name="plan" value="pack">
-      <button type="submit" class="btn-pack" style="font-size:17px; padding:18px 40px;">Commander mon pack — 350€ →</button>
+      <button type="submit" class="btn-pack" style="font-size:17px; padding:18px 40px;">Commander mon pack →</button>
     </form>
     <p class="cta-note">Paiement sécurisé · Livraison sous 48h · Aucun abonnement</p>
   </div>
