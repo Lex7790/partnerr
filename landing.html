@@ -693,6 +693,46 @@
       flex-shrink: 0;
     }
 
+    /* ── DÉBLOQUER ── */
+    .unlock-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-top: 48px;
+    }
+
+    .unlock-card {
+      border: 1.5px solid var(--border);
+      border-radius: 14px;
+      padding: 28px 24px;
+    }
+
+    .unlock-icon {
+      width: 40px;
+      height: 40px;
+      background: var(--accent-lo);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+
+    .unlock-card h3 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 8px;
+    }
+
+    .unlock-card p {
+      font-size: 14px;
+      color: var(--ink-soft);
+      line-height: 1.6;
+    }
+
     /* ── OUTIL SECTION ── */
     .tool-section {
       background: var(--surface);
@@ -1013,6 +1053,7 @@
       .problem-list { grid-template-columns: 1fr; }
       .problem-row { border-right: none !important; }
       .problem-row:nth-child(3) { border-bottom: 1.5px solid rgba(0,0,0,0.07) !important; }
+      .unlock-grid { grid-template-columns: 1fr; max-width: 480px; margin-left: auto; margin-right: auto; }
     }
 
     @media (max-width: 600px) {
@@ -1206,7 +1247,8 @@
   <div class="offer-inner">
     <p class="section-label" data-anim>Le pack Partnerr</p>
     <h2 class="section-title" data-anim>Un pack prêt à lancer, pas une simple liste d'idées</h2>
-    <p class="section-sub" data-anim>Vous ne cherchez plus vos partenaires. Vous les contactez.</p>
+    <p class="section-sub" data-anim>Chaque opportunité est contextualisée pour comprendre pourquoi elle peut générer du business, quel angle activer et par où commencer.</p>
+    <p data-anim style="font-size:16px; font-weight:600; color:rgba(255,255,255,0.88); margin-top:-40px; margin-bottom:40px; font-family:'Plus Jakarta Sans',sans-serif;">Vous ne cherchez plus vos partenaires. Vous les contactez.</p>
 
     <p data-anim style="font-size:13px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:rgba(255,255,255,0.65); margin-bottom:0; margin-top:48px;">Ce que vous recevez concrètement :</p>
 
@@ -1215,21 +1257,21 @@
         <span class="pack-row-num">01</span>
         <div>
           <h3>5 partenaires qualifiés</h3>
-          <p>Sélectionnés selon votre secteur, votre cible et votre positionnement. Pas une liste générique.</p>
+          <p>Sélectionnés pour leur potentiel d'acquisition, de distribution ou de visibilité qualifiée.</p>
         </div>
       </div>
       <div class="pack-row" data-anim data-delay="1">
         <span class="pack-row-num">02</span>
         <div>
           <h3>Pourquoi ils matchent</h3>
-          <p>Pour chaque partenaire, l'explication précise de la complémentarité et du levier business.</p>
+          <p>La complémentarité expliquée précisément, avec le levier business associé.</p>
         </div>
       </div>
       <div class="pack-row" data-anim data-delay="2">
         <span class="pack-row-num">03</span>
         <div>
           <h3>L'angle de collaboration</h3>
-          <p>Co-marketing, distribution croisée, intégration produit, apporteur d'affaires... l'angle le plus actionnable.</p>
+          <p>Co-marketing, distribution, apport d'affaires... l'angle le plus actionnable pour créer une opportunité commerciale.</p>
         </div>
       </div>
       <div class="pack-row" data-anim data-delay="3">
@@ -1243,7 +1285,7 @@
         <span class="pack-row-num">05</span>
         <div>
           <h3>5 messages prêts à envoyer</h3>
-          <p>Un premier message d'approche rédigé pour chaque partenaire. Personnalisé, direct, activable immédiatement.</p>
+          <p>Rédigés pour ouvrir une discussion concrète, pas juste faire une prise de contact générique.</p>
         </div>
       </div>
     </div>
@@ -1257,6 +1299,49 @@
         <input type="hidden" name="plan" value="pack">
         <button type="submit" class="btn-pack">Commander mon pack →</button>
       </form>
+    </div>
+  </div>
+</section>
+
+<!-- CE QUE LE PACK PEUT DÉBLOQUER -->
+<section class="section" style="padding-top:80px; padding-bottom:80px;">
+  <div class="section-inner">
+    <p class="section-label" data-anim>Ce que le pack peut débloquer</p>
+    <h2 class="section-title" data-anim>Des leviers business, pas des contacts à froid.</h2>
+
+    <div class="unlock-grid">
+
+      <div class="unlock-card" data-anim data-delay="0">
+        <div class="unlock-icon">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <path d="M10 3v14M3 10h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h3>Un nouveau canal d'acquisition</h3>
+        <p>Identifier des partenaires capables de vous amener une audience qualifiée, sans dépendre uniquement des Ads.</p>
+      </div>
+
+      <div class="unlock-card" data-anim data-delay="1">
+        <div class="unlock-icon">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <path d="M4 10a6 6 0 1012 0A6 6 0 004 10z" stroke="currentColor" stroke-width="1.5" fill="none"/>
+            <path d="M10 7v3l2 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h3>Un accès à une nouvelle distribution</h3>
+        <p>Repérer des réseaux, plateformes ou acteurs capables de diffuser votre offre plus largement.</p>
+      </div>
+
+      <div class="unlock-card" data-anim data-delay="2">
+        <div class="unlock-icon">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <path d="M17 9l-7-6-7 6v9a1 1 0 001 1h4v-4h4v4h4a1 1 0 001-1V9z" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h3>Des opportunités commerciales concrètes</h3>
+        <p>Transformer une collaboration en mission, vente, visibilité ou apport d'affaires.</p>
+      </div>
+
     </div>
   </div>
 </section>
@@ -1289,6 +1374,7 @@
     <div class="roi-highlight" data-anim>
       Un seul partenariat activé peut couvrir le coût du pack x5 à x10. C'est un potentiel, pas une garantie.
     </div>
+    <p data-anim style="margin-top:20px; font-size:14px; color:var(--ink-muted); text-align:center; line-height:1.6;">Le pack ne garantit pas un deal signé. Il réduit le temps nécessaire pour identifier et approcher les bonnes opportunités.</p>
   </div>
 </section>
 
@@ -1342,7 +1428,7 @@
     </div>
 
     </div>
-    <p class="method-note" data-anim>Le moteur Partnerr source vite et large. La validation humaine garantit que le pack reste pertinent et actionnable.</p>
+    <p class="method-note" data-anim>Le moteur Partnerr source vite et large. La validation humaine garantit que le pack reste pertinent et actionnable. L'objectif n'est pas de sortir le plus de noms possible, mais de sélectionner les opportunités avec le meilleur potentiel d'activation.</p>
   </div>
 </section>
 
