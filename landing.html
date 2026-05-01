@@ -1078,7 +1078,11 @@
     .pack-offer-card.business {
       background: rgba(94,53,224,0.18);
       border: none;
-      animation: businessGlow 3s ease-in-out infinite;
+    }
+
+    .pack-offer-card.business.in-view {
+      animation: fadeInUp 0.9s cubic-bezier(0.22, 1.15, 0.36, 1) both,
+                 businessGlow 3s ease-in-out 0.9s infinite;
     }
 
     .pack-offer-badge {
