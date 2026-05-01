@@ -922,6 +922,24 @@
       margin-top: 16px;
     }
 
+    /* ── POUR QUI BG ── */
+    .pour-qui-section {
+      position: relative;
+      background-image: linear-gradient(rgba(11,7,24,0.82), rgba(11,7,24,0.88)), url('/static/pour-qui-bg.jpg');
+      background-size: cover;
+      background-position: center;
+    }
+    .pour-qui-section .section-label { color: #A590FF; }
+    .pour-qui-section .section-title { color: white; }
+    .pour-qui-section .section-sub { color: rgba(255,255,255,0.78); }
+    .pour-qui-section .target-item {
+      background: rgba(255,255,255,0.07);
+      border-color: rgba(255,255,255,0.12);
+      color: rgba(255,255,255,0.88);
+      backdrop-filter: blur(6px);
+    }
+    .pour-qui-section .target-dot { background: #A590FF; }
+
     /* ── OUTIL SECTION ── */
     .tool-section {
       background: var(--surface);
@@ -1916,7 +1934,7 @@
 </section>
 
 <!-- POUR QUI -->
-<section class="section">
+<section class="section pour-qui-section">
   <div class="section-inner">
     <p class="section-label" data-anim>Pour qui</p>
     <h2 class="section-title" data-anim>Partnerr est fait pour les entreprises qui veulent développer des partenariats sans recruter.</h2>
