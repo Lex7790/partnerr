@@ -1414,8 +1414,8 @@
       .step p { font-size: 14px; }
 
       /* Targets */
-      .targets-grid { gap: 10px; }
-      .target-item { padding: 12px 18px; font-size: 14px; }
+      .targets-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; justify-items: stretch; }
+      .target-item { padding: 12px 16px; font-size: 14px; white-space: normal; justify-content: center; text-align: center; }
 
       /* Réseau */
       .reseau-pillar { padding: 22px 18px; }
