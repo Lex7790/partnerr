@@ -698,6 +698,7 @@ def pack_submit():
     from datetime import datetime, timezone
     email        = request.form.get("email", "").strip().lower()[:254]
     session_id   = request.form.get("session_id", "").strip()[:200]
+    poste        = escape(request.form.get("poste", "").strip()[:100])
     activite     = escape(request.form.get("activite", "").strip()[:2000])
     cible        = escape(request.form.get("cible", "").strip()[:500])
     offre        = escape(request.form.get("offre", "").strip()[:500])
@@ -715,6 +716,7 @@ def pack_submit():
         "date": datetime.now(timezone.utc).isoformat(),
         "email": email,
         "session_id": session_id,
+        "poste": poste,
         "activite": activite,
         "cible": cible,
         "offre": offre,
@@ -740,6 +742,7 @@ def reseau_submit():
     from html import escape
     from datetime import datetime, timezone
     email       = request.form.get("email", "").strip().lower()[:254]
+    poste       = escape(request.form.get("poste", "").strip()[:100])
     site        = escape(request.form.get("site", "").strip()[:200])
     description = escape(request.form.get("description", "").strip()[:1000])
 
@@ -753,6 +756,7 @@ def reseau_submit():
     members.append({
         "date": datetime.now(timezone.utc).isoformat(),
         "email": email,
+        "poste": poste,
         "site": site,
         "description": description,
     })
