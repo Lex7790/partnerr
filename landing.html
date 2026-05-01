@@ -128,6 +128,18 @@
       pointer-events: none;
     }
 
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 80px;
+      background: linear-gradient(to bottom, transparent, var(--ink));
+      pointer-events: none;
+      z-index: 2;
+    }
+
     .hero-inner {
       max-width: 860px;
       margin: 0 auto;
@@ -1536,7 +1548,7 @@
 </section>
 
 <!-- DÉMO LIVRABLE -->
-<section style="background:#100D22; padding:72px 32px 80px; position:relative;">
+<section style="background:var(--ink); padding:72px 32px 80px; position:relative;">
   <div style="max-width:900px; margin:0 auto; text-align:center; position:relative; z-index:1;">
 
     <p style="font-size:12px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:#A590FF; margin-bottom:16px;" data-anim>Exemple de livrable</p>
