@@ -41,7 +41,9 @@ STRIPE_PRICES = {
     "starter": os.environ.get("STRIPE_PRICE_STARTER", ""),
     "growth":  os.environ.get("STRIPE_PRICE_GROWTH",  ""),
     "scale":   os.environ.get("STRIPE_PRICE_SCALE",   ""),
+    "pack":    os.environ.get("STRIPE_PRICE_PACK",    "price_1TSD69IcIDgMctx4o02p4nSj"),
 }
+PACK_ORDERS_FILE = os.environ.get("PACK_ORDERS_FILE", "/data/pack_orders.json")
 PLAN_CREDITS = {
     "starter": {"plan": "starter", "credits": 2},
     "growth":  {"plan": "growth",  "credits": 3},
@@ -547,14 +549,20 @@ def create_checkout_session():
     if not price_id:
         return "Plan invalide.", 400
     base_url = request.host_url.rstrip("/")
+    if plan == "pack":
+        success_url = f"{base_url}/success-pack?session_id={{CHECKOUT_SESSION_ID}}"
+        cancel_url  = f"{base_url}/"
+    else:
+        success_url = f"{base_url}/success?session_id={{CHECKOUT_SESSION_ID}}"
+        cancel_url  = f"{base_url}/#pricing"
     session = stripe.checkout.Session.create(
         payment_method_types=["card"],
         line_items=[{"price": price_id, "quantity": 1}],
         mode="payment",
         customer_email=email if email else None,
         metadata={"plan": plan, "email": email},
-        success_url=f"{base_url}/success?session_id={{CHECKOUT_SESSION_ID}}",
-        cancel_url=f"{base_url}/#pricing",
+        success_url=success_url,
+        cancel_url=cancel_url,
     )
     return redirect(session.url, code=303)
 
@@ -571,11 +579,27 @@ def webhook():
         return "Signature invalide.", 400
 
     if event["type"] == "checkout.session.completed":
+        from datetime import datetime, timezone
         session_data = event["data"]["object"]
         email = (session_data.get("customer_email") or
                  session_data.get("metadata", {}).get("email", "")).strip().lower()
         plan = session_data.get("metadata", {}).get("plan", "starter")
-        if email and plan in PLAN_CREDITS:
+        if plan == "pack":
+            orders = []
+            if os.path.exists(PACK_ORDERS_FILE):
+                with open(PACK_ORDERS_FILE, "r", encoding="utf-8") as f:
+                    orders = json.load(f)
+            orders.append({
+                "date": datetime.now(timezone.utc).isoformat(),
+                "email": email,
+                "stripe_session_id": session_data.get("id", ""),
+                "amount": 350,
+                "status": "paid"
+            })
+            with open(PACK_ORDERS_FILE, "w", encoding="utf-8") as f:
+                json.dump(orders, f, ensure_ascii=False, indent=2)
+            print(f"[PACK] Commande reçue — email={email!r}", flush=True)
+        elif email and plan in PLAN_CREDITS:
             users = load_users()
             existing = users.get(email, {})
             users[email] = {
@@ -644,6 +668,12 @@ def audit_submit():
 @app.route("/success")
 def success():
     with open("success.html", encoding="utf-8") as f:
+        return f.read()
+
+
+@app.route("/success-pack")
+def success_pack():
+    with open("success_pack.html", encoding="utf-8") as f:
         return f.read()
 
 
