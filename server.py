@@ -181,7 +181,7 @@ def send_pack_onboarding_email(email, session_id):
         print(f"[EMAIL PACK ONBOARDING] Erreur : {e}", flush=True)
 
 
-def send_pack_context_to_admin(email, activite, cible, offre, partenariats, site):
+def send_pack_context_to_admin(email, activite, cible, offre, partenariats, site, poste=""):
     if not RESEND_API_KEY:
         return
     try:
@@ -198,6 +198,7 @@ def send_pack_context_to_admin(email, activite, cible, offre, partenariats, site
                 <h2 style="font-size:20px; font-weight:700; color:#0B0718; margin:0 0 24px;">Nouveau pack à préparer</h2>
                 <table style="width:100%; border-collapse:collapse;">
                   <tr><td style="padding:10px 0; border-bottom:1px solid #f0f0f0; font-size:13px; color:#8B87A3; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; width:140px;">Client</td><td style="padding:10px 0; border-bottom:1px solid #f0f0f0; font-size:15px; color:#0B0718;">{email}</td></tr>
+                  <tr><td style="padding:10px 0; border-bottom:1px solid #f0f0f0; font-size:13px; color:#8B87A3; font-weight:600; text-transform:uppercase; letter-spacing:0.08em;">Rôle</td><td style="padding:10px 0; border-bottom:1px solid #f0f0f0; font-size:15px; color:#0B0718;">{poste}</td></tr>
                   <tr><td style="padding:10px 0; border-bottom:1px solid #f0f0f0; font-size:13px; color:#8B87A3; font-weight:600; text-transform:uppercase; letter-spacing:0.08em;">Activité</td><td style="padding:10px 0; border-bottom:1px solid #f0f0f0; font-size:15px; color:#0B0718;">{activite}</td></tr>
                   <tr><td style="padding:10px 0; border-bottom:1px solid #f0f0f0; font-size:13px; color:#8B87A3; font-weight:600; text-transform:uppercase; letter-spacing:0.08em;">Cible</td><td style="padding:10px 0; border-bottom:1px solid #f0f0f0; font-size:15px; color:#0B0718;">{cible}</td></tr>
                   <tr><td style="padding:10px 0; border-bottom:1px solid #f0f0f0; font-size:13px; color:#8B87A3; font-weight:600; text-transform:uppercase; letter-spacing:0.08em;">Offre</td><td style="padding:10px 0; border-bottom:1px solid #f0f0f0; font-size:15px; color:#0B0718;">{offre}</td></tr>
@@ -633,11 +634,13 @@ def webhook():
             if os.path.exists(PACK_ORDERS_FILE):
                 with open(PACK_ORDERS_FILE, "r", encoding="utf-8") as f:
                     orders = json.load(f)
+            amount = 499 if plan == "pack-business" else 350
             orders.append({
                 "date": datetime.now(timezone.utc).isoformat(),
                 "email": email,
+                "plan": plan,
                 "stripe_session_id": session_data.get("id", ""),
-                "amount": 350,
+                "amount": amount,
                 "status": "paid"
             })
             with open(PACK_ORDERS_FILE, "w", encoding="utf-8") as f:
@@ -706,6 +709,8 @@ def pack_submit():
     partenariats = escape(request.form.get("partenariats", "").strip()[:500])
     site         = escape(request.form.get("site", "").strip()[:200])
 
+    if email and not re.match(r'^[^@\s]+@[^@\s]+\.[^@\s]+$', email):
+        email = ""
     if not activite or not cible:
         return redirect("/pack-onboarding?error=1")
 
@@ -728,7 +733,7 @@ def pack_submit():
         json.dump(contexts, f, ensure_ascii=False, indent=2)
     print(f"[PACK CONTEXT] Reçu — email={email!r}", flush=True)
 
-    send_pack_context_to_admin(email, activite, cible, offre, partenariats, site)
+    send_pack_context_to_admin(email, activite, cible, offre, partenariats, site, poste)
     return redirect("/merci")
 
 
