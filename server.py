@@ -115,21 +115,12 @@ def atomic_decrement_credits(email):
 
 
 
-def sync_pack_context_to_hubspot(email, poste, activite, cible, offre, partenariats, site):
+def hubspot_upsert(email, properties):
+    """Crée le contact HubSpot ou le met à jour s'il existe déjà (409)."""
     if not HUBSPOT_TOKEN or not email:
         return
     try:
-        description = f"Activité : {activite}\nCible : {cible}\nOffre : {offre}\nPartenariats : {partenariats}"
-        payload = json.dumps({
-            "properties": {
-                "email": email,
-                "jobtitle": poste,
-                "website": site if site.startswith("http") else "",
-                "description": description,
-                "hs_lead_status": "NEW",
-                "lifecyclestage": "lead"
-            }
-        }).encode("utf-8")
+        payload = json.dumps({"properties": {**properties, "email": email}}).encode("utf-8")
         req = urllib.request.Request(
             "https://api.hubapi.com/crm/v3/objects/contacts",
             data=payload,
@@ -137,62 +128,69 @@ def sync_pack_context_to_hubspot(email, poste, activite, cible, offre, partenari
             method="POST"
         )
         urllib.request.urlopen(req, timeout=5)
-        print(f"[HUBSPOT PACK] Contact créé : {email}", flush=True)
+    except urllib.error.HTTPError as e:
+        if e.code == 409:
+            try:
+                search_payload = json.dumps({
+                    "filterGroups": [{"filters": [{"propertyName": "email", "operator": "EQ", "value": email}]}],
+                    "properties": ["email"]
+                }).encode("utf-8")
+                search_req = urllib.request.Request(
+                    "https://api.hubapi.com/crm/v3/objects/contacts/search",
+                    data=search_payload,
+                    headers={"Authorization": f"Bearer {HUBSPOT_TOKEN}", "Content-Type": "application/json"},
+                    method="POST"
+                )
+                result = json.loads(urllib.request.urlopen(search_req, timeout=5).read())
+                if result.get("results"):
+                    contact_id = result["results"][0]["id"]
+                    patch_payload = json.dumps({"properties": properties}).encode("utf-8")
+                    patch_req = urllib.request.Request(
+                        f"https://api.hubapi.com/crm/v3/objects/contacts/{contact_id}",
+                        data=patch_payload,
+                        headers={"Authorization": f"Bearer {HUBSPOT_TOKEN}", "Content-Type": "application/json"},
+                        method="PATCH"
+                    )
+                    urllib.request.urlopen(patch_req, timeout=5)
+                    print(f"[HUBSPOT] Contact mis à jour : {email}", flush=True)
+            except Exception as e2:
+                print(f"[HUBSPOT PATCH] Erreur : {e2}", flush=True)
+        else:
+            print(f"[HUBSPOT] HTTP {e.code} : {e}", flush=True)
     except Exception as e:
-        print(f"[HUBSPOT PACK] Erreur : {e}", flush=True)
+        print(f"[HUBSPOT] Erreur : {e}", flush=True)
+
+
+def sync_pack_context_to_hubspot(email, poste, activite, cible, offre, partenariats, site):
+    description = f"Activité : {activite}\nCible : {cible}\nOffre : {offre}\nPartenariats : {partenariats}"
+    hubspot_upsert(email, {
+        "jobtitle": poste,
+        "website": site if site.startswith("http") else "",
+        "description": description,
+        "hs_lead_status": "NEW",
+        "lifecyclestage": "lead"
+    })
+    print(f"[HUBSPOT PACK] Sync : {email}", flush=True)
 
 
 def sync_reseau_to_hubspot(email, role, website, description):
-    if not HUBSPOT_TOKEN or not email:
-        return
-    try:
-        payload = json.dumps({
-            "properties": {
-                "email": email,
-                "jobtitle": role,
-                "website": website if website.startswith("http") else "",
-                "description": description,
-                "hs_lead_status": "NEW",
-                "lifecyclestage": "lead"
-            }
-        }).encode("utf-8")
-        req = urllib.request.Request(
-            "https://api.hubapi.com/crm/v3/objects/contacts",
-            data=payload,
-            headers={"Authorization": f"Bearer {HUBSPOT_TOKEN}", "Content-Type": "application/json"},
-            method="POST"
-        )
-        urllib.request.urlopen(req, timeout=5)
-        print(f"[HUBSPOT RÉSEAU] Contact créé : {email}", flush=True)
-    except Exception as e:
-        print(f"[HUBSPOT RÉSEAU] Erreur : {e}", flush=True)
+    hubspot_upsert(email, {
+        "jobtitle": role,
+        "website": website if website.startswith("http") else "",
+        "description": description,
+        "hs_lead_status": "NEW",
+        "lifecyclestage": "lead"
+    })
+    print(f"[HUBSPOT RÉSEAU] Sync : {email}", flush=True)
 
 
 def sync_to_hubspot(email, prenom=""):
-    if not HUBSPOT_TOKEN:
-        return
-    try:
-        payload = json.dumps({
-            "properties": {
-                "email": email,
-                "firstname": prenom or "",
-                "hs_lead_status": "NEW",
-                "lifecyclestage": "lead"
-            }
-        }).encode("utf-8")
-        req = urllib.request.Request(
-            "https://api.hubapi.com/crm/v3/objects/contacts",
-            data=payload,
-            headers={
-                "Authorization": f"Bearer {HUBSPOT_TOKEN}",
-                "Content-Type": "application/json"
-            },
-            method="POST"
-        )
-        urllib.request.urlopen(req, timeout=5)
-        print(f"[HUBSPOT] Contact créé : {email}", flush=True)
-    except Exception as e:
-        print(f"[HUBSPOT] Erreur : {e}", flush=True)
+    hubspot_upsert(email, {
+        "firstname": prenom or "",
+        "hs_lead_status": "NEW",
+        "lifecyclestage": "lead"
+    })
+    print(f"[HUBSPOT] Sync : {email}", flush=True)
 
 
 def send_pack_onboarding_email(email, session_id):
