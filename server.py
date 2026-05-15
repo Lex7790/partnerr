@@ -650,7 +650,7 @@ def create_checkout_session():
     if not price_id:
         return "Plan invalide.", 400
     base_url = request.host_url.rstrip("/")
-    if plan in ("pack", "pack-business"):
+    if plan in ("pack", "pack-business", "mission-explore", "mission-explore-plus", "mission-scale"):
         success_url = f"{base_url}/pack-onboarding?session_id={{CHECKOUT_SESSION_ID}}"
         cancel_url  = f"{base_url}/"
     else:
