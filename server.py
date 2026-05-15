@@ -656,15 +656,19 @@ def create_checkout_session():
     else:
         success_url = f"{base_url}/success?session_id={{CHECKOUT_SESSION_ID}}"
         cancel_url  = f"{base_url}/#pricing"
-    session = stripe.checkout.Session.create(
-        payment_method_types=["card"],
-        line_items=[{"price": price_id, "quantity": 1}],
-        mode="payment",
-        customer_email=email if email else None,
-        metadata={"plan": plan, "email": email},
-        success_url=success_url,
-        cancel_url=cancel_url,
-    )
+    try:
+        session = stripe.checkout.Session.create(
+            payment_method_types=["card"],
+            line_items=[{"price": price_id, "quantity": 1}],
+            mode="payment",
+            customer_email=email if email else None,
+            metadata={"plan": plan, "email": email},
+            success_url=success_url,
+            cancel_url=cancel_url,
+        )
+    except stripe.error.StripeError as e:
+        print(f"[STRIPE ERROR] plan={plan!r} price_id={price_id!r} error={e}", flush=True)
+        return f"Erreur paiement : {e.user_message or str(e)}", 400
     return redirect(session.url, code=303)
 
 
