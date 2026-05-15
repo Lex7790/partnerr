@@ -829,23 +829,18 @@
 
     /* ── RÉSEAU ── */
     .reseau-section {
-      background: var(--ink);
+      background: #F5F3FF;
       padding: 100px 32px;
       position: relative;
       overflow: hidden;
     }
 
-    #reseau-canvas {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      pointer-events: none;
-      z-index: 0;
-    }
+    #reseau-canvas { display: none; }
+
     .reseau-inner { max-width: 900px; margin: 0 auto; position: relative; z-index: 1; }
-    .reseau-section .section-label { color: #A590FF; }
-    .reseau-section .section-title { color: white; max-width: 640px; }
-    .reseau-section .section-sub { color: rgba(255,255,255,0.82); max-width: 620px; }
+    .reseau-section .section-label { color: var(--accent); }
+    .reseau-section .section-title { color: var(--ink); max-width: 640px; }
+    .reseau-section .section-sub { color: var(--ink-soft); max-width: 620px; }
 
     .reseau-pillars {
       display: grid;
@@ -880,11 +875,13 @@
     .reseau-pillar p { font-size: 15px; color: rgba(255,255,255,0.82); line-height: 1.65; }
 
     .reseau-form-box {
-      background: rgba(94,53,224,0.22);
-      border: 1px solid rgba(123,86,245,0.55);
+      background: white;
+      border: 1px solid rgba(94,53,224,0.18);
       border-radius: 20px;
       padding: 44px 48px;
-      box-shadow: 0 0 60px rgba(94,53,224,0.18);
+      box-shadow: 0 4px 32px rgba(94,53,224,0.08);
+      max-width: 560px;
+      margin: 0 auto;
     }
     .reseau-form-row {
       display: grid;
@@ -897,33 +894,33 @@
       font-family: 'Plus Jakarta Sans', sans-serif;
       font-size: 13px;
       font-weight: 600;
-      color: rgba(255,255,255,0.72);
+      color: var(--ink-soft);
     }
     .reseau-input {
-      background: rgba(255,255,255,0.05);
-      border: 1.5px solid rgba(255,255,255,0.1);
+      background: var(--surface);
+      border: 1.5px solid rgba(94,53,224,0.15);
       border-radius: 10px;
       padding: 12px 16px;
       font-family: 'Inter', sans-serif;
       font-size: 15px;
-      color: white;
+      color: var(--ink);
       outline: none;
       transition: border-color 0.2s, background 0.2s;
       width: 100%;
     }
-    .reseau-input::placeholder { color: rgba(255,255,255,0.25); }
-    .reseau-input:focus { border-color: rgba(94,53,224,0.7); background: rgba(94,53,224,0.07); }
+    .reseau-input::placeholder { color: var(--ink-muted); }
+    .reseau-input:focus { border-color: var(--accent); background: white; }
     .reseau-textarea { min-height: 88px; resize: none; }
-    .reseau-note { font-size: 14px; color: rgba(255,255,255,0.72); line-height: 1.6; max-width: 500px; margin-top: 12px; }
+    .reseau-note { font-size: 14px; color: var(--ink-muted); line-height: 1.6; max-width: 500px; margin-top: 12px; }
 
     .reseau-success {
       display: none;
-      background: rgba(94,53,224,0.15);
-      border: 1px solid rgba(94,53,224,0.35);
+      background: #EDE9FF;
+      border: 1px solid rgba(94,53,224,0.25);
       border-radius: 12px;
       padding: 20px 24px;
       font-size: 15px;
-      color: #C4B5FF;
+      color: var(--accent);
       text-align: center;
       margin-top: 16px;
     }
