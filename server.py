@@ -43,9 +43,9 @@ STRIPE_PRICES = {
     "scale":   os.environ.get("STRIPE_PRICE_SCALE",   ""),
     "pack":               os.environ.get("STRIPE_PRICE_PACK",               "price_1TSD69IcIDgMctx4o02p4nSj"),
     "pack-business":      os.environ.get("STRIPE_PRICE_PACK_BUSINESS",      "price_1TSIuQIcIDgMctx4frlN4DUc"),
-    "mission-explore":      os.environ.get("STRIPE_PRICE_MISSION_EXPLORE",      "price_1TXP1VIcIDgMctx4roGKLNX4"),
-    "mission-explore-plus": os.environ.get("STRIPE_PRICE_MISSION_EXPLORE_PLUS", "price_1TXP2JIcIDgMctx4LEHSBVIm"),
-    "mission-scale":        os.environ.get("STRIPE_PRICE_MISSION_SCALE",        "price_1TXP2yIcIDgMctx44iaulouZ"),
+    "mission-explore":      os.environ.get("STRIPE_PRICE_MISSION_EXPLORE",      "price_1TXQmhIcIDgMctx4VXwVwRbM"),
+    "mission-explore-plus": os.environ.get("STRIPE_PRICE_MISSION_EXPLORE_PLUS", "price_1TXQnbIcIDgMctx4aOuO8eZK"),
+    "mission-scale":        os.environ.get("STRIPE_PRICE_MISSION_SCALE",        "price_1TXQo1IcIDgMctx44ph4IsPr"),
 }
 PACK_ORDERS_FILE   = os.environ.get("PACK_ORDERS_FILE",   "/data/pack_orders.json")
 PACK_CONTEXT_FILE  = os.environ.get("PACK_CONTEXT_FILE",  "/data/pack_context.json")
