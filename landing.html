@@ -1051,14 +1051,15 @@
     /* ── PACK OFFERS ── */
     .pack-offers-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr;
       gap: 20px;
       margin-top: 56px;
+      align-items: center;
     }
 
     .pack-offer-card {
-      border-radius: 18px;
-      padding: 36px 32px;
+      border-radius: 20px;
+      padding: 36px 28px;
       display: flex;
       flex-direction: column;
       gap: 0;
@@ -1078,6 +1079,8 @@
     .pack-offer-card.business {
       background: rgba(94,53,224,0.18);
       border: none;
+      transform: translateY(-16px);
+      padding: 44px 32px;
     }
 
     .pack-offer-card.business.in-view {
@@ -1330,8 +1333,14 @@
     [data-anim].in-view[data-delay="3"] { animation-delay: 0.36s; }
 
     /* ── RESPONSIVE ── */
+    @media (max-width: 1020px) and (min-width: 601px) {
+      .pack-offers-grid { grid-template-columns: 1fr 1fr; max-width: 700px; margin-left: auto; margin-right: auto; }
+      .pack-offer-card.business { transform: none; padding: 36px 28px; }
+    }
+
     @media (max-width: 900px) {
-      .pack-offers-grid { grid-template-columns: 1fr; max-width: 480px; margin-left: auto; margin-right: auto; }
+      .pack-offers-grid { grid-template-columns: 1fr; max-width: 440px; margin-left: auto; margin-right: auto; }
+      .pack-offer-card.business { transform: none; padding: 36px 28px; }
       .roi-grid { grid-template-columns: 1fr; max-width: 480px; margin-left: auto; margin-right: auto; }
       .reviews-grid { grid-template-columns: 1fr; max-width: 520px; margin-left: auto; margin-right: auto; }
       .method-layout { grid-template-columns: 1fr; gap: 40px; }
@@ -1696,7 +1705,7 @@
       </div>
 
       <!-- Mission SCALE -->
-      <div class="pack-offer-card start" data-anim data-delay="2">
+      <div class="pack-offer-card start" data-anim data-delay="2" style="border-color:rgba(94,53,224,0.35);">
         <p class="pack-offer-name">SCALE</p>
         <p class="pack-offer-price">1 199€</p>
         <p class="pack-offer-billing">paiement unique · livraison sous 5 jours ouvrés</p>
