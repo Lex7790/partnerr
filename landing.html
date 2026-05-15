@@ -1689,7 +1689,10 @@
           <li><span class="check">✓</span><span><strong>1 rendez-vous qualifié</strong> garanti</span></li>
           <li><span class="check">✓</span><span>Paiement en 2 fois disponible</span></li>
         </ul>
-        <a href="mailto:contact@usepartnerr.com?subject=Mission%20EXPLORE%2B" class="btn-pack" style="width:100%; justify-content:center; display:flex;">Lancer ma mission EXPLORE+ →</a>
+        <form action="/create-checkout-session" method="POST">
+          <input type="hidden" name="plan" value="mission-explore-plus">
+          <button type="submit" class="btn-pack" style="width:100%; justify-content:center;">Lancer ma mission EXPLORE+ →</button>
+        </form>
       </div>
 
       <!-- Mission SCALE -->
@@ -1704,7 +1707,10 @@
           <li><span class="check">✓</span><span>Call de cadrage 30 min inclus</span></li>
           <li><span class="check">✓</span><span>Suivi J+30</span></li>
         </ul>
-        <a href="mailto:contact@usepartnerr.com?subject=Mission%20SCALE" class="btn-pack" style="width:100%; justify-content:center; display:flex;">Lancer ma mission SCALE →</a>
+        <form action="/create-checkout-session" method="POST">
+          <input type="hidden" name="plan" value="mission-scale">
+          <button type="submit" class="btn-pack" style="width:100%; justify-content:center;">Lancer ma mission SCALE →</button>
+        </form>
       </div>
 
     </div>
@@ -1962,88 +1968,6 @@
   </div>
 </section>
 
-<!-- OUTIL PARTNERR -->
-<section class="section tool-section" id="outil">
-  <div class="section-inner">
-    <div class="tool-intro">
-      <p class="section-label" data-anim>L'outil Partnerr</p>
-      <h2 class="section-title" data-anim>Vous voulez explorer vous-même ?</h2>
-      <p class="section-sub" data-anim>L'outil Partnerr est le moteur de sourcing derrière le pack. Disponible en accès direct pour ceux qui veulent chercher à leur rythme, tester plusieurs angles ou aller plus loin après leur pack.</p>
-    </div>
-
-    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:20px; margin-top:0;">
-
-      <div class="pricing-card" data-anim data-delay="0" style="background:var(--white); border:1.5px solid var(--border);">
-        <div>
-          <p style="font-family:'Plus Jakarta Sans',sans-serif; font-size:11px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--ink-muted); margin-bottom:6px; min-height:2.8em;">Essai — 2 recherches gratuites</p>
-          <p style="font-family:'Plus Jakarta Sans',sans-serif; font-size:18px; font-weight:700; color:var(--ink); margin-bottom:4px;">Gratuit</p>
-          <p style="font-family:'Plus Jakarta Sans',sans-serif; font-size:24px; font-weight:800; color:var(--ink);">0€</p>
-        </div>
-        <ul style="list-style:none; display:flex; flex-direction:column; gap:8px;">
-          <li style="font-size:14px; color:var(--ink-soft); display:flex; gap:8px; align-items:center;"><span style="color:var(--accent);">✓</span> 2 recherches gratuites</li>
-          <li style="font-size:14px; color:var(--ink-soft); display:flex; gap:8px; align-items:center;"><span style="color:var(--accent);">✓</span> 2 partenaires qualifiés</li>
-        </ul>
-        <a href="/app" style="display:block; text-align:center; padding:11px; border-radius:8px; font-family:'Plus Jakarta Sans',sans-serif; font-size:14px; font-weight:600; color:white; background:var(--accent); text-decoration:none;" onmouseover="this.style.background='#7B56F5'" onmouseout="this.style.background='var(--accent)'">Tester gratuitement →</a>
-      </div>
-
-      <div class="pricing-card" data-anim data-delay="1" style="background:var(--white); border:1.5px solid var(--border);">
-        <div>
-          <p style="font-family:'Plus Jakarta Sans',sans-serif; font-size:11px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--ink-muted); margin-bottom:6px; min-height:2.8em;">Tester 2 angles différents</p>
-          <p style="font-family:'Plus Jakarta Sans',sans-serif; font-size:18px; font-weight:700; color:var(--ink); margin-bottom:4px;">Starter</p>
-          <p style="font-family:'Plus Jakarta Sans',sans-serif; font-size:24px; font-weight:800; color:var(--ink);">39,99€</p>
-        </div>
-        <ul style="list-style:none; display:flex; flex-direction:column; gap:8px;">
-          <li style="font-size:14px; color:var(--ink-soft); display:flex; gap:8px; align-items:center;"><span style="color:var(--accent);">✓</span> 2 recherches complètes</li>
-          <li style="font-size:14px; color:var(--ink-soft); display:flex; gap:8px; align-items:center;"><span style="color:var(--accent);">✓</span> 2 partenaires qualifiés / recherche</li>
-          <li style="font-size:14px; color:var(--ink-soft); display:flex; gap:8px; align-items:center;"><span style="color:var(--accent);">✓</span> Angle de collaboration exploitable</li>
-        </ul>
-        <form action="/create-checkout-session" method="POST">
-          <input type="hidden" name="plan" value="starter">
-          <input type="hidden" name="email" id="starter-email" value="">
-          <button type="submit" style="width:100%; padding:11px; border:none; border-radius:8px; font-family:'Plus Jakarta Sans',sans-serif; font-size:14px; font-weight:600; color:white; background:var(--accent); cursor:pointer;" onmouseover="this.style.background='#7B56F5'" onmouseout="this.style.background='var(--accent)'">Choisir Starter →</button>
-        </form>
-      </div>
-
-      <div class="pricing-card" data-anim data-delay="2" style="background:var(--ink); border:1.5px solid var(--accent); position:relative;">
-        <div style="position:absolute; top:-13px; left:50%; transform:translateX(-50%); background:var(--accent); color:white; font-family:'Plus Jakarta Sans',sans-serif; font-size:11px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; padding:4px 14px; border-radius:100px; white-space:nowrap;">Le plus choisi</div>
-        <div>
-          <p style="font-family:'Plus Jakarta Sans',sans-serif; font-size:11px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:rgba(255,255,255,0.75); margin-bottom:6px; min-height:2.8em;">Multiplier les angles</p>
-          <p style="font-family:'Plus Jakarta Sans',sans-serif; font-size:18px; font-weight:700; color:white; margin-bottom:4px;">Growth</p>
-          <p style="font-family:'Plus Jakarta Sans',sans-serif; font-size:24px; font-weight:800; color:white;">79,99€</p>
-        </div>
-        <ul style="list-style:none; display:flex; flex-direction:column; gap:8px;">
-          <li style="font-size:14px; color:white; display:flex; gap:8px; align-items:center;"><span style="color:#A590FF;">✓</span> 3 recherches</li>
-          <li style="font-size:14px; color:white; display:flex; gap:8px; align-items:center;"><span style="color:#A590FF;">✓</span> 3 partenaires qualifiés / recherche</li>
-          <li style="font-size:14px; color:white; display:flex; gap:8px; align-items:center;"><span style="color:#A590FF;">✓</span> 9 opportunités au total</li>
-        </ul>
-        <form action="/create-checkout-session" method="POST">
-          <input type="hidden" name="plan" value="growth">
-          <input type="hidden" name="email" id="growth-email" value="">
-          <button type="submit" style="width:100%; padding:11px; border:none; border-radius:8px; font-family:'Plus Jakarta Sans',sans-serif; font-size:14px; font-weight:600; color:white; background:var(--accent); cursor:pointer;" onmouseover="this.style.background='#7B56F5'" onmouseout="this.style.background='var(--accent)'">Choisir Growth →</button>
-        </form>
-      </div>
-
-      <div class="pricing-card" data-anim data-delay="3" style="background:var(--white); border:1.5px solid var(--border);">
-        <div>
-          <p style="font-family:'Plus Jakarta Sans',sans-serif; font-size:11px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--ink-muted); margin-bottom:6px; min-height:2.8em;">Structurer un pipeline</p>
-          <p style="font-family:'Plus Jakarta Sans',sans-serif; font-size:18px; font-weight:700; color:var(--ink); margin-bottom:4px;">Scale</p>
-          <p style="font-family:'Plus Jakarta Sans',sans-serif; font-size:24px; font-weight:800; color:var(--ink);">149,99€</p>
-        </div>
-        <ul style="list-style:none; display:flex; flex-direction:column; gap:8px;">
-          <li style="font-size:14px; color:var(--ink-soft); display:flex; gap:8px; align-items:center;"><span style="color:var(--accent);">✓</span> 6 recherches</li>
-          <li style="font-size:14px; color:var(--ink-soft); display:flex; gap:8px; align-items:center;"><span style="color:var(--accent);">✓</span> 3 partenaires qualifiés / recherche</li>
-          <li style="font-size:14px; color:var(--ink-soft); display:flex; gap:8px; align-items:center;"><span style="color:var(--accent);">✓</span> 18 opportunités au total</li>
-        </ul>
-        <form action="/create-checkout-session" method="POST">
-          <input type="hidden" name="plan" value="scale">
-          <input type="hidden" name="email" id="scale-email" value="">
-          <button type="submit" style="width:100%; padding:11px; border:none; border-radius:8px; font-family:'Plus Jakarta Sans',sans-serif; font-size:14px; font-weight:600; color:white; background:var(--accent); cursor:pointer;" onmouseover="this.style.background='#7B56F5'" onmouseout="this.style.background='var(--accent)'">Choisir Scale →</button>
-        </form>
-      </div>
-
-    </div>
-  </div>
-</section>
 
 <!-- RÉSEAU -->
 <section class="reseau-section" id="reseau">

@@ -41,8 +41,11 @@ STRIPE_PRICES = {
     "starter": os.environ.get("STRIPE_PRICE_STARTER", ""),
     "growth":  os.environ.get("STRIPE_PRICE_GROWTH",  ""),
     "scale":   os.environ.get("STRIPE_PRICE_SCALE",   ""),
-    "pack":          os.environ.get("STRIPE_PRICE_PACK",          "price_1TSD69IcIDgMctx4o02p4nSj"),
-    "pack-business": os.environ.get("STRIPE_PRICE_PACK_BUSINESS", "price_1TSIuQIcIDgMctx4frlN4DUc"),
+    "pack":               os.environ.get("STRIPE_PRICE_PACK",               "price_1TSD69IcIDgMctx4o02p4nSj"),
+    "pack-business":      os.environ.get("STRIPE_PRICE_PACK_BUSINESS",      "price_1TSIuQIcIDgMctx4frlN4DUc"),
+    "mission-explore":      os.environ.get("STRIPE_PRICE_MISSION_EXPLORE",      ""),
+    "mission-explore-plus": os.environ.get("STRIPE_PRICE_MISSION_EXPLORE_PLUS", ""),
+    "mission-scale":        os.environ.get("STRIPE_PRICE_MISSION_SCALE",        ""),
 }
 PACK_ORDERS_FILE   = os.environ.get("PACK_ORDERS_FILE",   "/data/pack_orders.json")
 PACK_CONTEXT_FILE  = os.environ.get("PACK_CONTEXT_FILE",  "/data/pack_context.json")
@@ -682,12 +685,13 @@ def webhook():
         email = (session_data.get("customer_email") or
                  session_data.get("metadata", {}).get("email", "")).strip().lower()
         plan = session_data.get("metadata", {}).get("plan", "starter")
-        if plan in ("pack", "pack-business"):
+        if plan in ("pack", "pack-business", "mission-explore", "mission-explore-plus", "mission-scale"):
             orders = []
             if os.path.exists(PACK_ORDERS_FILE):
                 with open(PACK_ORDERS_FILE, "r", encoding="utf-8") as f:
                     orders = json.load(f)
-            amount = 499 if plan == "pack-business" else 350
+            amount_map = {"pack": 350, "pack-business": 499, "mission-explore": 599, "mission-explore-plus": 849, "mission-scale": 1199}
+            amount = amount_map.get(plan, 0)
             orders.append({
                 "date": datetime.now(timezone.utc).isoformat(),
                 "email": email,
