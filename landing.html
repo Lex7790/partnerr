@@ -689,17 +689,30 @@
 
     /* ── STEPS ── */
     /* ── STEPS STACK ── */
+    .steps-section-wrap {
+      background: white;
+    }
+
+    .steps-title-sticky {
+      position: sticky;
+      top: 80px;
+      background: white;
+      z-index: 20;
+      text-align: center;
+      padding: 28px 40px 20px;
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+
     .steps-pinned {
       position: relative;
-      background: white;
-      padding: 0 40px 600px;
+      padding: 24px 40px 40px;
       max-width: 1160px;
       margin: 0 auto;
     }
 
     .step-pin-card {
       position: sticky;
-      top: 90px;
+      top: 200px; /* nav 80px + titre ~120px */
       display: grid;
       grid-template-columns: 2fr 3fr;
       border-radius: 20px;
@@ -1565,7 +1578,8 @@
       .method-note { font-size: 13px; }
 
       /* Steps stack mobile */
-      .steps-pinned { padding: 0 16px 60px; }
+      .steps-title-sticky { position: relative; top: 0; padding: 40px 20px 16px; }
+      .steps-pinned { padding: 16px 16px 40px; }
       .step-pin-card { position: relative; top: 0; grid-template-columns: 1fr; height: auto; border-radius: 16px; }
       .step-vis { height: 140px; }
       .step-vis-num { font-size: 100px; }
@@ -2026,11 +2040,11 @@
 </section>
 
 <!-- COMMENT ÇA MARCHE -->
-<section id="comment-ca-marche" style="background:white;">
-  <div class="section-inner" style="text-align:center; padding:100px 40px 56px;">
-    <p class="section-label" data-anim>Les étapes</p>
-    <h2 class="section-title" data-anim style="margin:0 auto 16px;">De la commande aux premiers rendez-vous en moins d'un mois.</h2>
-    <p class="section-sub" data-anim style="margin:0 auto;">Quatre étapes, aucune complexité.</p>
+<section id="comment-ca-marche" class="steps-section-wrap">
+
+  <div class="steps-title-sticky">
+    <p class="section-label">Les étapes</p>
+    <h2 class="section-title" style="margin:8px auto 0; font-size:clamp(24px,3vw,40px);">De la commande aux premiers rendez-vous en moins d'un mois.</h2>
   </div>
 
   <div class="steps-pinned" id="steps-pinned">
@@ -2257,7 +2271,28 @@
 <script>
   // ── RÉSEAU ORBES — désactivé (canvas caché) ──
 
-  // Steps : sticky + z-index natif — pas de JS nécessaire
+  // ── STEPS FADE — card N s'évapore quand card N+1 monte dessus ──
+  (function() {
+    if (window.innerWidth < 600) return;
+    var cards = Array.prototype.slice.call(document.querySelectorAll('.step-pin-card'));
+    if (!cards.length) return;
+
+    function update() {
+      for (var i = 0; i < cards.length - 1; i++) {
+        var curr = cards[i];
+        var next = cards[i + 1];
+        var currRect = curr.getBoundingClientRect();
+        var nextRect = next.getBoundingClientRect();
+        // Overlap : combien la card suivante recouvre la courante par le bas
+        var overlap = currRect.bottom - nextRect.top;
+        var progress = Math.max(0, Math.min(1, overlap / currRect.height));
+        curr.style.opacity = (1 - progress).toFixed(2);
+      }
+    }
+
+    window.addEventListener('scroll', update, { passive: true });
+    update();
+  })();
 
   // ── HERO CONSTELLATION ──
   (function() {
