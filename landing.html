@@ -1770,10 +1770,7 @@
           <li><span class="check">✓</span><span>Livrable PDF premium avec angles de collaboration</span></li>
           <li><span class="check">✓</span><span>Livraison sous <strong>5 jours ouvrés</strong></span></li>
         </ul>
-        <form action="/create-checkout-session" method="POST">
-          <input type="hidden" name="plan" value="mission-explore">
-          <button type="submit" class="btn-pack" style="width:100%; justify-content:center;">Lancer ma mission EXPLORE →</button>
-        </form>
+        <button class="btn-pack btn-checkout" data-plan="mission-explore" style="width:100%; justify-content:center;">Lancer ma mission EXPLORE →</button>
       </div>
 
       <!-- Mission EXPLORE+ -->
@@ -1789,10 +1786,7 @@
           <li><span class="check">✓</span><span>Paiement en 2 fois disponible</span></li>
           <li><span class="check">✓</span><span><strong>Zéro prospection pour vous :</strong> on rédige, on contacte, vous pitchez.</span></li>
         </ul>
-        <form action="/create-checkout-session" method="POST">
-          <input type="hidden" name="plan" value="mission-explore-plus">
-          <button type="submit" class="btn-pack" style="width:100%; justify-content:center;">Lancer ma mission EXPLORE+ →</button>
-        </form>
+        <button class="btn-pack btn-checkout" data-plan="mission-explore-plus" style="width:100%; justify-content:center;">Lancer ma mission EXPLORE+ →</button>
       </div>
 
       <!-- Mission SCALE -->
@@ -1807,10 +1801,7 @@
           <li><span class="check">✓</span><span>Call de cadrage 30 min inclus</span></li>
           <li><span class="check">✓</span><span>Suivi J+30</span></li>
         </ul>
-        <form action="/create-checkout-session" method="POST">
-          <input type="hidden" name="plan" value="mission-scale">
-          <button type="submit" class="btn-pack" style="width:100%; justify-content:center;">Lancer ma mission<br>SCALE →</button>
-        </form>
+        <button class="btn-pack btn-checkout" data-plan="mission-scale" style="width:100%; justify-content:center;">Lancer ma mission SCALE →</button>
       </div>
 
     </div>
@@ -2403,14 +2394,34 @@
     probUpdate();
   })();
 
-  // Fix iOS : overflow:hidden sur parent peut bloquer le submit natif
-  document.querySelectorAll('form[action="/create-checkout-session"]').forEach(function(form) {
-    var btn = form.querySelector('button');
-    if (!btn) return;
-    btn.addEventListener('touchend', function(e) {
-      e.preventDefault();
-      form.submit();
-    }, { passive: false });
+  // Checkout JS — fiable desktop + mobile (évite le blocage iOS des redirects POST)
+  document.querySelectorAll('.btn-checkout').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var plan = btn.dataset.plan;
+      var originalText = btn.textContent;
+      btn.textContent = 'Chargement...';
+      btn.disabled = true;
+      fetch('/checkout-url', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ plan: plan })
+      })
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        if (data.url) {
+          window.location.href = data.url;
+        } else {
+          alert('Erreur : ' + (data.error || 'veuillez réessayer'));
+          btn.textContent = originalText;
+          btn.disabled = false;
+        }
+      })
+      .catch(function() {
+        alert('Erreur réseau, veuillez réessayer.');
+        btn.textContent = originalText;
+        btn.disabled = false;
+      });
+    });
   });
 
   function toggleFaq(btn) {

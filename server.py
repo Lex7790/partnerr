@@ -648,13 +648,10 @@ STYLE D'ÉCRITURE OBLIGATOIRE : N'utilise jamais de tiret long (—). Reformule 
     )
 
 
-@app.route("/create-checkout-session", methods=["POST"])
-def create_checkout_session():
-    plan = request.form.get("plan", "").strip().lower()
-    email = request.form.get("email", "").strip().lower()
+def _build_checkout_session(plan, email):
     price_id = STRIPE_PRICES.get(plan)
     if not price_id:
-        return "Plan invalide.", 400
+        return None, "Plan invalide."
     base_url = request.host_url.rstrip("/")
     if plan in ("pack", "pack-business", "mission-explore", "mission-explore-plus", "mission-scale"):
         success_url = f"{base_url}/pack-onboarding?session_id={{CHECKOUT_SESSION_ID}}"
@@ -672,10 +669,28 @@ def create_checkout_session():
             success_url=success_url,
             cancel_url=cancel_url,
         )
+        return session.url, None
     except stripe.error.StripeError as e:
         print(f"[STRIPE ERROR] plan={plan!r} price_id={price_id!r} error={e}", flush=True)
-        return f"Erreur paiement : {e.user_message or str(e)}", 400
-    return redirect(session.url, code=303)
+        return None, e.user_message or str(e)
+
+@app.route("/create-checkout-session", methods=["POST"])
+def create_checkout_session():
+    plan = request.form.get("plan", "").strip().lower()
+    email = request.form.get("email", "").strip().lower()
+    url, err = _build_checkout_session(plan, email)
+    if err:
+        return err, 400
+    return redirect(url, code=303)
+
+@app.route("/checkout-url", methods=["POST"])
+def checkout_url():
+    plan = request.json.get("plan", "").strip().lower()
+    email = request.json.get("email", "").strip().lower()
+    url, err = _build_checkout_session(plan, email)
+    if err:
+        return jsonify({"error": err}), 400
+    return jsonify({"url": url})
 
 
 @app.route("/webhook", methods=["POST"])
