@@ -1766,40 +1766,44 @@
     .prob-pin-card {
       position: sticky;
       top: 200px;
-      display: grid;
-      grid-template-columns: 2fr 3fr;
+      background: var(--prob-bg, #CCFF00);
       border-radius: 20px;
       overflow: hidden;
       height: 380px;
-      box-shadow: 0 12px 48px rgba(0,0,0,0.4);
+      box-shadow: 0 12px 48px rgba(0,0,0,0.10);
       margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      padding: 52px 64px;
     }
     .prob-pin-card:nth-child(1) { z-index: 1; }
     .prob-pin-card:nth-child(2) { z-index: 2; }
     .prob-pin-card:nth-child(3) { z-index: 3; }
     .prob-pin-card:nth-child(4) { z-index: 4; }
     .prob-vis {
-      background: var(--prob-bg, #CCFF00);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      overflow: hidden;
+      position: absolute;
+      right: -10px;
+      bottom: -30px;
+      pointer-events: none;
     }
     .prob-num {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: 200px;
-      line-height: 1;
-      opacity: 0.25;
+      font-size: 320px;
+      line-height: 0.85;
+      color: #0B0718;
+      opacity: 0.12;
+      display: block;
       user-select: none;
-      pointer-events: none;
     }
     .prob-content {
-      background: white;
-      padding: 52px 48px;
+      background: transparent;
+      padding: 0;
       display: flex;
       flex-direction: column;
       justify-content: center;
+      position: relative;
+      z-index: 1;
+      max-width: 600px;
     }
     .prob-badge {
       display: inline-flex;
@@ -1812,42 +1816,38 @@
       border-radius: 100px;
       margin-bottom: 28px;
       width: fit-content;
-      background: rgba(94,53,224,0.07);
-      color: var(--accent);
-      border: 1px solid rgba(94,53,224,0.15);
+      background: rgba(0,0,0,0.1);
+      color: rgba(0,0,0,0.6);
+      border: 1px solid rgba(0,0,0,0.12);
     }
     .prob-content h3 {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: 46px;
+      font-size: 52px;
       font-weight: 400;
       letter-spacing: 0.02em;
       text-transform: uppercase;
-      color: var(--ink);
+      color: #0B0718;
       line-height: 1.05;
       margin-bottom: 20px;
     }
     .prob-content p {
-      font-size: 15px;
-      color: var(--ink-soft);
+      font-size: 16px;
+      color: rgba(11,7,24,0.68);
       line-height: 1.7;
-      max-width: 360px;
+      max-width: 520px;
     }
     @media (max-width: 900px) {
-      .prob-pin-card { grid-template-columns: 1fr; height: auto; }
-      .prob-vis { height: 160px; }
-      .prob-num { font-size: 120px; }
-      .prob-content { padding: 28px 24px; }
-      .prob-content h3 { font-size: 30px; }
+      .prob-pin-card { height: auto; min-height: 260px; padding: 40px 36px; }
+      .prob-num { font-size: 200px; }
+      .prob-content h3 { font-size: 36px; }
       .prob-title-sticky { padding: 20px 24px 16px; }
     }
     @media (max-width: 600px) {
       .prob-title-sticky { position: relative; top: 0; padding: 40px 20px 16px; }
       .prob-pinned { padding: 16px 16px 40px; }
-      .prob-pin-card { position: relative; top: 0; border-radius: 16px; }
-      .prob-vis { height: 140px; }
-      .prob-num { font-size: 100px; }
-      .prob-content { padding: 24px 20px; }
-      .prob-content h3 { font-size: 26px; }
+      .prob-pin-card { position: relative; top: 0; border-radius: 16px; min-height: 220px; padding: 32px 24px; }
+      .prob-num { font-size: 150px; }
+      .prob-content h3 { font-size: 28px; }
     }
   </style>
 </head>
@@ -1962,7 +1962,7 @@
   <div class="prob-pinned">
 
     <div class="prob-pin-card" style="--prob-bg:#CCFF00;">
-      <div class="prob-vis"><span class="prob-num" style="color:#0B0718;">01</span></div>
+      <div class="prob-vis"><span class="prob-num">01</span></div>
       <div class="prob-content">
         <span class="prob-badge">Obstacle 1</span>
         <h3>Les Ads coûtent de plus en plus cher</h3>
@@ -1971,7 +1971,7 @@
     </div>
 
     <div class="prob-pin-card" style="--prob-bg:#A590FF;">
-      <div class="prob-vis"><span class="prob-num" style="color:#0B0718;">02</span></div>
+      <div class="prob-vis"><span class="prob-num">02</span></div>
       <div class="prob-content">
         <span class="prob-badge">Obstacle 2</span>
         <h3>La prospection prend trop de temps</h3>
@@ -1980,7 +1980,7 @@
     </div>
 
     <div class="prob-pin-card" style="--prob-bg:#C5902A;">
-      <div class="prob-vis"><span class="prob-num" style="color:rgba(255,255,255,0.9);">03</span></div>
+      <div class="prob-vis"><span class="prob-num">03</span></div>
       <div class="prob-content">
         <span class="prob-badge">Obstacle 3</span>
         <h3>On ne sait pas quoi proposer</h3>
@@ -1989,7 +1989,7 @@
     </div>
 
     <div class="prob-pin-card" style="--prob-bg:#FFE566;">
-      <div class="prob-vis"><span class="prob-num" style="color:#0B0718;">04</span></div>
+      <div class="prob-vis"><span class="prob-num">04</span></div>
       <div class="prob-content">
         <span class="prob-badge">Obstacle 4</span>
         <h3>Les partenariats restent en bas de la to-do</h3>
