@@ -210,6 +210,7 @@
       box-shadow: 0 8px 32px rgba(204,255,0,0.25);
       will-change: transform;
       -webkit-font-smoothing: antialiased;
+      touch-action: manipulation;
     }
 
     .btn-hero:hover { transform: scale(1.04); }
@@ -485,6 +486,7 @@
       box-shadow: 0 8px 28px rgba(165,144,255,0.3);
       will-change: transform;
       -webkit-font-smoothing: antialiased;
+      touch-action: manipulation;
     }
 
     .btn-pack:hover { transform: scale(1.04); }
@@ -1463,7 +1465,7 @@
       /* Steps stack mobile */
       .steps-title-sticky { position: relative; top: 0; padding: 40px 20px 16px; }
       .steps-pinned { padding: 16px 16px 40px; }
-      .step-pin-card { position: relative; top: 0; grid-template-columns: 1fr; height: auto; border-radius: 16px; }
+      .step-pin-card { position: relative; top: 0; z-index: auto; grid-template-columns: 1fr; height: auto; border-radius: 16px; }
       .step-vis { height: 140px; }
       .step-vis-num { font-size: 100px; }
       .step-content { padding: 24px 20px; }
@@ -1594,7 +1596,7 @@
     @media (max-width: 600px) {
       .prob-title-sticky { position: relative; top: 0; padding: 40px 20px 16px; }
       .prob-pinned { padding: 16px 16px 40px; }
-      .prob-pin-card { position: relative; top: 0; border-radius: 16px; }
+      .prob-pin-card { position: relative; top: 0; border-radius: 16px; z-index: auto; }
       .prob-vis { height: 160px; }
       .prob-content { padding: 24px 20px; }
       .prob-content h3 { font-size: 26px; }
