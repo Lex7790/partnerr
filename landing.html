@@ -2610,6 +2610,14 @@
   }, { threshold: 0.12 });
   document.querySelectorAll('[data-anim]').forEach(el => io.observe(el));
 
+  // Libère le transform après fadeInUp pour que le hover scale fonctionne
+  document.querySelectorAll('.btn-pack, .btn-hero, .btn-nav').forEach(btn => {
+    btn.addEventListener('animationend', () => {
+      btn.style.animation = 'none';
+      btn.style.opacity = '1';
+    }, { once: true });
+  });
+
   // ── PROBLÈME FADE — card N s'évapore quand card N+1 monte dessus ──
   (function() {
     if (window.innerWidth < 600) return;
