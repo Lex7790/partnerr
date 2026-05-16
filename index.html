@@ -1826,6 +1826,10 @@
     document.body.style.overflow = '';
   }
 
+  function escHtml(s) {
+    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
   async function loadHistory(email) {
     const body = document.getElementById('history-panel-body');
     body.innerHTML = '<div class="history-empty">Chargement...</div>';
@@ -1841,10 +1845,10 @@
       body.innerHTML = data.searches.map(s => {
         const date = new Date(s.date);
         const dateStr = date.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' });
-        const tags = (s.partners || []).map(p => `<span class="history-tag">${p}</span>`).join('');
+        const tags = (s.partners || []).map(p => `<span class="history-tag">${escHtml(p)}</span>`).join('');
         return `<div class="history-entry">
-          <div class="history-entry-date">${dateStr}</div>
-          <div class="history-entry-company">Recherche pour ${s.company || '—'}</div>
+          <div class="history-entry-date">${escHtml(dateStr)}</div>
+          <div class="history-entry-company">Recherche pour ${escHtml(s.company || '—')}</div>
           <div class="history-tags">${tags}</div>
         </div>`;
       }).join('');

@@ -24,6 +24,8 @@ def set_security_headers(response):
     response.headers['X-Frame-Options'] = 'SAMEORIGIN'
     response.headers['X-Content-Type-Options'] = 'nosniff'
     response.headers['Referrer-Policy'] = 'strict-origin-when-cross-origin'
+    response.headers['X-XSS-Protection'] = '1; mode=block'
+    response.headers['Permissions-Policy'] = 'camera=(), microphone=(), geolocation=()'
     return response
 
 client = anthropic.Anthropic(api_key=os.environ.get("ANTHROPIC_API_KEY"))
@@ -926,6 +928,16 @@ def network_signup():
     send_reseau_confirmation(email, role)
     send_reseau_admin_notification(email, role, website, description)
     return jsonify({"status": "ok"})
+
+
+@app.errorhandler(404)
+def not_found(e):
+    return jsonify({"error": "Page introuvable."}), 404
+
+@app.errorhandler(500)
+def server_error(e):
+    print(f"[500] {e}", flush=True)
+    return jsonify({"error": "Une erreur est survenue."}), 500
 
 
 if __name__ == "__main__":

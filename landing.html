@@ -27,13 +27,14 @@
       --border-dark: rgba(255,255,255,0.10);
     }
 
-    html { scroll-behavior: auto; }
+    html { scroll-behavior: auto; overflow-x: hidden; }
 
     body {
       font-family: 'Inter', system-ui, sans-serif;
       background: var(--white);
       color: var(--ink);
       -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
     }
 
     /* ── NAV ── */
@@ -1330,9 +1331,17 @@
     [data-anim].in-view[data-delay="3"] { animation-delay: 0.36s; }
 
     /* ── RESPONSIVE ── */
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+
     @media (max-width: 1020px) and (min-width: 601px) {
       .pack-offers-grid { grid-template-columns: 1fr 1fr; max-width: 700px; margin-left: auto; margin-right: auto; }
       .pack-offer-card.business { transform: none; padding: 36px 28px; }
+      .testimonials-grid { grid-template-columns: 1fr; max-width: 520px; margin-left: auto; margin-right: auto; border-top: 1px solid rgba(0,0,0,0.08); }
+      .testimonials-grid > div { border-right: none !important; border-bottom: 1px solid rgba(0,0,0,0.08); }
+      .nav-link-secondary { display: none; }
     }
 
     @media (max-width: 900px) {
@@ -1431,6 +1440,8 @@
 
       /* Reviews */
       .reviews-grid { grid-template-columns: 1fr; }
+      .testimonials-grid { grid-template-columns: 1fr; border-top: 1px solid rgba(0,0,0,0.08); }
+      .testimonials-grid > div { border-right: none !important; border-bottom: 1px solid rgba(0,0,0,0.08); padding: 24px 20px; }
 
       /* Pricing & packs */
       .pricing-card { padding: 22px 18px; }
@@ -1475,10 +1486,10 @@
       </svg>
       Partnerr
     </a>
-    <a href="#comment-ca-marche" class="nav-link">Comment ça marche</a>
+    <a href="#comment-ca-marche" class="nav-link nav-link-secondary">Comment ça marche</a>
     <a href="#pack" class="nav-link">Les missions</a>
-    <a href="#reseau" class="nav-link">Réseau</a>
-    <a href="#faq" class="nav-link">FAQ</a>
+    <a href="#reseau" class="nav-link nav-link-secondary">Réseau</a>
+    <a href="#faq" class="nav-link nav-link-secondary">FAQ</a>
     <a href="#pack" class="btn-nav" id="nav-cta">Voir les missions →</a>
   </div>
 </nav>
@@ -1683,7 +1694,7 @@
 <section class="section" style="background:var(--white); border-top:1px solid rgba(94,53,224,0.08);">
   <div class="section-inner">
     <p class="section-label" data-anim>Ils ont testé</p>
-    <div style="display:grid; grid-template-columns:1fr 1fr 1fr; margin-top:48px; align-items:start;">
+    <div class="testimonials-grid" style="margin-top:48px; align-items:start;">
 
       <!-- Marion -->
       <div data-anim data-delay="0" style="padding:32px 36px; display:flex; flex-direction:column; border-right:1px solid rgba(0,0,0,0.08); text-align:center;">
