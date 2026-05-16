@@ -85,7 +85,7 @@
       transition: opacity 0.2s;
     }
 
-    .btn-nav:hover { opacity: 0.85; }
+    .btn-nav:hover { opacity: 1; transform: scale(1.05); }
 
     .nav-link {
       font-family: 'Space Grotesk', sans-serif;
@@ -217,7 +217,7 @@
       box-shadow: 0 8px 32px rgba(204,255,0,0.25);
     }
 
-    .btn-hero:hover { background: #d4ff1a; transform: translateY(-2px); }
+    .btn-hero:hover { background: #d4ff1a; transform: scale(1.05); }
 
     .btn-hero-secondary {
       font-family: 'Inter', sans-serif;
@@ -537,11 +537,11 @@
       gap: 8px;
       border: none;
       cursor: pointer;
-      transition: opacity 0.2s, transform 0.15s;
+      transition: opacity 0.2s, transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
       box-shadow: 0 8px 28px rgba(165,144,255,0.3);
     }
 
-    .btn-pack:hover { opacity: 0.88; transform: translateY(-2px); }
+    .btn-pack:hover { opacity: 1; transform: scale(1.04); }
 
     /* ── ROI ── */
     .roi-grid {
