@@ -10,7 +10,7 @@
   <meta name="description" content="Partnerr est une agence de partenariats B2B. On identifie vos futurs partenaires, on prend contact à votre place, et on vous livre des rendez-vous qualifiés avec des décideurs. Livraison sous 5 jours ouvrés." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -80,8 +80,8 @@
       font-weight: 600;
       color: var(--white);
       background: var(--accent);
-      padding: 9px 20px;
-      border-radius: 8px;
+      padding: 9px 22px;
+      border-radius: 100px;
       text-decoration: none;
       transition: background 0.2s, box-shadow 0.2s;
     }
@@ -157,7 +157,7 @@
       width: 6px;
       height: 6px;
       border-radius: 50%;
-      background: #7B56F5;
+      background: #CCFF00;
       animation: pulse 2s ease-in-out infinite;
     }
 
@@ -167,14 +167,15 @@
     }
 
     .hero h1 {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: clamp(36px, 5.5vw, 64px);
-      font-weight: 800;
-      line-height: 1.12;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(56px, 9vw, 120px);
+      font-weight: 400;
+      line-height: 0.95;
       color: var(--white);
-      max-width: 820px;
-      margin: 0 auto 28px;
-      letter-spacing: -0.02em;
+      max-width: 860px;
+      margin: 0 auto 32px;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
     }
 
     .hero h1 em {
@@ -205,22 +206,22 @@
     .btn-hero {
       font-family: 'Plus Jakarta Sans', sans-serif;
       font-size: 16px;
-      font-weight: 700;
-      color: var(--white);
-      background: var(--accent);
-      padding: 16px 32px;
-      border-radius: 10px;
+      font-weight: 800;
+      color: #0B0718;
+      background: #CCFF00;
+      padding: 16px 36px;
+      border-radius: 100px;
       text-decoration: none;
       display: inline-flex;
       align-items: center;
       gap: 8px;
       border: none;
       cursor: pointer;
-      transition: background 0.2s;
-      box-shadow: 0 0 0 1px rgba(94,53,224,0.5), 0 8px 32px rgba(94, 53, 224, 0.4);
+      transition: background 0.2s, transform 0.15s;
+      box-shadow: 0 8px 32px rgba(204,255,0,0.25);
     }
 
-    .btn-hero:hover { background: var(--accent-hi); }
+    .btn-hero:hover { background: #d4ff1a; transform: translateY(-2px); }
 
     .btn-hero-secondary {
       font-family: 'Inter', sans-serif;
@@ -517,18 +518,18 @@
       color: white;
       background: var(--accent);
       padding: 15px 32px;
-      border-radius: 10px;
+      border-radius: 100px;
       text-decoration: none;
       display: inline-flex;
       align-items: center;
       gap: 8px;
       border: none;
       cursor: pointer;
-      transition: background 0.2s;
-      box-shadow: 0 8px 28px rgba(94,53,224,0.4);
+      transition: background 0.2s, transform 0.15s;
+      box-shadow: 0 8px 28px rgba(94,53,224,0.35);
     }
 
-    .btn-pack:hover { background: var(--accent-hi); }
+    .btn-pack:hover { background: var(--accent-hi); transform: translateY(-2px); }
 
     /* ── ROI ── */
     .roi-grid {
@@ -1150,7 +1151,7 @@
     }
 
     .pack-offer-features li strong { color: white; font-weight: 700; }
-    .pack-offer-features li .check { color: #A590FF; flex-shrink: 0; font-size: 16px; }
+    .pack-offer-features li .check { color: #CCFF00; flex-shrink: 0; font-size: 16px; }
 
     /* ── METHOD LAYOUT ── */
     .method-layout {
