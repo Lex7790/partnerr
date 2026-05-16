@@ -1086,17 +1086,25 @@
     }
 
     @keyframes businessGlow {
-      0%, 100% { box-shadow: 0 0 20px rgba(94,53,224,0.3), 0 0 0 1.5px rgba(123,86,245,0.6); }
-      50%       { box-shadow: 0 0 32px rgba(123,86,245,0.45), 0 0 0 1.5px rgba(165,144,255,0.8); }
+      0%, 100% { box-shadow: 0 0 28px rgba(165,144,255,0.5), 0 0 0 2px rgba(165,144,255,0.7); }
+      50%       { box-shadow: 0 0 48px rgba(165,144,255,0.7), 0 0 0 2px rgba(196,181,255,0.9); }
     }
 
     .pack-offer-card.business {
-      background: rgba(94,53,224,0.18);
+      background: #A590FF;
       border: none;
       transform: translateY(-16px);
       padding: 44px 32px;
       will-change: transform;
     }
+
+    /* Textes de la card EXPLORE+ sur fond lavande */
+    .pack-offer-card.business .pack-offer-name { color: #0B0718; }
+    .pack-offer-card.business .pack-offer-price { color: #0B0718; }
+    .pack-offer-card.business .pack-offer-billing { color: rgba(11,7,24,0.6); border-bottom-color: rgba(11,7,24,0.12); }
+    .pack-offer-card.business .pack-offer-features li { color: #0B0718; }
+    .pack-offer-card.business .pack-offer-features li strong { color: #0B0718; }
+    .pack-offer-card.business .check { color: #CCFF00 !important; }
 
     .pack-offer-card.business.in-view {
       animation: fadeInUp 0.9s cubic-bezier(0.22, 1.15, 0.36, 1) both,
@@ -1675,7 +1683,7 @@
         </ul>
         <form action="/create-checkout-session" method="POST">
           <input type="hidden" name="plan" value="mission-explore-plus">
-          <button type="submit" class="btn-pack" style="width:100%; justify-content:center;">Lancer ma mission EXPLORE+ →</button>
+          <button type="submit" class="btn-pack" style="width:100%; justify-content:center; background:#FFE566; color:#0B0718; box-shadow:0 8px 24px rgba(255,229,102,0.3);">Lancer ma mission EXPLORE+ →</button>
         </form>
       </div>
 
