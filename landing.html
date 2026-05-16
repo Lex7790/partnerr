@@ -1070,8 +1070,8 @@
     }
 
     @keyframes businessGlow {
-      0%, 100% { box-shadow: 0 0 24px rgba(94,53,224,0.35), 0 0 60px rgba(94,53,224,0.18), 0 0 0 1.5px rgba(123,86,245,0.7); }
-      50%       { box-shadow: 0 0 40px rgba(123,86,245,0.55), 0 0 90px rgba(94,53,224,0.28), 0 0 0 1.5px rgba(165,144,255,0.9); }
+      0%, 100% { box-shadow: 0 0 20px rgba(94,53,224,0.3), 0 0 0 1.5px rgba(123,86,245,0.6); }
+      50%       { box-shadow: 0 0 32px rgba(123,86,245,0.45), 0 0 0 1.5px rgba(165,144,255,0.8); }
     }
 
     .pack-offer-card.business {
@@ -1079,6 +1079,7 @@
       border: none;
       transform: translateY(-16px);
       padding: 44px 32px;
+      will-change: transform;
     }
 
     .pack-offer-card.business.in-view {
@@ -2103,56 +2104,7 @@
 </footer>
 
 <script>
-  // ── RÉSEAU ORBES ──
-  (function() {
-    const canvas = document.getElementById('reseau-canvas');
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    const section = canvas.parentElement;
-
-    function resize() {
-      canvas.width  = section.offsetWidth;
-      canvas.height = section.offsetHeight;
-    }
-    resize();
-    window.addEventListener('resize', resize);
-
-    const orbs = [
-      { x: 0.75, y: 0.8,  r: 200, vx:  0.18, vy: -0.12, color: 'rgba(94,53,224,' },
-      { x: 0.15, y: 0.3,  r: 150, vx: -0.14, vy:  0.16, color: 'rgba(123,86,245,' },
-      { x: 0.5,  y: 0.6,  r: 120, vx:  0.20, vy:  0.10, color: 'rgba(94,53,224,' },
-      { x: 0.85, y: 0.2,  r: 90,  vx: -0.16, vy:  0.18, color: 'rgba(165,144,255,' },
-    ].map(o => ({
-      ...o,
-      x: o.x * (canvas.width  || 1000),
-      y: o.y * (canvas.height || 600),
-    }));
-
-    function draw() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      orbs.forEach(o => {
-        o.x += o.vx;
-        o.y += o.vy;
-        if (o.x < -o.r)           o.x = canvas.width  + o.r;
-        if (o.x > canvas.width  + o.r) o.x = -o.r;
-        if (o.y < -o.r)           o.y = canvas.height + o.r;
-        if (o.y > canvas.height + o.r) o.y = -o.r;
-
-        const g = ctx.createRadialGradient(o.x, o.y, 0, o.x, o.y, o.r);
-        g.addColorStop(0,   o.color + '0.28)');
-        g.addColorStop(0.4, o.color + '0.14)');
-        g.addColorStop(1,   o.color + '0)');
-        ctx.beginPath();
-        ctx.arc(o.x, o.y, o.r, 0, Math.PI * 2);
-        ctx.fillStyle = g;
-        ctx.fill();
-      });
-
-      requestAnimationFrame(draw);
-    }
-    draw();
-  })();
+  // ── RÉSEAU ORBES — désactivé (canvas caché) ──
 
   // ── HERO CONSTELLATION ──
   (function() {
@@ -2169,20 +2121,23 @@
     resize();
     window.addEventListener('resize', resize);
 
-    const N = 55;
-    const MAX_DIST = 160;
+    const N = 32;
+    const MAX_DIST = 140;
     const nodes = Array.from({ length: N }, () => ({
       x:  Math.random() * canvas.width,
       y:  Math.random() * canvas.height,
-      vx: (Math.random() - 0.5) * 0.35,
-      vy: (Math.random() - 0.5) * 0.35,
-      r:  Math.random() * 2 + 1.5,
+      vx: (Math.random() - 0.5) * 0.3,
+      vy: (Math.random() - 0.5) * 0.3,
+      r:  Math.random() * 1.5 + 1,
     }));
 
+    let rafId = null;
+    let visible = true;
+
     function draw() {
+      if (!visible) { rafId = requestAnimationFrame(draw); return; }
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // Move
       nodes.forEach(n => {
         n.x += n.vx;
         n.y += n.vy;
@@ -2190,39 +2145,45 @@
         if (n.y < 0 || n.y > canvas.height) n.vy *= -1;
       });
 
-      // Lines
+      // Lignes sans shadowBlur (gain perf majeur)
+      ctx.lineWidth = 0.7;
       for (let i = 0; i < N; i++) {
         for (let j = i + 1; j < N; j++) {
           const dx = nodes[i].x - nodes[j].x;
           const dy = nodes[i].y - nodes[j].y;
-          const d  = Math.sqrt(dx * dx + dy * dy);
-          if (d < MAX_DIST) {
-            const alpha = (1 - d / MAX_DIST) * 0.35;
+          const d2 = dx * dx + dy * dy;
+          if (d2 < MAX_DIST * MAX_DIST) {
+            const alpha = (1 - Math.sqrt(d2) / MAX_DIST) * 0.3;
             ctx.beginPath();
             ctx.moveTo(nodes[i].x, nodes[i].y);
             ctx.lineTo(nodes[j].x, nodes[j].y);
-            ctx.strokeStyle = `rgba(123,86,245,${alpha})`;
-            ctx.lineWidth = 0.8;
-            ctx.shadowBlur = 4;
-            ctx.shadowColor = 'rgba(123,86,245,0.4)';
+            ctx.strokeStyle = `rgba(123,86,245,${alpha.toFixed(2)})`;
             ctx.stroke();
           }
         }
       }
 
-      // Dots
+      // Points sans shadowBlur
+      ctx.fillStyle = 'rgba(196,181,255,0.65)';
       nodes.forEach(n => {
         ctx.beginPath();
         ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(196,181,255,0.7)';
-        ctx.shadowBlur = 8;
-        ctx.shadowColor = '#7B56F5';
         ctx.fill();
       });
 
-      ctx.shadowBlur = 0;
-      requestAnimationFrame(draw);
+      rafId = requestAnimationFrame(draw);
     }
+
+    // Pause quand l'onglet est caché
+    document.addEventListener('visibilitychange', () => {
+      visible = !document.hidden;
+    });
+
+    // Pause quand le hero sort du viewport
+    const observer = new IntersectionObserver(entries => {
+      visible = entries[0].isIntersecting && !document.hidden;
+    }, { threshold: 0 });
+    observer.observe(hero);
 
     draw();
   })();
