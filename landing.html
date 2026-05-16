@@ -123,7 +123,10 @@
       top: -200px; left: 50%;
       transform: translateX(-50%);
       width: 900px; height: 900px;
-      background: radial-gradient(circle, rgba(94,53,224,0.25) 0%, transparent 65%);
+      background:
+        radial-gradient(circle at 30% 50%, rgba(124,58,237,0.30) 0%, transparent 50%),
+        radial-gradient(circle at 75% 40%, rgba(52,211,153,0.10) 0%, transparent 45%),
+        radial-gradient(circle at 60% 80%, rgba(96,165,250,0.10) 0%, transparent 40%);
       pointer-events: none;
     }
 
@@ -175,7 +178,7 @@
 
     .hero h1 em {
       font-style: normal;
-      background: linear-gradient(130deg, #C4B5FF 0%, #9B7BFF 45%, #6C47E8 100%);
+      background: linear-gradient(120deg, #A78BFA 0%, #7C3AED 40%, #C084FC 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -199,49 +202,52 @@
       margin-bottom: 20px;
     }
 
-    /* Pills flottantes */
+    /* Pills flottantes — positionnées autour du titre */
     .hero-pill {
       position: absolute;
       font-family: 'Plus Jakarta Sans', sans-serif;
       font-size: 13px;
       font-weight: 700;
-      padding: 8px 18px;
+      padding: 9px 20px;
       border-radius: 100px;
       white-space: nowrap;
-      z-index: 2;
       pointer-events: none;
     }
+    /* Lavande — haut gauche du titre */
     .hero-pill-1 {
-      background: rgba(196,181,255,0.15);
-      border: 1px solid rgba(196,181,255,0.35);
-      color: #C4B5FF;
-      top: 28%;
-      left: 6%;
-      transform: rotate(-8deg);
+      background: rgba(196,181,255,0.18);
+      border: 1.5px solid rgba(196,181,255,0.4);
+      color: #D4C5FF;
+      top: -30px;
+      left: -120px;
+      transform: rotate(-14deg);
     }
+    /* Vert menthe — haut droite */
     .hero-pill-2 {
-      background: rgba(94,53,224,0.25);
-      border: 1px solid rgba(123,86,245,0.5);
-      color: #B8A7FF;
-      top: 22%;
-      right: 7%;
-      transform: rotate(6deg);
+      background: rgba(52,211,153,0.15);
+      border: 1.5px solid rgba(52,211,153,0.35);
+      color: #6EE7B7;
+      top: -20px;
+      right: -100px;
+      transform: rotate(12deg);
     }
+    /* Corail/orange — bas gauche */
     .hero-pill-3 {
-      background: rgba(165,144,255,0.12);
-      border: 1px solid rgba(165,144,255,0.3);
-      color: #A590FF;
-      bottom: 26%;
-      left: 8%;
-      transform: rotate(5deg);
+      background: rgba(251,146,60,0.15);
+      border: 1.5px solid rgba(251,146,60,0.35);
+      color: #FDB173;
+      bottom: -20px;
+      left: -80px;
+      transform: rotate(10deg);
     }
+    /* Bleu ciel — bas droite */
     .hero-pill-4 {
-      background: rgba(94,53,224,0.2);
-      border: 1px solid rgba(94,53,224,0.4);
-      color: #C4B5FF;
-      bottom: 30%;
-      right: 6%;
-      transform: rotate(-5deg);
+      background: rgba(96,165,250,0.15);
+      border: 1.5px solid rgba(96,165,250,0.35);
+      color: #93C5FD;
+      bottom: -30px;
+      right: -90px;
+      transform: rotate(-12deg);
     }
 
     .btn-hero {
@@ -1542,12 +1548,6 @@
 <section class="hero">
   <canvas id="hero-canvas"></canvas>
 
-  <!-- Pills flottantes -->
-  <div class="hero-pill hero-pill-1" data-anim>5 partenaires ciblés</div>
-  <div class="hero-pill hero-pill-2" data-anim>RDV qualifié garanti</div>
-  <div class="hero-pill hero-pill-3" data-anim>Livraison sous 5j</div>
-  <div class="hero-pill hero-pill-4" data-anim>Zéro prospection</div>
-
   <div class="hero-inner">
 
     <div class="hero-tag" data-anim>
@@ -1555,7 +1555,14 @@
       Agence de partenariats B2B
     </div>
 
-    <h1 data-anim data-delay="1">Vos partenaires B2B<br><em>identifiés et activés.</em></h1>
+    <!-- Titre + pills collées autour -->
+    <div style="position:relative; display:inline-block; width:100%;">
+      <div class="hero-pill hero-pill-1" data-anim data-delay="1">5 partenaires ciblés</div>
+      <div class="hero-pill hero-pill-2" data-anim data-delay="2">RDV qualifié garanti</div>
+      <div class="hero-pill hero-pill-3" data-anim data-delay="1">Livraison sous 5j</div>
+      <div class="hero-pill hero-pill-4" data-anim data-delay="2">Zéro prospection</div>
+      <h1 data-anim data-delay="1">Vos partenaires B2B<br><em>identifiés et activés.</em></h1>
+    </div>
 
     <p class="hero-sub" data-anim data-delay="2">
       On identifie les meilleures opportunités pour votre business, on les analyse, et on gère les prises de contact pour que vous arriviez directement au rendez-vous.
