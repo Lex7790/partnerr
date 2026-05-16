@@ -26,6 +26,17 @@ def set_security_headers(response):
     response.headers['Referrer-Policy'] = 'strict-origin-when-cross-origin'
     response.headers['X-XSS-Protection'] = '1; mode=block'
     response.headers['Permissions-Policy'] = 'camera=(), microphone=(), geolocation=()'
+    response.headers['Content-Security-Policy'] = (
+        "default-src 'self'; "
+        "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://js.stripe.com; "
+        "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; "
+        "font-src 'self' https://fonts.gstatic.com; "
+        "img-src 'self' data: https:; "
+        "connect-src 'self' https://www.google-analytics.com https://api.stripe.com; "
+        "frame-src https://js.stripe.com https://hooks.stripe.com; "
+        "form-action 'self'; "
+        "base-uri 'self'"
+    )
     return response
 
 client = anthropic.Anthropic(api_key=os.environ.get("ANTHROPIC_API_KEY"))
@@ -238,6 +249,9 @@ def send_pack_onboarding_email(email, session_id):
 
 
 def send_pack_context_to_admin(email, activite, cible, offre, partenariats, site, poste=""):
+    from html import escape as he
+    email = he(email); activite = he(activite); cible = he(cible)
+    offre = he(offre); partenariats = he(partenariats); site = he(site); poste = he(poste)
     if not RESEND_API_KEY:
         return
     try:
@@ -855,6 +869,8 @@ def send_reseau_confirmation(email, role=""):
 
 
 def send_reseau_admin_notification(email, role, website, description):
+    from html import escape as he
+    email = he(email); role = he(role); website = he(website); description = he(description)
     if not RESEND_API_KEY:
         return
     try:

@@ -1702,9 +1702,15 @@
     }
 
     @media (max-width: 380px) {
-      .hero h1 { font-size: 23px; }
+      .hero h1 { font-size: 22px; line-height: 1.1; }
       .btn-nav { font-size: 12px; padding: 7px 12px; }
       .targets-grid { grid-template-columns: 1fr; }
+    }
+
+    /* Formulaire réseau — colonne sur petit mobile */
+    @media (max-width: 480px) {
+      #reseau-form { flex-direction: column !important; }
+      #reseau-form input, #reseau-form button { width: 100% !important; min-width: 0 !important; }
     }
   </style>
 </head>
