@@ -536,15 +536,12 @@
       gap: 8px;
       border: none;
       cursor: pointer;
-      transition: opacity 0.18s ease, transform 0.2s ease-out;
+      transition: transform 0.2s ease-out;
       box-shadow: 0 8px 28px rgba(165,144,255,0.3);
-      transform: perspective(1000px) translateZ(0);
-      backface-visibility: hidden;
-      -webkit-backface-visibility: hidden;
       -webkit-font-smoothing: antialiased;
     }
 
-    .btn-pack:hover { opacity: 1; transform: perspective(1000px) translateZ(0) scale(1.04); }
+    .btn-pack:hover { transform: scale(1.04); }
 
     /* ── ROI ── */
     .roi-grid {
