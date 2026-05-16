@@ -1951,27 +1951,45 @@
 </section>
 
 
-<!-- EARLY ADOPTER -->
-<section class="reseau-section" id="reseau" style="background:#F5F3FF; padding:72px 32px;">
-  <div class="reseau-inner" style="text-align:center; max-width:720px;">
+<!-- RÉSEAU -->
+<section class="reseau-section" id="reseau" style="background:#F5F3FF; padding:80px 32px;">
+  <div class="reseau-inner" style="max-width:760px;">
 
-    <p class="section-label" data-anim style="color:var(--accent);">L'avantage Early Adopter</p>
-    <h2 class="section-title" data-anim style="color:var(--ink); max-width:600px; margin:0 auto 20px;">Chaque client Partnerr rejoint notre base de matching prioritaire.</h2>
-    <p class="section-sub" data-anim style="color:var(--ink-soft); max-width:560px; margin:0 auto;">On ne fait pas que vous trouver des partenaires. On vous propose aussi à notre propre réseau. Vos clients de demain viennent peut-être de là.</p>
+    <p class="section-label" data-anim style="color:var(--accent);">Réseau Partnerr</p>
+    <h2 class="section-title" data-anim style="color:var(--ink);">Rejoignez le réseau Partnerr</h2>
 
-    <div data-anim style="display:flex; justify-content:center; gap:40px; margin-top:48px; flex-wrap:wrap;">
-      <div style="display:flex; align-items:center; gap:10px; font-family:'Plus Jakarta Sans',sans-serif; font-size:15px; font-weight:600; color:var(--ink);">
-        <span style="width:32px; height:32px; border-radius:50%; background:#EDE9FF; display:flex; align-items:center; justify-content:center; color:var(--accent); font-size:16px; flex-shrink:0;">✓</span>
-        Intégration automatique à la commande
+    <!-- Bloc 1 : clients missions -->
+    <div data-anim style="background:white; border:1px solid rgba(94,53,224,0.14); border-radius:16px; padding:32px 36px; margin-top:40px;">
+      <p style="font-family:'Plus Jakarta Sans',sans-serif; font-size:16px; font-weight:700; color:var(--ink); margin-bottom:12px;">Vous cherchez des partenaires en automatique ?</p>
+      <p style="font-size:15px; color:var(--ink-soft); line-height:1.75;">Chaque mission lancée (EXPLORE, EXPLORE+, SCALE) vous intègre d'office dans notre base de matching prioritaire. Dès qu'un membre correspond à vos critères, la connexion est immédiate.</p>
+    </div>
+
+    <div data-anim style="display:flex; align-items:center; gap:16px; margin:28px 0;">
+      <div style="flex:1; height:1px; background:rgba(94,53,224,0.12);"></div>
+      <span style="font-size:13px; color:var(--ink-muted); font-family:'Plus Jakarta Sans',sans-serif; font-weight:600; white-space:nowrap;">OU</span>
+      <div style="flex:1; height:1px; background:rgba(94,53,224,0.12);"></div>
+    </div>
+
+    <!-- Bloc 2 : inscription gratuite -->
+    <div data-anim style="background:white; border:1px solid rgba(94,53,224,0.14); border-radius:16px; padding:32px 36px;">
+      <p style="font-family:'Plus Jakarta Sans',sans-serif; font-size:16px; font-weight:700; color:var(--ink); margin-bottom:12px;">Pas encore prêt à lancer une mission ? Intégrez la base gratuitement.</p>
+      <p style="font-size:15px; color:var(--ink-soft); line-height:1.75; margin-bottom:28px;">Nous construisons l'écosystème de matching B2B le plus performant du marché. Rejoignez le réseau dès aujourd'hui : dès qu'un client payant de Partnerr cherchera un profil comme le vôtre, on vous connecte.</p>
+
+      <div id="reseau-success" class="reseau-success" style="display:none; background:#EDE9FF; border:1px solid rgba(94,53,224,0.25); border-radius:10px; padding:16px 20px; font-size:15px; color:var(--accent); text-align:center; margin-bottom:16px;">
+        ✓ Vous êtes dans la base. On vous contacte dès qu'une opportunité correspond.
       </div>
-      <div style="display:flex; align-items:center; gap:10px; font-family:'Plus Jakarta Sans',sans-serif; font-size:15px; font-weight:600; color:var(--ink);">
-        <span style="width:32px; height:32px; border-radius:50%; background:#EDE9FF; display:flex; align-items:center; justify-content:center; color:var(--accent); font-size:16px; flex-shrink:0;">✓</span>
-        Visible par tous nos clients actifs
-      </div>
-      <div style="display:flex; align-items:center; gap:10px; font-family:'Plus Jakarta Sans',sans-serif; font-size:15px; font-weight:600; color:var(--ink);">
-        <span style="width:32px; height:32px; border-radius:50%; background:#EDE9FF; display:flex; align-items:center; justify-content:center; color:var(--accent); font-size:16px; flex-shrink:0;">✓</span>
-        Aucune démarche supplémentaire
-      </div>
+
+      <form id="reseau-form" style="display:flex; gap:12px; flex-wrap:wrap;">
+        <input class="reseau-input" type="email" name="email" id="reseau-email" placeholder="Votre adresse email" required style="flex:1; min-width:220px; background:#FAFAF9; border:1.5px solid rgba(94,53,224,0.2); border-radius:10px; padding:12px 16px; font-size:15px; color:var(--ink); outline:none; font-family:'Inter',sans-serif;" />
+        <input type="hidden" name="role" value="réseau gratuit" />
+        <input type="hidden" name="website" value="" />
+        <input type="hidden" name="description" value="Inscription réseau gratuit" />
+        <button type="submit" id="reseau-submit-btn" class="btn-pack" style="white-space:nowrap;">Intégrer la base gratuitement →</button>
+      </form>
+      <p id="reseau-email-error" style="display:none; margin-top:8px; font-size:13px; color:#EF4444;">Email invalide.</p>
+      <p id="reseau-error" style="display:none; margin-top:8px; font-size:13px; color:#EF4444;"></p>
+
+      <p style="margin-top:20px; font-size:13px; color:var(--ink-muted);">✓ Inscription en 30 secondes &nbsp;·&nbsp; ✓ Zéro spam &nbsp;·&nbsp; ✓ Opportunités directes</p>
     </div>
 
   </div>
