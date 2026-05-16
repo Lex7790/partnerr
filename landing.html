@@ -1461,9 +1461,24 @@
       padding: 100px 32px;
       text-align: center;
       background: var(--ink);
+      background-image: url('/static/cta-bg.jpg');
+      background-size: cover;
+      background-position: center;
       position: relative;
       overflow: hidden;
     }
+
+    /* Overlay dark pour garder l'image à peine visible */
+    .cta-final::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(11,7,24,0.82);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .cta-final-inner, .cta-note { position: relative; z-index: 1; }
 
     .cta-final::before {
       content: '';
