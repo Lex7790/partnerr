@@ -829,7 +829,7 @@
     /* ── RÉSEAU ── */
     .reseau-section {
       background: #F5F3FF;
-      padding: 100px 32px;
+      padding: 80px 32px;
       position: relative;
       overflow: hidden;
     }
@@ -1435,6 +1435,9 @@
       .section-label { font-size: 12px; }
       .section-title { font-size: 21px; max-width: 100%; }
       .section-sub { font-size: 15px; margin-bottom: 32px; max-width: 100%; }
+      /* Perf mobile : désactiver animations lourdes */
+      .pack-offer-card.business::after { animation: none; }
+      .btn-pack, .btn-hero, .btn-nav { will-change: auto; }
 
       /* Problème */
       .problem-row { padding: 22px 18px; gap: 12px; }
@@ -1503,7 +1506,7 @@
     }
 
     /* Formulaire réseau — colonne sur petit mobile */
-    @media (max-width: 480px) {
+    @media (max-width: 600px) {
       #reseau-form { flex-direction: column !important; }
       #reseau-form input, #reseau-form button { width: 100% !important; min-width: 0 !important; }
     }
@@ -2005,7 +2008,7 @@
 
 
 <!-- RÉSEAU -->
-<section class="reseau-section" id="reseau" style="background:#F5F3FF; padding:80px 32px;">
+<section class="reseau-section" id="reseau">
   <div class="reseau-inner" style="max-width:760px;">
 
     <p class="section-label" data-anim style="color:var(--accent);">Réseau Partnerr</p>
