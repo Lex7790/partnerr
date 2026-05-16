@@ -104,12 +104,9 @@
     /* ── HERO ── */
     .hero {
       background: var(--ink);
-      padding: 0 40px;
+      padding: 140px 32px 120px;
       position: relative;
       overflow: hidden;
-      min-height: 90vh;
-      display: flex;
-      align-items: center;
     }
 
     #hero-canvas {
@@ -120,32 +117,23 @@
       z-index: 0;
     }
 
-    /* Dégradé gauche pour lisibilité du texte sur la constellation */
     .hero::before {
       content: '';
       position: absolute;
-      top: 0; left: 0;
-      width: 60%; height: 100%;
-      background: linear-gradient(to right, rgba(11,7,24,0.92) 0%, rgba(11,7,24,0.6) 70%, transparent 100%);
+      top: -200px; left: 50%;
+      transform: translateX(-50%);
+      width: 900px; height: 900px;
+      background: radial-gradient(circle, rgba(94,53,224,0.25) 0%, transparent 65%);
       pointer-events: none;
-      z-index: 1;
     }
 
     .hero-inner {
-      max-width: 1140px;
-      width: 100%;
+      max-width: 860px;
       margin: 0 auto;
       position: relative;
-      z-index: 2;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      align-items: center;
-      gap: 60px;
-      padding: 120px 0 140px;
+      z-index: 1;
+      text-align: center;
     }
-
-    .hero-left { text-align: left; }
-    .hero-right { /* constellation visible ici */ }
 
     .hero-tag {
       display: inline-flex;
@@ -158,13 +146,12 @@
       font-weight: 500;
       padding: 6px 14px;
       border-radius: 100px;
-      margin-bottom: 32px;
+      margin-bottom: 36px;
       letter-spacing: 0.01em;
     }
 
     .hero-tag-dot {
-      width: 6px;
-      height: 6px;
+      width: 6px; height: 6px;
       border-radius: 50%;
       background: #7B56F5;
       animation: pulse 2s ease-in-out infinite;
@@ -177,12 +164,13 @@
 
     .hero h1 {
       font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: clamp(38px, 4.5vw, 68px);
+      font-size: clamp(40px, 6vw, 80px);
       font-weight: 800;
-      line-height: 1.08;
+      line-height: 1.05;
       color: var(--white);
-      margin: 0 0 24px;
-      letter-spacing: -0.02em;
+      margin: 0 auto 28px;
+      letter-spacing: -0.025em;
+      text-transform: uppercase;
     }
 
     .hero h1 em {
@@ -194,29 +182,66 @@
     }
 
     .hero-sub {
-      font-size: clamp(15px, 1.6vw, 17px);
-      color: rgba(255,255,255,0.80);
-      max-width: 480px;
-      margin: 0 0 40px;
+      font-size: clamp(15px, 1.8vw, 18px);
+      color: rgba(255,255,255,0.75);
+      max-width: 540px;
+      margin: 0 auto 48px;
       line-height: 1.7;
+      text-transform: none;
     }
 
     .hero-cta-row {
       display: flex;
       align-items: center;
-      justify-content: flex-start;
+      justify-content: center;
       gap: 16px;
       flex-wrap: wrap;
       margin-bottom: 20px;
     }
 
-    .hero-wave {
+    /* Pills flottantes */
+    .hero-pill {
       position: absolute;
-      bottom: -1px;
-      left: 0; right: 0;
-      z-index: 3;
-      line-height: 0;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 8px 18px;
+      border-radius: 100px;
+      white-space: nowrap;
+      z-index: 2;
       pointer-events: none;
+    }
+    .hero-pill-1 {
+      background: rgba(196,181,255,0.15);
+      border: 1px solid rgba(196,181,255,0.35);
+      color: #C4B5FF;
+      top: 28%;
+      left: 6%;
+      transform: rotate(-8deg);
+    }
+    .hero-pill-2 {
+      background: rgba(94,53,224,0.25);
+      border: 1px solid rgba(123,86,245,0.5);
+      color: #B8A7FF;
+      top: 22%;
+      right: 7%;
+      transform: rotate(6deg);
+    }
+    .hero-pill-3 {
+      background: rgba(165,144,255,0.12);
+      border: 1px solid rgba(165,144,255,0.3);
+      color: #A590FF;
+      bottom: 26%;
+      left: 8%;
+      transform: rotate(5deg);
+    }
+    .hero-pill-4 {
+      background: rgba(94,53,224,0.2);
+      border: 1px solid rgba(94,53,224,0.4);
+      color: #C4B5FF;
+      bottom: 30%;
+      right: 6%;
+      transform: rotate(-5deg);
     }
 
     .btn-hero {
@@ -1398,16 +1423,13 @@
       /* Hero */
       #hero-canvas { display: none; }
       .hero-mock { display: none; }
-      .hero { padding: 0 20px; min-height: auto; }
-      .hero-inner { grid-template-columns: 1fr; gap: 0; padding: 80px 0 100px; }
-      .hero-right { display: none; }
-      .hero::before { width: 100%; }
-      .hero h1 { font-size: 28px; line-height: 1.15; }
+      .hero { padding: 80px 20px 72px; }
+      .hero h1 { font-size: 32px; line-height: 1.1; }
       .hero-sub { font-size: 15px; margin-bottom: 28px; max-width: 100%; }
       .hero-tag { font-size: 12px; padding: 5px 12px; margin-bottom: 24px; }
-      .hero-cta-row { flex-direction: column; align-items: stretch; width: 100%; max-width: 340px; margin-bottom: 12px; }
-      .btn-hero { text-align: center; justify-content: center; font-size: 15px; padding: 14px 24px; }
-      .hero-wave svg { height: 50px; }
+      .hero-cta-row { flex-direction: column; align-items: center; width: 100%; max-width: 340px; margin: 0 auto 12px; }
+      .btn-hero { text-align: center; justify-content: center; font-size: 15px; padding: 14px 24px; width: 100%; }
+      .hero-pill { display: none; }
 
       /* Proof bar */
       .proof-bar { padding: 20px; }
@@ -1520,37 +1542,30 @@
 <section class="hero">
   <canvas id="hero-canvas"></canvas>
 
+  <!-- Pills flottantes -->
+  <div class="hero-pill hero-pill-1" data-anim>5 partenaires ciblés</div>
+  <div class="hero-pill hero-pill-2" data-anim>RDV qualifié garanti</div>
+  <div class="hero-pill hero-pill-3" data-anim>Livraison sous 5j</div>
+  <div class="hero-pill hero-pill-4" data-anim>Zéro prospection</div>
+
   <div class="hero-inner">
 
-    <!-- Colonne gauche : texte -->
-    <div class="hero-left">
-      <div class="hero-tag" data-anim>
-        <span class="hero-tag-dot"></span>
-        L'agence qui vous obtient des rendez-vous, pas juste des listes.
-      </div>
-
-      <h1 data-anim data-delay="1">Vos prochains partenaires B2B, <em>identifiés et activés pour vous.</em></h1>
-
-      <p class="hero-sub" data-anim data-delay="2">
-        Partnerr est une agence de partenariats B2B. On identifie les meilleures opportunités pour votre business, on les analyse, et on gère les prises de contact pour que vous arriviez directement au rendez-vous.
-      </p>
-
-      <div class="hero-cta-row" data-anim data-delay="3">
-        <a href="#pack" class="btn-hero">Voir les missions →</a>
-      </div>
-      <p data-anim data-delay="3" style="margin-top:16px; font-size:13px; color:rgba(255,255,255,0.55); letter-spacing:0.01em;">Paiement sécurisé · Livraison sous 5 jours ouvrés · Aucun abonnement</p>
+    <div class="hero-tag" data-anim>
+      <span class="hero-tag-dot"></span>
+      Agence de partenariats B2B
     </div>
 
-    <!-- Colonne droite : constellation -->
-    <div class="hero-right"></div>
+    <h1 data-anim data-delay="1">Vos partenaires B2B<br><em>identifiés et activés.</em></h1>
 
-  </div>
+    <p class="hero-sub" data-anim data-delay="2">
+      On identifie les meilleures opportunités pour votre business, on les analyse, et on gère les prises de contact pour que vous arriviez directement au rendez-vous.
+    </p>
 
-  <!-- Vague de transition -->
-  <div class="hero-wave">
-    <svg viewBox="0 0 1440 90" preserveAspectRatio="none" width="100%" height="90" xmlns="http://www.w3.org/2000/svg">
-      <path d="M0,30 C400,90 1040,0 1440,50 L1440,90 L0,90 Z" fill="#ffffff"/>
-    </svg>
+    <div class="hero-cta-row" data-anim data-delay="3">
+      <a href="#pack" class="btn-hero">Voir les missions →</a>
+    </div>
+    <p data-anim data-delay="3" style="margin-top:16px; font-size:13px; color:rgba(255,255,255,0.45); letter-spacing:0.01em;">Paiement sécurisé · Livraison sous 5 jours ouvrés · Aucun abonnement</p>
+
   </div>
 </section>
 
