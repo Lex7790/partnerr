@@ -1173,7 +1173,9 @@
       line-height: 1.45;
     }
 
-    .pack-offer-features li strong { color: white; font-weight: 700; }
+    .pack-offer-features li strong { color: inherit; font-weight: 700; }
+    .pack-offer-card.business .pack-offer-features li strong { color: #0B0718; }
+    .pack-offer-card.start .pack-offer-features li strong { color: white; }
     .pack-offer-features li .check { color: #CCFF00; flex-shrink: 0; font-size: 16px; }
 
     /* ── METHOD LAYOUT ── */
@@ -1678,7 +1680,7 @@
           <li><span class="check">✓</span><span>Livrable PDF premium</span></li>
           <li><span class="check">✓</span><span><strong>1 rendez-vous qualifié</strong> garanti</span></li>
           <li><span class="check">✓</span><span>Paiement en 2 fois disponible</span></li>
-          <li><span class="check">✓</span><span style="color:rgba(255,255,255,0.95);"><strong>Zéro prospection pour vous :</strong> on rédige, on contacte, vous pitchez.</span></li>
+          <li><span class="check">✓</span><span><strong>Zéro prospection pour vous :</strong> on rédige, on contacte, vous pitchez.</span></li>
         </ul>
         <form action="/create-checkout-session" method="POST">
           <input type="hidden" name="plan" value="mission-explore-plus">
