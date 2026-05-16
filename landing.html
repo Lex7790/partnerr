@@ -1564,9 +1564,18 @@
       from { opacity: 0; transform: translateY(48px) scale(0.97); }
       to   { opacity: 1; transform: translateY(0) scale(1); }
     }
+    @keyframes fadeInOnly {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
     [data-anim] { opacity: 0; }
     [data-anim].in-view {
       animation: fadeInUp 0.9s cubic-bezier(0.22, 1.15, 0.36, 1) both;
+    }
+    .btn-pack[data-anim].in-view,
+    .btn-hero[data-anim].in-view,
+    .btn-nav[data-anim].in-view {
+      animation: fadeInOnly 0.6s ease forwards;
     }
     [data-anim].in-view[data-delay="1"] { animation-delay: 0.12s; }
     [data-anim].in-view[data-delay="2"] { animation-delay: 0.24s; }
@@ -2613,13 +2622,6 @@
   }, { threshold: 0.12 });
   document.querySelectorAll('[data-anim]').forEach(el => io.observe(el));
 
-  // Libère le transform après fadeInUp pour que le hover scale fonctionne
-  document.querySelectorAll('.btn-pack, .btn-hero, .btn-nav').forEach(btn => {
-    btn.addEventListener('animationend', () => {
-      btn.style.animation = 'none';
-      btn.style.opacity = '1';
-    }, { once: true });
-  });
 
   // ── PROBLÈME FADE — card N s'évapore quand card N+1 monte dessus ──
   (function() {
