@@ -1269,10 +1269,6 @@
       border: 1px solid rgba(255,255,255,0.1);
     }
 
-    @keyframes businessGlow {
-      0%, 100% { box-shadow: 0 0 16px rgba(204,255,0,0.2), 0 0 0 1.5px rgba(204,255,0,0.35); }
-      50%       { box-shadow: 0 0 28px rgba(204,255,0,0.35), 0 0 0 1.5px rgba(204,255,0,0.55); }
-    }
 
     @keyframes cardFlow {
       0%   { background-position: -200% center; }
@@ -1304,8 +1300,7 @@
     .pack-offer-card.business > * { position: relative; z-index: 1; }
 
     .pack-offer-card.business.in-view {
-      animation: fadeInUp 0.9s cubic-bezier(0.22, 1.15, 0.36, 1) both,
-                 businessGlow 3s ease-in-out 0.9s infinite;
+      animation: fadeInUp 0.9s cubic-bezier(0.22, 1.15, 0.36, 1) both;
     }
     @media (prefers-reduced-motion: reduce) {
       .pack-offer-card.business.in-view { animation: none; }
