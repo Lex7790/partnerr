@@ -394,18 +394,8 @@ def match():
     if not company_name or not theme or not user_email:
         return "Veuillez remplir tous les champs obligatoires.", 400
 
-    # Vérification + décrémentation atomique (protège contre les requêtes simultanées)
-    plan, credits = atomic_decrement_credits(user_email)
-    if plan is None:
-        return "Vous n'avez plus de recherches disponibles. Passez à un plan supérieur pour continuer.", 403
-
-    # Nombre de partenaires selon le plan réel
-    if plan == "free":
-        n_partners = 2
-    elif plan == "starter":
-        n_partners = 2
-    else:  # growth, scale
-        n_partners = 3
+    plan = "internal"
+    n_partners = 5
 
     if not AGENT_ID or AGENT_ID == "agent_...":
         return "Configuration manquante. Lance d'abord : python3 setup_agent.py", 500
