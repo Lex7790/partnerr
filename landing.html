@@ -878,6 +878,53 @@
       line-height: 1.65;
     }
 
+    /* ── TESTIMONIALS TICKER ── */
+    .ticker-wrap {
+      overflow: hidden;
+      mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+      -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+    }
+    .ticker-track {
+      display: flex;
+      gap: 24px;
+      width: max-content;
+      animation: ticker-scroll 30s linear infinite;
+    }
+    .ticker-track:hover { animation-play-state: paused; }
+    @keyframes ticker-scroll {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+    .ticker-card {
+      width: 380px;
+      flex-shrink: 0;
+      background: white;
+      border: 1px solid rgba(94,53,224,0.1);
+      border-radius: 16px;
+      padding: 28px 28px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .ticker-card-title {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink);
+    }
+    .ticker-card-stars { color: #FFE566; font-size: 16px; letter-spacing: 2px; }
+    .ticker-card-quote {
+      font-size: 14px;
+      color: var(--ink-soft);
+      line-height: 1.7;
+      font-style: italic;
+      flex: 1;
+    }
+    .ticker-card-author { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 13px; font-weight: 700; color: var(--ink); }
+    .ticker-card-role { font-size: 12px; color: var(--ink-muted); margin-top: 2px; }
+
     /* ── SOCIAL PROOF ── */
     .reviews-grid {
       display: grid;
@@ -1826,42 +1873,56 @@
 </section>
 
 <!-- SOCIAL PROOF -->
-<section class="section" style="background:var(--white); border-top:1px solid rgba(94,53,224,0.08);">
-  <div class="section-inner">
+<section style="background:var(--white); padding:72px 0; border-top:1px solid rgba(94,53,224,0.08);">
+  <div class="section-inner" style="text-align:center; margin-bottom:40px;">
     <p class="section-label" data-anim>Ils ont testé</p>
-    <div class="testimonials-grid" style="margin-top:48px; align-items:start;">
+  </div>
 
-      <!-- Marion -->
-      <div data-anim data-delay="0" style="padding:32px 36px; display:flex; flex-direction:column; border-right:1px solid rgba(0,0,0,0.08); text-align:center;">
-        <p style="font-family:'Plus Jakarta Sans',sans-serif; font-size:15px; font-weight:800; letter-spacing:0.08em; text-transform:uppercase; color:var(--ink); margin-bottom:12px;">"Je recommande vivement"</p>
-        <div style="color:#FFE566; font-size:20px; letter-spacing:3px; margin-bottom:20px;">★★★★★</div>
-        <p style="font-size:15px; color:var(--ink-soft); line-height:1.75; flex:1; font-style:italic;">"J'ai eu l'opportunité de travailler avec Partnerr et je recommande vivement leurs services. Alexis a fait preuve d'une grande réactivité et d'un vrai professionnalisme. L'analyse partenariats proposée était pertinente, cohérente et surtout pleine de sens par rapport à mes besoins et à mon activité."</p>
-        <div style="margin-top:24px;">
-          <p style="font-family:'Plus Jakarta Sans',sans-serif; font-size:14px; font-weight:700; color:var(--ink);">Marion Heurtier</p>
-          <p style="font-size:13px; color:var(--ink-muted); margin-top:3px;">Fondatrice de Moénou</p>
-        </div>
+  <div class="ticker-wrap">
+    <div class="ticker-track">
+
+      <!-- Set 1 -->
+      <div class="ticker-card">
+        <p class="ticker-card-title">"Je recommande vivement"</p>
+        <div class="ticker-card-stars">★★★★★</div>
+        <p class="ticker-card-quote">"J'ai eu l'opportunité de travailler avec Partnerr et je recommande vivement leurs services. Alexis a fait preuve d'une grande réactivité et d'un vrai professionnalisme. L'analyse partenariats proposée était pertinente et pleine de sens."</p>
+        <div><p class="ticker-card-author">Marion Heurtier</p><p class="ticker-card-role">Fondatrice de Moénou</p></div>
       </div>
 
-      <!-- Claire -->
-      <div data-anim data-delay="1" style="padding:32px 36px; display:flex; flex-direction:column; border-right:1px solid rgba(0,0,0,0.08); text-align:center;">
-        <p style="font-family:'Plus Jakarta Sans',sans-serif; font-size:15px; font-weight:800; letter-spacing:0.08em; text-transform:uppercase; color:var(--ink); margin-bottom:12px;">"950€ en une semaine"</p>
-        <div style="color:#FFE566; font-size:20px; letter-spacing:3px; margin-bottom:20px;">★★★★★</div>
-        <p style="font-size:15px; color:var(--ink-soft); line-height:1.75; flex:1; font-style:italic;">"Partnerr m'a identifié 5 partenaires stratégiques avec les angles d'approche pour chacun. En deux prises de contact, j'avais un rendez-vous. Une semaine après, je signais une prestation à 950€. Je n'aurais jamais structuré ça aussi vite toute seule."</p>
-        <div style="margin-top:24px;">
-          <p style="font-family:'Plus Jakarta Sans',sans-serif; font-size:14px; font-weight:700; color:var(--ink);">Claire M.</p>
-          <p style="font-size:13px; color:var(--ink-muted); margin-top:3px;">Consultante RP indépendante</p>
-        </div>
+      <div class="ticker-card">
+        <p class="ticker-card-title">"950€ en une semaine"</p>
+        <div class="ticker-card-stars">★★★★★</div>
+        <p class="ticker-card-quote">"Partnerr m'a identifié 5 partenaires stratégiques avec les angles d'approche pour chacun. En deux prises de contact, j'avais un rendez-vous. Une semaine après, je signais une prestation à 950€."</p>
+        <div><p class="ticker-card-author">Claire M.</p><p class="ticker-card-role">Consultante RP indépendante</p></div>
       </div>
 
-      <!-- Ludovic -->
-      <div data-anim data-delay="2" style="padding:32px 36px; display:flex; flex-direction:column; text-align:center;">
-        <p style="font-family:'Plus Jakarta Sans',sans-serif; font-size:15px; font-weight:800; letter-spacing:0.08em; text-transform:uppercase; color:var(--ink); margin-bottom:12px;">"Surpris par la pertinence"</p>
-        <div style="color:#FFE566; font-size:20px; letter-spacing:3px; margin-bottom:20px;">★★★★★</div>
-        <p style="font-size:15px; color:var(--ink-soft); line-height:1.75; flex:1; font-style:italic;">"Je ne savais pas trop à quoi m'attendre. J'ai reçu le livrable et j'ai été surpris par la pertinence, chaque partenaire avait une vraie logique business derrière. On est passé à l'action dans la semaine."</p>
-        <div style="margin-top:24px;">
-          <p style="font-family:'Plus Jakarta Sans',sans-serif; font-size:14px; font-weight:700; color:var(--ink);">Ludovic F.</p>
-          <p style="font-size:13px; color:var(--ink-muted); margin-top:3px;">Co-fondateur de Konstrui</p>
-        </div>
+      <div class="ticker-card">
+        <p class="ticker-card-title">"Surpris par la pertinence"</p>
+        <div class="ticker-card-stars">★★★★★</div>
+        <p class="ticker-card-quote">"Je ne savais pas trop à quoi m'attendre. J'ai reçu le livrable et j'ai été surpris par la pertinence, chaque partenaire avait une vraie logique business derrière. On est passé à l'action dans la semaine."</p>
+        <div><p class="ticker-card-author">Ludovic F.</p><p class="ticker-card-role">Co-fondateur de Konstrui</p></div>
+      </div>
+
+      <!-- Set 2 — copie pour boucle infinie -->
+      <div class="ticker-card">
+        <p class="ticker-card-title">"Je recommande vivement"</p>
+        <div class="ticker-card-stars">★★★★★</div>
+        <p class="ticker-card-quote">"J'ai eu l'opportunité de travailler avec Partnerr et je recommande vivement leurs services. Alexis a fait preuve d'une grande réactivité et d'un vrai professionnalisme. L'analyse partenariats proposée était pertinente et pleine de sens."</p>
+        <div><p class="ticker-card-author">Marion Heurtier</p><p class="ticker-card-role">Fondatrice de Moénou</p></div>
+      </div>
+
+      <div class="ticker-card">
+        <p class="ticker-card-title">"950€ en une semaine"</p>
+        <div class="ticker-card-stars">★★★★★</div>
+        <p class="ticker-card-quote">"Partnerr m'a identifié 5 partenaires stratégiques avec les angles d'approche pour chacun. En deux prises de contact, j'avais un rendez-vous. Une semaine après, je signais une prestation à 950€."</p>
+        <div><p class="ticker-card-author">Claire M.</p><p class="ticker-card-role">Consultante RP indépendante</p></div>
+      </div>
+
+      <div class="ticker-card">
+        <p class="ticker-card-title">"Surpris par la pertinence"</p>
+        <div class="ticker-card-stars">★★★★★</div>
+        <p class="ticker-card-quote">"Je ne savais pas trop à quoi m'attendre. J'ai reçu le livrable et j'ai été surpris par la pertinence, chaque partenaire avait une vraie logique business derrière. On est passé à l'action dans la semaine."</p>
+        <div><p class="ticker-card-author">Ludovic F.</p><p class="ticker-card-role">Co-fondateur de Konstrui</p></div>
       </div>
 
     </div>
