@@ -691,37 +691,28 @@
     /* ── STEPS STACK ── */
     .steps-pinned {
       position: relative;
-      height: 400vh;
       background: white;
-    }
-
-    .steps-pin {
-      position: sticky;
-      top: 80px;
-      height: calc(100vh - 80px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0 40px;
-      background: white;
-      overflow: hidden;
+      padding: 0 40px 600px;
+      max-width: 1160px;
+      margin: 0 auto;
     }
 
     .step-pin-card {
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      width: calc(100% - 80px);
-      max-width: 1080px;
+      position: sticky;
+      top: 90px;
       display: grid;
       grid-template-columns: 2fr 3fr;
       border-radius: 20px;
       overflow: hidden;
-      height: 460px;
-      box-shadow: 0 16px 60px rgba(0,0,0,0.10);
-      /* pas de transition CSS — scroll-driven pur */
-      will-change: transform, opacity;
+      height: 380px;
+      box-shadow: 0 12px 48px rgba(0,0,0,0.10);
+      margin-bottom: 20px;
     }
+
+    .step-pin-card:nth-child(1) { z-index: 1; }
+    .step-pin-card:nth-child(2) { z-index: 2; }
+    .step-pin-card:nth-child(3) { z-index: 3; }
+    .step-pin-card:nth-child(4) { z-index: 4; }
 
     /* ── STEPS STICKY (legacy, gardé pour le responsive) ── */
     .steps-sticky-wrap {
@@ -1574,13 +1565,12 @@
       .method-note { font-size: 13px; }
 
       /* Steps stack mobile */
-      .steps-pinned { height: auto; }
-      .steps-pin { position: relative; top: 0; height: auto; flex-direction: column; gap: 20px; padding: 0 16px 60px; align-items: stretch; overflow: visible; }
-      .step-pin-card { position: relative; left: 0; top: 0; transform: none !important; opacity: 1 !important; width: 100%; grid-template-columns: 1fr; height: auto; border-radius: 16px; }
-      .step-vis { height: 160px; }
-      .step-vis-num { font-size: 110px; }
-      .step-content { padding: 28px 24px; }
-      .step-content h3 { font-size: 28px; }
+      .steps-pinned { padding: 0 16px 60px; }
+      .step-pin-card { position: relative; top: 0; grid-template-columns: 1fr; height: auto; border-radius: 16px; }
+      .step-vis { height: 140px; }
+      .step-vis-num { font-size: 100px; }
+      .step-content { padding: 24px 20px; }
+      .step-content h3 { font-size: 26px; }
       /* Steps */
       .step h3 { font-size: 16px; }
       .step p { font-size: 14px; }
@@ -2043,11 +2033,9 @@
     <p class="section-sub" data-anim style="margin:0 auto;">Quatre étapes, aucune complexité.</p>
   </div>
 
-  <!-- Scroll pinner : 400vh = 4 cards × 100vh -->
   <div class="steps-pinned" id="steps-pinned">
-    <div class="steps-pin" id="steps-pin">
 
-      <div class="step-pin-card active" id="spc-1">
+      <div class="step-pin-card" id="spc-1">
         <div class="step-vis" style="background:#CCFF00;">
           <span class="step-vis-num">01</span>
         </div>
@@ -2091,7 +2079,6 @@
         </div>
       </div>
 
-    </div>
   </div>
 </section>
 
@@ -2270,64 +2257,7 @@
 <script>
   // ── RÉSEAU ORBES — désactivé (canvas caché) ──
 
-  // ── STEPS SCROLL STACK ──
-  (function() {
-    if (window.innerWidth < 600) return;
-    var pinned = document.getElementById('steps-pinned');
-    var cards  = Array.prototype.slice.call(document.querySelectorAll('.step-pin-card'));
-    if (!pinned || !cards.length) return;
-
-    var N    = cards.length;
-    var PEEK = 80; // px chaque card dépasse en dessous de la précédente
-
-    // Position initiale de chaque card : centrée + décalage peek
-    function setCard(card, i, ty, op, zi) {
-      card.style.transform = 'translate(-50%, calc(-50% + ' + ty.toFixed(1) + 'px))';
-      card.style.opacity   = Math.max(0, Math.min(1, op)).toFixed(2);
-      card.style.zIndex    = zi;
-    }
-
-    function update() {
-      var rect     = pinned.getBoundingClientRect();
-      var scrolled = -rect.top;
-      var total    = pinned.offsetHeight - window.innerHeight;
-      if (total <= 0) { cards.forEach(function(c, i){ setCard(c, i, PEEK*i, 1, N-i); }); return; }
-
-      var p   = Math.max(0, Math.min(N, scrolled / total * N));
-      var idx = Math.min(N - 1, Math.floor(p));
-      var lp  = p - idx; // 0→1 dans le segment de cette card
-
-      cards.forEach(function(card, i) {
-        var ty, op, zi;
-
-        if (i < idx) {
-          // Cartes déjà passées → invisibles au-dessus
-          ty = -60; op = 0; zi = N + 5;
-        } else if (i === idx) {
-          // Card active → s'évapore pendant que la suivante monte
-          ty = 0;
-          op = 1 - lp;
-          zi = 5;
-        } else if (i === idx + 1) {
-          // Card suivante → monte de PEEK vers 0
-          ty = PEEK * (1 - lp);
-          op = 1;
-          zi = 10; // par-dessus la card active
-        } else {
-          // Cartes en attente → peek formation, se rapprochent au fil du scroll
-          var dist = i - idx;
-          ty = PEEK * dist - lp * PEEK;
-          op = dist === 2 ? 0.7 : 0.5;
-          zi = N - i;
-        }
-
-        setCard(card, i, ty, op, zi);
-      });
-    }
-
-    window.addEventListener('scroll', update, { passive: true });
-    update();
-  })();
+  // Steps : sticky + z-index natif — pas de JS nécessaire
 
   // ── HERO CONSTELLATION ──
   (function() {
