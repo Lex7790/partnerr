@@ -1766,15 +1766,23 @@
     .prob-pin-card {
       position: sticky;
       top: 200px;
-      background: var(--prob-bg, #CCFF00);
+      background-size: cover;
+      background-position: center;
       border-radius: 20px;
       overflow: hidden;
       height: 380px;
-      box-shadow: 0 12px 48px rgba(0,0,0,0.10);
+      box-shadow: 0 12px 48px rgba(0,0,0,0.18);
       margin-bottom: 20px;
       display: flex;
       align-items: center;
       padding: 52px 64px;
+    }
+    .prob-pin-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(11,7,24,0.58);
+      z-index: 0;
     }
     .prob-pin-card:nth-child(1) { z-index: 1; }
     .prob-pin-card:nth-child(2) { z-index: 2; }
@@ -1790,8 +1798,8 @@
       font-family: 'Bebas Neue', sans-serif;
       font-size: 320px;
       line-height: 0.85;
-      color: #0B0718;
-      opacity: 0.12;
+      color: white;
+      opacity: 0.10;
       display: block;
       user-select: none;
     }
@@ -1816,9 +1824,9 @@
       border-radius: 100px;
       margin-bottom: 28px;
       width: fit-content;
-      background: rgba(0,0,0,0.1);
-      color: rgba(0,0,0,0.6);
-      border: 1px solid rgba(0,0,0,0.12);
+      background: rgba(255,255,255,0.12);
+      color: rgba(255,255,255,0.75);
+      border: 1px solid rgba(255,255,255,0.2);
     }
     .prob-content h3 {
       font-family: 'Bebas Neue', sans-serif;
@@ -1826,13 +1834,13 @@
       font-weight: 400;
       letter-spacing: 0.02em;
       text-transform: uppercase;
-      color: #0B0718;
+      color: white;
       line-height: 1.05;
       margin-bottom: 20px;
     }
     .prob-content p {
       font-size: 16px;
-      color: rgba(11,7,24,0.68);
+      color: rgba(255,255,255,0.75);
       line-height: 1.7;
       max-width: 520px;
     }
@@ -1961,7 +1969,7 @@
 
   <div class="prob-pinned">
 
-    <div class="prob-pin-card" style="--prob-bg:#CCFF00;">
+    <div class="prob-pin-card" style="background-image:url('/static/prob1.jpg');">
       <div class="prob-vis"><span class="prob-num">01</span></div>
       <div class="prob-content">
         <span class="prob-badge">Obstacle 1</span>
@@ -1970,7 +1978,7 @@
       </div>
     </div>
 
-    <div class="prob-pin-card" style="--prob-bg:#A590FF;">
+    <div class="prob-pin-card" style="background-image:url('/static/prob2.jpg');">
       <div class="prob-vis"><span class="prob-num">02</span></div>
       <div class="prob-content">
         <span class="prob-badge">Obstacle 2</span>
@@ -1979,7 +1987,7 @@
       </div>
     </div>
 
-    <div class="prob-pin-card" style="--prob-bg:#C5902A;">
+    <div class="prob-pin-card" style="background-image:url('/static/prob3.jpg');">
       <div class="prob-vis"><span class="prob-num">03</span></div>
       <div class="prob-content">
         <span class="prob-badge">Obstacle 3</span>
@@ -1988,7 +1996,7 @@
       </div>
     </div>
 
-    <div class="prob-pin-card" style="--prob-bg:#FFE566;">
+    <div class="prob-pin-card" style="background-image:url('/static/prob4.jpg');">
       <div class="prob-vis"><span class="prob-num">04</span></div>
       <div class="prob-content">
         <span class="prob-badge">Obstacle 4</span>
