@@ -1279,21 +1279,34 @@
       50%       { box-shadow: 0 0 28px rgba(204,255,0,0.35), 0 0 0 1.5px rgba(204,255,0,0.55); }
     }
 
+    @keyframes cardFlow {
+      0%   { background-position: -200% center; }
+      100% { background-position: 200% center; }
+    }
+
     .pack-offer-card.business {
-      background: #A590FF;
-      border: none;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.12);
       transform: translateY(-16px);
       padding: 44px 32px;
       will-change: transform;
+      overflow: hidden;
     }
 
-    /* Textes de la card EXPLORE+ sur fond lavande */
-    .pack-offer-card.business .pack-offer-name { color: #0B0718; }
-    .pack-offer-card.business .pack-offer-price { color: #0B0718; }
-    .pack-offer-card.business .pack-offer-billing { color: rgba(11,7,24,0.6); border-bottom-color: rgba(11,7,24,0.12); }
-    .pack-offer-card.business .pack-offer-features li { color: #0B0718; }
-    .pack-offer-card.business .pack-offer-features li strong { color: #0B0718; }
-    .pack-offer-card.business .check { color: #CCFF00 !important; }
+    /* Effet flow — reflet lumineux qui glisse */
+    .pack-offer-card.business::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(105deg, transparent 25%, rgba(165,144,255,0.2) 50%, transparent 75%);
+      background-size: 200% 100%;
+      animation: cardFlow 2.5s ease-in-out infinite;
+      pointer-events: none;
+      border-radius: inherit;
+      z-index: 0;
+    }
+
+    .pack-offer-card.business > * { position: relative; z-index: 1; }
 
     .pack-offer-card.business.in-view {
       animation: fadeInUp 0.9s cubic-bezier(0.22, 1.15, 0.36, 1) both,
@@ -1301,6 +1314,7 @@
     }
     @media (prefers-reduced-motion: reduce) {
       .pack-offer-card.business.in-view { animation: none; }
+      .pack-offer-card.business::after { animation: none; }
     }
 
     .pack-offer-badge {
@@ -1863,7 +1877,7 @@
         </ul>
         <form action="/create-checkout-session" method="POST">
           <input type="hidden" name="plan" value="mission-explore-plus">
-          <button type="submit" class="btn-pack" style="width:100%; justify-content:center; background:#CCFF00; color:#0B0718; box-shadow:0 8px 24px rgba(204,255,0,0.3);">Lancer ma mission EXPLORE+ →</button>
+          <button type="submit" class="btn-pack" style="width:100%; justify-content:center;">Lancer ma mission EXPLORE+ →</button>
         </form>
       </div>
 
