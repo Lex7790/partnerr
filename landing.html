@@ -1490,19 +1490,19 @@
 
     <div class="hero-tag" data-anim>
       <span class="hero-tag-dot"></span>
-      Agence de partenariats B2B · Livraison sous 5 jours ouvrés
+      L'agence qui vous obtient des rendez-vous, pas juste des listes.
     </div>
 
     <h1 data-anim data-delay="1">Vos prochains partenaires B2B, <em>identifiés et activés pour vous.</em></h1>
 
     <p class="hero-sub" data-anim data-delay="2">
-      Partnerr est une agence de partenariats B2B. On trouve les meilleures opportunités pour votre business, on les analyse, et on s'occupe des prises de contact pour les missions EXPLORE+ et SCALE.
+      Partnerr est une agence de partenariats B2B. On identifie les meilleures opportunités pour votre business, on les analyse, et on gère les prises de contact pour que vous arriviez directement au rendez-vous.
     </p>
 
     <div class="hero-cta-row" data-anim data-delay="3">
       <a href="#pack" class="btn-hero">Voir les missions →</a>
     </div>
-    <p data-anim data-delay="3" style="margin-top:16px; font-size:14px; color:rgba(255,255,255,0.72); letter-spacing:0.01em;">Paiement sécurisé · Mission EXPLORE 499€ / SCALE 1199€ · Livraison sous 5 jours ouvrés</p>
+    <p data-anim data-delay="3" style="margin-top:16px; font-size:14px; color:rgba(255,255,255,0.72); letter-spacing:0.01em;">Paiement sécurisé · Livraison sous 5 jours ouvrés · Aucun abonnement</p>
 
 
   </div>
@@ -1649,6 +1649,7 @@
           <li><span class="check">✓</span><span>Livrable PDF premium</span></li>
           <li><span class="check">✓</span><span><strong>1 rendez-vous qualifié</strong> garanti</span></li>
           <li><span class="check">✓</span><span>Paiement en 2 fois disponible</span></li>
+          <li><span class="check">✓</span><span style="color:rgba(255,255,255,0.95);"><strong>Zéro prospection pour vous :</strong> on rédige, on contacte, vous pitchez.</span></li>
         </ul>
         <form action="/create-checkout-session" method="POST">
           <input type="hidden" name="plan" value="mission-explore-plus">
@@ -1939,35 +1940,27 @@
 </section>
 
 
-<!-- RÉSEAU -->
-<section class="reseau-section" id="reseau">
-  <canvas id="reseau-canvas"></canvas>
-  <div class="reseau-inner">
+<!-- EARLY ADOPTER -->
+<section class="reseau-section" id="reseau" style="background:#F5F3FF; padding:72px 32px;">
+  <div class="reseau-inner" style="text-align:center; max-width:720px;">
 
-    <p class="section-label" data-anim>Base Partnerr — Bientôt disponible</p>
-    <h2 class="section-title" data-anim>Rejoignez la liste d'attente</h2>
-    <p class="section-sub" data-anim>Soyez parmi les premiers à intégrer notre réseau de matching B2B. Dès l'ouverture, vous serez notifié en priorité.</p>
+    <p class="section-label" data-anim style="color:var(--accent);">L'avantage Early Adopter</p>
+    <h2 class="section-title" data-anim style="color:var(--ink); max-width:600px; margin:0 auto 20px;">Chaque client Partnerr rejoint notre base de matching prioritaire.</h2>
+    <p class="section-sub" data-anim style="color:var(--ink-soft); max-width:560px; margin:0 auto;">On ne fait pas que vous trouver des partenaires. On vous propose aussi à notre propre réseau. Vos clients de demain viennent peut-être de là.</p>
 
-    <div class="reseau-form-box" data-anim>
-      <div id="reseau-success" class="reseau-success">
-        ✓ Merci ! Vous serez notifié en priorité à l'ouverture de la Base Partnerr.
+    <div data-anim style="display:flex; justify-content:center; gap:40px; margin-top:48px; flex-wrap:wrap;">
+      <div style="display:flex; align-items:center; gap:10px; font-family:'Plus Jakarta Sans',sans-serif; font-size:15px; font-weight:600; color:var(--ink);">
+        <span style="width:32px; height:32px; border-radius:50%; background:#EDE9FF; display:flex; align-items:center; justify-content:center; color:var(--accent); font-size:16px; flex-shrink:0;">✓</span>
+        Intégration automatique à la commande
       </div>
-      <form id="reseau-form">
-        <div class="reseau-form-row">
-          <div class="reseau-field" style="grid-column: 1 / -1;">
-            <label>Votre email</label>
-            <input class="reseau-input" type="email" name="email" id="reseau-email" placeholder="vous@votreentreprise.com" required />
-            <p id="reseau-email-error" style="display:none; margin-top:7px; font-size:13px; color:#FCA5A5; line-height:1.5;">Email invalide.</p>
-          </div>
-        </div>
-        <input type="hidden" name="role" value="liste d'attente" />
-        <input type="hidden" name="website" value="" />
-        <input type="hidden" name="description" value="Inscription liste d'attente Base Partnerr" />
-        <div style="margin-top:24px;">
-          <button type="submit" class="btn-pack" id="reseau-submit-btn">Rejoindre la liste d'attente →</button>
-          <p id="reseau-error" style="display:none; margin-top:10px; font-size:13px; color:#FCA5A5;"></p>
-        </div>
-      </form>
+      <div style="display:flex; align-items:center; gap:10px; font-family:'Plus Jakarta Sans',sans-serif; font-size:15px; font-weight:600; color:var(--ink);">
+        <span style="width:32px; height:32px; border-radius:50%; background:#EDE9FF; display:flex; align-items:center; justify-content:center; color:var(--accent); font-size:16px; flex-shrink:0;">✓</span>
+        Visible par tous nos clients actifs
+      </div>
+      <div style="display:flex; align-items:center; gap:10px; font-family:'Plus Jakarta Sans',sans-serif; font-size:15px; font-weight:600; color:var(--ink);">
+        <span style="width:32px; height:32px; border-radius:50%; background:#EDE9FF; display:flex; align-items:center; justify-content:center; color:var(--accent); font-size:16px; flex-shrink:0;">✓</span>
+        Aucune démarche supplémentaire
+      </div>
     </div>
 
   </div>
