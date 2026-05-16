@@ -2606,13 +2606,21 @@
   }, { threshold: 0.12 });
   document.querySelectorAll('[data-anim]').forEach(el => io.observe(el));
 
-  // Timeline zigzag — reveal au scroll
-  const tlObs = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) { e.target.classList.add('tl-visible'); tlObs.unobserve(e.target); }
-    });
-  }, { threshold: 0.05, rootMargin: '0px 0px -60px 0px' });
-  document.querySelectorAll('.tl-item').forEach(el => tlObs.observe(el));
+  // Timeline zigzag — reveal progressif item par item au scroll
+  (function() {
+    const items = Array.from(document.querySelectorAll('.tl-item'));
+    if (!items.length) return;
+    function checkItems() {
+      const triggerY = window.innerHeight * 0.72;
+      items.forEach(el => {
+        if (el.classList.contains('tl-visible')) return;
+        const rect = el.getBoundingClientRect();
+        if (rect.top < triggerY) el.classList.add('tl-visible');
+      });
+    }
+    window.addEventListener('scroll', checkItems, { passive: true });
+    checkItems();
+  })();
 
   function toggleFaq(btn) {
     const item = btn.closest('.faq-item');
