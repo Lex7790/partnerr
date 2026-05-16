@@ -538,12 +538,12 @@
       cursor: pointer;
       transition: opacity 0.18s ease, transform 0.18s ease-out;
       box-shadow: 0 8px 28px rgba(165,144,255,0.3);
-      will-change: transform;
+      transform: translateZ(0);
       backface-visibility: hidden;
       -webkit-backface-visibility: hidden;
     }
 
-    .btn-pack:hover { opacity: 1; transform: scale(1.04); }
+    .btn-pack:hover { opacity: 1; transform: translateZ(0) scale(1.04); }
 
     /* ── ROI ── */
     .roi-grid {
