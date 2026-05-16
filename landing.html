@@ -1785,7 +1785,11 @@
       font-size: 20px; color: #fff;
       box-shadow: 0 0 0 6px rgba(197,144,42,0.15);
       flex-shrink: 0;
+      opacity: 0;
+      transform: scale(0.5);
+      transition: opacity 0.5s cubic-bezier(0.22,1,0.36,1) 0.2s, transform 0.5s cubic-bezier(0.22,1,0.36,1) 0.2s;
     }
+    .tl-item.tl-visible .tl-dot { opacity: 1; transform: scale(1); }
     .tl-content {
       background: #fff;
       border: 1px solid rgba(94,53,224,0.09);
@@ -1793,11 +1797,11 @@
       padding: 24px 28px;
       box-shadow: 0 4px 20px rgba(0,0,0,0.05);
       opacity: 0;
-      transition: opacity 0.55s ease, transform 0.55s ease;
+      transition: opacity 0.75s cubic-bezier(0.22,1,0.36,1), transform 0.75s cubic-bezier(0.22,1,0.36,1);
     }
-    .tl-left .tl-content  { transform: translateX(-36px); text-align: right; }
-    .tl-right .tl-content { transform: translateX(36px);  text-align: left;  }
-    .tl-item.tl-visible .tl-content { opacity: 1; transform: translateX(0); }
+    .tl-left .tl-content  { transform: translateX(-90px) scale(0.92); text-align: right; }
+    .tl-right .tl-content { transform: translateX(90px)  scale(0.92); text-align: left;  }
+    .tl-item.tl-visible .tl-content { opacity: 1; transform: translateX(0) scale(1); }
     .tl-title {
       font-family: 'Plus Jakarta Sans', sans-serif;
       font-size: 16px; font-weight: 700;
@@ -1818,8 +1822,8 @@
         gap: 0 14px;
       }
       .tl-spacer { display: none; }
-      .tl-left .tl-content  { text-align: left; transform: translateX(20px); }
-      .tl-right .tl-content { transform: translateX(20px); }
+      .tl-left .tl-content  { text-align: left; transform: translateX(40px) scale(0.92); }
+      .tl-right .tl-content { transform: translateX(40px) scale(0.92); }
     }
   </style>
 </head>
@@ -2607,7 +2611,7 @@
     entries.forEach(e => {
       if (e.isIntersecting) { e.target.classList.add('tl-visible'); tlObs.unobserve(e.target); }
     });
-  }, { threshold: 0.25 });
+  }, { threshold: 0.05, rootMargin: '0px 0px -60px 0px' });
   document.querySelectorAll('.tl-item').forEach(el => tlObs.observe(el));
 
   function toggleFaq(btn) {
