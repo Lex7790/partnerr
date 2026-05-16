@@ -2242,7 +2242,7 @@
 <script>
   // ── RÉSEAU ORBES — désactivé (canvas caché) ──
 
-  // ── STEPS STICKY FADE ──
+  // ── STEPS STICKY SCALE (pas d'opacity — card 2 couvre card 1 par z-index) ──
   (function() {
     if (window.innerWidth < 600) return;
     var slots = document.querySelectorAll('.step-slot');
@@ -2250,25 +2250,16 @@
 
     function update() {
       slots.forEach(function(slot, i) {
+        if (i === slots.length - 1) return;
         var card = slot.querySelector('.step-card-s');
         if (!card) return;
         var rect = slot.getBoundingClientRect();
         var h = slot.offsetHeight;
-        // progress dans le slot : 0 = slot en haut de viewport, 1 = slot sorti
-        var scrolled = -rect.top;
-        var progress = Math.max(0, Math.min(1, scrolled / h));
-
-        if (i < slots.length - 1) {
-          // card s'évapore et rétrécit légèrement au fil du scroll
-          var scale = 1 - progress * 0.07;
-          var opacity = 1 - progress * 0.85;
-          card.style.transform = 'scale(' + scale.toFixed(3) + ')';
-          card.style.opacity = Math.max(0, opacity).toFixed(3);
-        } else {
-          // dernière card : toujours visible
-          card.style.transform = '';
-          card.style.opacity = '1';
-        }
+        var progress = Math.max(0, Math.min(1, -rect.top / h));
+        // La card précédente se réduit légèrement pour donner de la profondeur
+        var scale = 1 - progress * 0.05;
+        card.style.transform = 'scale(' + scale.toFixed(3) + ')';
+        card.style.opacity = '1';
       });
     }
 
