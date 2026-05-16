@@ -689,95 +689,6 @@
     }
 
     /* ── STEPS ── */
-    /* ── STEPS STICKY ── */
-    .steps-sticky-wrapper {
-      padding: 0 40px 80px;
-      max-width: 1160px;
-      margin: 0 auto;
-    }
-
-    .step-scroll-slot {
-      height: 72vh;
-      position: relative;
-    }
-
-    .step-scroll-slot:last-child { height: 90vh; }
-
-    .step-sticky-card {
-      position: sticky;
-      top: 90px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      border-radius: 24px;
-      overflow: hidden;
-      height: 420px;
-      box-shadow: 0 12px 48px rgba(0,0,0,0.10);
-      transition: transform 0.3s ease, opacity 0.3s ease;
-      transform-origin: top center;
-    }
-
-    .step-card-visual {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .step-card-visual-num {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 160px;
-      font-weight: 400;
-      opacity: 0.18;
-      line-height: 1;
-      position: absolute;
-      bottom: -20px;
-      right: 20px;
-      color: #0B0718;
-      letter-spacing: -0.02em;
-    }
-
-    .step-card-content {
-      background: white;
-      padding: 48px 44px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-
-    .step-card-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      padding: 6px 14px;
-      border-radius: 100px;
-      margin-bottom: 24px;
-      width: fit-content;
-    }
-
-    .step-card-content h3 {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 42px;
-      font-weight: 400;
-      letter-spacing: 0.02em;
-      text-transform: uppercase;
-      color: var(--ink);
-      line-height: 1;
-      margin-bottom: 16px;
-    }
-
-    .step-card-content p {
-      font-size: 15px;
-      color: var(--ink-soft);
-      line-height: 1.7;
-      max-width: 340px;
-    }
-
     .steps-grid {
       display: flex;
       flex-direction: column;
@@ -1540,15 +1451,9 @@
       .method-card p { max-width: 100%; }
       .method-note { font-size: 13px; }
 
-      /* Steps sticky */
-      .steps-sticky-wrapper { padding: 0 16px 40px; }
-      .step-scroll-slot { height: auto; margin-bottom: 20px; }
-      .step-scroll-slot:last-child { height: auto; }
-      .step-sticky-card { position: relative; top: 0; grid-template-columns: 1fr; height: auto; border-radius: 16px; }
-      .step-card-visual { height: 160px; }
-      .step-card-visual-num { font-size: 100px; }
-      .step-card-content { padding: 28px 24px; }
-      .step-card-content h3 { font-size: 28px; }
+      /* Steps */
+      .step h3 { font-size: 16px; }
+      .step p { font-size: 14px; }
 
       /* Targets */
       .targets-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; justify-items: stretch; }
@@ -2001,71 +1906,47 @@
 </section>
 
 <!-- COMMENT ÇA MARCHE -->
-<section class="section" id="comment-ca-marche" style="padding-bottom:0;">
-  <div class="section-inner" style="text-align:center; margin-bottom:48px;">
+<section class="section" id="comment-ca-marche">
+  <div class="section-inner">
     <p class="section-label" data-anim>Les étapes</p>
-    <h2 class="section-title" data-anim style="margin:0 auto 16px;">De la commande aux premiers rendez-vous en moins d'un mois.</h2>
-    <p class="section-sub" data-anim style="margin:0 auto;">Quatre étapes, aucune complexité.</p>
-  </div>
+    <h2 class="section-title" data-anim>De la commande aux premiers rendez-vous en moins d'un mois.</h2>
+    <p class="section-sub" data-anim>Quatre étapes, aucune complexité.</p>
 
-  <div class="steps-sticky-wrapper">
+    <div class="steps-grid" style="margin-top:48px;">
 
-    <!-- Étape 1 -->
-    <div class="step-scroll-slot">
-      <div class="step-sticky-card" id="step-card-1" style="z-index:1;">
-        <div class="step-card-visual" style="background: linear-gradient(135deg, #CCFF00 0%, #86EFAC 100%);">
-          <span class="step-card-visual-num">01</span>
-        </div>
-        <div class="step-card-content">
-          <div class="step-card-badge" style="background:rgba(204,255,0,0.15); color:#3a7a00; border:1px solid rgba(204,255,0,0.4);">Étape 1</div>
+      <div class="step" data-anim data-delay="0">
+        <div class="step-rail"><div class="step-num">01</div></div>
+        <div class="step-body">
           <h3>Vous lancez votre mission</h3>
-          <p>Paiement sécurisé via Stripe. Vous recevez immédiatement un email de confirmation avec le formulaire de contexte.</p>
+          <p>Paiement sécurisé via Stripe. Vous recevez immédiatement un email de confirmation.</p>
         </div>
       </div>
-    </div>
 
-    <!-- Étape 2 -->
-    <div class="step-scroll-slot">
-      <div class="step-sticky-card" id="step-card-2" style="z-index:2;">
-        <div class="step-card-visual" style="background: linear-gradient(135deg, #A590FF 0%, #C4B5FF 100%);">
-          <span class="step-card-visual-num">02</span>
-        </div>
-        <div class="step-card-content">
-          <div class="step-card-badge" style="background:rgba(165,144,255,0.15); color:#5E35E0; border:1px solid rgba(165,144,255,0.4);">Étape 2</div>
+      <div class="step" data-anim data-delay="1">
+        <div class="step-rail"><div class="step-num">02</div></div>
+        <div class="step-body">
           <h3>Vous décrivez votre activité</h3>
-          <p>Un formulaire rapide pour préciser votre activité, votre cible et vos objectifs. 2 à 3 minutes, pas plus.</p>
+          <p>Un formulaire rapide vous permet de préciser votre activité, votre cible et vos objectifs. 2–3 minutes.</p>
         </div>
       </div>
-    </div>
 
-    <!-- Étape 3 -->
-    <div class="step-scroll-slot">
-      <div class="step-sticky-card" id="step-card-3" style="z-index:3;">
-        <div class="step-card-visual" style="background: linear-gradient(135deg, #FFE566 0%, #FCD34D 100%);">
-          <span class="step-card-visual-num">03</span>
-        </div>
-        <div class="step-card-content">
-          <div class="step-card-badge" style="background:rgba(255,229,102,0.2); color:#92680a; border:1px solid rgba(255,229,102,0.5);">Étape 3</div>
-          <h3>Partnerr identifie et valide</h3>
-          <p>On analyse votre profil, on identifie les 5 à 8 partenaires les plus pertinents et on valide chaque opportunité manuellement.</p>
+      <div class="step" data-anim data-delay="2">
+        <div class="step-rail"><div class="step-num">03</div></div>
+        <div class="step-body">
+          <h3>Partnerr identifie et valide les partenaires</h3>
+          <p>On analyse votre profil, on identifie les 5 à 8 partenaires les plus pertinents selon votre mission et on valide chaque opportunité manuellement.</p>
         </div>
       </div>
-    </div>
 
-    <!-- Étape 4 -->
-    <div class="step-scroll-slot">
-      <div class="step-sticky-card" id="step-card-4" style="z-index:4;">
-        <div class="step-card-visual" style="background: linear-gradient(135deg, #0B0718 0%, #2D1B69 100%);">
-          <span class="step-card-visual-num" style="color:white; opacity:0.15;">04</span>
-        </div>
-        <div class="step-card-content">
-          <div class="step-card-badge" style="background:rgba(11,7,24,0.08); color:#0B0718; border:1px solid rgba(11,7,24,0.15);">Étape 4</div>
+      <div class="step" data-anim data-delay="3">
+        <div class="step-rail"><div class="step-num">04</div></div>
+        <div class="step-body">
           <h3>Vous recevez vos rendez-vous</h3>
           <p>Pour les missions EXPLORE+ et SCALE, on gère les prises de contact et on fixe les rendez-vous directement dans votre agenda. Vous n'avez plus qu'à vous présenter.</p>
         </div>
       </div>
-    </div>
 
+    </div>
   </div>
 </section>
 
@@ -2243,34 +2124,6 @@
 
 <script>
   // ── RÉSEAU ORBES — désactivé (canvas caché) ──
-
-  // ── STEPS STICKY SCALE ──
-  (function() {
-    const cards = document.querySelectorAll('.step-sticky-card');
-    if (!cards.length || window.innerWidth < 600) return;
-
-    function updateCards() {
-      cards.forEach((card, i) => {
-        if (i === cards.length - 1) return;
-        const nextSlot = card.closest('.step-scroll-slot').nextElementSibling;
-        if (!nextSlot) return;
-        const nextCard = nextSlot.querySelector('.step-sticky-card');
-        if (!nextCard) return;
-
-        const nextRect = nextCard.getBoundingClientRect();
-        const cardRect = card.getBoundingClientRect();
-        const overlap = cardRect.bottom - nextRect.top;
-        const progress = Math.max(0, Math.min(1, overlap / cardRect.height));
-
-        const scale = 1 - progress * 0.05;
-        const opacity = 1 - progress * 0.25;
-        card.style.transform = `scale(${scale.toFixed(3)})`;
-        card.style.opacity = opacity.toFixed(3);
-      });
-    }
-
-    window.addEventListener('scroll', updateCards, { passive: true });
-  })();
 
   // ── HERO CONSTELLATION ──
   (function() {
