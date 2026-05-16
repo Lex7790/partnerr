@@ -1746,84 +1746,108 @@
       #reseau-form input, #reseau-form button { width: 100% !important; min-width: 0 !important; }
     }
 
-    /* ── Timeline zigzag (Le problème) ── */
-    .timeline-wrap {
+    /* ── Section Le problème — sticky scroll ── */
+    .prob-section-wrap { background: #0B0718; }
+    .prob-title-sticky {
+      position: sticky;
+      top: 80px;
+      background: #0B0718;
+      z-index: 20;
+      text-align: center;
+      padding: 28px 40px 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+    .prob-pinned {
       position: relative;
-      max-width: 800px;
-      margin: 56px auto 0;
+      padding: 24px 40px 60px;
+      max-width: 1160px;
+      margin: 0 auto;
     }
-    .timeline-wrap::before {
-      content: '';
-      position: absolute;
-      left: 50%;
-      top: 0; bottom: 0;
-      width: 2px;
-      background: linear-gradient(to bottom, transparent, #C5902A 8%, #C5902A 92%, transparent);
-      transform: translateX(-50%);
-      z-index: 0;
-    }
-    .tl-item {
+    .prob-pin-card {
+      position: sticky;
+      top: 200px;
       display: grid;
-      grid-template-columns: 1fr 56px 1fr;
+      grid-template-columns: 2fr 3fr;
+      border-radius: 20px;
+      overflow: hidden;
+      height: 380px;
+      box-shadow: 0 12px 48px rgba(0,0,0,0.4);
+      margin-bottom: 20px;
+    }
+    .prob-pin-card:nth-child(1) { z-index: 1; }
+    .prob-pin-card:nth-child(2) { z-index: 2; }
+    .prob-pin-card:nth-child(3) { z-index: 3; }
+    .prob-pin-card:nth-child(4) { z-index: 4; }
+    .prob-vis {
+      background: var(--prob-bg, #CCFF00);
+      display: flex;
       align-items: center;
-      gap: 0 20px;
-      margin-bottom: 44px;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
     }
-    .tl-item:last-child { margin-bottom: 0; }
-    .tl-left  { grid-template-areas: "content dot spacer"; }
-    .tl-right { grid-template-areas: "spacer dot content"; }
-    .tl-content { grid-area: content; }
-    .tl-dot     { grid-area: dot; }
-    .tl-spacer  { grid-area: spacer; }
-    .tl-dot {
-      width: 56px; height: 56px;
-      border-radius: 50%;
-      background: #C5902A;
-      display: flex; align-items: center; justify-content: center;
-      position: relative; z-index: 2;
+    .prob-num {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: 20px; color: #fff;
-      box-shadow: 0 0 0 6px rgba(197,144,42,0.15);
-      flex-shrink: 0;
-      opacity: 0;
-      transform: scale(0.5);
-      transition: opacity 0.5s cubic-bezier(0.22,1,0.36,1) 0.2s, transform 0.5s cubic-bezier(0.22,1,0.36,1) 0.2s;
+      font-size: 200px;
+      line-height: 1;
+      opacity: 0.25;
+      user-select: none;
+      pointer-events: none;
     }
-    .tl-item.tl-visible .tl-dot { opacity: 1; transform: scale(1); }
-    .tl-content {
-      background: #fff;
-      border: 1px solid rgba(94,53,224,0.09);
-      border-radius: 16px;
-      padding: 24px 28px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-      opacity: 0;
-      transition: opacity 0.75s cubic-bezier(0.22,1,0.36,1), transform 0.75s cubic-bezier(0.22,1,0.36,1);
+    .prob-content {
+      background: #14102A;
+      padding: 52px 48px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
-    .tl-left .tl-content  { transform: translateX(-90px) scale(0.92); text-align: right; }
-    .tl-right .tl-content { transform: translateX(90px)  scale(0.92); text-align: left;  }
-    .tl-item.tl-visible .tl-content { opacity: 1; transform: translateX(0) scale(1); }
-    .tl-title {
+    .prob-badge {
+      display: inline-flex;
       font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 16px; font-weight: 700;
-      color: var(--ink);
-      margin: 0 0 8px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border-radius: 100px;
+      margin-bottom: 28px;
+      width: fit-content;
+      background: rgba(255,255,255,0.07);
+      color: rgba(255,255,255,0.55);
+      border: 1px solid rgba(255,255,255,0.1);
     }
-    .tl-text {
-      font-size: 14px;
-      color: var(--ink-soft);
-      line-height: 1.65;
-      margin: 0;
+    .prob-content h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 46px;
+      font-weight: 400;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      color: white;
+      line-height: 1.05;
+      margin-bottom: 20px;
     }
-    @media (max-width: 640px) {
-      .timeline-wrap::before { left: 28px; transform: none; }
-      .tl-left, .tl-right {
-        grid-template-columns: 56px 1fr;
-        grid-template-areas: "dot content";
-        gap: 0 14px;
-      }
-      .tl-spacer { display: none; }
-      .tl-left .tl-content  { text-align: left; transform: translateX(40px) scale(0.92); }
-      .tl-right .tl-content { transform: translateX(40px) scale(0.92); }
+    .prob-content p {
+      font-size: 15px;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.7;
+      max-width: 360px;
+    }
+    @media (max-width: 900px) {
+      .prob-pin-card { grid-template-columns: 1fr; height: auto; }
+      .prob-vis { height: 160px; }
+      .prob-num { font-size: 120px; }
+      .prob-content { padding: 28px 24px; }
+      .prob-content h3 { font-size: 30px; }
+      .prob-title-sticky { padding: 20px 24px 16px; }
+    }
+    @media (max-width: 600px) {
+      .prob-title-sticky { position: relative; top: 0; padding: 40px 20px 16px; }
+      .prob-pinned { padding: 16px 16px 40px; }
+      .prob-pin-card { position: relative; top: 0; border-radius: 16px; }
+      .prob-vis { height: 140px; }
+      .prob-num { font-size: 100px; }
+      .prob-content { padding: 24px 20px; }
+      .prob-content h3 { font-size: 26px; }
     }
   </style>
 </head>
@@ -1927,56 +1951,52 @@
   </div>
 </section>
 
-<!-- PROBLÈME — timeline zigzag -->
-<section class="section">
-  <div class="section-inner">
-    <p class="section-label" data-anim>Le problème</p>
-    <h2 class="section-title" data-anim>Les bons partenariats existent. Le problème, c'est de les activer.</h2>
-    <p class="section-sub" data-anim>La plupart des entreprises passent à côté de leurs meilleures opportunités de croissance faute de méthode.</p>
+<!-- PROBLÈME — sticky scroll -->
+<section class="prob-section-wrap">
 
-    <div class="timeline-wrap">
+  <div class="prob-title-sticky">
+    <p class="section-label" style="color:rgba(255,255,255,0.45);">Le problème</p>
+    <h2 class="section-title" style="color:white; margin:8px auto 0; font-size:clamp(24px,3vw,40px);">Les bons partenariats existent.<br>Le problème, c'est de les activer.</h2>
+  </div>
 
-      <!-- Item 1 — gauche -->
-      <div class="tl-item tl-left">
-        <div class="tl-content">
-          <h3 class="tl-title">Les Ads coûtent de plus en plus cher</h3>
-          <p class="tl-text">Les coûts d'acquisition augmentent. Les campagnes payantes deviennent moins rentables.</p>
-        </div>
-        <div class="tl-dot"><span>01</span></div>
-        <div class="tl-spacer"></div>
+  <div class="prob-pinned">
+
+    <div class="prob-pin-card" style="--prob-bg:#CCFF00;">
+      <div class="prob-vis"><span class="prob-num" style="color:#0B0718;">01</span></div>
+      <div class="prob-content">
+        <span class="prob-badge">Obstacle 1</span>
+        <h3>Les Ads coûtent de plus en plus cher</h3>
+        <p>Les coûts d'acquisition augmentent. Les campagnes payantes deviennent moins rentables et la dépendance aux plateformes fragilise votre croissance.</p>
       </div>
-
-      <!-- Item 2 — droite -->
-      <div class="tl-item tl-right">
-        <div class="tl-spacer"></div>
-        <div class="tl-dot"><span>02</span></div>
-        <div class="tl-content">
-          <h3 class="tl-title">La prospection prend trop de temps</h3>
-          <p class="tl-text">Chercher, qualifier, contacter... des semaines de travail pour des résultats souvent décevants.</p>
-        </div>
-      </div>
-
-      <!-- Item 3 — gauche -->
-      <div class="tl-item tl-left">
-        <div class="tl-content">
-          <h3 class="tl-title">On ne sait pas quoi proposer</h3>
-          <p class="tl-text">Trouver un partenaire, c'est bien. Savoir quoi lui proposer et comment l'approcher, c'est autre chose.</p>
-        </div>
-        <div class="tl-dot"><span>03</span></div>
-        <div class="tl-spacer"></div>
-      </div>
-
-      <!-- Item 4 — droite -->
-      <div class="tl-item tl-right">
-        <div class="tl-spacer"></div>
-        <div class="tl-dot"><span>04</span></div>
-        <div class="tl-content">
-          <h3 class="tl-title">Les partenariats, ça prend du temps à activer</h3>
-          <p class="tl-text">Identifier les bons contacts, trouver le bon angle, gérer les échanges... autant de tâches qui s'accumulent et restent en bas de la to-do list.</p>
-        </div>
-      </div>
-
     </div>
+
+    <div class="prob-pin-card" style="--prob-bg:#A590FF;">
+      <div class="prob-vis"><span class="prob-num" style="color:#0B0718;">02</span></div>
+      <div class="prob-content">
+        <span class="prob-badge">Obstacle 2</span>
+        <h3>La prospection prend trop de temps</h3>
+        <p>Chercher, qualifier, contacter... des semaines de travail pour des résultats souvent décevants, et un pipeline qui repart de zéro chaque mois.</p>
+      </div>
+    </div>
+
+    <div class="prob-pin-card" style="--prob-bg:#C5902A;">
+      <div class="prob-vis"><span class="prob-num" style="color:rgba(255,255,255,0.9);">03</span></div>
+      <div class="prob-content">
+        <span class="prob-badge">Obstacle 3</span>
+        <h3>On ne sait pas quoi proposer</h3>
+        <p>Trouver un partenaire, c'est bien. Savoir quoi lui proposer et comment l'approcher pour qu'il accepte, c'est une autre compétence.</p>
+      </div>
+    </div>
+
+    <div class="prob-pin-card" style="--prob-bg:#FFE566;">
+      <div class="prob-vis"><span class="prob-num" style="color:#0B0718;">04</span></div>
+      <div class="prob-content">
+        <span class="prob-badge">Obstacle 4</span>
+        <h3>Les partenariats restent en bas de la to-do</h3>
+        <p>Identifier les bons contacts, trouver le bon angle, gérer les échanges... autant de tâches chronophages qui s'accumulent sans jamais avancer.</p>
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -2606,20 +2626,28 @@
   }, { threshold: 0.12 });
   document.querySelectorAll('[data-anim]').forEach(el => io.observe(el));
 
-  // Timeline zigzag — reveal progressif item par item au scroll
+  // ── PROBLÈME FADE — card N s'évapore quand card N+1 monte dessus ──
   (function() {
-    const items = Array.from(document.querySelectorAll('.tl-item'));
-    if (!items.length) return;
-    function checkItems() {
-      const triggerY = window.innerHeight * 0.72;
-      items.forEach(el => {
-        if (el.classList.contains('tl-visible')) return;
-        const rect = el.getBoundingClientRect();
-        if (rect.top < triggerY) el.classList.add('tl-visible');
-      });
+    if (window.innerWidth < 600) return;
+    var pcards = Array.prototype.slice.call(document.querySelectorAll('.prob-pin-card'));
+    if (!pcards.length) return;
+    var pticking = false;
+    function probUpdate() {
+      for (var i = 0; i < pcards.length - 1; i++) {
+        var curr = pcards[i];
+        var next = pcards[i + 1];
+        var currRect = curr.getBoundingClientRect();
+        var nextRect = next.getBoundingClientRect();
+        var overlap = currRect.bottom - nextRect.top;
+        var progress = Math.max(0, Math.min(1, overlap / currRect.height));
+        curr.style.opacity = (1 - progress).toFixed(2);
+      }
+      pticking = false;
     }
-    window.addEventListener('scroll', checkItems, { passive: true });
-    checkItems();
+    window.addEventListener('scroll', function() {
+      if (!pticking) { requestAnimationFrame(probUpdate); pticking = true; }
+    }, { passive: true });
+    probUpdate();
   })();
 
   function toggleFaq(btn) {
