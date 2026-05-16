@@ -10,7 +10,7 @@
   <meta name="description" content="Partnerr est une agence de partenariats B2B. On identifie vos futurs partenaires, on prend contact à votre place, et on vous livre des rendez-vous qualifiés avec des décideurs. Livraison sous 5 jours ouvrés." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -41,8 +41,8 @@
       position: sticky;
       top: 0;
       z-index: 100;
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
       background: rgba(255,255,255,0.85);
       border-bottom: 1px solid var(--border);
     }
@@ -74,7 +74,7 @@
     }
 
     .btn-nav {
-      font-family: 'Space Grotesk', sans-serif;
+      font-family: 'Plus Jakarta Sans', sans-serif;
       font-size: 17px;
       font-weight: 700;
       color: #0B0718;
@@ -88,7 +88,7 @@
     .btn-nav:hover { opacity: 1; transform: scale(1.05); }
 
     .nav-link {
-      font-family: 'Space Grotesk', sans-serif;
+      font-family: 'Plus Jakarta Sans', sans-serif;
       font-size: 17px;
       font-weight: 500;
       color: var(--ink-soft);
@@ -1299,6 +1299,9 @@
       animation: fadeInUp 0.9s cubic-bezier(0.22, 1.15, 0.36, 1) both,
                  businessGlow 3s ease-in-out 0.9s infinite;
     }
+    @media (prefers-reduced-motion: reduce) {
+      .pack-offer-card.business.in-view { animation: none; }
+    }
 
     .pack-offer-badge {
       position: absolute;
@@ -2248,6 +2251,7 @@
     if (window.innerWidth < 600) return;
     var cards = Array.prototype.slice.call(document.querySelectorAll('.step-pin-card'));
     if (!cards.length) return;
+    var ticking = false;
 
     function update() {
       for (var i = 0; i < cards.length - 1; i++) {
@@ -2255,14 +2259,16 @@
         var next = cards[i + 1];
         var currRect = curr.getBoundingClientRect();
         var nextRect = next.getBoundingClientRect();
-        // Overlap : combien la card suivante recouvre la courante par le bas
         var overlap = currRect.bottom - nextRect.top;
         var progress = Math.max(0, Math.min(1, overlap / currRect.height));
         curr.style.opacity = (1 - progress).toFixed(2);
       }
+      ticking = false;
     }
 
-    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('scroll', function() {
+      if (!ticking) { requestAnimationFrame(update); ticking = true; }
+    }, { passive: true });
     update();
   })();
 
