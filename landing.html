@@ -27,7 +27,7 @@
       --border-dark: rgba(255,255,255,0.10);
     }
 
-    html { scroll-behavior: auto; overflow-x: hidden; }
+    html { scroll-behavior: auto; }
 
     body {
       font-family: 'Inter', system-ui, sans-serif;
@@ -695,10 +695,10 @@
       padding: 0 40px 100px;
     }
     .step-slot {
-      height: 85vh;
+      height: 500px;
       position: relative;
     }
-    .step-slot:last-child { height: 100vh; }
+    .step-slot:last-child { height: 80vh; }
 
     .step-card-s {
       position: sticky;
@@ -2242,30 +2242,38 @@
 <script>
   // ── RÉSEAU ORBES — désactivé (canvas caché) ──
 
-  // ── STEPS STICKY SCALE ──
+  // ── STEPS STICKY FADE ──
   (function() {
     if (window.innerWidth < 600) return;
-    const slots = document.querySelectorAll('.step-slot');
+    var slots = document.querySelectorAll('.step-slot');
     if (!slots.length) return;
 
-    function updateSteps() {
+    function update() {
       slots.forEach(function(slot, i) {
-        if (i === slots.length - 1) return;
         var card = slot.querySelector('.step-card-s');
         if (!card) return;
-        var slotRect = slot.getBoundingClientRect();
-        var slotH = slot.offsetHeight;
-        // progress: 0 = slot just entered, 1 = slot fully scrolled past
-        var progress = Math.max(0, Math.min(1, -slotRect.top / slotH));
-        var scale = 1 - progress * 0.06;
-        var brightness = 1 - progress * 0.18;
-        card.style.transform = 'scale(' + scale.toFixed(3) + ')';
-        card.style.filter = 'brightness(' + brightness.toFixed(3) + ')';
+        var rect = slot.getBoundingClientRect();
+        var h = slot.offsetHeight;
+        // progress dans le slot : 0 = slot en haut de viewport, 1 = slot sorti
+        var scrolled = -rect.top;
+        var progress = Math.max(0, Math.min(1, scrolled / h));
+
+        if (i < slots.length - 1) {
+          // card s'évapore et rétrécit légèrement au fil du scroll
+          var scale = 1 - progress * 0.07;
+          var opacity = 1 - progress * 0.85;
+          card.style.transform = 'scale(' + scale.toFixed(3) + ')';
+          card.style.opacity = Math.max(0, opacity).toFixed(3);
+        } else {
+          // dernière card : toujours visible
+          card.style.transform = '';
+          card.style.opacity = '1';
+        }
       });
     }
 
-    window.addEventListener('scroll', updateSteps, { passive: true });
-    updateSteps();
+    window.addEventListener('scroll', update, { passive: true });
+    update();
   })();
 
   // ── HERO CONSTELLATION ──
