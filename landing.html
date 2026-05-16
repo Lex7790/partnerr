@@ -1489,14 +1489,31 @@
     }
 
     @media (max-width: 1020px) and (min-width: 601px) {
-      .pack-offers-grid { grid-template-columns: 1fr 1fr; max-width: 700px; margin-left: auto; margin-right: auto; }
+      /* Pricing */
+      .pack-offers-grid { grid-template-columns: 1fr 1fr; max-width: 660px; margin-left: auto; margin-right: auto; }
       .pack-offer-card.business { transform: none; padding: 36px 28px; }
+      /* Témoignages */
       .testimonials-grid { grid-template-columns: 1fr; max-width: 520px; margin-left: auto; margin-right: auto; border-top: 1px solid rgba(0,0,0,0.08); }
       .testimonials-grid > div { border-right: none !important; border-bottom: 1px solid rgba(0,0,0,0.08); }
+      /* Nav */
       .nav-link-secondary { display: none; }
+      /* Steps sticky */
+      .step-pin-card { grid-template-columns: 1fr; height: auto; }
+      .step-vis { height: 160px; }
+      .step-vis-num { font-size: 120px; }
+      .step-content { padding: 28px 24px; }
+      .step-content h3 { font-size: 30px; }
+      .steps-title-sticky { padding: 20px 24px 16px; }
+      /* Sections paddings */
+      .offer-section { padding: 64px 24px; }
+      .method-section { padding: 64px 24px; }
+      .section { padding: 64px 24px; }
+      /* Method cards */
+      .method-card { gap: 32px; }
     }
 
     @media (max-width: 900px) {
+      .hero::before { width: 600px; height: 600px; }
       .pack-offers-grid { grid-template-columns: 1fr; max-width: 440px; margin-left: auto; margin-right: auto; }
       .pack-offer-card.business { transform: none; padding: 36px 28px; }
       .roi-grid { grid-template-columns: 1fr; max-width: 480px; margin-left: auto; margin-right: auto; }
