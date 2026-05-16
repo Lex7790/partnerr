@@ -1747,15 +1747,15 @@
     }
 
     /* ── Section Le problème — sticky scroll ── */
-    .prob-section-wrap { background: #0B0718; }
+    .prob-section-wrap { background: white; }
     .prob-title-sticky {
       position: sticky;
       top: 80px;
-      background: #0B0718;
+      background: white;
       z-index: 20;
       text-align: center;
       padding: 28px 40px 20px;
-      border-bottom: 1px solid rgba(255,255,255,0.07);
+      border-bottom: 1px solid rgba(0,0,0,0.06);
     }
     .prob-pinned {
       position: relative;
@@ -1795,7 +1795,7 @@
       pointer-events: none;
     }
     .prob-content {
-      background: #14102A;
+      background: white;
       padding: 52px 48px;
       display: flex;
       flex-direction: column;
@@ -1812,9 +1812,9 @@
       border-radius: 100px;
       margin-bottom: 28px;
       width: fit-content;
-      background: rgba(255,255,255,0.07);
-      color: rgba(255,255,255,0.55);
-      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(94,53,224,0.07);
+      color: var(--accent);
+      border: 1px solid rgba(94,53,224,0.15);
     }
     .prob-content h3 {
       font-family: 'Bebas Neue', sans-serif;
@@ -1822,13 +1822,13 @@
       font-weight: 400;
       letter-spacing: 0.02em;
       text-transform: uppercase;
-      color: white;
+      color: var(--ink);
       line-height: 1.05;
       margin-bottom: 20px;
     }
     .prob-content p {
       font-size: 15px;
-      color: rgba(255,255,255,0.6);
+      color: var(--ink-soft);
       line-height: 1.7;
       max-width: 360px;
     }
@@ -1955,8 +1955,8 @@
 <section class="prob-section-wrap">
 
   <div class="prob-title-sticky">
-    <p class="section-label" style="color:rgba(255,255,255,0.45);">Le problème</p>
-    <h2 class="section-title" style="color:white; margin:8px auto 0; font-size:clamp(24px,3vw,40px);">Les bons partenariats existent.<br>Le problème, c'est de les activer.</h2>
+    <p class="section-label">Le problème</p>
+    <h2 class="section-title" style="margin:8px auto 0; font-size:clamp(24px,3vw,40px);">Les bons partenariats existent.<br>Le problème, c'est de les activer.</h2>
   </div>
 
   <div class="prob-pinned">
