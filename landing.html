@@ -78,17 +78,14 @@
       font-size: 17px;
       font-weight: 700;
       color: #0B0718;
-      background: var(--accent);
+      background: linear-gradient(135deg, #A590FF 0%, #ddd0ff 100%);
       padding: 9px 22px;
       border-radius: 100px;
       text-decoration: none;
-      transition: background 0.2s, box-shadow 0.2s;
+      transition: opacity 0.2s;
     }
 
-    .btn-nav:hover {
-      background: var(--accent-hi);
-      animation: btnGlow 1.2s ease-in-out infinite;
-    }
+    .btn-nav:hover { opacity: 0.85; }
 
     .nav-link {
       font-family: 'Space Grotesk', sans-serif;
@@ -531,7 +528,7 @@
       font-size: 16px;
       font-weight: 700;
       color: #0B0718;
-      background: var(--accent);
+      background: linear-gradient(135deg, #A590FF 0%, #ddd0ff 100%);
       padding: 15px 32px;
       border-radius: 100px;
       text-decoration: none;
@@ -540,11 +537,11 @@
       gap: 8px;
       border: none;
       cursor: pointer;
-      transition: background 0.2s, transform 0.15s;
-      box-shadow: 0 8px 28px rgba(94,53,224,0.35);
+      transition: opacity 0.2s, transform 0.15s;
+      box-shadow: 0 8px 28px rgba(165,144,255,0.3);
     }
 
-    .btn-pack:hover { background: var(--accent-hi); transform: translateY(-2px); }
+    .btn-pack:hover { opacity: 0.88; transform: translateY(-2px); }
 
     /* ── ROI ── */
     .roi-grid {
