@@ -2595,7 +2595,7 @@
       if (!target) return;
       e.preventDefault();
       const navH = document.querySelector('nav')?.offsetHeight || 64;
-      window.scrollTo({ top: target.offsetTop - navH - 8, behavior: 'smooth' });
+      window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - navH - 8, behavior: 'smooth' });
     });
   });
 
