@@ -1766,38 +1766,28 @@
     .prob-pin-card {
       position: sticky;
       top: 200px;
-      background-size: cover;
-      background-position: center;
+      display: grid;
+      grid-template-columns: 3fr 2fr;
       border-radius: 20px;
       overflow: hidden;
       height: 380px;
-      box-shadow: 0 12px 48px rgba(0,0,0,0.18);
+      box-shadow: 0 12px 48px rgba(0,0,0,0.10);
       margin-bottom: 20px;
-      display: flex;
-      align-items: center;
-      padding: 52px 64px;
-    }
-    .prob-pin-card::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: rgba(11,7,24,0.72);
-      z-index: 0;
     }
     .prob-pin-card:nth-child(1) { z-index: 1; }
     .prob-pin-card:nth-child(2) { z-index: 2; }
     .prob-pin-card:nth-child(3) { z-index: 3; }
     .prob-pin-card:nth-child(4) { z-index: 4; }
-    .prob-vis { display: none; }
+    .prob-vis {
+      background-size: cover;
+      background-position: center;
+    }
     .prob-content {
-      background: transparent;
-      padding: 0;
+      background: white;
+      padding: 48px 44px;
       display: flex;
       flex-direction: column;
       justify-content: center;
-      position: relative;
-      z-index: 1;
-      max-width: 600px;
     }
     .prob-badge {
       display: inline-flex;
@@ -1810,38 +1800,39 @@
       border-radius: 100px;
       margin-bottom: 28px;
       width: fit-content;
-      background: rgba(255,255,255,0.12);
-      color: rgba(255,255,255,0.75);
-      border: 1px solid rgba(255,255,255,0.2);
+      background: rgba(94,53,224,0.07);
+      color: var(--accent);
+      border: 1px solid rgba(94,53,224,0.15);
     }
     .prob-content h3 {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: 52px;
+      font-size: 46px;
       font-weight: 400;
       letter-spacing: 0.02em;
       text-transform: uppercase;
-      color: white;
+      color: var(--ink);
       line-height: 1.05;
       margin-bottom: 20px;
     }
     .prob-content p {
-      font-size: 16px;
-      color: rgba(255,255,255,0.75);
+      font-size: 15px;
+      color: var(--ink-soft);
       line-height: 1.7;
-      max-width: 520px;
     }
     @media (max-width: 900px) {
-      .prob-pin-card { height: auto; min-height: 260px; padding: 40px 36px; }
-      .prob-num { font-size: 200px; }
-      .prob-content h3 { font-size: 36px; }
+      .prob-pin-card { grid-template-columns: 1fr; height: auto; }
+      .prob-vis { height: 200px; }
+      .prob-content { padding: 28px 24px; }
+      .prob-content h3 { font-size: 32px; }
       .prob-title-sticky { padding: 20px 24px 16px; }
     }
     @media (max-width: 600px) {
       .prob-title-sticky { position: relative; top: 0; padding: 40px 20px 16px; }
       .prob-pinned { padding: 16px 16px 40px; }
-      .prob-pin-card { position: relative; top: 0; border-radius: 16px; min-height: 220px; padding: 32px 24px; }
-      .prob-num { font-size: 150px; }
-      .prob-content h3 { font-size: 28px; }
+      .prob-pin-card { position: relative; top: 0; border-radius: 16px; }
+      .prob-vis { height: 160px; }
+      .prob-content { padding: 24px 20px; }
+      .prob-content h3 { font-size: 26px; }
     }
   </style>
 </head>
@@ -1955,40 +1946,40 @@
 
   <div class="prob-pinned">
 
-    <div class="prob-pin-card" style="background-image:url('/static/prob1.jpg');">
-      <div class="prob-vis"><span class="prob-num">01</span></div>
+    <div class="prob-pin-card">
       <div class="prob-content">
         <span class="prob-badge">Obstacle 1</span>
         <h3>Les Ads coûtent de plus en plus cher</h3>
         <p>Les coûts d'acquisition augmentent. Les campagnes payantes deviennent moins rentables et la dépendance aux plateformes fragilise votre croissance.</p>
       </div>
+      <div class="prob-vis" style="background-image:url('/static/prob1.jpg');"></div>
     </div>
 
-    <div class="prob-pin-card" style="background-image:url('/static/prob2.jpg');">
-      <div class="prob-vis"><span class="prob-num">02</span></div>
+    <div class="prob-pin-card">
       <div class="prob-content">
         <span class="prob-badge">Obstacle 2</span>
         <h3>La prospection prend trop de temps</h3>
         <p>Chercher, qualifier, contacter... des semaines de travail pour des résultats souvent décevants, et un pipeline qui repart de zéro chaque mois.</p>
       </div>
+      <div class="prob-vis" style="background-image:url('/static/prob2.jpg');"></div>
     </div>
 
-    <div class="prob-pin-card" style="background-image:url('/static/prob3.jpg');">
-      <div class="prob-vis"><span class="prob-num">03</span></div>
+    <div class="prob-pin-card">
       <div class="prob-content">
         <span class="prob-badge">Obstacle 3</span>
         <h3>On ne sait pas quoi proposer</h3>
         <p>Trouver un partenaire, c'est bien. Savoir quoi lui proposer et comment l'approcher pour qu'il accepte, c'est une autre compétence.</p>
       </div>
+      <div class="prob-vis" style="background-image:url('/static/prob3.jpg');"></div>
     </div>
 
-    <div class="prob-pin-card" style="background-image:url('/static/prob4.jpg');">
-      <div class="prob-vis"><span class="prob-num">04</span></div>
+    <div class="prob-pin-card">
       <div class="prob-content">
         <span class="prob-badge">Obstacle 4</span>
         <h3>Les partenariats restent en bas de la to-do</h3>
         <p>Identifier les bons contacts, trouver le bon angle, gérer les échanges... autant de tâches chronophages qui s'accumulent sans jamais avancer.</p>
       </div>
+      <div class="prob-vis" style="background-image:url('/static/prob4.jpg');"></div>
     </div>
 
   </div>
